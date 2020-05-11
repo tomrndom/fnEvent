@@ -1,16 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 
 import '../styles/login.css'
 
-export const LoginPageTemplate = ({ title, content, contentComponent }) => {
+export const LoginPageTemplate = ({ title, content, contentComponent, isDarkMode }) => {
   const PageContent = contentComponent || Content
 
+  console.log('redux test', isDarkMode);
+
   return (
-    <React.Fragment>      
+    <React.Fragment>
       <div className="modal fade" id="modal-confirmation" tabIndex="-1" role="dialog" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -59,7 +62,7 @@ export const LoginPageTemplate = ({ title, content, contentComponent }) => {
               To request access to Sponsor Services, please <a href="/request">click here.</a>
           </form>
         </div>
-      </div>      
+      </div>
     </React.Fragment>
   )
 }
@@ -70,7 +73,7 @@ LoginPageTemplate.propTypes = {
   contentComponent: PropTypes.func,
 }
 
-const LoginPage = ({ data }) => {
+const LoginPage = ({ data, isDarkMode }) => {
   const { markdownRemark: post } = data
 
   return (
@@ -79,6 +82,7 @@ const LoginPage = ({ data }) => {
         contentComponent={HTMLContent}
         title={post.frontmatter.title}
         content={post.html}
+        isDarkMode={isDarkMode}
       />
     </Layout>
   )
@@ -88,7 +92,9 @@ LoginPage.propTypes = {
   data: PropTypes.object.isRequired,
 }
 
-export default LoginPage
+export default connect(state => ({
+  isDarkMode: state.app.isDarkMode
+}), null)(LoginPage)
 
 export const loginPageQuery = graphql`
   query LoginPage($id: String!) {
