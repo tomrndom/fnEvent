@@ -3,6 +3,10 @@ const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
@@ -84,4 +88,22 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
   }
+}
+
+exports.onCreateWebpackConfig = ({ loaders, actions, plugins }) => {  
+  actions.setWebpackConfig({
+    plugins: [
+      plugins.define({
+        'global.GENTLY': false
+      })
+    ],
+    // module: {
+    //   rules: [
+    //     {
+    //       test: /openstack-uicore-foundation/,
+    //       use: loaders.null(),
+    //     },
+    //   ],
+    // },
+  })
 }

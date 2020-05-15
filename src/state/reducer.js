@@ -60,7 +60,7 @@ export const loggedUserReducer = (state = DEFAULT_STATE, action) => {
           return {...DEFAULT_STATE, backUrl: payload.backUrl};
       }
       case RECEIVE_USER_INFO: {
-          let { response } = action.payload;
+          let { response, idToken } = action.payload;
 
           if(issuer != '' && audience != '') {
               // check on idp groups

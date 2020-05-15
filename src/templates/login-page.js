@@ -5,12 +5,14 @@ import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 
+import { onUserAuth, doLogin, doLogout, initLogOut, getUserInfo } from "openstack-uicore-foundation/lib/methods";
+
 import '../styles/login.css'
 
-export const LoginPageTemplate = ({ title, content, contentComponent, isDarkMode }) => {
+export const LoginPageTemplate = ({ title, content, contentComponent, loggedUserState }) => {
   const PageContent = contentComponent || Content
 
-  console.log('redux test', isDarkMode);
+  console.log(loggedUserState);  
 
   return (
     <React.Fragment>
@@ -73,7 +75,7 @@ LoginPageTemplate.propTypes = {
   contentComponent: PropTypes.func,
 }
 
-const LoginPage = ({ data, isDarkMode }) => {
+const LoginPage = ({ data, loggedUserState }) => {
   const { markdownRemark: post } = data
 
   return (
@@ -82,7 +84,7 @@ const LoginPage = ({ data, isDarkMode }) => {
         contentComponent={HTMLContent}
         title={post.frontmatter.title}
         content={post.html}
-        isDarkMode={isDarkMode}
+        loggedUserState={loggedUserState}
       />
     </Layout>
   )
@@ -93,7 +95,7 @@ LoginPage.propTypes = {
 }
 
 export default connect(state => ({
-  isDarkMode: state.app.isDarkMode
+  loggedUserState: state.loggedUserState
 }), null)(LoginPage)
 
 export const loginPageQuery = graphql`
