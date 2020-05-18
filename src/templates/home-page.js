@@ -21,7 +21,7 @@ export const HomePageTemplate = ({ title, content, contentComponent }) => {
                 {title}
               </h2>
               <PageContent className="content" content={content} />
-              <ScheduleClientSide/>
+              <ScheduleClientSide />
             </div>
           </div>
         </div>
@@ -31,27 +31,36 @@ export const HomePageTemplate = ({ title, content, contentComponent }) => {
 }
 
 HomePageTemplate.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   content: PropTypes.string,
   contentComponent: PropTypes.func,
 }
 
 const HomePage = ({ data }) => {
-  const { markdownRemark: post } = data
 
-  return (
-    <Layout>
+  if (data) {
+    const { markdownRemark: post } = data
+
+    return (
+      <Layout>
+        <HomePageTemplate
+          contentComponent={HTMLContent}
+          title={post.frontmatter.title}
+          content={post.html}
+        />
+      </Layout>
+    )
+  } else {
+    return (
       <HomePageTemplate
-        contentComponent={HTMLContent}
-        title={post.frontmatter.title}
-        content={post.html}
+        contentComponent={HTMLContent}          
       />
-    </Layout>
-  )
+    )
+  }  
 }
 
 HomePage.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
 }
 
 export default HomePage

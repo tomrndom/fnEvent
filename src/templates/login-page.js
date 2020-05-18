@@ -8,11 +8,17 @@ import Content, { HTMLContent } from '../components/Content'
 import { onUserAuth, doLogin, doLogout, initLogOut, getUserInfo } from "openstack-uicore-foundation/lib/methods";
 
 import '../styles/login.css'
+import LoginButton from '../components/LoginButton'
 
 export const LoginPageTemplate = ({ title, content, contentComponent, loggedUserState }) => {
   const PageContent = contentComponent || Content
 
-  console.log(loggedUserState);  
+  if (loggedUserState.isLoggedUser) {
+    console.log('yay!')
+    
+  } else {
+    console.log('nay!')
+  }
 
   return (
     <React.Fragment>
@@ -53,18 +59,7 @@ export const LoginPageTemplate = ({ title, content, contentComponent, loggedUser
         </div>
       </div>
 
-      <div className="container">
-        <div className="login-form">
-          <form className="form-signin" role="form" method="post" action="/login">
-            <input type="hidden" name="_token" value="WvdDIsxe5lUZPlu5MVoa6abY65FEtooo5cdbG2gy" />
-            <h2 className="form-signin-heading">Sponsor Services Login</h2>
-            <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <br /><br />
-            <h4>Request access</h4>
-              To request access to Sponsor Services, please <a href="/request">click here.</a>
-          </form>
-        </div>
-      </div>
+      <LoginButton />
     </React.Fragment>
   )
 }

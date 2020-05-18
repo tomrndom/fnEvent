@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { loggedUserReducer } from 'openstack-uicore-foundation/lib/reducers';
 
 import thunk from 'redux-thunk';
@@ -9,8 +9,6 @@ import storage from 'redux-persist/es/storage' // default: localStorage if web, 
 import { PersistGate } from 'redux-persist/integration/react';
 
 // const composeEnhancers = typeof window === 'object' && window.REDUX_DEVTOOLS_EXTENSION ? window.REDUX_DEVTOOLS_EXTENSION() : compose;
-
-console.log(loggedUserReducer)
 
 const onBeforeLift = () => {
   console.log("reading state ...")
