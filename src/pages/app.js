@@ -44,10 +44,10 @@ const App = class extends React.Component {
     return (
       <Layout>
         <Router basepath="/app">
-          <LoadableAuthorizedRoute isLoggedUser={false} doLogin={this.onClickLogin.bind(this)} backUrl={backUrl} path="/home" component={HomePage} />
+          {/* <LoadableAuthorizedRoute isLoggedUser={false} doLogin={this.onClickLogin.bind(this)} backUrl={backUrl} path="/home" component={HomePage} /> */}
           <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/auth/callback' getUserInfo={getUserInfo} />
           <LoadableLogOutCallbackRoute doLogout={doLogout} path='/auth/logout' />
-          {/* <PrivateRoute path="/home" component={HomePage} isLoggedIn={false} /> */}
+          <PrivateRoute path="/home" component={HomePage} isLoggedIn={false} />
         </Router>
       </Layout >
     )
