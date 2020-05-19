@@ -6,6 +6,8 @@ import Content, { HTMLContent } from '../components/Content'
 
 import Loadable from "@loadable/component"
 
+import Video from '../components/VideoPlayer'
+import DisqusComponent from '../components/DisqusComponent'
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
 export const HomePageTemplate = ({ title, content, contentComponent }) => {
@@ -21,6 +23,8 @@ export const HomePageTemplate = ({ title, content, contentComponent }) => {
                 {title}
               </h2>
               <PageContent className="content" content={content} />
+              <Video />
+              <DisqusComponent />
               <ScheduleClientSide />
             </div>
           </div>

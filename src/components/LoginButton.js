@@ -26,6 +26,7 @@ const LoginButton = class extends React.Component {
 
   onClickLogin() {
       this.getBackURL();
+      console.log('origin', window.location.origin);
       doLogin(this.getBackURL());        
   }
 

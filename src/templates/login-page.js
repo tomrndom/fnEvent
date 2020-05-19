@@ -5,8 +5,6 @@ import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 
-import { onUserAuth, doLogin, doLogout, initLogOut, getUserInfo } from "openstack-uicore-foundation/lib/methods";
-
 import '../styles/login.css'
 import LoginButton from '../components/LoginButton'
 
@@ -15,7 +13,7 @@ export const LoginPageTemplate = ({ title, content, contentComponent, loggedUser
 
   if (loggedUserState.isLoggedUser) {
     console.log('yay!')
-    
+
   } else {
     console.log('nay!')
   }
@@ -59,34 +57,44 @@ export const LoginPageTemplate = ({ title, content, contentComponent, loggedUser
         </div>
       </div>
 
+
       <LoginButton />
     </React.Fragment>
   )
 }
 
 LoginPageTemplate.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   content: PropTypes.string,
   contentComponent: PropTypes.func,
 }
 
-const LoginPage = ({ data, loggedUserState }) => {
-  const { markdownRemark: post } = data
+const LoginPage = ({ data, loggedUserState }) => {  
+  if (data) {
+    const { markdownRemark: post } = data
 
-  return (
-    <Layout>
+    return (
+      <Layout>
+        <LoginPageTemplate
+          contentComponent={HTMLContent}
+          title={post.frontmatter.title}
+          content={post.html}
+          loggedUserState={loggedUserState}
+        />
+      </Layout>
+    )
+  } else {
+    return (      
       <LoginPageTemplate
-        contentComponent={HTMLContent}
-        title={post.frontmatter.title}
-        content={post.html}
+        contentComponent={HTMLContent}        
         loggedUserState={loggedUserState}
-      />
-    </Layout>
-  )
+      />      
+    )
+  }  
 }
 
 LoginPage.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
 }
 
 export default connect(state => ({

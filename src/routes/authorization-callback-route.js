@@ -30,7 +30,7 @@ class AuthorizationCallbackRoute extends AbstractAuthorizationCallbackRoute {
 
     _redirect2Error(error){
         return (
-            <Route render={ props => {
+            <div render={ props => {
                 return <Redirect to={`/error?error=${error}`} />
             }} />
         )
