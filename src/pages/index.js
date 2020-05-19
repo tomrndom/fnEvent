@@ -2,7 +2,7 @@ import { navigate } from "gatsby"
 
 const IndexPage = ({location}) => {
   if (location.pathname === `/`) {
-    navigate("/app")
+    navigate("/auth")
     return null
   }
 }

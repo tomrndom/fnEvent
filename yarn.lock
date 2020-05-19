@@ -12091,10 +12091,10 @@ openstack-uicore-foundation@^2.0.24:
   resolved "https://registry.yarnpkg.com/openstack-uicore-foundation/-/openstack-uicore-foundation-2.0.28.tgz#dc102201f9d8b104a167d5c7900c50842e1b8e3b"
   integrity sha512-otr2bkA+a1VgKHuyb0ylr+X4OyZViC4SJFYLX6r+nzhtIigUhwMwyZ+TUIlhLPUQ4gopdHPcO4Xz+yNMV27qDA==
 
-openstack-uicore-foundation@^2.0.31:
-  version "2.0.31"
-  resolved "https://registry.yarnpkg.com/openstack-uicore-foundation/-/openstack-uicore-foundation-2.0.31.tgz#641c751f9bf0f62f7aa3077ab9dfb91bc110bcd7"
-  integrity sha512-jI6K0CKOc2jL4G6OYwnYp+v3olfAiBCq0wPlxfmxqVyhwbyyidM528zt7w8jSS+vlutY/POvTnhPzDgdZlXfsg==
+openstack-uicore-foundation@^2.0.33:
+  version "2.0.33"
+  resolved "https://registry.yarnpkg.com/openstack-uicore-foundation/-/openstack-uicore-foundation-2.0.33.tgz#7c2973a0e03a4df11c3bea4a90b2afe77d000e79"
+  integrity sha512-0s2PqinIhg4yym+q0Aa+zr8OzmyE+0SMb6F+JuabZPLqfV8qYdYWO0S58D+WLL+8d/xo2l240DUJzEZLcgvV2Q==
 
 opentracing@^0.14.4:
   version "0.14.4"

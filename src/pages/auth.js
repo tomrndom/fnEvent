@@ -24,11 +24,11 @@ const App = class extends React.Component {
 
     return (
       <Layout>
-        <Router basepath="/app">
+        <Router basepath="/auth">
           {/* <LoadableAuthorizedRoute isLoggedUser={false} doLogin={this.onClickLogin.bind(this)} backUrl={backUrl} path="/home" component={HomePage} /> */}
-          <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/auth/callback' getUserInfo={getUserInfo} />
-          <LoadableLogOutCallbackRoute doLogout={doLogout} path='/auth/logout' />
-          <PrivateRoute path="/home" component={HomePage} isLoggedIn={false} />
+          <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
+          <LoadableLogOutCallbackRoute doLogout={doLogout} path='/logout' />
+          <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />
           <LoginPage path="/" />
         </Router>
       </Layout >

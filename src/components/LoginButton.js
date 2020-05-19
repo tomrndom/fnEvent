@@ -8,16 +8,11 @@ const LoginButton = class extends React.Component {
   getBackURL() {
     let defaultLocation = '/app/home';
     let url      = URI(window.location.href);
-    console.log('url', url)
     let location = url.pathname();
     if (location === '/') location = defaultLocation
     let query    = url.search(true);
-    let fragment = url.fragment();      
+    let fragment = url.fragment();
     let backUrl  = query.hasOwnProperty('BackUrl') ? query['BackUrl'] : location;
-    console.log('location', location)
-    console.log('query', query)
-    console.log('fragment', fragment)
-    console.log('back url', backUrl)
     if(fragment != null && fragment != ''){
         backUrl += `#${fragment}`;
     }
@@ -26,8 +21,7 @@ const LoginButton = class extends React.Component {
 
   onClickLogin() {
       this.getBackURL();
-      console.log('origin', window.location.origin);
-      doLogin(this.getBackURL());        
+      doLogin(this.getBackURL());
   }
 
   render() {

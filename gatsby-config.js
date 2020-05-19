@@ -61,7 +61,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/app/*`] },
+      options: { prefixes: [`/auth/*`] },
     },
     {
       resolve: `gatsby-plugin-disqus`,

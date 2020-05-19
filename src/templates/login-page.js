@@ -8,12 +8,14 @@ import Content, { HTMLContent } from '../components/Content'
 import '../styles/login.css'
 import LoginButton from '../components/LoginButton'
 
+import { navigate } from "gatsby"
+
 export const LoginPageTemplate = ({ title, content, contentComponent, loggedUserState }) => {
   const PageContent = contentComponent || Content
 
   if (loggedUserState.isLoggedUser) {
     console.log('yay!')
-
+    navigate('/auth/home');
   } else {
     console.log('nay!')
   }
@@ -69,7 +71,7 @@ LoginPageTemplate.propTypes = {
   contentComponent: PropTypes.func,
 }
 
-const LoginPage = ({ data, loggedUserState }) => {  
+const LoginPage = ({ data, loggedUserState }) => {
   if (data) {
     const { markdownRemark: post } = data
 
@@ -84,13 +86,13 @@ const LoginPage = ({ data, loggedUserState }) => {
       </Layout>
     )
   } else {
-    return (      
+    return (
       <LoginPageTemplate
-        contentComponent={HTMLContent}        
+        contentComponent={HTMLContent}
         loggedUserState={loggedUserState}
-      />      
+      />
     )
-  }  
+  }
 }
 
 LoginPage.propTypes = {

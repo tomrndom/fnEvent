@@ -6,7 +6,7 @@ const
         width="100%"
         height="1000"
         src="https://www.youtube.com/embed/P7d1H83IcjE"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         webkitallowfullscreen="true"
         mozallowfullscreen="true"
