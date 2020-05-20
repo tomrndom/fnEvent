@@ -21,11 +21,15 @@ import { getUserInfo } from "openstack-uicore-foundation/lib/methods";
 class AuthorizationCallbackRoute extends AbstractAuthorizationCallbackRoute {
 
     constructor(props){
-      super(process.env['IDP_BASE_URL'], process.env['OAUTH2_CLIENT_ID'], props);
+        if (typeof window !== 'undefined') {
+            super(process.env.IDP_BASE_URL, process.env.OAUTH2_CLIENT_ID, props);
+        } else {
+            super(window.IDP_BASE_URL, window.OAUTH2_CLIENT_ID, props);
+        }
     }
 
     _callback(backUrl) {
-      this.props.getUserInfo(backUrl, history);
+        this.props.getUserInfo(backUrl, history);
     }
 
     _redirect2Error(error){

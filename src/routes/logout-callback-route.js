@@ -12,7 +12,7 @@
  **/
 import URI from "urijs"
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { navigate } from "gatsby"
 
 class LogOutCallbackRoute extends React.Component {
 
@@ -39,10 +39,10 @@ class LogOutCallbackRoute extends React.Component {
             return (<p>Invalid State</p>);
 
         doLogout();
-        backUrl ? history.push(backUrl) : history.push("/");
+        backUrl ? navigate(backUrl) : navigate("/auth");
         return null;
     }
 }
 
-export default withRouter(LogOutCallbackRoute);
+export default LogOutCallbackRoute;
 
