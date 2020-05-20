@@ -3,9 +3,9 @@ import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
 
 const DisqusComponent = () => {
   let disqusConfig = {
-    url: `https://localhost:8000/`,
-    identifier: 'id',
-    title: 'title',
+    url: `https://idp-gatsby-poc.netlify.app/`,
+    identifier: 'gatsby-idp-poc',
+    title: 'Comments',
   }
   return (
     <div className="disqus" style={{ padding: "50px" }}>

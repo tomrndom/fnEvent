@@ -6,7 +6,7 @@ import Content, { HTMLContent } from '../components/Content'
 
 import Loadable from "@loadable/component"
 
-import Video from '../components/VideoPlayer'
+import VideoComponent from '../components/VideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
@@ -20,10 +20,10 @@ export const HomePageTemplate = ({ title, content, contentComponent }) => {
           <div className="column is-10 is-offset-1">
             <div className="section">
               <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                {title}
+                Livestream
               </h2>
-              <PageContent className="content" content={content} />
-              <Video />
+              {content && <PageContent className="content" content={content} />}
+              <VideoComponent videoSrcURL="https://www.youtube.com/embed/P7d1H83IcjE" />
               <DisqusComponent />
               <ScheduleClientSide />
             </div>

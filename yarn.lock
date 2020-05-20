@@ -5349,6 +5349,11 @@ disposables@^1.0.1:
   resolved "https://registry.yarnpkg.com/disposables/-/disposables-1.0.2.tgz#36c6a674475f55a2d6913567a601444e487b4b6e"
   integrity sha1-NsamdEdfVaLWkTVnpgFETkh7S24=
 
+disqus-react@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/disqus-react/-/disqus-react-1.0.8.tgz#df3999e7dd107a24ea0862c4f592e05ab7d8bdb5"
+  integrity sha512-fkDL6XVGteaxTwz8aN+n89iyMv1BPKKKO3v8YJCcNaJfhoKY/f6MSiqMqu1rNrbAkyxQ2VjF7C/2mPpPAElozg==
+
 dnd-core@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-2.6.0.tgz#12bad66d58742c6e5f7cf2943fb6859440f809c4"

@@ -1,6 +1,7 @@
 import React from "react"
 import { Router } from "@reach/router"
 import { connect } from 'react-redux'
+import { navigate } from "gatsby"
 
 import Layout from "../components/Layout"
 import LoginPage from "../templates/login-page"
@@ -21,6 +22,10 @@ const App = class extends React.Component {
   render() {
 
     let {isLoggedUser, onUserAuth, doLogout, getUserInfo, member, backUrl, summit} = this.props;
+
+    if (isLoggedUser) {      
+      navigate('/auth/home');
+    }
 
     return (
       <Layout>
