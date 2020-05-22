@@ -28,11 +28,11 @@ const LoginButton = class extends React.Component {
     return (
       <div className="container">
         <div className="login-form">
-          <h2 className="form-signin-heading">Sponsor Services Login</h2>
+          <h2 className="form-signin-heading">Virtual Event Login</h2>
           <button className="btn btn-lg btn-primary btn-block" onClick={() => this.onClickLogin()}>Sign in</button>
           <br /><br />
           <h4>Request access</h4>
-              To request access to Sponsor Services, please <a href="#">click here.</a>
+            Get access to virtual event.<a href="https://idp.dev.fnopen.com/auth/register">Register here</a>
         </div>
       </div>
     )
