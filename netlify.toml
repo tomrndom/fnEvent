@@ -4,8 +4,4 @@
 [build.environment]
   NODE_VERSION = "12"
   YARN_VERSION = "1.22.4"
-  YARN_FLAGS = "--no-ignore-optional"
-  API_BASE_URL="1"
-  IDP_BASE_URL="2"
-  OAUTH2_CLIENT_ID="3"
-  SCOPES="4"
+  YARN_FLAGS = "--no-ignore-optional"  

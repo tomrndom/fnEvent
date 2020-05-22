@@ -22,7 +22,7 @@ class AuthorizationCallbackRoute extends AbstractAuthorizationCallbackRoute {
 
     constructor(props){
         if (typeof window !== 'undefined') {
-            super(process.env.IDP_BASE_URL, process.env.OAUTH2_CLIENT_ID, props);
+            super(process.env.GATSBY_IDP_BASE_URL, process.env.GATSBY_OAUTH2_CLIENT_ID, props);
         } else {
             super(window.IDP_BASE_URL, window.OAUTH2_CLIENT_ID, props);
         }
