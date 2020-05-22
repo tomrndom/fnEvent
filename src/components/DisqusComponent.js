@@ -5,11 +5,11 @@ const DisqusComponent = () => {
   let disqusConfig = {
     url: `https://idp-gatsby-poc.netlify.app/`,
     identifier: 'gatsby-idp-poc',
-    title: 'Comments',
+    title: 'Conversation',
   }
   return (
-    <div className="disqus" style={{ padding: "15px" }}>
-      <h1>{disqusConfig.title}</h1>      
+    <div className="disqus" style={{ padding: "0px 15px" }}>
+      <h3>{disqusConfig.title}</h3>      
       <Disqus config={disqusConfig} />
     </div>
   )

@@ -442,3 +442,31 @@ div.modalcenter-frame .modal-body {
 .dropzone .dz-preview .dz-image img{
     height: 120px !important;
 }
+
+.video-row {
+  display: flex;
+}
+.video-player {
+  width: 80%;
+}
+.disqus-container {
+  width: 20%;
+  max-height: 720px;
+}
+
+.schedule-row {
+  display: flex;
+  padding: 0 15px;
+}
+
+.sponsor-container {
+  width: 20%;  
+}
+.schedule-container {
+  width: 60%;
+  max-height: 800px;
+  overflow: scroll;  
+}
+.docs-container {
+  width: 20%;
+}

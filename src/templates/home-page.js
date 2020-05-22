@@ -15,19 +15,37 @@ export const HomePageTemplate = ({ title, content, contentComponent }) => {
 
   return (
     <section className="section section--gradient">
-      <div className="container">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <div className="section">
-              <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                Livestream
-              </h2>
-              {content && <PageContent className="content" content={content} />}
-              <VideoComponent videoSrcURL="https://www.youtube.com/embed/P7d1H83IcjE" />
-              <DisqusComponent />
-              <ScheduleClientSide base='auth/home'/>
-            </div>
-          </div>
+      <div className="video-row">
+        <div className="video-player">
+          <VideoComponent videoSrcURL="https://www.youtube.com/embed/0eEisMm9ykg" videoTitle="Introducing Airship"/>
+        </div>
+        <div className="disqus-container">
+          <DisqusComponent />          
+        </div>
+      </div>
+      <div className="video-title" style={{ padding: "15px" }}>
+        <span><b>Wednesday, November 14, 9:20am-9:25am - CityCube Berlin - Level 1 - Hall A4-6</b></span>
+        <h1>
+          <b>Introducing Airship</b>
+        </h1>
+        <div className="speaker-info">
+          <img /> 
+          <span>Alan Meadows & Matt McEuen</span>
+          <br />
+          <span><b>Job Title</b></span>
+        </div>
+        {content && <PageContent className="content" content={content} />}
+      </div>
+      <br /><br />
+      <div className="schedule-row">
+        <div className="sponsor-container">
+          <img src="/img/intel.png" alt="sponsor"/>
+        </div>
+        <div className="schedule-container">
+          <ScheduleClientSide base='auth/home'/>
+        </div>
+        <div className="docs-container">
+
         </div>
       </div>
     </section>
