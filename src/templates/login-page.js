@@ -14,52 +14,11 @@ export const LoginPageTemplate = ({ title, content, contentComponent, loggedUser
   const PageContent = contentComponent || Content
 
   if (loggedUserState.isLoggedUser) {
-    console.log('yay!')
     navigate('/auth/home');
-  } else {
-    console.log('nay!')
   }
 
   return (
     <React.Fragment>
-      <div className="modal fade" id="modal-confirmation" tabIndex="-1" role="dialog" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-body"></div>
-          </div>
-        </div>
-      </div>
-
-      <div className="modal fade" id="modal-warning" tabIndex="-1" role="dialog" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header panel-heading">
-              <h4 className="modal-title"></h4>
-            </div>
-            <div className="row">
-              <div className="col-sm-1 modal-icon"><span className="glyphicon glyphicon-exclamation-sign modal-warning-icon"></span></div>
-              <div className="col-sm-11 modal-body"></div>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-default" data-dismiss="modal">OK</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="modal fade" id="confirm-delete" tabIndex="-1" role="dialog" aria-labelledby="Delete dialog" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-body"></div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-              <a href="#" className="btn btn-danger danger" id="delete-confirm-button">Delete</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
       <LoginButton />
     </React.Fragment>
   )

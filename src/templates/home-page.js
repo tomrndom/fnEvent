@@ -24,7 +24,7 @@ export const HomePageTemplate = ({ title, content, contentComponent }) => {
               </h2>
               {content && <PageContent className="content" content={content} />}
               <VideoComponent videoSrcURL="https://www.youtube.com/embed/P7d1H83IcjE" />
-              {/* <DisqusComponent /> */}
+              <DisqusComponent />
               <ScheduleClientSide base='auth/home'/>
             </div>
           </div>

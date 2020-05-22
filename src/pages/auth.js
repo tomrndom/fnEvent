@@ -23,8 +23,8 @@ const App = class extends React.Component {
 
     let {isLoggedUser, onUserAuth, doLogout, getUserInfo, member, backUrl, summit} = this.props;
 
-    if (isLoggedUser) {      
-      navigate('/auth/home');
+    if (typeof window !== `undefined` && window.location.pathname === '/auth/callback' && isLoggedUser) {      
+      navigate('/auth/home')
     }
 
     return (
@@ -34,7 +34,7 @@ const App = class extends React.Component {
           <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
           <LoadableLogOutCallbackRoute doLogout={doLogout} path='/logout' />
           <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />
-          <LoginPage path="/" />
+          <LoginPage path="/" />          
         </Router>
       </Layout >
     )
