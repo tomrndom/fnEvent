@@ -462,6 +462,9 @@ div.modalcenter-frame .modal-body {
 .sponsor-container {
   width: 20%;  
 }
+.sponsor-container img {
+  max-width: 100%;
+}
 .schedule-container {
   width: 60%;
   max-height: 800px;

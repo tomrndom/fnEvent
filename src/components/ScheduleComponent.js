@@ -9,7 +9,7 @@ const ScheduleComponent = class extends React.Component {
   // custom component using client-side libraries
   render() {
 
-    const {base} = this.props;
+    const {base, accessToken} = this.props;
 
     return (
       <React.Fragment>

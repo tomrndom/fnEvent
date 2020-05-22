@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 
@@ -10,7 +11,7 @@ import VideoComponent from '../components/VideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
-export const HomePageTemplate = ({ title, content, contentComponent }) => {
+export const HomePageTemplate = ({ title, content, contentComponent, loggedUserState }) => {
   const PageContent = contentComponent || Content
 
   return (
@@ -32,7 +33,6 @@ export const HomePageTemplate = ({ title, content, contentComponent }) => {
           <img /> 
           <span>Alan Meadows & Matt McEuen</span>
           <br />
-          <span><b>Job Title</b></span>
         </div>
         {content && <PageContent className="content" content={content} />}
       </div>
@@ -42,7 +42,7 @@ export const HomePageTemplate = ({ title, content, contentComponent }) => {
           <img src="/img/intel.png" alt="sponsor"/>
         </div>
         <div className="schedule-container">
-          <ScheduleClientSide base='auth/home'/>
+          <ScheduleClientSide base='auth/home' accessToken={loggedUserState.accessToken}/>
         </div>
         <div className="docs-container">
 
@@ -58,7 +58,7 @@ HomePageTemplate.propTypes = {
   contentComponent: PropTypes.func,
 }
 
-const HomePage = ({ data }) => {
+const HomePage = ({ data, loggedUserState }) => {
 
   if (data) {
     const { markdownRemark: post } = data
@@ -69,13 +69,15 @@ const HomePage = ({ data }) => {
           contentComponent={HTMLContent}
           title={post.frontmatter.title}
           content={post.html}
+          loggedUserState={loggedUserState}
         />
       </Layout>
     )
   } else {
     return (
       <HomePageTemplate
-        contentComponent={HTMLContent}          
+        contentComponent={HTMLContent}
+        loggedUserState={loggedUserState}
       />
     )
   }  
@@ -85,7 +87,9 @@ HomePage.propTypes = {
   data: PropTypes.object,
 }
 
-export default HomePage
+export default connect(state => ({
+  loggedUserState: state.loggedUserState
+}), null)(HomePage)
 
 export const homePageQuery = graphql`
   query HomePage($id: String!) {
