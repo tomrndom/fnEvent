@@ -19,7 +19,7 @@ const ScheduleComponent = class extends React.Component {
         </Helmet>
         <div style={{ padding: "0 15px" }}>
           <summit-schedule
-            summit_id="25"
+            summit_id="27"
             api_access_token=""
             api_url="https://testresource-server.openstack.org"
             schedule_base={`/${base}`}
