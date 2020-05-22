@@ -8,7 +8,7 @@ const DisqusComponent = () => {
     title: 'Comments',
   }
   return (
-    <div className="disqus" style={{ padding: "50px" }}>
+    <div className="disqus" style={{ padding: "15px" }}>
       <h1>{disqusConfig.title}</h1>      
       <Disqus config={disqusConfig} />
     </div>

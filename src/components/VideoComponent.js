@@ -1,7 +1,7 @@
 import React from "react"
 const
   VideoComponent = ({ videoSrcURL, videoTitle, ...props }) => (
-    <div className="video" style={{ padding: "50px" }}>
+    <div className="video" style={{ padding: "15px" }}>
       <iframe
         width="100%"
         height="720"
