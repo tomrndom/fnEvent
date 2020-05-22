@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css'
-
 import ReduxWrapper from "./src/state/ReduxWrapper"
 export const wrapRootElement = ReduxWrapper
 
