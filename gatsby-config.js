@@ -66,7 +66,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: `gatsby-idp-poc`
+        shortname: `fnvirtual-poc`
       }
     },
     {
