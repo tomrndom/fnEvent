@@ -10,6 +10,7 @@ import Loadable from "@loadable/component"
 import VideoComponent from '../components/VideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
+
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
 export const HomePageTemplate = ({ title, content, contentComponent, loggedUserState }) => {
@@ -58,7 +59,6 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
           </div>
         </div>
         {content && <PageContent className="content" content={content} />}
-
       </div>
       <br /><br />
       <div className="schedule">
