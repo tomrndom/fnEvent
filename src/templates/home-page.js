@@ -9,6 +9,7 @@ import Loadable from "@loadable/component"
 
 import VideoComponent from '../components/VideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
+import Etherpad from '../components/Etherpad'
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
 export const HomePageTemplate = ({ title, content, contentComponent, loggedUserState }) => {
@@ -18,35 +19,61 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
     <section className="section section--gradient">
       <div className="video-row">
         <div className="video-player">
-          <VideoComponent videoSrcURL="https://www.youtube.com/embed/0eEisMm9ykg" videoTitle="Introducing Airship"/>
+          <VideoComponent videoSrcURL="https://www.youtube.com/embed/0eEisMm9ykg" videoTitle="Introducing Airship" />
         </div>
         <div className="disqus-container">
-          <DisqusComponent />          
+          <DisqusComponent />
         </div>
       </div>
-      <div className="video-title" style={{ padding: "15px" }}>
-        <span><b>Wednesday, November 14, 9:20am-9:25am - CityCube Berlin - Level 1 - Hall A4-6</b></span>
-        <h1>
-          <b>Introducing Airship</b>
-        </h1>
-        <div className="speaker-info">
-          <img /> 
-          <span>Alan Meadows & Matt McEuen</span>
-          <br />
+      <div className="talk">
+        <div className="talk__row">
+          <div className="talk__row--left">
+            <span className="talk__date">Wednesday, November 14, 9:20am-9:25am - CityCube Berlin - Level 1 - Hall A4-6</span>
+            <h1>
+              <b>Introducing Airship</b>
+            </h1>
+            <div className="talk__speaker">
+              <img />
+              <span>Alan Meadows & Matt McEuen</span>
+              <br /><br />
+              <div className="talk__description">
+                Swisscom has one of the largest in-production industry standard Platform as a Service built on Openstack.
+                Their offering is focused on providing an enterprise-grade PaaS environment to customers worldwide and with various delivery models based on Cloud Foundry and Openstack.
+              </div>
+            </div>
+          </div>
+          <div className="talk__row--right">
+            <div className="talk__"> &lt;3 Like | Share</div>
+            <div className="talk__join-button">join zoom to take the mic !</div>
+          </div>
+        </div>
+        <div className="talk__row">
+          <div className="talk__row--left">
+            <Etherpad className="talk__etherpad" />
+          </div>
+          <div className="talk__row--right">
+            <div className="talk__docs">
+              <div className="talk__docs--title">Documents</div>
+            </div>
+          </div>
         </div>
         {content && <PageContent className="content" content={content} />}
+
       </div>
       <br /><br />
-      <div className="schedule-row">
-        <div className="sponsor-container">
-          <img src="/img/intel.png" alt="sponsor"/>
-        </div>
-        <div className="schedule-container">
-          <ScheduleClientSide base='auth/home' accessToken={loggedUserState.accessToken}/>
-        </div>
-        <div className="docs-container">
-
-        </div>
+      <div className="schedule">
+        <div className="schedule__row">
+          <div className="schedule__row--left">
+            <div className="schedule-container">
+              <ScheduleClientSide base='auth/home' accessToken={loggedUserState.accessToken} />
+            </div>
+          </div>
+          <div className="schedule__row--right">
+            <div className="sponsor-container">
+              <img src="/img/intel.png" alt="sponsor" />
+            </div>
+          </div>
+        </div>        
       </div>
     </section>
   )
@@ -80,7 +107,7 @@ const HomePage = ({ data, loggedUserState }) => {
         loggedUserState={loggedUserState}
       />
     )
-  }  
+  }
 }
 
 HomePage.propTypes = {

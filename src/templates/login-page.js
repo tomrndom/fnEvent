@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 
-import '../styles/login.css'
+import '../styles/login.scss'
 import LoginButton from '../components/LoginButton'
 
 import { navigate } from "gatsby"
