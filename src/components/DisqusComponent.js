@@ -27,8 +27,8 @@ const DisqusComponent = class extends React.Component {
       url: `https://idp-gatsby-poc.netlify.app/`,
       identifier: 'gatsby-idp-poc',
       title: 'Conversation',
-      remote_auth_s3: this.state.auth,
-      api_key: this.state.public_key,
+      remoteAuthS3: this.state.auth,
+      apiKey: this.state.public_key,
     }
     
     if (!disqusConfig.remote_auth_s3 && !disqusConfig.api_key) {
