@@ -31,7 +31,7 @@ const DisqusComponent = class extends React.Component {
       apiKey: this.state.public_key,
     }
     
-    if (!disqusConfig.remote_auth_s3 && !disqusConfig.api_key) {
+    if (!disqusConfig.remoteAuthS3 && !disqusConfig.apiKey) {
       return null
     } else {
       return (
