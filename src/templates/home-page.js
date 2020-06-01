@@ -10,6 +10,7 @@ import Loadable from "@loadable/component"
 import VideoComponent from '../components/VideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
+import RocketChatComponent from '../components/RocketChat'
 
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
@@ -23,7 +24,7 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
           <VideoComponent videoSrcURL="https://www.youtube.com/embed/0eEisMm9ykg" videoTitle="Introducing Airship" />
         </div>
         <div className="disqus-container">
-          <DisqusComponent />
+          <DisqusComponent accessToken={loggedUserState.accessToken} />
         </div>
       </div>
       <div className="talk">
@@ -59,6 +60,7 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
           </div>
         </div>
         {content && <PageContent className="content" content={content} />}
+        {/* <RocketChatComponent accessToken={loggedUserState.accessToken} /> */}
       </div>
       <br /><br />
       <div className="schedule">
@@ -73,7 +75,7 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
               <img src="/img/intel.png" alt="sponsor" />
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     </section>
   )

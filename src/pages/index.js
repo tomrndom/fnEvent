@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 
 const IndexPage = ({location, isLoggedUser}) => {
   if (location.pathname === `/` && !isLoggedUser) {
-    navigate("/auth");
+    navigate("/auth");        
     return null
   } else if (isLoggedUser) {
     navigate('/auth/home');
+    return null
   }
 }
 
