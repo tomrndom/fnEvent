@@ -1,14 +1,27 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Header = class extends React.Component {  
+import LogoutButton from './LogoutButton'
+
+const Header = class extends React.Component {
 
   render() {
+
+    let { isLoggedUser } = this.props;
+
     return (
       <header>
-        <img src="/img/logo.png" alt="FNTech Logo" />
+        <div className="header">
+          <img src="/img/logo.png" alt="FNTech Logo" />
+          <LogoutButton isLoggedUser={isLoggedUser} />
+        </div>
       </header>
     )
   }
 }
 
-export default Header
+const mapStateToProps = ({ loggedUserState }) => ({
+  isLoggedUser: loggedUserState.isLoggedUser
+})
+
+export default connect(mapStateToProps)(Header)
