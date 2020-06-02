@@ -7,7 +7,7 @@ import Content, { HTMLContent } from '../components/Content'
 
 import Loadable from "@loadable/component"
 
-import VideoComponent from '../components/VideoComponent'
+import YoutubeVideoComponent from '../components/YoutubeVideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
 import RocketChatComponent from '../components/RocketChat'
@@ -21,7 +21,7 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
     <section className="section section--gradient">
       <div className="video-row">
         <div className="video-player">
-          <VideoComponent videoSrcURL="https://www.youtube.com/embed/0eEisMm9ykg" videoTitle="Introducing Airship" />
+          <YoutubeVideoComponent videoSrcURL="https://www.youtube.com/embed/0eEisMm9ykg" videoTitle="Introducing Airship" />
         </div>
         <div className="disqus-container">
           <DisqusComponent accessToken={loggedUserState.accessToken} />
@@ -60,7 +60,7 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
           </div>
         </div>
         {content && <PageContent className="content" content={content} />}
-        {/* <RocketChatComponent accessToken={loggedUserState.accessToken} /> */}
+        <RocketChatComponent accessToken={loggedUserState.accessToken} />
       </div>
       <br /><br />
       <div className="schedule">

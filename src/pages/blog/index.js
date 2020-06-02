@@ -3,7 +3,7 @@ import Loadable from "@loadable/component"
 
 import Layout from '../../components/Layout'
 
-import VideoComponent from '../../components/VideoComponent'
+import YoutubeVideoComponent from '../../components/YoutubeVideoComponent'
 import DisqusComponent from '../../components/DisqusComponent'
 const ScheduleClientSide = Loadable(() => import('../../components/ScheduleComponent'))
 
@@ -13,7 +13,7 @@ export default class BlogIndexPage extends React.Component {
       <Layout>
         Testing place
         
-        <VideoComponent videoSrcURL="https://www.youtube.com/embed/P7d1H83IcjE" />
+        <YoutubeVideoComponent videoSrcURL="https://www.youtube.com/embed/P7d1H83IcjE" />
         <DisqusComponent />
         <ScheduleClientSide base='blog'/>
       </Layout>
