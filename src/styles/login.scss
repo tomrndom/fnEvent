@@ -634,14 +634,48 @@ div.modalcenter-frame .modal-body {
 }
 
 .header {
-  display: flex;  
+  display: flex;
   align-items: center;
   padding-top: 5px;
 }
 
-.logout-button {  
-  color: #fff;  
+.logout-button {
+  color: #fff;
   font-weight: bold;
   cursor: pointer;
   padding-right: 20px;
+}
+
+.rocket-chat {
+  iframe {    
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    z-index: 30;
+    border: 2px solid #26b;    
+  }
+
+  &--button {
+    background-color: #26b;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 42px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 20;
+    display: flex;    
+    justify-content: center;    
+    img {
+      filter: invert(1);
+      justify-content: center;
+    }
+  }
 }
