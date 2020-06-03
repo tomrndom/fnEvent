@@ -11,11 +11,21 @@ import YoutubeVideoComponent from '../components/YoutubeVideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
 import RocketChatComponent from '../components/RocketChat'
+import VideoPlayer from '../components/VideoPlayer'
 
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
 export const HomePageTemplate = ({ title, content, contentComponent, loggedUserState }) => {
   const PageContent = contentComponent || Content
+
+  const videoJsOptions = {
+    autoplay: true,
+    controls: true,
+    sources: [{
+      src: 'https://stream.mux.com/jMXSdkQaDVOWa6r1zYYDr6YyckfbDxIKzbKLsTnqexw.m3u8',
+      type: 'application/x-mpegURL'
+    }]
+  }
 
   return (
     <section className="section section--gradient">
@@ -61,6 +71,7 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
         </div>
         {content && <PageContent className="content" content={content} />}
         <RocketChatComponent accessToken={loggedUserState.accessToken} />
+        <VideoPlayer {...videoJsOptions} />
       </div>
       <br /><br />
       <div className="schedule">
