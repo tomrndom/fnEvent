@@ -51,7 +51,7 @@ export const EventPageTemplate = class extends React.Component {
       if (speakers.length > index + 2) formatedSpeakers += ', ';
       if (speakers.length - 2 === index) formatedSpeakers += ' & ';
     })
-    return speakers ? formatedSpeakers : null;
+    return speakers.length > 0 ? formatedSpeakers : null;
   }
 
   formatEventLocation(event) {
