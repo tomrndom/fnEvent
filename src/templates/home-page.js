@@ -11,7 +11,7 @@ import YoutubeVideoComponent from '../components/YoutubeVideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
 import RocketChatComponent from '../components/RocketChat'
-import VideoPlayer from '../components/VideoPlayer'
+import LiveVideoPlayer from '../components/LiveVideoPlayer'
 
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
@@ -21,10 +21,11 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
   const videoJsOptions = {
     autoplay: true,
     controls: true,
+    fluid: true,
     sources: [{
       src: 'https://stream.mux.com/jMXSdkQaDVOWa6r1zYYDr6YyckfbDxIKzbKLsTnqexw.m3u8',
       type: 'application/x-mpegURL'
-    }]
+    }],
   }
 
   return (
@@ -70,8 +71,8 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
           </div>
         </div>
         {content && <PageContent className="content" content={content} />}
-        <RocketChatComponent accessToken={loggedUserState.accessToken} />
-        <VideoPlayer {...videoJsOptions} />
+        <RocketChatComponent accessToken={loggedUserState.accessToken} embedded={true} />
+        <LiveVideoPlayer {...videoJsOptions} />
       </div>
       <br /><br />
       <div className="schedule">
@@ -125,6 +126,7 @@ const HomePage = ({ data, loggedUserState }) => {
 
 HomePage.propTypes = {
   data: PropTypes.object,
+  loggedUserState: PropTypes.object
 }
 
 export default connect(state => ({

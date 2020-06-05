@@ -3,7 +3,7 @@ import videojs from 'video.js';
 
 import 'video.js/dist/video-js.css'
 
-class VideoPlayer extends React.Component {
+class LiveVideoPlayer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -25,7 +25,7 @@ class VideoPlayer extends React.Component {
 
     return (
       <div>
-        <div data-vjs-player data-setup='{"liveui": true}'>
+        <div data-vjs-player>
           <video ref={node => this.videoNode = node} className="video-js"></video>
         </div>
       </div>
@@ -33,4 +33,4 @@ class VideoPlayer extends React.Component {
   }
 }
 
-export default VideoPlayer;
+export default LiveVideoPlayer;

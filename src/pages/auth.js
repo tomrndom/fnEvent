@@ -6,6 +6,7 @@ import { navigate } from "gatsby"
 import Layout from "../components/Layout"
 import LoginPage from "../templates/login-page"
 import HomePage from "../templates/home-page"
+import EventPage from "../templates/event-page"
 
 import PrivateRoute from "../components/PrivateRoute"
 
@@ -34,6 +35,7 @@ const App = class extends React.Component {
           <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
           <LoadableLogOutCallbackRoute doLogout={doLogout} path='/logout' />
           <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />
+          <PrivateRoute path="/event" component={EventPage} isLoggedIn={isLoggedUser} />
           <LoginPage path="/" />          
         </Router>
       </Layout >

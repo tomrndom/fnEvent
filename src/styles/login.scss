@@ -633,6 +633,10 @@ div.modalcenter-frame .modal-body {
   overflow: scroll;
 }
 
+.rocket-container {  
+  margin-bottom: 35px;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -647,12 +651,16 @@ div.modalcenter-frame .modal-body {
 }
 
 .rocket-chat {
-  iframe {    
+  &--embedded {
     position: fixed;
     bottom: 100px;
     right: 50px;
     z-index: 30;
     border: 2px solid #26b;    
+  }
+
+  &--full {
+
   }
 
   &--button {
