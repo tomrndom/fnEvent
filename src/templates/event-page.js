@@ -27,6 +27,7 @@ export const EventPageTemplate = class extends React.Component {
 
     this.formatEventDate = this.formatEventDate.bind(this);
     this.formatSpeakers = this.formatSpeakers.bind(this);
+    this.formatEventLocation = this.formatEventLocation.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +54,11 @@ export const EventPageTemplate = class extends React.Component {
     return formatedSpeakers;
   }
 
+  formatEventLocation(event) {
+    let formattedLocation = `${event.location?.venue?.name} - ${event.location?.floor?.name} - ${event.location?.name}`;
+    return formattedLocation;
+  }
+
   render() {
 
     const { loggedUser, event } = this.props;
@@ -71,7 +77,7 @@ export const EventPageTemplate = class extends React.Component {
           <div className="talk">
             <div className="talk__row">
               <div className="talk__row--left">
-                <span className="talk__date">Date - {`${event.location.venue.name} - ${event.location.floor.name} - ${event.location.name}`}</span>
+                <span className="talk__date">Date - {this.formatEventLocation(event)}</span>
                 <h1>
                   <b>{event.title}</b>
                 </h1>
@@ -116,7 +122,7 @@ export const EventPageTemplate = class extends React.Component {
         </section>
       )
     } else {
-      return <span>Loading...</span>
+      return <span>Event not found</span>
     }
   }
 }
