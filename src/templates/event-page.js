@@ -46,12 +46,14 @@ export const EventPageTemplate = class extends React.Component {
 
   formatSpeakers(speakers) {
     let formatedSpeakers = '';
-    speakers.map((speaker, index) => {
-      formatedSpeakers += `${speaker.first_name} ${speaker.last_name}`;
-      if (speakers.length > index + 2) formatedSpeakers += ', ';
-      if (speakers.length - 2 === index) formatedSpeakers += ' & ';
-    })
-    return speakers.length > 0 ? formatedSpeakers : null;
+    if (speakers.length > 0) {
+      speakers.map((speaker, index) => {
+        formatedSpeakers += `${speaker.first_name} ${speaker.last_name}`;
+        if (speakers.length > index + 2) formatedSpeakers += ', ';
+        if (speakers.length - 2 === index) formatedSpeakers += ' & ';
+      })
+    }
+    return formatedSpeakers;
   }
 
   formatEventLocation(event) {
