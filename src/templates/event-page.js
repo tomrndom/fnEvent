@@ -48,7 +48,7 @@ export const EventPageTemplate = class extends React.Component {
     speakers.map((speaker, index) => {
       formatedSpeakers += `${speaker.first_name} ${speaker.last_name}`;
       if (speakers.length > index + 2) formatedSpeakers += ', ';
-      if (speakers.length-2 === index) formatedSpeakers += ' & ';
+      if (speakers.length - 2 === index) formatedSpeakers += ' & ';
     })
     return formatedSpeakers;
   }
@@ -57,65 +57,67 @@ export const EventPageTemplate = class extends React.Component {
 
     const { loggedUser, event } = this.props;
 
-    console.log('event state???', event)    
-
-    return (
-      <section className="section section--gradient">
-        <div className="video-row">
-          <div className="video-player">
-            <VideoComponent url={event.streaming_url} />
+    if (event) {
+      return (
+        <section className="section section--gradient">
+          <div className="video-row">
+            <div className="video-player">
+              <VideoComponent url={event.streaming_url} />
+            </div>
+            <div className="disqus-container">
+              <DisqusComponent accessToken={loggedUser.accessToken} />
+            </div>
           </div>
-          <div className="disqus-container">
-            <DisqusComponent accessToken={loggedUser.accessToken} />
-          </div>
-        </div>
-        <div className="talk">
-          <div className="talk__row">
-            <div className="talk__row--left">
-              <span className="talk__date">Date - {`${event.location.venue.name} - ${event.location.floor.name} - ${event.location.name}`}</span>
-              <h1>
-                <b>{event.title}</b>
-              </h1>
-              <div className="talk__speaker">
-                <img />
-                <span className="talk__speaker--name">{this.formatSpeakers(event.speakers)}</span>
-                <br /><br />
-                <div className="talk__description" dangerouslySetInnerHTML={{ __html: event.description }} />
+          <div className="talk">
+            <div className="talk__row">
+              <div className="talk__row--left">
+                <span className="talk__date">Date - {`${event.location.venue.name} - ${event.location.floor.name} - ${event.location.name}`}</span>
+                <h1>
+                  <b>{event.title}</b>
+                </h1>
+                <div className="talk__speaker">
+                  <img />
+                  <span className="talk__speaker--name">{this.formatSpeakers(event.speakers)}</span>
+                  <br /><br />
+                  <div className="talk__description" dangerouslySetInnerHTML={{ __html: event.description }} />
+                </div>
+              </div>
+              <div className="talk__row--right">
+                <div className="talk__"> &lt;3 Like | Share</div>
+                <div className="talk__join-button">join zoom to take the mic !</div>
               </div>
             </div>
-            <div className="talk__row--right">
-              <div className="talk__"> &lt;3 Like | Share</div>
-              <div className="talk__join-button">join zoom to take the mic !</div>
-            </div>
-          </div>
-          <div className="talk__row">
-            <div className="talk__row--left">
-              {event.etherpad_link  && <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />}              
-            </div>
-            <div className="talk__row--right">
-              {/* <div className="talk__docs">
-                <div className="talk__docs--title">Documents</div>
-              </div> */}
-            </div>
-          </div>
-        </div>
-        <div className="schedule">
-          <div className="schedule__row">
-            <div className="schedule__row--left">
-              <div className="rocket-container">
-                {/* <ScheduleClientSide base='auth/event' accessToken={loggedUser.accessToken} /> */}
-                <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
+            <div className="talk__row">
+              <div className="talk__row--left">
+                {event.etherpad_link && <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />}
               </div>
-            </div>
-            <div className="schedule__row--right">
-              <div className="sponsor-container">
-                <img src="/img/intel.png" alt="sponsor" />
+              <div className="talk__row--right">
+                {/* <div className="talk__docs">
+                  <div className="talk__docs--title">Documents</div>
+                </div> */}
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    )
+          <div className="schedule">
+            <div className="schedule__row">
+              <div className="schedule__row--left">
+                <div className="rocket-container">
+                  {/* <ScheduleClientSide base='auth/event' accessToken={loggedUser.accessToken} /> */}
+                  <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
+                </div>
+              </div>
+              <div className="schedule__row--right">
+                <div className="sponsor-container">
+                  <img src="/img/intel.png" alt="sponsor" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )
+    } else {
+      return <span>Loading...</span>
+    }
   }
 }
 
