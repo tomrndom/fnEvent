@@ -1,11 +1,11 @@
 import React from "react"
 const
-  Etherpad = ({ videoSrcURL, videoTitle, ...props }) => (
+  Etherpad = ({ ...props }) => (
     <div className={props.className}>
       <iframe
         width="100%"
         height="420"
-        src='https://etherpad.opendev.org/p/octagon'
+        src={props.etherpad_link}
       />
     </div>
   )

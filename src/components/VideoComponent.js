@@ -18,25 +18,29 @@ const VideoComponent = class extends React.Component {
   }
 
   render() {
-    const {url} = this.props;
-
-    if(this.checkLiveVideo(url)) {
-      const videoJsOptions = {
-        autoplay: true,
-        controls: true,
-        fluid: true,        
-        sources: [{
-          src: url,
-          type: 'application/x-mpegURL'
-        }]
-      }      
-      return (
-        <LiveVideoPlayer {...videoJsOptions} />
-      )
+    const { url } = this.props;
+    
+    if (url) {
+      if (this.checkLiveVideo(url)) {
+        const videoJsOptions = {
+          autoplay: true,
+          controls: true,
+          fluid: true,
+          sources: [{
+            src: url,
+            type: 'application/x-mpegURL'
+          }]
+        }
+        return (
+          <LiveVideoPlayer {...videoJsOptions} />
+        )
+      } else {
+        return (
+          <YoutubeVideoComponent videoSrcURL={url} />
+        )
+      }
     } else {
-      return (
-        <YoutubeVideoComponent videoSrcURL={url} />
-      )
+      return <span className="no-video">No video URL Provided</span>
     }
   }
 

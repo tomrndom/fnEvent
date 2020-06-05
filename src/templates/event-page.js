@@ -15,7 +15,7 @@ import VideoComponent from '../components/VideoComponent'
 
 import { getEventBySlug2 } from '../state/event-actions'
 
-import {epochToMomentTimeZone} from "openstack-uicore-foundation/lib/methods";
+import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
@@ -26,6 +26,7 @@ export const EventPageTemplate = class extends React.Component {
     this.state = { eventId: '' };
 
     this.formatEventDate = this.formatEventDate.bind(this);
+    this.formatSpeakers = this.formatSpeakers.bind(this);
   }
 
   componentDidMount() {
@@ -42,17 +43,27 @@ export const EventPageTemplate = class extends React.Component {
     // return dateNice;
   }
 
+  formatSpeakers(speakers) {
+    let formatedSpeakers = '';
+    speakers.map((speaker, index) => {
+      formatedSpeakers += `${speaker.first_name} ${speaker.last_name}`;
+      if (speakers.length > index + 2) formatedSpeakers += ', ';
+      if (speakers.length-2 === index) formatedSpeakers += ' & ';
+    })
+    return formatedSpeakers;
+  }
+
   render() {
 
     const { loggedUser, event } = this.props;
 
-    console.log('event state???', event)
+    console.log('event state???', event)    
 
     return (
       <section className="section section--gradient">
         <div className="video-row">
           <div className="video-player">
-            <VideoComponent url="https://stream.mux.com/jMXSdkQaDVOWa6r1zYYDr6YyckfbDxIKzbKLsTnqexw.m3u8" />
+            <VideoComponent url={event.streaming_url} />
           </div>
           <div className="disqus-container">
             <DisqusComponent accessToken={loggedUser.accessToken} />
@@ -61,15 +72,15 @@ export const EventPageTemplate = class extends React.Component {
         <div className="talk">
           <div className="talk__row">
             <div className="talk__row--left">
-              <span className="talk__date">Date - CityCube Berlin - Level 1 - Hall A4-6</span>
+              <span className="talk__date">Date - {`${event.location.venue.name} - ${event.location.floor.name} - ${event.location.name}`}</span>
               <h1>
                 <b>{event.title}</b>
               </h1>
               <div className="talk__speaker">
                 <img />
-                <span>Alan Meadows & Matt McEuen</span>
+                <span className="talk__speaker--name">{this.formatSpeakers(event.speakers)}</span>
                 <br /><br />
-                <div className="talk__description" dangerouslySetInnerHTML={{ __html: event.description }} />                
+                <div className="talk__description" dangerouslySetInnerHTML={{ __html: event.description }} />
               </div>
             </div>
             <div className="talk__row--right">
@@ -79,7 +90,7 @@ export const EventPageTemplate = class extends React.Component {
           </div>
           <div className="talk__row">
             <div className="talk__row--left">
-              <Etherpad className="talk__etherpad" />
+              {event.etherpad_link  && <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />}              
             </div>
             <div className="talk__row--right">
               {/* <div className="talk__docs">

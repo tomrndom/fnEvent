@@ -528,7 +528,13 @@ div.modalcenter-frame .modal-body {
 }
 
 .video-player {
-  width: calc(75% - 20px);
+  width: calc(75% - 20px);  
+  .no-video {
+    height: 720px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+  }
 }
 
 .disqus-container {
@@ -564,7 +570,11 @@ div.modalcenter-frame .modal-body {
 
   &__title {}
 
-  &__speaker {}
+  &__speaker {
+    &--name {
+      text-transform: capitalize;
+    }
+  }
 
   &__description {
     font-weight: bold;
@@ -633,7 +643,7 @@ div.modalcenter-frame .modal-body {
   overflow: scroll;
 }
 
-.rocket-container {  
+.rocket-container {
   margin-bottom: 35px;
 }
 
@@ -656,12 +666,10 @@ div.modalcenter-frame .modal-body {
     bottom: 100px;
     right: 50px;
     z-index: 30;
-    border: 2px solid #26b;    
+    border: 2px solid #26b;
   }
 
-  &--full {
-
-  }
+  &--full {}
 
   &--button {
     background-color: #26b;
@@ -679,8 +687,9 @@ div.modalcenter-frame .modal-body {
     bottom: 50px;
     right: 50px;
     z-index: 20;
-    display: flex;    
-    justify-content: center;    
+    display: flex;
+    justify-content: center;
+
     img {
       filter: invert(1);
       justify-content: center;

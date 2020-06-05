@@ -72,7 +72,6 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
         </div>
         {content && <PageContent className="content" content={content} />}
         <RocketChatComponent accessToken={loggedUserState.accessToken} embedded={true} />
-        <LiveVideoPlayer {...videoJsOptions} />
       </div>
       <br /><br />
       <div className="schedule">
