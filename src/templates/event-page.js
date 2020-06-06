@@ -57,7 +57,7 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   formatEventLocation(event) {
-    let formattedLocation = `${event?.location?.venue?.name} - ${event?.location?.floor?.name} - ${event?.location?.name}`;
+    let formattedLocation = `${event?.location?.venue?.name} ${event?.location?.floor?.name? ` - ${event.location.floor.name}`: ''} - ${event?.location?.name}`;
     return formattedLocation;
   }
 
