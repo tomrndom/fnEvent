@@ -35,13 +35,13 @@ export const EventPageTemplate = class extends React.Component {
     this.props.getEventBySlug2(eventSlug);
   }
 
-  formatEventDate(startDate, endDate) {
-    // const timeZone = summit.time_zone_id;
-    // const date = epochToMomentTimeZone(event.start_date, timeZone).format('dddd, MMMM D')
-    // const startTime = epochToMomentTimeZone(event.start_date, timeZone).format('h:mm a');
-    // const endTime = epochToMomentTimeZone(event.end_date, timeZone).format('h:mm a');
-    // const dateNice = `${date}, ${startTime} - ${endTime}`;
-    // return dateNice;
+  formatEventDate(start_date, end_date) {
+    const timeZone = 'US/Pacific'; //Hardcoded
+    const date = epochToMomentTimeZone(start_date, timeZone).format('dddd, MMMM D')
+    const startTime = epochToMomentTimeZone(start_date, timeZone).format('h:mm a');
+    const endTime = epochToMomentTimeZone(end_date, timeZone).format('h:mm a');
+    const dateNice = `${date}, ${startTime} - ${endTime}`;
+    return dateNice;
   }
 
   formatSpeakers(speakers) {
