@@ -32,7 +32,7 @@ const DisqusComponent = class extends React.Component {
     }
     
     if (!disqusConfig.remoteAuthS3 && !disqusConfig.apiKey) {
-      return null
+      return <span>Error loading Disqus</span>
     } else {
       return (
         <div className="disqus" style={{ paddingLeft: "20px" }}>
