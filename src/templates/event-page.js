@@ -81,7 +81,7 @@ export const EventPageTemplate = class extends React.Component {
           <div className="talk">
             <div className="talk__row">
               <div className="talk__row--left">
-                <span className="talk__date">Date - {this.formatEventLocation(event)}</span>
+                <span className="talk__date">{this.formatEventDate(event.start_date, event.end_date)} - {this.formatEventLocation(event)}</span>
                 <h1>
                   <b>{event.title}</b>
                 </h1>
