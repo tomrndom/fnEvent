@@ -25,7 +25,7 @@ const DisqusComponent = class extends React.Component {
   render() {
     let disqusConfig = {
       url: `https://idp-gatsby-poc.netlify.app/`,
-      identifier: 'gatsby-idp-poc',
+      identifier: window.location,
       title: 'Conversation',
       remoteAuthS3: this.state.auth,
       apiKey: this.state.public_key,
