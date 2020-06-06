@@ -36,6 +36,7 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   formatEventDate(start_date, end_date) {
+    if (!start_date || !end_date) return;
     const timeZone = 'US/Pacific'; //Hardcoded
     const date = epochToMomentTimeZone(start_date, timeZone).format('dddd, MMMM D')
     const startTime = epochToMomentTimeZone(start_date, timeZone).format('h:mm a');
