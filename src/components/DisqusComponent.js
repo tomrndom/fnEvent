@@ -40,7 +40,7 @@ const DisqusComponent = class extends React.Component {
     } else {
       return (
         <div className="disqus" style={{ paddingLeft: "20px" }}>
-          <h3>{disqusConfig.title}</h3>
+          <h3>Conversation</h3>
           <DiscussionEmbed
             shortname='fnvirtual-poc'
             config={disqusConfig}
