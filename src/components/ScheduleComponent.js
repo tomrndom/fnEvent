@@ -22,8 +22,8 @@ const ScheduleComponent = class extends React.Component {
             summit_id="27"
             api_access_token=""
             api_url="https://testresource-server.openstack.org"
-            schedule_base={`/${base}`}
-            schedule_url={`${typeof window === 'object' ? window.origin : 'localhost'}/${base}`}
+            schedule_base={typeof window === 'object' ? window.location.pathname : `/${base}`}
+            schedule_url={typeof window === 'object' ? window.location.origin : `localhost/${base}`}
             login_url="login-url-not-set"
             calendar_instructions_link="calendar-instructions-link-not-set"
             venues_page_link="venues-page-not-set"

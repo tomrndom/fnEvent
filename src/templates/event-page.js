@@ -15,7 +15,7 @@ import VideoComponent from '../components/VideoComponent'
 
 import { getEventBySlug2 } from '../state/event-actions'
 
-import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
+import TalkComponent from '../components/TalkComponent'
 
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
@@ -24,42 +24,11 @@ export const EventPageTemplate = class extends React.Component {
   constructor(props) {
     super(props);
     this.state = { eventId: '' };
-
-    this.formatEventDate = this.formatEventDate.bind(this);
-    this.formatSpeakers = this.formatSpeakers.bind(this);
-    this.formatEventLocation = this.formatEventLocation.bind(this);
   }
 
   componentDidMount() {
     let eventSlug = window.location.search.replace('?id=', '')
     this.props.getEventBySlug2(eventSlug);
-  }
-
-  formatEventDate(start_date, end_date) {
-    if (!start_date || !end_date) return;
-    const timeZone = 'US/Pacific'; //Hardcoded
-    const date = epochToMomentTimeZone(start_date, timeZone).format('dddd, MMMM D')
-    const startTime = epochToMomentTimeZone(start_date, timeZone).format('h:mm a');
-    const endTime = epochToMomentTimeZone(end_date, timeZone).format('h:mm a');
-    const dateNice = `${date}, ${startTime} - ${endTime}`;
-    return dateNice;
-  }
-
-  formatSpeakers(speakers) {
-    let formatedSpeakers = '';
-    if (speakers && speakers.length > 0) {
-      speakers.map((speaker, index) => {
-        formatedSpeakers += `${speaker.first_name} ${speaker.last_name}`;
-        if (speakers.length > index + 2) formatedSpeakers += ', ';
-        if (speakers.length - 2 === index) formatedSpeakers += ' & ';
-      })
-    }
-    return formatedSpeakers;
-  }
-
-  formatEventLocation(event) {
-    let formattedLocation = `${event?.location?.venue?.name} ${event?.location?.floor?.name? ` - ${event.location.floor.name}`: ''} - ${event?.location?.name}`;
-    return formattedLocation;
   }
 
   render() {
@@ -73,31 +42,18 @@ export const EventPageTemplate = class extends React.Component {
         <section className="section section--gradient">
           <div className="video-row">
             <div className="video-player">
-              <VideoComponent url={event.streaming_url} />
+              {event.streaming_url ?
+                <VideoComponent url={event.streaming_url} />
+                :
+                <TalkComponent event={event} noStream={true} />
+              }
             </div>
             <div className="disqus-container">
-              <DisqusComponent accessToken={loggedUser.accessToken} />
+              <DisqusComponent accessToken={loggedUser.accessToken} title={event.title} />
             </div>
           </div>
           <div className="talk">
-            <div className="talk__row">
-              <div className="talk__row--left">
-                <span className="talk__date">{this.formatEventDate(event.start_date, event.end_date)} - {this.formatEventLocation(event)}</span>
-                <h1>
-                  <b>{event.title}</b>
-                </h1>
-                <div className="talk__speaker">
-                  <img />
-                  <span className="talk__speaker--name">{this.formatSpeakers(event.speakers)}</span>
-                  <br /><br />
-                  <div className="talk__description" dangerouslySetInnerHTML={{ __html: event.description }} />
-                </div>
-              </div>
-              <div className="talk__row--right">
-                <div className="talk__"> &lt;3 Like | Share</div>
-                <div className="talk__join-button">join zoom to take the mic !</div>
-              </div>
-            </div>
+            {event.streaming_url ? <TalkComponent event={event} noStream={false} /> : null}
             <div className="talk__row">
               <div className="talk__row--left">
                 {event.etherpad_link && <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />}

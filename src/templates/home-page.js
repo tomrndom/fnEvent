@@ -78,7 +78,7 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
         <div className="schedule__row">
           <div className="schedule__row--left">
             <div className="schedule-container">
-              <ScheduleClientSide base='auth/home' accessToken={loggedUserState.accessToken} />
+              <ScheduleClientSide base={typeof window === 'object' ? window.location.pathname : '/auth/home'} accessToken={loggedUserState.accessToken} />
             </div>
           </div>
           <div className="schedule__row--right">
