@@ -37,6 +37,7 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-helmet": "^6.0.0",
+    "react-iframe-comm": "^1.2.2",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-persist": "^5.9.1",
@@ -54,7 +55,7 @@
     "clean": "gatsby clean",
     "start": "npm run develop",
     "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
-    "develop": "npm run clean && gatsby develop",
+    "develop": "npm run clean && gatsby develop --https",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

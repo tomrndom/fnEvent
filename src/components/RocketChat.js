@@ -1,16 +1,29 @@
 import React from 'react'
+import IframeComm from 'react-iframe-comm';
 
 const RocketChatComponent = class extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { auth: '', loggedIn: false, displayChat: false };
+    this.state = { auth: '', loggedIn: false, displayChat: false, postMessageData: null };
     this.getToken = this.getToken.bind(this);
   }
 
   componentDidMount() {
     this.getToken();    
-  }  
+  }
+
+  onReady = () => {
+    setTimeout(function() { 
+      const el = document.getElementById('rocket-chat');
+      if (el) {
+        el.contentWindow.postMessage({
+          externalCommand: 'login-with-token',
+          token: this.state.auth
+        }, '*');
+      }
+    }.bind(this), 1000)
+  };
 
   getToken = async () => {
     fetch(`https://idp.dev.fnopen.com/api/v1/sso/rocket-chat/fnvirtual-poc/profile?access_token=${this.props.accessToken}`)
@@ -19,50 +32,54 @@ const RocketChatComponent = class extends React.Component {
         this.setState({ auth: json.authToken })
       })
       .then(() => {
-        const el = document.getElementById('rocket-chat');
-        if (el) {
-          console.log('sendingMessage');
-          el.contentWindow.postMessage({
-            externalCommand: 'login-with-token',
-            token: this.state.auth
-          }, '*');
-        }
+        this.setState(prevState => {
+          let postMessageData = Object.assign({}, prevState.postMessageData);
+          postMessageData.externalCommand = 'login-with-token';
+          postMessageData.token = this.state.auth;
+          return { postMessageData };
+        })
       }).then(() => this.setState({ loggedIn: true }))
   }
 
   render() {
 
-    let { displayChat } = this.state;
+    let { displayChat, postMessageData } = this.state;
     const { embedded } = this.props;
 
-    if (embedded) {
-      return (
-        <div className="rocket-chat">
-          <div className="rocket-chat--button" onClick={() => this.setState({ displayChat: !displayChat })}>
-            <img src={displayChat ? '/img/close.svg' : '/img/chat.svg'} width="30px" />
-          </div>
-          <iframe
-            src="https://rocket-chat.dev.fnopen.com/channel/general"
-            width='400px'
-            height="600px"
-            style={{ display: `${displayChat ? '' : 'none'}` }}
-            className="rocket-chat--embedded"
-            id="rocket-chat"
-          ></iframe>
-        </div>
-      )
+    let iframeConfig = {
+      id: 'rocket-chat',
+      src: 'https://rocket-chat.dev.fnopen.com/channel/general',
+      width: embedded ? '400px' : '100%',
+      height: '600px',
+      //style: 'display: ' + displayChat ? '' : 'none',
+      className: embedded ? 'rocket-chat--embedded' : 'rocket-chat--full'
+    }
+
+    if (!postMessageData) {
+      return null 
     } else {
-      return (
-        <div className="rocket-chat">
-          <iframe
-            src="https://rocket-chat.dev.fnopen.com/channel/general"
-            width='100%'
-            height="600px"
-            className="rocket-chat--full"
-            id="rocket-chat"
-          ></iframe>
-        </div>
-      )
+      if (embedded) {
+        return (
+          <div className="rocket-chat">
+            <div className="rocket-chat--button" onClick={() => this.setState({ displayChat: !displayChat })}>
+              <img src={displayChat ? '/img/close.svg' : '/img/chat.svg'} width="30px" />
+            </div>
+            <IframeComm
+                attributes={iframeConfig}
+                handleReady={this.onReady}
+            />
+          </div>
+        )
+      } else {
+        return (
+          <div className="rocket-chat">
+            <IframeComm
+                attributes={iframeConfig}
+                handleReady={this.onReady}
+            />
+          </div>
+        )
+      }
     }
   }
 }
