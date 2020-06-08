@@ -21,6 +21,7 @@ const RocketChatComponent = class extends React.Component {
       .then(() => {
         const el = document.getElementById('rocket-chat');
         if (el) {
+          console.log('sendingMessage');
           el.contentWindow.postMessage({
             externalCommand: 'login-with-token',
             token: this.state.auth
@@ -41,7 +42,7 @@ const RocketChatComponent = class extends React.Component {
             <img src={displayChat ? '/img/close.svg' : '/img/chat.svg'} width="30px" />
           </div>
           <iframe
-            src="https://rocket-chat.dev.fnopen.com/channel/general?layout=embedded"
+            src="https://rocket-chat.dev.fnopen.com/channel/general"
             width='400px'
             height="600px"
             style={{ display: `${displayChat ? '' : 'none'}` }}
@@ -54,7 +55,7 @@ const RocketChatComponent = class extends React.Component {
       return (
         <div className="rocket-chat">
           <iframe
-            src="https://rocket-chat.dev.fnopen.com/channel/general?layout=embedded"
+            src="https://rocket-chat.dev.fnopen.com/channel/general"
             width='100%'
             height="600px"
             className="rocket-chat--full"
