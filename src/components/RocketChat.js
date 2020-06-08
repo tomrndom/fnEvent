@@ -19,10 +19,14 @@ const RocketChatComponent = class extends React.Component {
         this.setState({ auth: json.authToken })
       })
       .then(() => {
-        document.getElementById('rocket-chat').contentWindow.postMessage({
-          externalCommand: 'login-with-token',
-          token: this.state.auth
-      }, '*');
+        const el = document.getElementById('rocket-chat');
+        if (el) {
+          console.log('sendingMessage');
+          el.contentWindow.postMessage({
+            externalCommand: 'login-with-token',
+            token: this.state.auth
+          }, '*');
+        }
       }).then(() => this.setState({ loggedIn: true }))
   }
 
