@@ -29,7 +29,7 @@ const DisqusComponent = class extends React.Component {
 
     let disqusConfig = {
       url: window.location,
-      identifier: window.location,
+      identifier: `${window.location.pathname}${window.location.search}`,
       title: title,
       remoteAuthS3: this.state.auth,
       apiKey: this.state.public_key,
