@@ -48,7 +48,7 @@ const RocketChatComponent = class extends React.Component {
 
     let iframeConfig = {
       id: 'rocket-chat',
-      src: 'https://rocket-chat.dev.fnopen.com/channel/general',
+      src: 'https://rocket-chat.dev.fnopen.com/channel/general?layout=embedded',
       width: embedded ? '400px' : '100%',
       height: '600px',
       style: { display: !embedded || displayChat ? '' : 'none' },
