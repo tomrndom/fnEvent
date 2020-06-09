@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Link } from 'gatsby'
 
 import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 
@@ -60,10 +61,14 @@ const TalkComponent = class extends React.Component {
             <div className="talk__description" dangerouslySetInnerHTML={{ __html: description }} />
           </div>
         </div>
-        {!noStream &&
+        {event.meeting_url &&
           <div className="talk__row--right">
             <div className="talk__"></div>
-            <div className="talk__join-button">join zoom to take the mic !</div>
+            <div className="talk__join-button">
+              <a href={event.meeting_url} target="_blank">
+                join zoom to take the mic !
+              </a>
+            </div>
           </div>
         }
       </div>

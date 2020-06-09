@@ -593,6 +593,12 @@ div.modalcenter-frame .modal-body {
     text-transform: uppercase;
     border-radius: 5px;
     cursor: pointer;
+    a {
+      color: white;
+      &:hover {
+        color: white;
+      }
+    } 
   }
 
   &__docs {
