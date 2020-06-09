@@ -66,12 +66,15 @@ export default class
   }
 
   render() {
-    let {isLoggedUser} = this.props;  
+    let { isLoggedUser } = this.props;
 
     if (isLoggedUser) {
       return (
 
         <div className="logout-button">
+          <span onClick={() => { this.props.clearState(); }}>
+            Clear State |&nbsp;
+          </span>                    
           <span className="dropdown-item" onClick={() => { this.initLogOut(); }}>
             Logout
           </span>

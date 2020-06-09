@@ -7,13 +7,12 @@ import Content, { HTMLContent } from '../components/Content'
 
 import Loadable from "@loadable/component"
 
-import YoutubeVideoComponent from '../components/YoutubeVideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
 import RocketChatComponent from '../components/RocketChat'
 import VideoComponent from '../components/VideoComponent'
 
-import { getEventBySlug2 } from '../state/event-actions'
+import { getEventBySlug } from '../state/event-actions'
 
 import TalkComponent from '../components/TalkComponent'
 
@@ -29,7 +28,7 @@ export const EventPageTemplate = class extends React.Component {
 
   componentDidMount() {
     let eventSlug = window.location.search.replace('?id=', '')
-    this.props.getEventBySlug2(eventSlug);    
+    this.props.getEventBySlug(eventSlug);    
   }  
 
   componentDidUpdate() {
@@ -115,13 +114,13 @@ EventPageTemplate.propTypes = {
   contentComponent: PropTypes.func,
 }
 
-const EventPage = ({ loggedUser, event, getEventBySlug2 }) => {
+const EventPage = ({ loggedUser, event, getEventBySlug }) => {
 
   return (
     <EventPageTemplate
       loggedUser={loggedUser}
       event={event}
-      getEventBySlug2={getEventBySlug2}
+      getEventBySlug={getEventBySlug}
     />
   )
 
@@ -140,6 +139,6 @@ const mapStateToProps = ({ loggedUserState, eventState }) => ({
 export default connect(
   mapStateToProps,
   {
-    getEventBySlug2
+    getEventBySlug
   }
 )(EventPage);

@@ -15,17 +15,17 @@ import { onUserAuth, doLogout, getUserInfo } from "openstack-uicore-foundation/l
 import Loadable from "@loadable/component"
 
 // const LoadableAuthorizedRoute = Loadable(() => import('../routes/authorized-route')) 
-const LoadableAuthorizationCallbackRoute = Loadable(() => import('../routes/authorization-callback-route')) 
-const LoadableLogOutCallbackRoute = Loadable(() => import('../routes/logout-callback-route')) 
+const LoadableAuthorizationCallbackRoute = Loadable(() => import('../routes/authorization-callback-route'))
+const LoadableLogOutCallbackRoute = Loadable(() => import('../routes/logout-callback-route'))
 
 const App = class extends React.Component {
- 
+
   render() {
 
-    let {isLoggedUser, onUserAuth, doLogout, getUserInfo, member, backUrl, summit} = this.props;
+    let { isLoggedUser, onUserAuth, doLogout, getUserInfo, member, backUrl, summit } = this.props;
 
-    if (typeof window !== `undefined` && window.location.pathname === '/auth/callback' && isLoggedUser) {      
-      navigate('/auth/event?id=106')
+    if (typeof window !== `undefined` && window.location.pathname === '/auth/callback' && isLoggedUser) {
+      navigate('/auth/?id=106')
     }
 
     return (
@@ -34,9 +34,12 @@ const App = class extends React.Component {
           {/* <LoadableAuthorizedRoute isLoggedUser={false} doLogin={this.onClickLogin.bind(this)} backUrl={backUrl} path="/home" component={HomePage} /> */}
           <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
           <LoadableLogOutCallbackRoute doLogout={doLogout} path='/logout' />
+          {isLoggedUser ?
+            <PrivateRoute path="/" component={EventPage} isLoggedIn={isLoggedUser} />
+            :
+            <LoginPage path="/" />
+          }
           <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />
-          <PrivateRoute path="/event" component={EventPage} isLoggedIn={isLoggedUser} />
-          <LoginPage path="/" />          
         </Router>
       </Layout >
     )
