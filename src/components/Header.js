@@ -12,7 +12,7 @@ const Header = class extends React.Component {
     return (
       <header>
         <div className="header">
-          <img src="/img/logo.png" alt="FNTech Logo" />
+          <img src="/img/opendevbadge-nav.png" alt="Show Logo" />
           <LogoutButton isLoggedUser={isLoggedUser} />
         </div>
       </header>

@@ -24,6 +24,8 @@ header {
 header img {
   margin: 0 auto;
   display: block;
+  height: 42px;
+  margin-top: 4px;
 }
 
 header div.current-user {
@@ -674,7 +676,10 @@ div.modalcenter-frame .modal-body {
     border: 2px solid #26b;
   }
 
-  &--full {}
+  &--full {
+    margin-top: 33px;
+    padding: 0 15px;
+  }
 
   &--button {
     background-color: #26b;
