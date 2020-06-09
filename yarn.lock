@@ -16382,10 +16382,10 @@ sudo-prompt@^8.2.0:
   resolved "https://registry.yarnpkg.com/sudo-prompt/-/sudo-prompt-8.2.5.tgz#cc5ef3769a134bb94b24a631cc09628d4d53603e"
   integrity sha512-rlBo3HU/1zAJUrkY6jNxDOC9eVYliG6nS4JA8u8KAshITd07tafMc/Br7xQwCSseXwJ2iCcHCE8SNWX3q8Z+kw==
 
-summit-schedule-app@^1.0.17:
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/summit-schedule-app/-/summit-schedule-app-1.0.17.tgz#25b60029ea064f30afc981856036d71b2cedc68d"
-  integrity sha512-tXeJeflKDAHhNjukTAnmw01WDjVM+Z0Zj+wHwzUoPPtYqGcpmJBoPs2W6l0D3BGuPBYOMaBqGMif4BfnCpMjrQ==
+summit-schedule-app@^1.0.18:
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/summit-schedule-app/-/summit-schedule-app-1.0.18.tgz#cd83f90c0281ebc4378e3c9a85c4f1219538cb9d"
+  integrity sha512-ne+4DCB+v10RS1qwRD47IkHG39YdyNsBEvh3yGcpm4q6GiQxNoKcthZGSlCcnQIhzIN7jqfVEfu1oQ8XQMR8Pg==
   dependencies:
     "@babel/core" "^7.5.5"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
