@@ -42,7 +42,7 @@
     "redux": "^4.0.5",
     "redux-persist": "^5.9.1",
     "redux-thunk": "^2.3.0",
-    "summit-schedule-app": "^1.0.16",
+    "summit-schedule-app": "^1.0.17",
     "uuid": "^7.0.0",
     "video.js": "^7.8.2"
   },

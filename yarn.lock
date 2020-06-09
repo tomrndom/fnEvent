@@ -1466,6 +1466,14 @@
     core-js "^3.4.1"
     regenerator-runtime "^0.13.3"
 
+"@kadira/storybook-deployer@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@kadira/storybook-deployer/-/storybook-deployer-1.2.0.tgz#1708f5cb37fa08ab4173b1bd99df6f4717dfae12"
+  integrity sha1-Fwj1yzf6CKtBc7G9md9vRxffrhI=
+  dependencies:
+    git-url-parse "^6.0.2"
+    shelljs "^0.7.0"
+
 "@loadable/component@^5.12.0":
   version "5.12.0"
   resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.12.0.tgz#34d056d15f53dc08d04e9203cad6867cf4f7306c"
@@ -4625,7 +4633,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.1, create-react-class@^15.5.2:
+create-react-class@^15.5.1, create-react-class@^15.5.2, create-react-class@^15.6.0:
   version "15.6.3"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   integrity sha512-M+/3Q6E6DLO6Yx3OwrWjwHBnvfXXYA7W+dFjt/ZDBemHO1DDZhsalX/NUtnTYclN6GfnBDRh4qRHjcDHmlJBJg==
@@ -7794,6 +7802,21 @@ git-up@4.0.1:
     is-ssh "^1.3.0"
     parse-url "^5.0.0"
 
+git-up@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/git-up/-/git-up-2.1.0.tgz#2f14cfe78327e7c4a2b92fcac7bfc674fdfad40c"
+  integrity sha512-MJgwfcSd9qxgDyEYpRU/CDxNpUadrK80JHuEQDG4Urn0m7tpSOgCBrtiSIa9S9KH8Tbuo/TN8SSQmJBvsw1HkA==
+  dependencies:
+    is-ssh "^1.3.0"
+    parse-url "^3.0.2"
+
+git-url-parse@^6.0.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-6.2.2.tgz#be49024e14b8487553436b4572b8b439532fa871"
+  integrity sha1-vkkCThS4SHVTQ2tFcri0OVMvqHE=
+  dependencies:
+    git-up "^2.0.0"
+
 github-from-package@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/github-from-package/-/github-from-package-0.0.0.tgz#97fb5d96bfde8973313f20e8288ef9a167fa64ce"
@@ -9193,6 +9216,11 @@ interpret@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
   integrity sha512-mT34yGKMNceBQUoVn7iCDKDntA7SC6gycMAWzGx1z/CMCTV7b2AAtXlo3nRyHZ1FelRkQbQjprHSYGwzLtkVbw==
+
+interpret@^1.0.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.4.0.tgz#665ab8bc4da27a774a40584e812e3e0fa45b1a1e"
+  integrity sha512-agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA==
 
 into-stream@^3.1.0:
   version "3.1.0"
@@ -11850,7 +11878,7 @@ normalize-range@^0.1.2:
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
 
-normalize-url@1.9.1:
+normalize-url@1.9.1, normalize-url@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-1.9.1.tgz#2cc0d66b31ea23036458436e3620d85954c66c3c"
   integrity sha1-LMDWazHqIwNkWENuNiDYWVTGbDw=
@@ -12565,12 +12593,30 @@ parse-passwd@^1.0.0:
   resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
   integrity sha1-bVuTSkVpk7I9N/QKOC1vFmao5cY=
 
+parse-path@^3.0.1:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/parse-path/-/parse-path-3.0.4.tgz#a48b7b529da41f34d9d1428602a39b29fc7180e4"
+  integrity sha512-wP70vtwv2DyrM2YoA7ZHVv4zIXa4P7dGgHlj+VwyXNDduLLVJ7NMY1zsFxjUUJ3DAwJLupGb1H5gMDDiNlJaxw==
+  dependencies:
+    is-ssh "^1.3.0"
+    protocols "^1.4.0"
+
 parse-path@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/parse-path/-/parse-path-4.0.1.tgz#0ec769704949778cb3b8eda5e994c32073a1adff"
   integrity sha512-d7yhga0Oc+PwNXDvQ0Jv1BuWkLVPXcAoQ/WREgd6vNNoKYaW52KI+RdOFjI63wjkmps9yUE8VS4veP+AgpQ/hA==
   dependencies:
     is-ssh "^1.3.0"
+    protocols "^1.4.0"
+
+parse-url@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/parse-url/-/parse-url-3.0.2.tgz#602787a7063a795d72b8673197505e72f60610be"
+  integrity sha1-YCeHpwY6eV1yuGcxl1BecvYGEL4=
+  dependencies:
+    is-ssh "^1.3.0"
+    normalize-url "^1.9.1"
+    parse-path "^3.0.1"
     protocols "^1.4.0"
 
 parse-url@^5.0.0:
@@ -13831,6 +13877,16 @@ react-dnd@^7.3.2:
     invariant "^2.1.0"
     shallowequal "^1.1.0"
 
+react-dom@^15.4.2:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.2.tgz#41cfadf693b757faf2708443a1d1fd5a02bef730"
+  integrity sha1-Qc+t9pO3V/rycIRDodH9WgK+9zA=
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+    prop-types "^15.5.10"
+
 react-dom@^16.4.1, react-dom@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
@@ -13904,6 +13960,16 @@ react-hot-loader@^4.12.21, react-hot-loader@^4.8.0:
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.1.0"
     source-map "^0.7.3"
+
+react-iframe-comm@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-iframe-comm/-/react-iframe-comm-1.2.2.tgz#5041fc692a91c03228cdee5cc99c02036e0ba805"
+  integrity sha1-UEH8aSqRwDIoze5cyZwCA24LqAU=
+  dependencies:
+    "@kadira/storybook-deployer" "^1.2.0"
+    prop-types "^15.5.7"
+    react "^15.4.2"
+    react-dom "^15.4.2"
 
 react-immutable-proptypes@^2.1.0:
   version "2.2.0"
@@ -14240,6 +14306,17 @@ react-window@^1.8.5:
     "@babel/runtime" "^7.0.0"
     memoize-one ">=3.1.1 <6"
 
+react@^15.4.2:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
+  integrity sha1-26BDSrQ5z+gvEI8PURZjkIF5qnI=
+  dependencies:
+    create-react-class "^15.6.0"
+    fbjs "^0.8.9"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+    prop-types "^15.5.10"
+
 react@^16.1.0, react@^16.4.1, react@^16.6.3, react@^16.8.0, react@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
@@ -14345,6 +14422,13 @@ readdirp@~3.4.0:
   integrity sha512-0xe001vZBnJEK+uKcj8qOhyAKPzIT+gStxWr3LCB0DwcXR5NZJ3IaC+yGnHCYzB/S7ov3m3EEbZI2zeNvX+hGQ==
   dependencies:
     picomatch "^2.2.1"
+
+rechoir@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/rechoir/-/rechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
+  integrity sha1-hSBLVNuoLVdC4oyWdW70OvUOM4Q=
+  dependencies:
+    resolve "^1.1.6"
 
 recompose@^0.26.0:
   version "0.26.0"
@@ -14843,7 +14927,7 @@ resolve@1.1.7:
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
   integrity sha1-IDEU2CrSxe2ejgQRs5ModeiJ6Xs=
 
-resolve@^1.10.0, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.15.1, resolve@^1.3.2, resolve@^1.8.1:
+resolve@^1.1.6, resolve@^1.10.0, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.15.1, resolve@^1.3.2, resolve@^1.8.1:
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.17.0.tgz#b25941b54968231cc2d1bb76a79cb7f2c0bf8444"
   integrity sha512-ic+7JYiV8Vi2yzQGFWOkiZD5Z9z7O2Zhm9XMaTxdJExKasieFCr+yXZ/WmXsckHiKl12ar0y6XiXDx3m4RHn1w==
@@ -15401,6 +15485,15 @@ shell-quote@1.6.1:
     array-map "~0.0.0"
     array-reduce "~0.0.0"
     jsonify "~0.0.0"
+
+shelljs@^0.7.0:
+  version "0.7.8"
+  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.8.tgz#decbcf874b0d1e5fb72e14b164a9683048e9acb3"
+  integrity sha1-3svPh0sNHl+3LhSxZKloMEjprLM=
+  dependencies:
+    glob "^7.0.0"
+    interpret "^1.0.0"
+    rechoir "^0.6.2"
 
 side-channel@^1.0.2:
   version "1.0.2"
@@ -16289,10 +16382,10 @@ sudo-prompt@^8.2.0:
   resolved "https://registry.yarnpkg.com/sudo-prompt/-/sudo-prompt-8.2.5.tgz#cc5ef3769a134bb94b24a631cc09628d4d53603e"
   integrity sha512-rlBo3HU/1zAJUrkY6jNxDOC9eVYliG6nS4JA8u8KAshITd07tafMc/Br7xQwCSseXwJ2iCcHCE8SNWX3q8Z+kw==
 
-summit-schedule-app@^1.0.15:
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/summit-schedule-app/-/summit-schedule-app-1.0.15.tgz#5ddf4115f17f778b3d9375b42c9c8c253641d341"
-  integrity sha512-Bhy2A0N5GqwzKAm/hJbM4cUb3PNL69vrybK1vy7HzieZamfTby7HJ7DcdRHZ8poDp8lICsIpCdXP17fP6+0Y9Q==
+summit-schedule-app@^1.0.17:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/summit-schedule-app/-/summit-schedule-app-1.0.17.tgz#25b60029ea064f30afc981856036d71b2cedc68d"
+  integrity sha512-tXeJeflKDAHhNjukTAnmw01WDjVM+Z0Zj+wHwzUoPPtYqGcpmJBoPs2W6l0D3BGuPBYOMaBqGMif4BfnCpMjrQ==
   dependencies:
     "@babel/core" "^7.5.5"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
