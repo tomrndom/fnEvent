@@ -17,8 +17,6 @@ import { getEventBySlug2 } from '../state/event-actions'
 
 import TalkComponent from '../components/TalkComponent'
 
-import ScheduleClient from '../components/ScheduleComponent';
-
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
 export const EventPageTemplate = class extends React.Component {
@@ -96,7 +94,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row--left">
               <div className="rocket-container">
                 <span>Event not found</span>
-                <ScheduleClient base='auth/event' accessToken={loggedUser.accessToken} clickSchedule={() => this.getEventData()}/>
+                <ScheduleClientSide base='auth/event' accessToken={loggedUser.accessToken} />
               </div>
             </div>
             <div className="schedule__row--right">
