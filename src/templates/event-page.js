@@ -17,6 +17,8 @@ import { getEventBySlug2 } from '../state/event-actions'
 
 import TalkComponent from '../components/TalkComponent'
 
+import ScheduleClient from '../components/ScheduleComponent';
+
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 
 export const EventPageTemplate = class extends React.Component {
@@ -24,11 +26,16 @@ export const EventPageTemplate = class extends React.Component {
   constructor(props) {
     super(props);
     this.state = { eventId: '' };
+
   }
 
   componentDidMount() {
     let eventSlug = window.location.search.replace('?id=', '')
-    this.props.getEventBySlug2(eventSlug);
+    this.props.getEventBySlug2(eventSlug);    
+  }  
+
+  componentDidUpdate() {
+    console.log('component update');
   }
 
   render() {
@@ -69,7 +76,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row">
               <div className="schedule__row--left">
                 <div className="rocket-container">
-                  {/* <ScheduleClientSide base='auth/event' accessToken={loggedUser.accessToken} /> */}
+                  <ScheduleClientSide base='auth/event' accessToken={loggedUser.accessToken} />
                   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
                 </div>
               </div>
@@ -83,7 +90,23 @@ export const EventPageTemplate = class extends React.Component {
         </section>
       )
     } else {
-      return <span>Event not found</span>
+      return (
+        <div className="schedule">
+          <div className="schedule__row">
+            <div className="schedule__row--left">
+              <div className="rocket-container">
+                <span>Event not found</span>
+                <ScheduleClient base='auth/event' accessToken={loggedUser.accessToken} clickSchedule={() => this.getEventData()}/>
+              </div>
+            </div>
+            <div className="schedule__row--right">
+              <div className="sponsor-container">
+                <img src="/img/intel.png" alt="sponsor" />
+              </div>
+            </div>
+          </div>
+        </div>
+      )
     }
   }
 }
