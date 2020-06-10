@@ -16,10 +16,6 @@ const App = class extends React.Component {
 
     let { isLoggedUser } = this.props;
 
-    if (typeof window !== `undefined` && window.location.pathname === '/auth/callback' && isLoggedUser) {      
-      navigate('/login')
-    }
-
     return (
       <Layout>
         <Router basepath="/a">

@@ -37,10 +37,6 @@ export default class
     let postLogOutUri = window.location.origin + '/auth/logout';
     let backUrl = URI(window.location.href).pathname();
 
-
-    let detailUrl = '/a/member/orders/detail';
-    if (backUrl === detailUrl) backUrl = '/a/member/orders';
-
     // store nonce to check it later
     window.localStorage.setItem('post_logout_state', state);
     window.localStorage.setItem('post_logout_back_uri', backUrl);

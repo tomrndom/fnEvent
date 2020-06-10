@@ -6,7 +6,6 @@ const IndexPage = ({location, isLoggedUser}) => {
     navigate("/a/login");
     return null
   } else if (isLoggedUser) {
-    // navigate('/auth/')
     navigate('/a/')
     return null
   }

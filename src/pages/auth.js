@@ -19,9 +19,8 @@ const Auth = class extends React.Component {
 
     let { isLoggedUser, onUserAuth, doLogout, getUserInfo, member, backUrl, summit } = this.props;
 
-    if (typeof window !== `undefined` && window.location.pathname === '/auth/callback' && isLoggedUser) {
-      //navigate('/auth/')
-      navigate('/')
+    if (typeof window !== `undefined` && window.location.pathname === '/auth/callback' && isLoggedUser) {      
+      navigate('/a/')
     }
 
     return (

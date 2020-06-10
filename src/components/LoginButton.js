@@ -6,7 +6,7 @@ import { doLogin } from "openstack-uicore-foundation/lib/methods";
 const LoginButton = class extends React.Component {
 
   getBackURL() {
-    let defaultLocation = '/auth/';
+    let defaultLocation = '/a/';
     let url      = URI(window.location.href);
     let location = url.pathname();
     if (location === '/') location = defaultLocation
