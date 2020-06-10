@@ -14,7 +14,8 @@ export const LoginPageTemplate = ({ title, content, contentComponent, loggedUser
   const PageContent = contentComponent || Content
 
   if (loggedUserState.isLoggedUser) {
-    navigate('/auth/');
+    // navigate('/auth/');
+    navigate('/a/')
   }
 
   return (
