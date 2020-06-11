@@ -139,7 +139,7 @@ exports.createPages = ({ actions, graphql }) => {
       const { id, attending_media, description, end_date, etherpad_link,
         meeting_url, start_date, streaming_url, title } = edge.node
       createPage({
-        path: `a/event/${edge.node.event_id}/${_.kebabCase(edge.node.title)}`,
+        path: `event/${edge.node.event_id}/${_.kebabCase(edge.node.title)}`,
         component: path.resolve(
           `src/templates/event-page.js`
         ),
