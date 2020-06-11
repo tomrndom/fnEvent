@@ -7,13 +7,12 @@ import Content, { HTMLContent } from '../components/Content'
 
 import Loadable from "@loadable/component"
 
-import YoutubeVideoComponent from '../components/YoutubeVideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
 import RocketChatComponent from '../components/RocketChat'
 import VideoComponent from '../components/VideoComponent'
 
-import { getEventBySlug2 } from '../state/event-actions'
+import { getEventBySlug } from '../state/event-actions'
 
 import TalkComponent from '../components/TalkComponent'
 
@@ -28,9 +27,9 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   componentDidMount() {
-    let eventSlug = window.location.search.replace('?id=', '')
-    this.props.getEventBySlug2(eventSlug);    
-  }  
+    let eventSlug = window.location.search.replace('?id=', '');
+    this.props.getEventBySlug(eventSlug ? eventSlug : '103');
+  }
 
   componentDidUpdate() {
     console.log('component update');
@@ -73,8 +72,8 @@ export const EventPageTemplate = class extends React.Component {
           <div className="schedule">
             <div className="schedule__row">
               <div className="schedule__row--left">
-                <div className="rocket-container">
-                  <ScheduleClientSide base='auth/event' accessToken={loggedUser.accessToken} />
+                <div className="rocket-container">                  
+                  <ScheduleClientSide base='a/event' accessToken={loggedUser.accessToken} />
                   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
                 </div>
               </div>
@@ -94,7 +93,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row--left">
               <div className="rocket-container">
                 <span>Event not found</span>
-                <ScheduleClientSide base='auth/event' accessToken={loggedUser.accessToken} />
+                <ScheduleClientSide base='a/event' accessToken={loggedUser.accessToken} />
               </div>
             </div>
             <div className="schedule__row--right">
@@ -115,13 +114,13 @@ EventPageTemplate.propTypes = {
   contentComponent: PropTypes.func,
 }
 
-const EventPage = ({ loggedUser, event, getEventBySlug2 }) => {
+const EventPage = ({ loggedUser, event, getEventBySlug }) => {
 
   return (
     <EventPageTemplate
       loggedUser={loggedUser}
       event={event}
-      getEventBySlug2={getEventBySlug2}
+      getEventBySlug={getEventBySlug}
     />
   )
 
@@ -140,6 +139,6 @@ const mapStateToProps = ({ loggedUserState, eventState }) => ({
 export default connect(
   mapStateToProps,
   {
-    getEventBySlug2
+    getEventBySlug
   }
 )(EventPage);

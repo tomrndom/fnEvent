@@ -4,28 +4,23 @@ import { connect } from 'react-redux'
 import { navigate } from "gatsby"
 
 import Layout from "../components/Layout"
-import LoginPage from "../templates/login-page"
-import HomePage from "../templates/home-page"
-import EventPage from "../templates/event-page"
-
-import PrivateRoute from "../components/PrivateRoute"
 
 import { onUserAuth, doLogout, getUserInfo } from "openstack-uicore-foundation/lib/methods";
 
 import Loadable from "@loadable/component"
 
 // const LoadableAuthorizedRoute = Loadable(() => import('../routes/authorized-route')) 
-const LoadableAuthorizationCallbackRoute = Loadable(() => import('../routes/authorization-callback-route')) 
-const LoadableLogOutCallbackRoute = Loadable(() => import('../routes/logout-callback-route')) 
+const LoadableAuthorizationCallbackRoute = Loadable(() => import('../routes/authorization-callback-route'))
+const LoadableLogOutCallbackRoute = Loadable(() => import('../routes/logout-callback-route'))
 
-const App = class extends React.Component {
- 
+const Auth = class extends React.Component {
+
   render() {
 
-    let {isLoggedUser, onUserAuth, doLogout, getUserInfo, member, backUrl, summit} = this.props;
+    let { isLoggedUser, onUserAuth, doLogout, getUserInfo, member, backUrl, summit } = this.props;
 
     if (typeof window !== `undefined` && window.location.pathname === '/auth/callback' && isLoggedUser) {      
-      navigate('/auth/event?id=106')
+      navigate('/a/')
     }
 
     return (
@@ -34,9 +29,6 @@ const App = class extends React.Component {
           {/* <LoadableAuthorizedRoute isLoggedUser={false} doLogin={this.onClickLogin.bind(this)} backUrl={backUrl} path="/home" component={HomePage} /> */}
           <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
           <LoadableLogOutCallbackRoute doLogout={doLogout} path='/logout' />
-          <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />
-          <PrivateRoute path="/event" component={EventPage} isLoggedIn={isLoggedUser} />
-          <LoginPage path="/" />          
         </Router>
       </Layout >
     )
@@ -52,4 +44,4 @@ export default connect(mapStateToProps, {
   onUserAuth,
   doLogout,
   getUserInfo,
-})(App)
+})(Auth)
