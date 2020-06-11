@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
@@ -27,8 +27,8 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   componentDidMount() {
-    let eventSlug = window.location.search.replace('?id=', '');
-    this.props.getEventBySlug(eventSlug ? eventSlug : '103');
+    // let eventSlug = window.location.search.replace('?id=', '');
+    // this.props.getEventBySlug(eventSlug ? eventSlug : '103');    
   }
 
   componentDidUpdate() {
@@ -72,7 +72,7 @@ export const EventPageTemplate = class extends React.Component {
           <div className="schedule">
             <div className="schedule__row">
               <div className="schedule__row--left">
-                <div className="rocket-container">                  
+                <div className="rocket-container">
                   <ScheduleClientSide base='a/event' accessToken={loggedUser.accessToken} />
                   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
                 </div>
@@ -114,22 +114,53 @@ EventPageTemplate.propTypes = {
   contentComponent: PropTypes.func,
 }
 
-const EventPage = ({ loggedUser, event, getEventBySlug }) => {
+const EventPage = ({ data, loggedUser, event, getEventBySlug }) => {
 
-  return (
-    <EventPageTemplate
-      loggedUser={loggedUser}
-      event={event}
-      getEventBySlug={getEventBySlug}
-    />
-  )
+  if (data) {
+    const { event } = data
+    return (
+      <Layout>
+        <EventPageTemplate
+          loggedUser={loggedUser}
+          event={event}
+          getEventBySlug={getEventBySlug}
+        />
+      </Layout>
+    )
+  } else {
+    return (
+      <Layout>
+        <EventPageTemplate
+          loggedUser={loggedUser}
+          event={event}
+          getEventBySlug={getEventBySlug}
+        />
+      </Layout>
+    )
+  }
 
 }
 
 EventPage.propTypes = {
+  data: PropTypes.object,
   loggedUser: PropTypes.object,
   event: PropTypes.object
 }
+
+export const eventPageQuery = graphql`
+  query EventPage($id: String!) {
+    event(id: { eq: $id }) {
+      title
+      description
+      attending_media      
+      end_date
+      etherpad_link
+      meeting_url
+      start_date
+      streaming_url      
+    }
+  }
+`
 
 const mapStateToProps = ({ loggedUserState, eventState }) => ({
   loggedUser: loggedUserState,
