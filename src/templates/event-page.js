@@ -27,9 +27,16 @@ export const EventPageTemplate = class extends React.Component {
 
   }
 
+  componentWillMount() {
+    const { loggedUser } = this.props;
+    if (!loggedUser.isLoggedUser) {
+      navigate('a/login');
+    }
+  }
+
   componentDidMount() {
     // let eventSlug = window.location.search.replace('?id=', '');
-    // this.props.getEventBySlug(eventSlug ? eventSlug : '103');
+    // this.props.getEventBySlug(eventSlug ? eventSlug : '103');    
   }
 
   componentDidUpdate() {
@@ -74,7 +81,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row">
               <div className="schedule__row--left">
                 <div className="rocket-container">
-                  <ScheduleLiteClientSide base='/' accessToken={loggedUser.accessToken} />
+                  <ScheduleLiteClientSide />
                   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
                 </div>
               </div>
@@ -94,7 +101,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row--left">
               <div className="rocket-container">
                 <span>Event not found</span>
-                <ScheduleLiteClientSide base='/' accessToken={loggedUser.accessToken} />
+                <ScheduleLiteClientSide />
               </div>
             </div>
             <div className="schedule__row--right">
@@ -120,19 +127,23 @@ const EventPage = ({ data, loggedUser, event, getEventBySlug }) => {
   if (data) {
     const { event } = data
     return (
-      <EventPageTemplate
-        loggedUser={loggedUser}
-        event={event}
-        getEventBySlug={getEventBySlug}
-      />
+      <Layout>
+        <EventPageTemplate
+          loggedUser={loggedUser}
+          event={event}
+          getEventBySlug={getEventBySlug}
+        />
+      </Layout>
     )
   } else {
     return (
-      <EventPageTemplate
-        loggedUser={loggedUser}
-        event={event}
-        getEventBySlug={getEventBySlug}
-      />
+      <Layout>
+        <EventPageTemplate
+          loggedUser={loggedUser}
+          event={event}
+          getEventBySlug={getEventBySlug}
+        />
+      </Layout>
     )
   }
 
@@ -154,7 +165,8 @@ export const eventPageQuery = graphql`
       etherpad_link
       meeting_url
       start_date
-      streaming_url      
+      streaming_url
+      timezone
     }
   }
 `

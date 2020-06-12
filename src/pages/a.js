@@ -17,14 +17,12 @@ const App = class extends React.Component {
     let { isLoggedUser } = this.props;
 
     return (
-      <Layout>
-        <Router basepath="/a">
-          <LoginPage path="/login" />
-          <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />
-          <PrivateRoute path="/" component={EventPage} isLoggedIn={isLoggedUser} />
-          <PrivateRoute path="/event" component={EventPage} isLoggedIn={isLoggedUser} />
-        </Router>
-      </Layout>
+      <Router basepath="/a">
+        <LoginPage path="/login" />
+        <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />
+        <PrivateRoute path="/" component={EventPage} isLoggedIn={isLoggedUser} />
+        <PrivateRoute path="/event" component={EventPage} isLoggedIn={isLoggedUser} />
+      </Router>
     )
   }
 }

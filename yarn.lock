@@ -15168,6 +15168,11 @@ sax@>=0.6.0, sax@~1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
+schedule-lite@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.10.tgz#a49e81d36f79ab0fffc5076e5a503b7f50c79843"
+  integrity sha512-NdcKBFiWJnoESBb/FgZovM+NKEgKeuYuqpuZQOtWw0g99aOJ/iK5U/ZoQxKyGMSGjZZQaK9LmkuVdvw5Sh/jQw==
+
 scheduler@^0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.15.0.tgz#6bfcf80ff850b280fed4aeecc6513bc0b4f17f8e"
@@ -16382,10 +16387,10 @@ sudo-prompt@^8.2.0:
   resolved "https://registry.yarnpkg.com/sudo-prompt/-/sudo-prompt-8.2.5.tgz#cc5ef3769a134bb94b24a631cc09628d4d53603e"
   integrity sha512-rlBo3HU/1zAJUrkY6jNxDOC9eVYliG6nS4JA8u8KAshITd07tafMc/Br7xQwCSseXwJ2iCcHCE8SNWX3q8Z+kw==
 
-summit-schedule-app@^1.0.18:
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/summit-schedule-app/-/summit-schedule-app-1.0.18.tgz#cd83f90c0281ebc4378e3c9a85c4f1219538cb9d"
-  integrity sha512-ne+4DCB+v10RS1qwRD47IkHG39YdyNsBEvh3yGcpm4q6GiQxNoKcthZGSlCcnQIhzIN7jqfVEfu1oQ8XQMR8Pg==
+summit-schedule-app@^1.0.19:
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/summit-schedule-app/-/summit-schedule-app-1.0.19.tgz#d5c9b6854f64bc518e98669ffd88b13b24456af0"
+  integrity sha512-2mNLRAmBeNIRm5R9BSg2XNNA0k/8YAOuvH0KOvBppS/Csrval1feeevqJa+8LE4F0EjapsHYyfTv1BbMbDDEQw==
   dependencies:
     "@babel/core" "^7.5.5"
     "@babel/plugin-proposal-class-properties" "^7.8.3"

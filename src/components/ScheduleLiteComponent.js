@@ -6,17 +6,14 @@ import ScheduleLite from 'schedule-lite/dist';
 import 'schedule-lite/dist/index.css';
 
 const ScheduleComponent = class extends React.Component {
-    
+
   render() {
-
-    const { base, accessToken } = this.props;
-
     const scheduleProps = {
       apiBaseUrl: "https://api.dev.fnopen.com",
-      eventBaseUrl: "/event",
-      trackBaseUrl: "/tracks",
-      speakerBaseUrl: "/speakers",
-      roomBaseUrl: "/rooms",
+      eventBaseUrl: "/a/event",
+      trackBaseUrl: "/a/tracks",
+      speakerBaseUrl: "/a/speakers",
+      roomBaseUrl: "/a/rooms",
       summitId: 16,
       landscape: true,
       updateCallback: ev => console.log('event updated', ev),

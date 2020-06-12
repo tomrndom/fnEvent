@@ -46,10 +46,12 @@ const LoginPage = ({ data, loggedUserState }) => {
     )
   } else {
     return (
-      <LoginPageTemplate
-        contentComponent={HTMLContent}
-        loggedUserState={loggedUserState}
-      />
+      <Layout>
+        <LoginPageTemplate
+          contentComponent={HTMLContent}
+          loggedUserState={loggedUserState}
+        />
+      </Layout>
     )
   }
 }
