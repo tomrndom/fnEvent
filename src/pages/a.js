@@ -23,7 +23,7 @@ const App = class extends React.Component {
           <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />
           <PrivateRoute path="/" component={EventPage} isLoggedIn={isLoggedUser} />
         </Router>
-      </Layout >
+      </Layout>
     )
   }
 }
