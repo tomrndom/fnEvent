@@ -120,23 +120,19 @@ const EventPage = ({ data, loggedUser, event, getEventBySlug }) => {
   if (data) {
     const { event } = data
     return (
-      <Layout>
-        <EventPageTemplate
-          loggedUser={loggedUser}
-          event={event}
-          getEventBySlug={getEventBySlug}
-        />
-      </Layout>
+      <EventPageTemplate
+        loggedUser={loggedUser}
+        event={event}
+        getEventBySlug={getEventBySlug}
+      />
     )
   } else {
     return (
-      <Layout>
-        <EventPageTemplate
-          loggedUser={loggedUser}
-          event={event}
-          getEventBySlug={getEventBySlug}
-        />
-      </Layout>
+      <EventPageTemplate
+        loggedUser={loggedUser}
+        event={event}
+        getEventBySlug={getEventBySlug}
+      />
     )
   }
 

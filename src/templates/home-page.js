@@ -104,14 +104,12 @@ const HomePage = ({ data, loggedUserState }) => {
     const { markdownRemark: post } = data
 
     return (
-      <Layout>
-        <HomePageTemplate
-          contentComponent={HTMLContent}
-          title={post.frontmatter.title}
-          content={post.html}
-          loggedUserState={loggedUserState}
-        />
-      </Layout>
+      <HomePageTemplate
+        contentComponent={HTMLContent}
+        title={post.frontmatter.title}
+        content={post.html}
+        loggedUserState={loggedUserState}
+      />
     )
   } else {
     return (
