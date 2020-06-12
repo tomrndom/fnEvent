@@ -29,7 +29,7 @@ export const EventPageTemplate = class extends React.Component {
 
   componentDidMount() {
     // let eventSlug = window.location.search.replace('?id=', '');
-    // this.props.getEventBySlug(eventSlug ? eventSlug : '103');    
+    // this.props.getEventBySlug(eventSlug ? eventSlug : '103');
   }
 
   componentDidUpdate() {
@@ -74,7 +74,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row">
               <div className="schedule__row--left">
                 <div className="rocket-container">
-                  <ScheduleLiteClientSide base='event' accessToken={loggedUser.accessToken} />
+                  <ScheduleLiteClientSide base='/' accessToken={loggedUser.accessToken} />
                   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
                 </div>
               </div>
@@ -94,7 +94,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row--left">
               <div className="rocket-container">
                 <span>Event not found</span>
-                <ScheduleLiteClientSide base='event' accessToken={loggedUser.accessToken} />
+                <ScheduleLiteClientSide base='/' accessToken={loggedUser.accessToken} />
               </div>
             </div>
             <div className="schedule__row--right">

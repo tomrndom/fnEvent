@@ -105,18 +105,6 @@ exports.sourceNodes = async ({
   }
 }
 
-// exports.onCreatePage = async ({ page, actions }) => {
-//   const { createPage } = actions
-//   // Only update the `/app` page.
-//   if (page.path.match(/^\/a\/events/)) {
-//     // page.matchPath is a special key that's used for matching pages
-//     // with corresponding routes only on the client.
-//     page.matchPath = "/a/events/*"
-//     // Update the page.
-//     createPage(page)
-//   }
-// }
-
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
@@ -170,6 +158,18 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
   })
+}
+
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
+  // Only update the `/app` page.
+  if (page.path.match(/^\/events/)) {
+    // page.matchPath is a special key that's used for matching pages
+    // with corresponding routes only on the client.
+    page.matchPath = "/events/*"
+    // Update the page.
+    createPage(page)
+  }
 }
 
 exports.onCreateWebpackConfig = ({ loaders, actions, plugins }) => {

@@ -20,7 +20,7 @@ const App = class extends React.Component {
       <Layout>
         <Router basepath="/a">
           <LoginPage path="/login" />
-          <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />        
+          <PrivateRoute path="/home" component={HomePage} isLoggedIn={isLoggedUser} />
           <PrivateRoute path="/" component={EventPage} isLoggedIn={isLoggedUser} />
         </Router>
       </Layout >

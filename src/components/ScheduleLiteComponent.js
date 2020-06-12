@@ -13,7 +13,7 @@ const ScheduleComponent = class extends React.Component {
 
     const scheduleProps = {
       apiBaseUrl: "https://api.dev.fnopen.com",
-      eventBaseUrl: base,
+      eventBaseUrl: "/event",
       trackBaseUrl: "/tracks",
       speakerBaseUrl: "/speakers",
       roomBaseUrl: "/rooms",
