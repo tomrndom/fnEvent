@@ -24,7 +24,7 @@ const App = class extends React.Component {
           <PrivateRoute path="/" component={EventPage} isLoggedIn={isLoggedUser} />
           <PrivateRoute path="/event" component={EventPage} isLoggedIn={isLoggedUser} />
         </Router>
-      </Layout >
+      </Layout>
     )
   }
 }

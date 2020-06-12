@@ -30,7 +30,7 @@ const Auth = class extends React.Component {
           <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
           <LoadableLogOutCallbackRoute doLogout={doLogout} path='/logout' />
         </Router>
-      </Layout >
+      </Layout>
     )
   }
 }
