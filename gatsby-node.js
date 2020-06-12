@@ -105,6 +105,18 @@ exports.sourceNodes = async ({
   }
 }
 
+// exports.onCreatePage = async ({ page, actions }) => {
+//   const { createPage } = actions
+//   // Only update the `/app` page.
+//   if (page.path.match(/^\/a\/events/)) {
+//     // page.matchPath is a special key that's used for matching pages
+//     // with corresponding routes only on the client.
+//     page.matchPath = "/a/events/*"
+//     // Update the page.
+//     createPage(page)
+//   }
+// }
+
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
@@ -139,7 +151,7 @@ exports.createPages = ({ actions, graphql }) => {
       const { id, attending_media, description, end_date, etherpad_link,
         meeting_url, start_date, streaming_url, title } = edge.node
       createPage({
-        path: `event/${edge.node.event_id}/${_.kebabCase(edge.node.title)}`,
+        path: `event/${edge.node.event_id}`,
         component: path.resolve(
           `src/templates/event-page.js`
         ),
