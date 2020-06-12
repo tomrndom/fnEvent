@@ -30,7 +30,7 @@ export const EventPageTemplate = class extends React.Component {
   componentWillMount() {
     const { loggedUser } = this.props;
     if (!loggedUser.isLoggedUser) {
-      navigate('a/login');
+      navigate('/a/login');
     }
   }
 
