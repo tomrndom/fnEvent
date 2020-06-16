@@ -108,9 +108,10 @@ export const EventPageTemplate = class extends React.Component {
 }
 
 EventPageTemplate.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.string,
-  contentComponent: PropTypes.func,
+  loggedUser: PropTypes.object, 
+  event: PropTypes.object,
+  eventId: PropTypes.string,  
+  getEventBySlug: PropTypes.func,
 }
 
 const EventPage = ({ data, loggedUser, event, getEventBySlug, eventId }) => {
@@ -144,7 +145,9 @@ const EventPage = ({ data, loggedUser, event, getEventBySlug, eventId }) => {
 EventPage.propTypes = {
   data: PropTypes.object,
   loggedUser: PropTypes.object,
-  event: PropTypes.object
+  event: PropTypes.object,
+  eventId: PropTypes.string,
+  getEventBySlug: PropTypes.func
 }
 
 // export const eventPageQuery = graphql`
