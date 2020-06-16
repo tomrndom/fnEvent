@@ -22,16 +22,13 @@ export const EventPageTemplate = class extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { eventId: '' };
   }
 
   componentWillMount() {
-    const { loggedUser } = this.props;
+    const { loggedUser, eventSlug } = this.props;
     if (!loggedUser.isLoggedUser) {
       navigate('/a/login');
     } else {
-      console.log(this.props.eventId);
-      let eventSlug = this.props.eventId;
       this.props.getEventBySlug(eventSlug ? eventSlug : '99');
     }
   }
