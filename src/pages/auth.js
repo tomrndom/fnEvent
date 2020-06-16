@@ -3,8 +3,6 @@ import { Router } from "@reach/router"
 import { connect } from 'react-redux'
 import { navigate } from "gatsby"
 
-import Layout from "../components/Layout"
-
 import { onUserAuth, doLogout, getUserInfo } from "openstack-uicore-foundation/lib/methods";
 
 import Loadable from "@loadable/component"

@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 
-import Loadable from "@loadable/component"
-
 import YoutubeVideoComponent from '../components/YoutubeVideoComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
 import RocketChatComponent from '../components/RocketChat'
 import LiveVideoPlayer from '../components/LiveVideoPlayer'
+
+import Loadable from "@loadable/component"
 
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 

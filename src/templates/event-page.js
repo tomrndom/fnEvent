@@ -5,16 +5,15 @@ import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 
-import Loadable from "@loadable/component"
-
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
 import RocketChatComponent from '../components/RocketChat'
 import VideoComponent from '../components/VideoComponent'
+import TalkComponent from '../components/TalkComponent'
 
 import { getEventBySlug } from '../state/event-actions'
 
-import TalkComponent from '../components/TalkComponent'
+import Loadable from "@loadable/component"
 
 const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 const ScheduleLiteClientSide = Loadable(() => import('../components/ScheduleLiteComponent'))
@@ -24,7 +23,6 @@ export const EventPageTemplate = class extends React.Component {
   constructor(props) {
     super(props);
     this.state = { eventId: '' };
-
   }
 
   componentWillMount() {
@@ -34,20 +32,9 @@ export const EventPageTemplate = class extends React.Component {
     }
   }
 
-  componentDidMount() {
-    // let eventSlug = window.location.search.replace('?id=', '');
-    // this.props.getEventBySlug(eventSlug ? eventSlug : '103');    
-  }
-
-  componentDidUpdate() {
-    console.log('component update');
-  }
-
   render() {
 
     const { loggedUser, event } = this.props;
-
-    console.log(event);
 
     if (event) {
       return (
@@ -146,7 +133,6 @@ const EventPage = ({ data, loggedUser, event, getEventBySlug }) => {
       </Layout>
     )
   }
-
 }
 
 EventPage.propTypes = {

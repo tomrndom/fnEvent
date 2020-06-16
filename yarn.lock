@@ -912,6 +912,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.10.2":
+  version "7.10.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
+  integrity sha512-6sF3uQw2ivImfVIl62RZ7MXhO2tap69WeWK57vAaimT6AZbE4FbqjdEJIN1UqoD6wI6B+1n9UiagafH1sxjOtg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/standalone@^7.9.6":
   version "7.9.6"
   resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.9.6.tgz#7a5f82c6fa29959b12f708213be6de8ec0b79338"
@@ -7225,11 +7232,11 @@ gatsby-page-utils@^0.2.3:
     micromatch "^3.1.10"
 
 gatsby-plugin-create-client-paths@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-create-client-paths/-/gatsby-plugin-create-client-paths-2.3.1.tgz#4a276f02468f01bcf33cff8e56d11f803a1c8f54"
-  integrity sha512-r8Sa4q0bF3wdjUfkX+jjTg4WYvoIzOqinX14X16i3BN9ThWt9ASy5IRqtaEu/ECI8gBJvwT9KNqJBs9jS9xQTw==
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-create-client-paths/-/gatsby-plugin-create-client-paths-2.3.4.tgz#f036e39bf5611f87067951d426c7730a60da6cd2"
+  integrity sha512-eoNOwAEzKY0bALVkZNut1E+VXwHY8WWx5ox9cSwFxpofvTXU2nHbOx1ba+w3eXXwEJIqdnXZtG7gHhAjmelAAw==
   dependencies:
-    "@babel/runtime" "^7.9.6"
+    "@babel/runtime" "^7.10.2"
 
 gatsby-plugin-disqus@^1.1.4:
   version "1.1.4"
@@ -15168,10 +15175,10 @@ sax@>=0.6.0, sax@~1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
-schedule-lite@1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.10.tgz#a49e81d36f79ab0fffc5076e5a503b7f50c79843"
-  integrity sha512-NdcKBFiWJnoESBb/FgZovM+NKEgKeuYuqpuZQOtWw0g99aOJ/iK5U/ZoQxKyGMSGjZZQaK9LmkuVdvw5Sh/jQw==
+schedule-lite@1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.12.tgz#e5322fdf927f82d3453f5055948da6443847ac00"
+  integrity sha512-X9TilvGFBpnlquvTPTAz5h8IXhMeIQuVGHK+dw+FwnDUGxGMLuZcV9nG9BLO+SvoGvQl6qn0sagm10qoYvdW+g==
 
 scheduler@^0.15.0:
   version "0.15.0"

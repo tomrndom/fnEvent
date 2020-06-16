@@ -18,7 +18,6 @@ const DisqusComponent = class extends React.Component {
     fetch(`https://idp.dev.fnopen.com/api/v1/sso/disqus/fnvirtual-poc/profile?access_token=${this.props.accessToken}`)
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         this.setState({ auth: json.auth, public_key: json.public_key })
       })
   }

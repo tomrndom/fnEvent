@@ -8,6 +8,7 @@ import 'schedule-lite/dist/index.css';
 const ScheduleComponent = class extends React.Component {
 
   render() {
+
     const scheduleProps = {
       apiBaseUrl: "https://api.dev.fnopen.com",
       eventBaseUrl: "/a/event",
