@@ -30,8 +30,8 @@ export const EventPageTemplate = class extends React.Component {
     if (!loggedUser.isLoggedUser) {
       navigate('/a/login');
     } else {
-      let regex = /\/a\/event\/([0-9]+)/
-      let eventSlug = regex.exec(window.location.pathname)[1];
+      console.log(this.props.eventId);
+      let eventSlug = this.props.eventId;
       this.props.getEventBySlug(eventSlug ? eventSlug : '99');
     }
   }
@@ -113,7 +113,7 @@ EventPageTemplate.propTypes = {
   contentComponent: PropTypes.func,
 }
 
-const EventPage = ({ data, loggedUser, event, getEventBySlug }) => {
+const EventPage = ({ data, loggedUser, event, getEventBySlug, eventId }) => {
 
   if (data) {
     const { event } = data
@@ -122,6 +122,7 @@ const EventPage = ({ data, loggedUser, event, getEventBySlug }) => {
         <EventPageTemplate
           loggedUser={loggedUser}
           event={event}
+          eventId={eventId}
           getEventBySlug={getEventBySlug}
         />
       </Layout>
@@ -132,6 +133,7 @@ const EventPage = ({ data, loggedUser, event, getEventBySlug }) => {
         <EventPageTemplate
           loggedUser={loggedUser}
           event={event}
+          eventId={eventId}
           getEventBySlug={getEventBySlug}
         />
       </Layout>

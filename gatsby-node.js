@@ -140,7 +140,7 @@ exports.createPages = ({ actions, graphql }) => {
         meeting_url, start_date, streaming_url, title } = edge.node
       createPage({
         path: `/a/event/${edge.node.event_id}`,
-        matchPath: "/a/event/:id",
+        matchPath: "/a/event/:eventId",
         component: path.resolve(
           `src/templates/event-page.js`
         ),
