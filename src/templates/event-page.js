@@ -29,6 +29,10 @@ export const EventPageTemplate = class extends React.Component {
     const { loggedUser } = this.props;
     if (!loggedUser.isLoggedUser) {
       navigate('/a/login');
+    } else {
+      let regex = /\/a\/event\/([0-9]+)/
+      let eventSlug = regex.exec(window.location.pathname)[1];
+      this.props.getEventBySlug(eventSlug ? eventSlug : '99');
     }
   }
 
@@ -141,21 +145,21 @@ EventPage.propTypes = {
   event: PropTypes.object
 }
 
-export const eventPageQuery = graphql`
-  query EventPage($id: String!) {
-    event(id: { eq: $id }) {
-      title
-      description
-      attending_media      
-      end_date
-      etherpad_link
-      meeting_url
-      start_date
-      streaming_url
-      timezone
-    }
-  }
-`
+// export const eventPageQuery = graphql`
+//   query EventPage($id: String!) {
+//     event(id: { eq: $id }) {
+//       title
+//       description
+//       attending_media      
+//       end_date
+//       etherpad_link
+//       meeting_url
+//       start_date
+//       streaming_url
+//       timezone
+//     }
+//   }
+// `
 
 const mapStateToProps = ({ loggedUserState, eventState }) => ({
   loggedUser: loggedUserState,
