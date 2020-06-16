@@ -22,15 +22,21 @@ export const EventPageTemplate = class extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.onEventChange = this.onEventChange.bind(this);
   }
 
   componentWillMount() {
-    const { loggedUser, eventSlug } = this.props;
+    const { loggedUser, eventId } = this.props;
     if (!loggedUser.isLoggedUser) {
-      navigate('/a/login');
+      //navigate('/a/login');
     } else {
-      this.props.getEventBySlug(eventSlug ? eventSlug : '99');
+      this.props.getEventBySlug(eventId ? eventId : '99');
     }
+  }
+
+  onEventChange(ev) {    
+    this.props.getEventBySlug(ev);
   }
 
   render() {
@@ -69,7 +75,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row">
               <div className="schedule__row--left">
                 <div className="rocket-container">
-                  <ScheduleLiteClientSide />
+                  <ScheduleLiteClientSide eventClick={(ev) => this.onEventChange(ev)} />
                   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
                 </div>
               </div>
@@ -89,7 +95,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row--left">
               <div className="rocket-container">
                 <span>Event not found</span>
-                <ScheduleLiteClientSide />
+                <ScheduleLiteClientSide eventClick={(ev) => this.onEventChange(ev)} />
               </div>
             </div>
             <div className="schedule__row--right">
@@ -106,7 +112,7 @@ export const EventPageTemplate = class extends React.Component {
 
 EventPageTemplate.propTypes = {
   loggedUser: PropTypes.object, 
-  event: PropTypes.object,
+  // event: PropTypes.object,
   eventId: PropTypes.string,  
   getEventBySlug: PropTypes.func,
 }

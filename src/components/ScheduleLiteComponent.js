@@ -18,6 +18,7 @@ const ScheduleComponent = class extends React.Component {
       summitId: 16,
       landscape: true,
       updateCallback: ev => console.log('event updated', ev),
+      onEventClick: ev => this.props.eventClick(ev)
     };
 
     return (
