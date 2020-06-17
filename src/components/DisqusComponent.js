@@ -15,7 +15,7 @@ const DisqusComponent = class extends React.Component {
   }
 
   getToken = async () => {
-    fetch(`${typeof window === 'object' ? window.API_BASE_URL : process.env.GATSBY_API_BASE_URL}/api/v1/sso/disqus/fnvirtual-poc/profile?access_token=${this.props.accessToken}`)
+    fetch(`${typeof window === 'object' ? window.IDP_BASE_URL : process.env.GATSBY_IDP_BASE_URL}/api/v1/sso/disqus/fnvirtual-poc/profile?access_token=${this.props.accessToken}`)
       .then(response => response.json())
       .then(json => {
         this.setState({ auth: json.auth, public_key: json.public_key })
