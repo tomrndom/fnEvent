@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { graphql, navigate } from 'gatsby'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
-import { createBrowserHistory } from 'history'
+
+import { getSummitData } from '../state/summit-actions'
 
 import Loadable from "@loadable/component"
 
@@ -18,10 +19,11 @@ export const HomePageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    const { loggedUser, eventId } = this.props;
+    const { loggedUser } = this.props;
     if (!loggedUser.isLoggedUser) {
       navigate('/a/login');
     }
+    this.props.getSummitData();
   }
 
   onEventChange(ev) {
@@ -30,13 +32,15 @@ export const HomePageTemplate = class extends React.Component {
 
   render() {
 
-    const { loggedUser } = this.props;
+    const { loggedUser, summit } = this.props;
 
     return (
       <div className="schedule">
         <div className="schedule__row">
           <div className="schedule__row--left">
             <div className="rocket-container">
+              <h2>Welcome to {summit.name}</h2>
+              <br />
               <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
             </div>
           </div>
@@ -53,12 +57,12 @@ export const HomePageTemplate = class extends React.Component {
 
 HomePageTemplate.propTypes = {
   loggedUser: PropTypes.object,
-  // event: PropTypes.object,
+  summit: PropTypes.object,
   eventId: PropTypes.string,
-  getEventBySlug: PropTypes.func,
+  getSummitData: PropTypes.func,
 }
 
-const HomePage = ({ data, loggedUser, location }) => {
+const HomePage = ({ data, loggedUser, location, summit, getSummitData }) => {
 
   if (data) {
     const { event } = data
@@ -67,6 +71,8 @@ const HomePage = ({ data, loggedUser, location }) => {
         <HomePageTemplate
           loggedUser={loggedUser}
           location={location}
+          summit={summit}
+          getSummitData={getSummitData}
         />
       </Layout>
     )
@@ -76,6 +82,8 @@ const HomePage = ({ data, loggedUser, location }) => {
         <HomePageTemplate
           loggedUser={loggedUser}
           location={location}
+          summit={summit}
+          getSummitData={getSummitData}
         />
       </Layout>
     )
@@ -104,8 +112,13 @@ HomePage.propTypes = {
 //   }
 // `
 
-const mapStateToProps = ({ loggedUserState, eventState }) => ({
+const mapStateToProps = ({ loggedUserState, summitState }) => ({
   loggedUser: loggedUserState,
+  summit: summitState.summit
 })
 
-export default connect(mapStateToProps, {})(HomePage);
+export default connect(mapStateToProps,
+  {
+    getSummitData
+  }
+)(HomePage);

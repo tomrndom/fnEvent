@@ -27,7 +27,7 @@ const DisqusComponent = class extends React.Component {
     const { event } = this.props;
 
     let disqusConfig = {
-      url: window.location,
+      url: window.location.href,
       identifier: `${event.id}`,
       title: event.title,
       remoteAuthS3: this.state.auth,
