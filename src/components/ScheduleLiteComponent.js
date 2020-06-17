@@ -9,8 +9,11 @@ const ScheduleComponent = class extends React.Component {
 
   render() {
 
+    const { accessToken } = this.props;
+
     const scheduleProps = {
       apiBaseUrl: `${typeof window === 'object' ? window.EVENT_API_BASE_URL : process.env.GATSBY_EVENT_API_BASE_URL}`,
+      accessToken: accessToken,
       eventBaseUrl: "/a/event",
       trackBaseUrl: "/a/tracks",
       speakerBaseUrl: "/a/speakers",

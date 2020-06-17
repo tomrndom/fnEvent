@@ -24,18 +24,20 @@ export const HomePageTemplate = class extends React.Component {
     }
   }
 
-  onEventChange(ev) {    
+  onEventChange(ev) {
     navigate(`/a/event/${ev}`);
   }
 
   render() {
+
+    const { loggedUser } = this.props;
 
     return (
       <div className="schedule">
         <div className="schedule__row">
           <div className="schedule__row--left">
             <div className="rocket-container">
-              <ScheduleLiteClientSide eventClick={(ev) => this.onEventChange(ev)} />
+              <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
             </div>
           </div>
           <div className="schedule__row--right">

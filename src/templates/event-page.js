@@ -44,7 +44,7 @@ export const EventPageTemplate = class extends React.Component {
 
   render() {
 
-    const { loggedUser, event, location } = this.props;
+    const { loggedUser, event } = this.props;
 
     if (event) {
       return (
@@ -78,7 +78,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row">
               <div className="schedule__row--left">
                 <div className="rocket-container">
-                  <ScheduleLiteClientSide eventClick={(ev) => this.onEventChange(ev)} />
+                  <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
                   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
                 </div>
               </div>
@@ -98,7 +98,7 @@ export const EventPageTemplate = class extends React.Component {
             <div className="schedule__row--left">
               <div className="rocket-container">
                 <span>Event not found</span>
-                <ScheduleLiteClientSide eventClick={(ev) => this.onEventChange(ev)} />
+                <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
               </div>
             </div>
             <div className="schedule__row--right">
