@@ -79,7 +79,7 @@ export const EventPageTemplate = class extends React.Component {
               <div className="schedule__row--left">
                 <div className="rocket-container">
                   <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
-                  <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} />
+                  {/* <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
                 </div>
               </div>
               <div className="schedule__row--right">
