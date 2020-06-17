@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql, navigate } from 'gatsby'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
+import { createBrowserHistory } from 'history'
 import Content, { HTMLContent } from '../components/Content'
 
 import DisqusComponent from '../components/DisqusComponent'
@@ -34,14 +35,16 @@ export const EventPageTemplate = class extends React.Component {
       this.props.getEventBySlug(eventId ? eventId : '99');
     }
   }
-
-  onEventChange(ev) {    
+  
+  onEventChange(ev) {
+    const history = createBrowserHistory()
+    history.push(`/a/events/${ev}`);
     this.props.getEventBySlug(ev);
   }
 
   render() {
 
-    const { loggedUser, event } = this.props;
+    const { loggedUser, event, location } = this.props;
 
     if (event) {
       return (
@@ -55,7 +58,7 @@ export const EventPageTemplate = class extends React.Component {
               }
             </div>
             <div className="disqus-container">
-              <DisqusComponent accessToken={loggedUser.accessToken} title={event.title} />
+              <DisqusComponent accessToken={loggedUser.accessToken} event={event} />
             </div>
           </div>
           <div className="talk">
@@ -111,13 +114,13 @@ export const EventPageTemplate = class extends React.Component {
 }
 
 EventPageTemplate.propTypes = {
-  loggedUser: PropTypes.object, 
+  loggedUser: PropTypes.object,
   // event: PropTypes.object,
-  eventId: PropTypes.string,  
+  eventId: PropTypes.string,
   getEventBySlug: PropTypes.func,
 }
 
-const EventPage = ({ data, loggedUser, event, getEventBySlug, eventId }) => {
+const EventPage = ({ data, loggedUser, event, eventId, location, getEventBySlug }) => {
 
   if (data) {
     const { event } = data
@@ -127,6 +130,7 @@ const EventPage = ({ data, loggedUser, event, getEventBySlug, eventId }) => {
           loggedUser={loggedUser}
           event={event}
           eventId={eventId}
+          location={location}
           getEventBySlug={getEventBySlug}
         />
       </Layout>
@@ -138,6 +142,7 @@ const EventPage = ({ data, loggedUser, event, getEventBySlug, eventId }) => {
           loggedUser={loggedUser}
           event={event}
           eventId={eventId}
+          location={location}
           getEventBySlug={getEventBySlug}
         />
       </Layout>
@@ -148,6 +153,7 @@ const EventPage = ({ data, loggedUser, event, getEventBySlug, eventId }) => {
 EventPage.propTypes = {
   data: PropTypes.object,
   loggedUser: PropTypes.object,
+  location: PropTypes.object,
   event: PropTypes.object,
   eventId: PropTypes.string,
   getEventBySlug: PropTypes.func

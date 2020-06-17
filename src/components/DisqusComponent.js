@@ -24,16 +24,16 @@ const DisqusComponent = class extends React.Component {
 
   render() {
 
-    const { title } = this.props;
+    const { event } = this.props;
 
     let disqusConfig = {
       url: window.location,
-      identifier: `${window.location.pathname}${window.location.search}`,
-      title: title,
+      identifier: `${event.id}`,
+      title: event.title,
       remoteAuthS3: this.state.auth,
       apiKey: this.state.public_key,
     }
-    
+
     if (!disqusConfig.remoteAuthS3 && !disqusConfig.apiKey) {
       return null;
     } else {

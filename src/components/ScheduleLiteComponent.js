@@ -10,12 +10,12 @@ const ScheduleComponent = class extends React.Component {
   render() {
 
     const scheduleProps = {
-      apiBaseUrl: "https://api.dev.fnopen.com",
+      apiBaseUrl: `${typeof window === 'object' ? window.EVENT_API_BASE_URL : process.env.GATSBY_EVENT_API_BASE_URL}`,
       eventBaseUrl: "/a/event",
       trackBaseUrl: "/a/tracks",
       speakerBaseUrl: "/a/speakers",
       roomBaseUrl: "/a/rooms",
-      summitId: 16,
+      summitId: `${typeof window === 'object' ? window.EVENT_SUMMIT_ID : process.env.GATSBY_GATSBY_EVENT_SUMMIT_ID}`,
       landscape: true,
       updateCallback: ev => console.log('event updated', ev),
       onEventClick: ev => this.props.eventClick(ev)
