@@ -30,15 +30,15 @@ export const EventPageTemplate = class extends React.Component {
   componentWillMount() {
     const { loggedUser, eventId } = this.props;
     if (!loggedUser.isLoggedUser) {
-      //navigate('/a/login');
+      navigate('/a/login');
     } else {
       this.props.getEventBySlug(eventId ? eventId : '99');
     }
   }
-  
+
   onEventChange(ev) {
     const history = createBrowserHistory()
-    history.push(`/a/events/${ev}`);
+    history.push(`/a/event/${ev}`);
     this.props.getEventBySlug(ev);
   }
 

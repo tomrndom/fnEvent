@@ -15,7 +15,7 @@ const App = ({ isLoggedUser }) => (
   <Location>
     {({ location }) => (
       <Router basepath="/a" >
-        <PrivateRoute path="/" component={EventPage} isLoggedIn={isLoggedUser} location={location} />
+        <PrivateRoute path="/" component={HomePage} isLoggedIn={isLoggedUser} location={location} />
         <PrivateRoute path="/event/:eventId" component={EventPage} isLoggedIn={isLoggedUser} location={location} />
         <LoginPage path="/login" location={location} />
       </Router>

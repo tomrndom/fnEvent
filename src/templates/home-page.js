@@ -1,84 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
-
-import YoutubeVideoComponent from '../components/YoutubeVideoComponent'
-import DisqusComponent from '../components/DisqusComponent'
-import Etherpad from '../components/Etherpad'
-import RocketChatComponent from '../components/RocketChat'
-import LiveVideoPlayer from '../components/LiveVideoPlayer'
+import { createBrowserHistory } from 'history'
 
 import Loadable from "@loadable/component"
 
-const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
+const ScheduleLiteClientSide = Loadable(() => import('../components/ScheduleLiteComponent'))
 
-export const HomePageTemplate = ({ title, content, contentComponent, loggedUserState }) => {
-  const PageContent = contentComponent || Content
+export const HomePageTemplate = class extends React.Component {
 
-  const videoJsOptions = {
-    autoplay: true,
-    controls: true,
-    fluid: true,
-    sources: [{
-      src: 'https://stream.mux.com/jMXSdkQaDVOWa6r1zYYDr6YyckfbDxIKzbKLsTnqexw.m3u8',
-      type: 'application/x-mpegURL'
-    }],
+  constructor(props) {
+    super(props);
+
+    this.onEventChange = this.onEventChange.bind(this);
   }
 
-  return (
-    <section className="section section--gradient">
-      <div className="video-row">
-        <div className="video-player">
-          <YoutubeVideoComponent videoSrcURL="https://www.youtube.com/embed/0eEisMm9ykg" videoTitle="Introducing Airship" />
-        </div>
-        <div className="disqus-container">
-          <DisqusComponent accessToken={loggedUserState.accessToken} />
-        </div>
-      </div>
-      <div className="talk">
-        <div className="talk__row">
-          <div className="talk__row--left">
-            <span className="talk__date">Wednesday, November 14, 9:20am-9:25am - CityCube Berlin - Level 1 - Hall A4-6</span>
-            <h1>
-              <b>Introducing Airship</b>
-            </h1>
-            <div className="talk__speaker">
-              <img />
-              <span>Alan Meadows & Matt McEuen</span>
-              <br /><br />
-              <div className="talk__description">
-                Swisscom has one of the largest in-production industry standard Platform as a Service built on Openstack.
-                Their offering is focused on providing an enterprise-grade PaaS environment to customers worldwide and with various delivery models based on Cloud Foundry and Openstack.
-              </div>
-            </div>
-          </div>
-          <div className="talk__row--right">
-            <div className="talk__"> &lt;3 Like | Share</div>
-            <div className="talk__join-button">join zoom to take the mic !</div>
-          </div>
-        </div>
-        <div className="talk__row">
-          <div className="talk__row--left">
-            <Etherpad className="talk__etherpad" />
-          </div>
-          <div className="talk__row--right">
-            <div className="talk__docs">
-              <div className="talk__docs--title">Documents</div>
-            </div>
-          </div>
-        </div>
-        {content && <PageContent className="content" content={content} />}
-        <RocketChatComponent accessToken={loggedUserState.accessToken} embedded={true} />
-      </div>
-      <br /><br />
+  componentWillMount() {
+    const { loggedUser, eventId } = this.props;
+    if (!loggedUser.isLoggedUser) {
+      navigate('/a/login');
+    }
+  }
+
+  onEventChange(ev) {    
+    navigate(`/a/event/${ev}`);
+  }
+
+  render() {
+
+    return (
       <div className="schedule">
         <div className="schedule__row">
           <div className="schedule__row--left">
-            <div className="schedule-container">
-              <ScheduleClientSide base={typeof window === 'object' ? window.location.pathname : '/a/home'} accessToken={loggedUserState.accessToken} />
+            <div className="rocket-container">
+              <ScheduleLiteClientSide eventClick={(ev) => this.onEventChange(ev)} />
             </div>
           </div>
           <div className="schedule__row--right">
@@ -88,28 +45,26 @@ export const HomePageTemplate = ({ title, content, contentComponent, loggedUserS
           </div>
         </div>
       </div>
-    </section>
-  )
+    )
+  }
 }
 
 HomePageTemplate.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.string,
-  contentComponent: PropTypes.func,
+  loggedUser: PropTypes.object,
+  // event: PropTypes.object,
+  eventId: PropTypes.string,
+  getEventBySlug: PropTypes.func,
 }
 
-const HomePage = ({ data, loggedUserState }) => {
+const HomePage = ({ data, loggedUser, location }) => {
 
   if (data) {
-    const { markdownRemark: post } = data
-
+    const { event } = data
     return (
       <Layout>
         <HomePageTemplate
-          contentComponent={HTMLContent}
-          title={post.frontmatter.title}
-          content={post.html}
-          loggedUserState={loggedUserState}
+          loggedUser={loggedUser}
+          location={location}
         />
       </Layout>
     )
@@ -117,8 +72,8 @@ const HomePage = ({ data, loggedUserState }) => {
     return (
       <Layout>
         <HomePageTemplate
-          contentComponent={HTMLContent}
-          loggedUserState={loggedUserState}
+          loggedUser={loggedUser}
+          location={location}
         />
       </Layout>
     )
@@ -127,20 +82,28 @@ const HomePage = ({ data, loggedUserState }) => {
 
 HomePage.propTypes = {
   data: PropTypes.object,
-  loggedUserState: PropTypes.object
+  loggedUser: PropTypes.object,
+  location: PropTypes.object,
 }
 
-export default connect(state => ({
-  loggedUserState: state.loggedUserState
-}), null)(HomePage)
+// export const HomePageQuery = graphql`
+//   query HomePage($id: String!) {
+//     event(id: { eq: $id }) {
+//       title
+//       description
+//       attending_media      
+//       end_date
+//       etherpad_link
+//       meeting_url
+//       start_date
+//       streaming_url
+//       timezone
+//     }
+//   }
+// `
 
-export const homePageQuery = graphql`
-  query HomePage($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      html
-      frontmatter {
-        title
-      }
-    }
-  }
-`
+const mapStateToProps = ({ loggedUserState, eventState }) => ({
+  loggedUser: loggedUserState,
+})
+
+export default connect(mapStateToProps, {})(HomePage);
