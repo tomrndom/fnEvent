@@ -38,18 +38,18 @@ const TalkComponent = class extends React.Component {
     let formattedLocation = `
       ${event?.location?.venue?.name ? `- ${event.location.venue.name}` : ''} 
       ${event?.location?.floor?.name ? ` - ${event.location.floor.name}` : ''}
-      ${event?.location?.name ? ` - ${event.location.name}` : ''}`;    
+      ${event?.location?.name ? ` - ${event.location.name}` : ''}`;
     return event === {} ? 'Select an event from the schedule' : formattedLocation;
   }
 
   render() {
 
-    const { event: { start_date, end_date, speakers, title, description, timezone }, event, noStream } = this.props;
+    const { event: { start_date, end_date, speakers, title, description }, event, noStream, summit: { time_zone_id } } = this.props;
 
     return (
       <div className="talk__row" style={noStream ? { padding: '20px 40px' } : null}>
         <div className="talk__row--left">
-          <span className="talk__date">{this.formatEventDate(start_date, end_date, timezone)} {this.formatEventLocation(event)}</span>
+          <span className="talk__date">{this.formatEventDate(start_date, end_date, time_zone_id)} {this.formatEventLocation(event)}</span>
           <h1>
             <b>{title}</b>
           </h1>

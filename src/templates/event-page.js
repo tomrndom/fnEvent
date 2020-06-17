@@ -44,7 +44,7 @@ export const EventPageTemplate = class extends React.Component {
 
   render() {
 
-    const { loggedUser, event } = this.props;
+    const { loggedUser, event, summit } = this.props;
 
     if (event) {
       return (
@@ -54,7 +54,7 @@ export const EventPageTemplate = class extends React.Component {
               {event.streaming_url ?
                 <VideoComponent url={event.streaming_url} />
                 :
-                <TalkComponent event={event} noStream={true} />
+                <TalkComponent event={event} summit={summit} noStream={true} />
               }
             </div>
             <div className="disqus-container">
@@ -62,7 +62,7 @@ export const EventPageTemplate = class extends React.Component {
             </div>
           </div>
           <div className="talk">
-            {event.streaming_url ? <TalkComponent event={event} noStream={false} /> : null}
+            {event.streaming_url ? <TalkComponent event={event} summit={summit} noStream={false} /> : null}
             <div className="talk__row">
               <div className="talk__row--left">
                 {event.etherpad_link && <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />}
@@ -120,7 +120,7 @@ EventPageTemplate.propTypes = {
   getEventBySlug: PropTypes.func,
 }
 
-const EventPage = ({ data, loggedUser, event, eventId, location, getEventBySlug }) => {
+const EventPage = ({ data, loggedUser, summit, event, eventId, location, getEventBySlug }) => {
 
   if (data) {
     const { event } = data
@@ -129,6 +129,7 @@ const EventPage = ({ data, loggedUser, event, eventId, location, getEventBySlug 
         <EventPageTemplate
           loggedUser={loggedUser}
           event={event}
+          summit={summit}
           eventId={eventId}
           location={location}
           getEventBySlug={getEventBySlug}
@@ -141,6 +142,7 @@ const EventPage = ({ data, loggedUser, event, eventId, location, getEventBySlug 
         <EventPageTemplate
           loggedUser={loggedUser}
           event={event}
+          summit={summit}
           eventId={eventId}
           location={location}
           getEventBySlug={getEventBySlug}
@@ -155,6 +157,7 @@ EventPage.propTypes = {
   loggedUser: PropTypes.object,
   location: PropTypes.object,
   event: PropTypes.object,
+  summit: PropTypes.object,
   eventId: PropTypes.string,
   getEventBySlug: PropTypes.func
 }
@@ -175,9 +178,10 @@ EventPage.propTypes = {
 //   }
 // `
 
-const mapStateToProps = ({ loggedUserState, eventState }) => ({
+const mapStateToProps = ({ loggedUserState, eventState, summitState }) => ({
   loggedUser: loggedUserState,
-  event: eventState.event
+  event: eventState.event,
+  summit: summitState.summit
 })
 
 export default connect(
