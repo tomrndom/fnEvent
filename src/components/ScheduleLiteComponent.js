@@ -12,13 +12,13 @@ const ScheduleComponent = class extends React.Component {
     const { accessToken } = this.props;
 
     const scheduleProps = {
-      apiBaseUrl: `${typeof window === 'object' ? window.EVENT_API_BASE_URL : process.env.GATSBY_EVENT_API_BASE_URL}`,
+      apiBaseUrl: `${typeof window === 'object' ? window.SUMMIT_API_BASE_URL : process.env.GATSBY_SUMMIT_API_BASE_URL}`,
       accessToken: accessToken,
       eventBaseUrl: "/a/event",
       trackBaseUrl: "/a/tracks",
       speakerBaseUrl: "/a/speakers",
       roomBaseUrl: "/a/rooms",
-      summitId: typeof window === 'object' ? window.EVENT_SUMMIT_ID : process.env.GATSBY_GATSBY_EVENT_SUMMIT_ID,
+      summitId: typeof window === 'object' ? window.SUMMIT_ID : process.env.GATSBY_GATSBY_SUMMIT_ID,
       landscape: true,
       updateCallback: ev => console.log('event updated', ev),
       onEventClick: ev => this.props.eventClick(ev)

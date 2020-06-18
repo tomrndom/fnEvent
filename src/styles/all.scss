@@ -6,19 +6,13 @@ body {
   height: 100%;
 }
 
-label {
-  font-weight: 300;
-}
-
 header {
   height: 60px;
   background-color: #000;
   text-align: center;
-}
-
-#container {
-  min-height: 100vh;
-  position: relative;
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
 }
 
 header img {
@@ -28,48 +22,24 @@ header img {
   margin-top: 4px;
 }
 
-header div.current-user {
-  position: absolute;
-  top: 30px;
-  right: 10px;
-  color: #fff;
-}
-
 footer {
   position: absolute;
   bottom: 0;
-  background: none repeat scroll 0 0 #26b;
+  background: none repeat scroll 0 0 #26b !important;
   color: #fff;
   height: 44px;
-  text-align: center;
   width: 100%;
-  padding-top: 12px;
+  padding: 0.6rem 0 0 !important;
 }
 
-div.login-form {
-  display: block;
-  background-color: #f5f5f5;
-  border: 1px solid #e3e3e3;
-  border-radius: 4px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
-  margin-bottom: 20px;
-  min-height: 20px;
-  padding: 19px;
-  margin: 50px auto;
-  width: 380px;
-}
-
-div.content {
-  padding: 30px;
-  padding-bottom: 54px;
-}
 
 .video-row {
   display: flex;
 }
 
 .video-player {
-  width: calc(75% - 20px);  
+  width: calc(75% - 20px);
+
   .no-video {
     height: 720px;
     display: grid;
@@ -134,12 +104,14 @@ div.content {
     text-transform: uppercase;
     border-radius: 5px;
     cursor: pointer;
+
     a {
       color: white;
+
       &:hover {
         color: white;
       }
-    } 
+    }
   }
 
   &__docs {
@@ -193,12 +165,6 @@ div.content {
   margin-bottom: 35px;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  padding-top: 5px;
-}
-
 .logout-button {
   color: #fff;
   font-weight: bold;
@@ -243,11 +209,5 @@ div.content {
       filter: invert(1);
       justify-content: center;
     }
-  }
-}
-
-@media (max-width: 768px) {
-  div.login-form {
-    width: auto;
   }
 }

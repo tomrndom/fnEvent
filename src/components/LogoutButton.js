@@ -71,7 +71,7 @@ export default class
           <span onClick={() => { this.props.clearState(); }}>
             Clear State |&nbsp;
           </span>                    
-          <span className="dropdown-item" onClick={() => { this.initLogOut(); }}>
+          <span onClick={() => { this.initLogOut(); }}>
             Logout
           </span>
         </div>
