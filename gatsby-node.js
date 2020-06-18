@@ -74,7 +74,7 @@ exports.sourceNodes = async ({
 }) => {
   const { createNode } = actions
 
-  const summitData = await axios.get(
+  const summit = await axios.get(
     `https://api.dev.fnopen.com/api/public/v1/summits/16?expand=event_types%2C+tracks%2C+track_groups%2C+presentation_levels%2C+locations.rooms%2C+locations.floors`
   ).then((response) => response.data);
 
@@ -82,12 +82,32 @@ exports.sourceNodes = async ({
     `https://api.dev.fnopen.com/api/public/v1/summits/16/events/published?expand=rsvp_template%2C+type%2C+track%2C+location%2C+location.venue%2C+location.floor%2C+speakers%2C+moderator%2C+sponsors%2C+groups&page=1&per_page=100&order=%2Bstart_date`
   ).then((response) => response.data.data);
 
+
+  const nodeContent = JSON.stringify(summit)
+
+  const nodeMeta = {
+    ...summit,
+    id: createNodeId(`summit-${summit.id}`),
+    summit_id: summit.id,
+    parent: null,
+    children: [],
+    internal: {
+      type: `Summit`,
+      mediaType: `application/json`,
+      content: nodeContent,
+      contentDigest: createContentDigest(summit)
+    }
+  }
+
+  const node = Object.assign({}, summit, nodeMeta)
+  createNode(node)
+
   for (const event of events) {
     const nodeContent = JSON.stringify(event)
 
     const nodeMeta = {
       ...event,
-      timezone: summitData.time_zone_id,
+      timezone: summit.time_zone_id,
       id: createNodeId(`event-${event.id}`),
       event_id: event.id,
       parent: null,
@@ -139,7 +159,8 @@ exports.createPages = ({ actions, graphql }) => {
       const { id, attending_media, description, end_date, etherpad_link,
         meeting_url, start_date, streaming_url, title } = edge.node
       createPage({
-        path: `event/${edge.node.event_id}/${_.kebabCase(edge.node.title)}`,
+        path: `/a/event/${edge.node.event_id}`,
+        matchPath: "/a/event/:eventId",
         component: path.resolve(
           `src/templates/event-page.js`
         ),

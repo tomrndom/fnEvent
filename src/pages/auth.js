@@ -3,8 +3,6 @@ import { Router } from "@reach/router"
 import { connect } from 'react-redux'
 import { navigate } from "gatsby"
 
-import Layout from "../components/Layout"
-
 import { onUserAuth, doLogout, getUserInfo } from "openstack-uicore-foundation/lib/methods";
 
 import Loadable from "@loadable/component"
@@ -19,18 +17,16 @@ const Auth = class extends React.Component {
 
     let { isLoggedUser, onUserAuth, doLogout, getUserInfo, member, backUrl, summit } = this.props;
 
-    if (typeof window !== `undefined` && window.location.pathname === '/auth/callback' && isLoggedUser) {      
+    if (typeof window !== `undefined` && window.location.pathname === '/auth/callback' && isLoggedUser) {
       navigate('/a/')
     }
 
     return (
-      <Layout>
-        <Router basepath="/auth">
-          {/* <LoadableAuthorizedRoute isLoggedUser={false} doLogin={this.onClickLogin.bind(this)} backUrl={backUrl} path="/home" component={HomePage} /> */}
-          <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
-          <LoadableLogOutCallbackRoute doLogout={doLogout} path='/logout' />
-        </Router>
-      </Layout >
+      <Router basepath="/auth">
+        {/* <LoadableAuthorizedRoute isLoggedUser={false} doLogin={this.onClickLogin.bind(this)} backUrl={backUrl} path="/home" component={HomePage} /> */}
+        <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
+        <LoadableLogOutCallbackRoute doLogout={doLogout} path='/logout' />
+      </Router>
     )
   }
 }
