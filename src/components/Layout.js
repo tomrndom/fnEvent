@@ -36,7 +36,7 @@ const TemplateWrapper = ({ children }) => {
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
       </Helmet>
       <Header />
-      <div>{children}</div>
+      <div id="content-wrapper">{children}</div>
       <Footer />
     </div>
   )
