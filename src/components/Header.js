@@ -17,7 +17,7 @@ const Header = ({ isLoggedUser, summit, handleResetReducers }) => (
     render={data => (
       <header>
         <div className="header">
-          {summit.logo ?
+          {summit && summit.logo ?
             <img src={summit.logo} alt="Show Logo" />
             :
             data.summit.logo ?
