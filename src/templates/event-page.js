@@ -57,27 +57,23 @@ export const EventPageTemplate = class extends React.Component {
                   <TalkComponent event={event} summit={summit} noStream={true} />
                 }
               </div>
-              <div className="column is-one-quarter is-hidden-mobile">
-                <DisqusComponent accessToken={loggedUser.accessToken} event={event} />
-              </div>
               <div className="column is-one-quarter is-hidden-tablet">
                 <TalkComponent event={event} summit={summit} noStream={true} />
               </div>
+              <div className="column is-one-quarter">
+                <DisqusComponent accessToken={loggedUser.accessToken} event={event} />
+              </div>
             </div>
           </section>
-          <section className="section px-4 py-6">
-            <div className="columns mx-0 my-0">
-              {event.streaming_url ?
+          {event.streaming_url &&
+            <section className="section px-4 py-6">
+              <div className="columns mx-0 my-0">
                 <div className="column is-three-quarters is-hidden-mobile">
                   <TalkComponent event={event} summit={summit} noStream={true} />
                 </div>
-                :
-                <div className="column is-three-quarters is-hidden-tablet">
-                  <DisqusComponent accessToken={loggedUser.accessToken} event={event} />
-                </div>
-              }
-            </div>
-          </section>
+              </div>
+            </section>
+          }
           {event.etherpad_link &&
             <section className="section px-4 py-6">
               <div className="columns">
