@@ -44,7 +44,7 @@ export const HomePageTemplate = class extends React.Component {
               <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
             </div>
           </div>
-          <div className="column is-one-quarter pb-5">
+          <div className="column is-one-quarter pb-6">
             <div className="sponsor-container">
               <img src="/img/intel.png" alt="sponsor" />
             </div>

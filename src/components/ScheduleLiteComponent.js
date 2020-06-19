@@ -30,7 +30,7 @@ const ScheduleComponent = class extends React.Component {
           <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
           <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css" />
         </Helmet>
-        <div style={{ padding: "0 15px" }}>
+        <div>
           <ScheduleLite {...scheduleProps} />
         </div>
       </React.Fragment>

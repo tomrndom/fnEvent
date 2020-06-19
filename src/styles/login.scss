@@ -78,12 +78,6 @@ div.content {
   }
 }
 
-.disqus-container {
-  width: calc(25% + 40px);
-  max-height: 720px;
-  overflow: auto;
-}
-
 .talk {
   padding: 20px 40px;
 
@@ -249,5 +243,9 @@ div.content {
 @media (max-width: 768px) {
   div.login-form {
     width: auto;
+  }
+
+  .disqus-container {
+    padding: 0 15px;
   }
 }
