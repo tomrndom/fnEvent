@@ -7,7 +7,7 @@ import LoginPage from "../templates/login-page"
 import HomePage from "../templates/home-page"
 import EventPage from "../templates/event-page"
 
-import PrivateRoute from "../components/PrivateRoute"
+import PrivateRoute from "../routes/PrivateRoute"
 
 
 
