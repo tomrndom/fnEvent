@@ -39,7 +39,7 @@ export const HomePageTemplate = class extends React.Component {
         <div className="columns">
           <div className="column is-three-quarters">
             <div className="rocket-container">
-              <h2>Welcome to {summit.name}</h2>
+              {summit && <h2>Welcome to {summit.name}</h2>}
               <br />
               <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
             </div>
