@@ -49,17 +49,33 @@ export const EventPageTemplate = class extends React.Component {
       return (
         <React.Fragment>
           <section className="section px-0 py-0">
-            <div className="columns">
-              <div className="column is-three-quarters">
+            <div className="columns mx-0 my-0">
+              <div className="column is-three-quarters px-0 py-0">
                 {event.streaming_url ?
                   <VideoComponent url={event.streaming_url} />
                   :
                   <TalkComponent event={event} summit={summit} noStream={true} />
                 }
               </div>
-              <div className="column is-one-quarter">
+              <div className="column is-one-quarter is-hidden-mobile">
                 <DisqusComponent accessToken={loggedUser.accessToken} event={event} />
               </div>
+              <div className="column is-one-quarter is-hidden-tablet">
+                <TalkComponent event={event} summit={summit} noStream={true} />
+              </div>
+            </div>
+          </section>
+          <section className="section px-4 py-6">
+            <div className="columns mx-0 my-0">
+              {event.streaming_url ?
+                <div className="column is-three-quarters is-hidden-mobile">
+                  <TalkComponent event={event} summit={summit} noStream={true} />
+                </div>
+                :
+                <div className="column is-three-quarters is-hidden-tablet">
+                  <DisqusComponent accessToken={loggedUser.accessToken} event={event} />
+                </div>
+              }
             </div>
           </section>
           {event.etherpad_link &&
@@ -80,8 +96,8 @@ export const EventPageTemplate = class extends React.Component {
             <div className="columns">
               <div className="column is-three-quarters pb-6">
                 {/* <div className="rocket-container"> */}
-                  <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
-                  {/* <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
+                <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
+                {/* <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
                 {/* </div> */}
               </div>
               <div className="column is-one-quarter has-text-centered pb-6">
@@ -95,21 +111,23 @@ export const EventPageTemplate = class extends React.Component {
       )
     } else {
       return (
-        <div className="schedule">
-          <div className="schedule__row">
-            <div className="schedule__row--left">
-              <div className="rocket-container">
-                <span>Event not found</span>
-                <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
-              </div>
+        <section className="section px-4 py-6">
+          <div className="columns">
+            <div className="column is-three-quarters pb-6">
+              {/* <div className="rocket-container"> */}
+              <span>Event not found</span>
+              <br />
+              <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
+              {/* <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
+              {/* </div> */}
             </div>
-            <div className="schedule__row--right">
+            <div className="column is-one-quarter has-text-centered pb-6">
               <div className="sponsor-container">
                 <img src="/img/intel.png" alt="sponsor" />
               </div>
             </div>
           </div>
-        </div>
+        </section >
       )
     }
   }
