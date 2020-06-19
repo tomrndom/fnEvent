@@ -20,7 +20,7 @@ const Header = ({ isLoggedUser, summit, handleResetReducers }) => (
           {summit && summit.logo ?
             <img src={summit.logo} alt="Show Logo" />
             :
-            data.summit.logo ?
+            data.summit && data.summit.logo ?
               <img src={data.summit.logo} alt="Show Logo" />
               :
               <img src="/img/opendevbadge-nav.png" alt="Show Logo" />

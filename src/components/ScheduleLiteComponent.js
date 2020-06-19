@@ -18,7 +18,7 @@ const ScheduleComponent = class extends React.Component {
       trackBaseUrl: "/a/tracks",
       speakerBaseUrl: "/a/speakers",
       roomBaseUrl: "/a/rooms",
-      summitId: typeof window === 'object' ? window.SUMMIT_ID : process.env.GATSBY_GATSBY_SUMMIT_ID,
+      summitId: parseInt(typeof window === 'object' ? window.SUMMIT_ID : process.env.GATSBY_GATSBY_SUMMIT_ID),
       landscape: true,
       updateCallback: ev => console.log('event updated', ev),
       onEventClick: ev => this.props.eventClick(ev)
