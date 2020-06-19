@@ -21,11 +21,11 @@ header {
   position: relative;
 }
 
-header img {
-  margin: 0 auto;
+header img {  
   display: block;
   height: 42px;
   margin-top: 4px;
+  padding-left: 15px;
 }
 
 header div.current-user {
@@ -73,7 +73,8 @@ div.content {
 }
 
 .video-player {
-  width: calc(75% - 20px);  
+  width: calc(75% - 20px);
+
   .no-video {
     height: 720px;
     display: grid;
@@ -83,24 +84,6 @@ div.content {
 }
 
 .talk {
-  padding: 20px 40px;
-
-  &__row {
-    display: flex;
-    padding: 10px 0;
-
-    &--left {
-      width: 75%;
-      padding-right: 10px;
-    }
-
-    &--right {
-      display: flex;
-      flex-direction: column;
-      width: 25%;
-      padding-left: 10px;
-    }
-  }
 
   &__date {
     font-weight: bold;
@@ -132,12 +115,15 @@ div.content {
     text-transform: uppercase;
     border-radius: 5px;
     cursor: pointer;
-    a {
+    align-items: flex-end;
+  }
+
+  a {
+    color: white;
+
+    &:hover {
       color: white;
-      &:hover {
-        color: white;
-      }
-    } 
+    }
   }
 
   &__docs {
@@ -156,28 +142,6 @@ div.content {
   &__etherpad {}
 }
 
-.schedule {
-  padding: 20px 40px;
-
-  &__row {
-    display: flex;
-    padding: 10px 0;
-
-    &--left {
-      width: 75%;
-      padding-right: 10px;
-    }
-
-    &--right {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      width: 25%;
-      padding-left: 10px;
-    }
-  }
-}
-
 .sponsor-container img {
   max-width: 100%;
 }
@@ -194,14 +158,18 @@ div.content {
 .header {
   display: flex;
   align-items: center;
+  padding-top: 5px;  
+  align-items: center;
   padding-top: 5px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .logout-button {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  padding-right: 20px;
+  padding-right: 15px;
 }
 
 .rocket-chat {
@@ -263,9 +231,11 @@ div.content {
     align-content: center;
     padding: 0 10px;
     width: 100%;
+
     img {
       margin: 0;
     }
+
     .logout-button {
       padding: 0;
     }

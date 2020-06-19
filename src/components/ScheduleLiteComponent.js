@@ -13,6 +13,7 @@ const ScheduleComponent = class extends React.Component {
 
     const scheduleProps = {
       apiBaseUrl: `${typeof window === 'object' ? window.SUMMIT_API_BASE_URL : process.env.GATSBY_SUMMIT_API_BASE_URL}`,
+      marketingApiBaseUrl: `${typeof window === 'object' ? window.MARKETING_API_BASE_URL : process.env.GATSBY_MARKETING_API_BASE_URL}`,
       accessToken: accessToken,
       eventBaseUrl: "/a/event",
       trackBaseUrl: "/a/tracks",
