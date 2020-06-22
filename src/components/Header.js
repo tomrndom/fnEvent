@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link, StaticQuery, graphql } from "gatsby"
 import LogoutButton from './LogoutButton'
 import { handleResetReducers } from '../state/event-actions'
+import Navbar from './Navbar'
 
 const Header = ({ isLoggedUser, summit, handleResetReducers }) => (
 
@@ -16,8 +17,18 @@ const Header = ({ isLoggedUser, summit, handleResetReducers }) => (
       `}
     render={data => (
       <header>
-        <div className="header">
-          <Link            
+        <Navbar isLoggedUser={isLoggedUser} clearState={handleResetReducers}
+          logo={
+            summit && summit.logo ?
+              summit.logo
+              :
+              data.summit && data.summit.logo ?
+                data.summit.logo
+                :
+                "/img/opendevbadge-nav.png"
+          } />
+        {/* <div className="header">
+          <Link
             to="/"
           >
             {summit && summit.logo ?
@@ -28,9 +39,9 @@ const Header = ({ isLoggedUser, summit, handleResetReducers }) => (
                 :
                 <img src="/img/opendevbadge-nav.png" alt="Show Logo" />
             }
-          </Link>
-          <LogoutButton isLoggedUser={isLoggedUser} clearState={handleResetReducers} />
-        </div>
+          </Link> */}
+        {/* <LogoutButton isLoggedUser={isLoggedUser} clearState={handleResetReducers} /> */}
+        {/* </div> */}
       </header>
     )}
   />
