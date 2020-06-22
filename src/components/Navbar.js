@@ -57,9 +57,9 @@ const Navbar = class extends React.Component {
 
         <div id="navbarBasicExample" className={`${styles.navbarMenu} ${styles.isBlack} ${this.state.navBarActiveClass}`}>
           <div className={styles.navbarStart}>
-            <Link to="/a/" className={styles.navbarItem}>
+            {/* <Link to="/a/" className={styles.navbarItem}>
               Home
-            </Link>
+            </Link> */}
           </div>
           <div className={styles.navbarEnd}>
             <div className={styles.navbarItem}>

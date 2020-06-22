@@ -7,7 +7,6 @@ import { withPrefix } from 'gatsby'
 
 // import "../styles/all.scss"
 import "../styles/bulma.scss"
-import Navbar from './Navbar'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata()
