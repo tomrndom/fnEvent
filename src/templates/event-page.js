@@ -91,7 +91,7 @@ export const EventPageTemplate = class extends React.Component {
                   <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />
                 </div>
                 <div className="column is-one-quarter">
-                  {/* <div className="talk__docs">
+                {/* <div className="talk__docs">
                   <div className="talk__docs--title">Documents</div>
                 </div> */}
                 </div>
@@ -103,7 +103,7 @@ export const EventPageTemplate = class extends React.Component {
               <div className="column is-three-quarters pb-6">
                 {/* <div className="rocket-container"> */}
                 <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
-                <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} />
+                {/* <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} /> */}
                 {/* </div> */}
               </div>
               <div className="column is-one-quarter has-text-centered pb-6">
@@ -124,7 +124,7 @@ export const EventPageTemplate = class extends React.Component {
               <span>Event not found</span>
               <br />
               <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
-              {/* <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
+              {/*   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
               {/* </div> */}
             </div>
             <div className="column is-one-quarter has-text-centered pb-6">
