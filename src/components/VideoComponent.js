@@ -19,6 +19,8 @@ const VideoComponent = class extends React.Component {
   render() {
     const { url } = this.props;
 
+    console.log(url);
+
     if (url) {
       if (this.checkLiveVideo(url)) {
         const videoJsOptions = {

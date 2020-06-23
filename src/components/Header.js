@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link, StaticQuery, graphql } from "gatsby"
-import LogoutButton from './LogoutButton'
-import { handleResetReducers } from '../state/event-actions'
+import { handleResetReducers } from '../actions/event-actions'
 import Navbar from './Navbar'
 
 const Header = ({ isLoggedUser, summit, handleResetReducers }) => (
@@ -25,23 +24,8 @@ const Header = ({ isLoggedUser, summit, handleResetReducers }) => (
               data.summit && data.summit.logo ?
                 data.summit.logo
                 :
-                "/img/opendevbadge-nav.png"
+                null
           } />
-        {/* <div className="header">
-          <Link
-            to="/"
-          >
-            {summit && summit.logo ?
-              <img src={summit.logo} alt="Show Logo" />
-              :
-              data.summit && data.summit.logo ?
-                <img src={data.summit.logo} alt="Show Logo" />
-                :
-                <img src="/img/opendevbadge-nav.png" alt="Show Logo" />
-            }
-          </Link> */}
-        {/* <LogoutButton isLoggedUser={isLoggedUser} clearState={handleResetReducers} /> */}
-        {/* </div> */}
       </header>
     )}
   />

@@ -1,14 +1,13 @@
 import { START_LOADING, STOP_LOADING, LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
 
-import { GET_DISQUS_SSO, GET_ROCKETCHAT_SSO } from './user-actions'
+import { GET_SUMMIT_DATA } from '../actions/summit-actions'
 
 const DEFAULT_STATE = {
   loading: false,
-  disqusSSO: {},
-  rocketChatSSO: {},
+  summit: {},
 }
 
-const userReducer = (state = DEFAULT_STATE, action) => {
+const summitReducer = (state = DEFAULT_STATE, action) => {
   const { type, payload } = action
 
   switch (type) {
@@ -20,13 +19,9 @@ const userReducer = (state = DEFAULT_STATE, action) => {
     case STOP_LOADING:
       return { ...state, loading: false };
       break;
-    case GET_DISQUS_SSO:      
-      const disqus = payload.response;
-      return { ...state, loading: false, disqusSSO: disqus };
-      break;
-    case GET_ROCKETCHAT_SSO:      
-      const rocket = payload.response;
-      return { ...state, loading: false, rocketChatSSO: rocket };
+    case GET_SUMMIT_DATA:
+      const summit = payload.response;
+      return { ...state, loading: false, summit: summit };
       break;
     default:
       return state;
@@ -34,4 +29,4 @@ const userReducer = (state = DEFAULT_STATE, action) => {
   }
 }
 
-export default userReducer
+export default summitReducer

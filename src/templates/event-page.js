@@ -12,8 +12,8 @@ import RocketChatComponent from '../components/RocketChat'
 import VideoComponent from '../components/VideoComponent'
 import TalkComponent from '../components/TalkComponent'
 
-import { getEventBySlug } from '../state/event-actions'
-import { getDisqusSSO, getRocketChatSSO } from '../state/user-actions'
+import { getEventBySlug } from '../actions/event-actions'
+import { getDisqusSSO, getRocketChatSSO } from '../actions/user-actions'
 
 import Loadable from "@loadable/component"
 
@@ -39,6 +39,10 @@ export const EventPageTemplate = class extends React.Component {
   componentDidMount() {
     this.props.getDisqusSSO();
     this.props.getRocketChatSSO();
+  }
+
+  componentDidUpdate() {
+
   }
 
   onEventChange(ev) {

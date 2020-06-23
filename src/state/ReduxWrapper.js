@@ -2,9 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { loggedUserReducer } from 'openstack-uicore-foundation/lib/reducers';
-import eventReducer from './event-reducer'
-import summitReducer from './summit-reducer'
-import userReducer from './user-reducer'
+import eventReducer from '../reducers/event-reducer'
+import summitReducer from '../reducers/summit-reducer'
+import userReducer from '../reducers/user-reducer'
 
 import thunk from 'redux-thunk';
 import { persistStore, persistCombineReducers } from 'redux-persist'
