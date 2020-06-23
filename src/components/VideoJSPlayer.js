@@ -1,9 +1,10 @@
 import React from 'react';
 import videojs from 'video.js';
+import Youtube from 'videojs-youtube';
 
 import 'video.js/dist/video-js.css'
 
-class LiveVideoPlayer extends React.Component {
+class VideoJSPlayer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -33,4 +34,4 @@ class LiveVideoPlayer extends React.Component {
   }
 }
 
-export default LiveVideoPlayer;
+export default VideoJSPlayer;

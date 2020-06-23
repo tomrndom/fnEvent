@@ -17602,7 +17602,7 @@ vfile@^4.0.0:
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
 
-"video.js@^6.8.0 || ^7.0.0", video.js@^7.8.2:
+"video.js@^5.6.0 || ^6.2.8 || ^7.0.2", "video.js@^6.8.0 || ^7.0.0", video.js@^7.8.2:
   version "7.8.2"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-7.8.2.tgz#1394df0ba05680f0821c280ff14e6b3e1c3846d4"
   integrity sha512-NIxRWCpq5N9QFnwPtemgdBf3IE3GAqLUR6R/12+qv6Flc/o2hRvPw3aFQwytRvBAqgc6Wg2whrHCh8ltQ3RiRA==
@@ -17627,6 +17627,13 @@ videojs-vtt.js@^0.15.2:
   integrity sha512-kEo4hNMvu+6KhPvVYPKwESruwhHC3oFis133LwhXHO9U7nRnx0RiJYMiqbgwjgazDEXHR6t8oGJiHM6wq5XlAw==
   dependencies:
     global "^4.3.1"
+
+videojs-youtube@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/videojs-youtube/-/videojs-youtube-2.6.1.tgz#3f7cce15229509ea6d54582e28793df530254860"
+  integrity sha512-qvwrkgXixbX8xzdkBa7o5r9KUITRISAy4bbyrpBgub3m0mhwz6WLXDIwJZ6/w4Z/JijWjLQqlg8W1jYhCEgHZw==
+  dependencies:
+    video.js "^5.6.0 || ^6.2.8 || ^7.0.2"
 
 vm-browserify@^1.0.1:
   version "1.1.2"

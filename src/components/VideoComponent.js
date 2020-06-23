@@ -1,7 +1,6 @@
 import React from 'react'
 
-import LiveVideoPlayer from './LiveVideoPlayer';
-import YoutubeVideoComponent from './YoutubeVideoComponent';
+import VideoJSPlayer from './VideoJSPlayer';
 
 const VideoComponent = class extends React.Component {
 
@@ -19,7 +18,7 @@ const VideoComponent = class extends React.Component {
 
   render() {
     const { url } = this.props;
-    
+
     if (url) {
       if (this.checkLiveVideo(url)) {
         const videoJsOptions = {
@@ -32,11 +31,25 @@ const VideoComponent = class extends React.Component {
           }]
         }
         return (
-          <LiveVideoPlayer {...videoJsOptions} />
+          <VideoJSPlayer {...videoJsOptions} />
         )
       } else {
+        const videoJsOptions = {
+          autoplay: true,
+          controls: true,
+          fluid: true,
+          techOrder: ["youtube"],
+          sources: [{
+            type: "video/youtube",
+            src: url
+          }],
+          youtube: {
+            ytControls: 0,
+            iv_load_policy: 1
+          }
+        }
         return (
-          <YoutubeVideoComponent videoSrcURL={url} />
+          <VideoJSPlayer {...videoJsOptions} />
         )
       }
     } else {

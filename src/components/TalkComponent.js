@@ -61,8 +61,8 @@ const TalkComponent = class extends React.Component {
           </div>
           <br />
           {event.meeting_url &&
-            <a href={event.meeting_url} target="_blank">
-              <div className="button is-info is-uppercase" style={{ fontSize: '2rem', textDecoration: 'none' }}>
+            <a href={event.meeting_url} target="_blank" style={{ textDecoration: 'none' }}>
+              <div className="button is-info is-uppercase" style={{ fontSize: '1.15em' }}>
                 join zoom to take the mic !
               </div>
             </a>
