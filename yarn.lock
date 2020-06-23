@@ -15099,10 +15099,10 @@ sax@>=0.6.0, sax@~1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
-schedule-lite@^1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.14.tgz#52147b9952e757657220d977512c6d8040832956"
-  integrity sha512-ygVpCozdN1GLmMcnASgyfRF285D6XkceqEbpX81ZA4ZhleV9RzysMPP+g2tB1nRXn17XGKzFUvLQr9IMQVRTTQ==
+schedule-lite@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.15.tgz#383f507264b51cec0533cc67ae149e46eb04fdaf"
+  integrity sha512-LLL953yHu6lBfwyLWZIuW81iU1s8SIgj3Byipg5oMX3A/m7AEsNZrWkkNiSPezVOvUBBdnXYy/RsLxoMBsAjPw==
 
 scheduler@^0.15.0:
   version "0.15.0"
