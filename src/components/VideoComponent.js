@@ -43,7 +43,8 @@ const VideoComponent = class extends React.Component {
             type: "video/youtube",
             src: url
           }],
-          youtube: {            
+          youtube: {
+            ytControls: 0,
             iv_load_policy: 1
           }
         }

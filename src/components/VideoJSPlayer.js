@@ -1,5 +1,6 @@
 import React from 'react';
 import videojs from 'video.js';
+import Youtube from 'videojs-youtube';
 
 import 'video.js/dist/video-js.css'
 
@@ -10,7 +11,6 @@ class VideoJSPlayer extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       console.log('onPlayerReady', this)
     });
