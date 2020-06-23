@@ -36,18 +36,22 @@ export const handleResetReducers = () => (dispatch, getState) => {
   dispatch(createAction(LOGOUT_USER)({}));
 }
 
-export function getEventBySlug(slug) {
+export const getEventBySlug = (slug) => (dispatch, getState) => {
 
-  let url = `${window.SUMMIT_API_BASE_URL}/api/public/v1/summits/${window.SUMMIT_ID}/events/${slug}/published?expand=rsvp_template%2C+type%2C+track%2C+location%2C+location.venue%2C+location.floor%2C+speakers%2C+moderator%2C+sponsors%2C+groups%2C+feedback%2C+summit`;
+  console.log('parapaaa');
 
-  return function (dispatch) {
-    axios.get(url)
-      .then((response) => dispatch({
-        type: GET_EVENT_DATA,
-        payload: response.data
-      })).catch((response) => dispatch({
-        type: GET_EVENT_DATA,
-        payload: response.error
-      }))
+  dispatch(startLoading());
+
+  return getRequest(
+    dispatch(startLoading()),
+    createAction(GET_EVENT_DATA),
+    `${window.SUMMIT_API_BASE_URL}/api/public/v1/summits/${window.SUMMIT_ID}/events/${slug}/published?expand=rsvp_template%2C+type%2C+track%2C+location%2C+location.venue%2C+location.floor%2C+speakers%2C+moderator%2C+sponsors%2C+groups%2C+feedback%2C+summit`,
+    authErrorHandler
+  )({})(dispatch).then(() => {
+    dispatch(stopLoading());
   }
+  ).catch(e => {
+    dispatch(stopLoading());
+    return (e);
+  });
 }

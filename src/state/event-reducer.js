@@ -19,8 +19,9 @@ const eventReducer = (state = DEFAULT_STATE, action) => {
     case STOP_LOADING:
       return { ...state, loading: false };
       break;
-    case GET_EVENT_DATA:      
-      return { ...state, loading: false, event: payload };
+    case GET_EVENT_DATA:
+      const event = payload.response;
+      return { ...state, loading: false, event: event };
       break;
     default:
       return state;
