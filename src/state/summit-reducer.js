@@ -19,8 +19,9 @@ const summitReducer = (state = DEFAULT_STATE, action) => {
     case STOP_LOADING:
       return { ...state, loading: false };
       break;
-    case GET_SUMMIT_DATA:      
-      return { ...state, loading: false, summit: payload };
+    case GET_SUMMIT_DATA:
+      const summit = payload.response;
+      return { ...state, loading: false, summit: summit };
       break;
     default:
       return state;
