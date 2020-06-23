@@ -38,7 +38,7 @@ const DisqusComponent = class extends React.Component {
       return null;
     } else {
       return (
-        <div className="disqus" style={{ paddingLeft: "20px" }}>
+        <div className="disqus-container">
           <h3>Join the conversation</h3>
           <DiscussionEmbed
             shortname='fnvirtual-poc'

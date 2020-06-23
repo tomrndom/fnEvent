@@ -75,12 +75,14 @@ exports.sourceNodes = async ({
   const { createNode } = actions
 
   const summit = await axios.get(
-    `https://api.dev.fnopen.com/api/public/v1/summits/16?expand=event_types%2C+tracks%2C+track_groups%2C+presentation_levels%2C+locations.rooms%2C+locations.floors`
-  ).then((response) => response.data);
+    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/public/v1/summits/${process.env.GATSBY_SUMMIT_ID}?expand=event_types%2C+tracks%2C+track_groups%2C+presentation_levels%2C+locations.rooms%2C+locations.floors`
+  ).then((response) => response.data)
+  .catch(e => console.log(e));
 
   const events = await axios.get(
-    `https://api.dev.fnopen.com/api/public/v1/summits/16/events/published?expand=rsvp_template%2C+type%2C+track%2C+location%2C+location.venue%2C+location.floor%2C+speakers%2C+moderator%2C+sponsors%2C+groups&page=1&per_page=100&order=%2Bstart_date`
-  ).then((response) => response.data.data);
+    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/public/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published?expand=rsvp_template%2C+type%2C+track%2C+location%2C+location.venue%2C+location.floor%2C+speakers%2C+moderator%2C+sponsors%2C+groups&page=1&per_page=100&order=%2Bstart_date`
+  ).then((response) => response.data.data)
+  .catch(e => console.log(e));
 
 
   const nodeContent = JSON.stringify(summit)
