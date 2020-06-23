@@ -14,8 +14,6 @@ export const GET_SUMMIT_DATA = 'GET_SUMMIT_DATA';
 
 export const getSummitData = () => (dispatch, getState) => {
 
-  console.log('parapaaa');
-
   dispatch(startLoading());
 
   return getRequest(

@@ -13,6 +13,7 @@ import VideoComponent from '../components/VideoComponent'
 import TalkComponent from '../components/TalkComponent'
 
 import { getEventBySlug } from '../state/event-actions'
+import { getDisqusSSO, getRocketChatSSO } from '../state/user-actions'
 
 import Loadable from "@loadable/component"
 
@@ -35,6 +36,11 @@ export const EventPageTemplate = class extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.getDisqusSSO();
+    this.props.getRocketChatSSO();
+  }
+
   onEventChange(ev) {
     const history = createBrowserHistory()
     history.push(`/a/event/${ev}`);
@@ -43,7 +49,7 @@ export const EventPageTemplate = class extends React.Component {
 
   render() {
 
-    const { loggedUser, event, summit } = this.props;
+    const { loggedUser, event, summit, user } = this.props;
 
     if (event) {
       return (
@@ -60,8 +66,8 @@ export const EventPageTemplate = class extends React.Component {
               <div className="column is-one-quarter is-hidden-tablet">
                 <TalkComponent event={event} summit={summit} noStream={true} />
               </div>
-              <div className="column is-one-quarter">
-                <DisqusComponent accessToken={loggedUser.accessToken} event={event} />
+              <div className="column is-one-quarter" style={{ overflowY: 'auto' }}>
+                <DisqusComponent disqusSSO={user.disqusSSO} event={event} />
               </div>
             </div>
           </section>
@@ -93,7 +99,7 @@ export const EventPageTemplate = class extends React.Component {
               <div className="column is-three-quarters pb-6">
                 {/* <div className="rocket-container"> */}
                 <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
-                {/* <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
+                <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} />
                 {/* </div> */}
               </div>
               <div className="column is-one-quarter has-text-centered pb-6">
@@ -132,11 +138,27 @@ export const EventPageTemplate = class extends React.Component {
 EventPageTemplate.propTypes = {
   loggedUser: PropTypes.object,
   // event: PropTypes.object,
+  user: PropTypes.object,
   eventId: PropTypes.string,
   getEventBySlug: PropTypes.func,
+  getDisqusSSO: PropTypes.func,
+  getRocketChatSSO: PropTypes.func
 }
 
-const EventPage = ({ data, loggedUser, summit, event, eventId, location, getEventBySlug }) => {
+const EventPage = (
+  {
+    data,
+    loggedUser,
+    summit,
+    event,
+    eventId,
+    location,
+    user,
+    getEventBySlug,
+    getDisqusSSO,
+    getRocketChatSSO
+  }
+) => {
 
   if (data) {
     const { event } = data
@@ -148,7 +170,10 @@ const EventPage = ({ data, loggedUser, summit, event, eventId, location, getEven
           summit={summit}
           eventId={eventId}
           location={location}
+          user={user}
           getEventBySlug={getEventBySlug}
+          getDisqusSSO={getDisqusSSO}
+          getRocketChatSSO={getRocketChatSSO}
         />
       </Layout>
     )
@@ -161,7 +186,10 @@ const EventPage = ({ data, loggedUser, summit, event, eventId, location, getEven
           summit={summit}
           eventId={eventId}
           location={location}
+          user={user}
           getEventBySlug={getEventBySlug}
+          getDisqusSSO={getDisqusSSO}
+          getRocketChatSSO={getRocketChatSSO}
         />
       </Layout>
     )
@@ -174,8 +202,11 @@ EventPage.propTypes = {
   location: PropTypes.object,
   event: PropTypes.object,
   summit: PropTypes.object,
+  user: PropTypes.object,
   eventId: PropTypes.string,
-  getEventBySlug: PropTypes.func
+  getEventBySlug: PropTypes.func,
+  getDisqusSSO: PropTypes.func,
+  getRocketChatSSO: PropTypes.func
 }
 
 // export const eventPageQuery = graphql`
@@ -194,15 +225,18 @@ EventPage.propTypes = {
 //   }
 // `
 
-const mapStateToProps = ({ loggedUserState, eventState, summitState }) => ({
+const mapStateToProps = ({ loggedUserState, eventState, summitState, userState }) => ({
   loggedUser: loggedUserState,
   event: eventState.event,
-  summit: summitState.summit
+  summit: summitState.summit,
+  user: userState,
 })
 
 export default connect(
   mapStateToProps,
   {
-    getEventBySlug
+    getEventBySlug,
+    getDisqusSSO,
+    getRocketChatSSO
   }
 )(EventPage);
