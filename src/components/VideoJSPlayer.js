@@ -3,13 +3,14 @@ import videojs from 'video.js';
 
 import 'video.js/dist/video-js.css'
 
-class LiveVideoPlayer extends React.Component {
+class VideoJSPlayer extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       console.log('onPlayerReady', this)
     });
@@ -33,4 +34,4 @@ class LiveVideoPlayer extends React.Component {
   }
 }
 
-export default LiveVideoPlayer;
+export default VideoJSPlayer;
