@@ -16,7 +16,6 @@ import { getEventBySlug } from '../state/event-actions'
 
 import Loadable from "@loadable/component"
 
-const ScheduleClientSide = Loadable(() => import('../components/ScheduleComponent'))
 const ScheduleLiteClientSide = Loadable(() => import('../components/ScheduleLiteComponent'))
 
 export const EventPageTemplate = class extends React.Component {
@@ -48,66 +47,83 @@ export const EventPageTemplate = class extends React.Component {
 
     if (event) {
       return (
-        <section className="section section--gradient">
-          <div className="video-row">
-            <div className="video-player">
-              {event.streaming_url ?
-                <VideoComponent url={event.streaming_url} />
-                :
+        <React.Fragment>
+          <section className="section px-0 py-0">
+            <div className="columns mx-0 my-0">
+              <div className="column is-three-quarters px-0 py-0">
+                {event.streaming_url ?
+                  <VideoComponent url={event.streaming_url} />
+                  :
+                  <TalkComponent event={event} summit={summit} noStream={true} />
+                }
+              </div>
+              <div className="column is-one-quarter is-hidden-tablet">
                 <TalkComponent event={event} summit={summit} noStream={true} />
-              }
-            </div>
-            <div className="disqus-container">
-              <DisqusComponent accessToken={loggedUser.accessToken} event={event} />
-            </div>
-          </div>
-          <div className="talk">
-            {event.streaming_url ? <TalkComponent event={event} summit={summit} noStream={false} /> : null}
-            <div className="talk__row">
-              <div className="talk__row--left">
-                {event.etherpad_link && <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />}
               </div>
-              <div className="talk__row--right">
-                {/* <div className="talk__docs">
-                  <div className="talk__docs--title">Documents</div>
-                </div> */}
+              <div className="column is-one-quarter">
+                <DisqusComponent accessToken={loggedUser.accessToken} event={event} />
               </div>
             </div>
-          </div>
-          <div className="schedule">
-            <div className="schedule__row">
-              <div className="schedule__row--left">
-                <div className="rocket-container">
-                  <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
-                  {/* <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
+          </section>
+          {event.streaming_url &&
+            <section className="section px-0 py-0">
+              <div className="columns mx-0 my-0">
+                <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
+                  <TalkComponent event={event} summit={summit} noStream={true} />
                 </div>
               </div>
-              <div className="schedule__row--right">
+            </section>
+          }
+          {event.etherpad_link &&
+            <section className="section px-4 py-6">
+              <div className="columns">
+                <div className="column is-three-quarters">
+                  <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />
+                </div>
+                <div className="column is-one-quarter">
+                  {/* <div className="talk__docs">
+                  <div className="talk__docs--title">Documents</div>
+                </div> */}
+                </div>
+              </div>
+            </section>
+          }
+          <section className="section px-4 py-6">
+            <div className="columns">
+              <div className="column is-three-quarters pb-6">
+                {/* <div className="rocket-container"> */}
+                <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
+                {/* <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
+                {/* </div> */}
+              </div>
+              <div className="column is-one-quarter has-text-centered pb-6">
                 <div className="sponsor-container">
                   <img src="/img/intel.png" alt="sponsor" />
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section >
+        </React.Fragment >
       )
     } else {
       return (
-        <div className="schedule">
-          <div className="schedule__row">
-            <div className="schedule__row--left">
-              <div className="rocket-container">
-                <span>Event not found</span>
-                <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
-              </div>
+        <section className="section px-4 py-6">
+          <div className="columns">
+            <div className="column is-three-quarters pb-6">
+              {/* <div className="rocket-container"> */}
+              <span>Event not found</span>
+              <br />
+              <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
+              {/* <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
+              {/* </div> */}
             </div>
-            <div className="schedule__row--right">
+            <div className="column is-one-quarter has-text-centered pb-6">
               <div className="sponsor-container">
                 <img src="/img/intel.png" alt="sponsor" />
               </div>
             </div>
           </div>
-        </div>
+        </section >
       )
     }
   }

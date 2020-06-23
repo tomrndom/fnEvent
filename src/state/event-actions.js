@@ -38,7 +38,7 @@ export const handleResetReducers = () => (dispatch, getState) => {
 
 export function getEventBySlug(slug) {
 
-  let url = `${window.EVENT_API_BASE_URL}/api/public/v1/summits/${window.EVENT_SUMMIT_ID}/events/${slug}/published?expand=rsvp_template%2C+type%2C+track%2C+location%2C+location.venue%2C+location.floor%2C+speakers%2C+moderator%2C+sponsors%2C+groups%2C+feedback%2C+summit`;
+  let url = `${window.SUMMIT_API_BASE_URL}/api/public/v1/summits/${window.SUMMIT_ID}/events/${slug}/published?expand=rsvp_template%2C+type%2C+track%2C+location%2C+location.venue%2C+location.floor%2C+speakers%2C+moderator%2C+sponsors%2C+groups%2C+feedback%2C+summit`;
 
   return function (dispatch) {
     axios.get(url)
