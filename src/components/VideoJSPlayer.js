@@ -26,6 +26,7 @@ class VideoJSPlayer extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if(this.state.updateCount !== prevState.updateCount) {
+      if (this.player && !this.player.paused()) this.player.pause()
       this.player = videojs(this.videoNode, this.props, null)
     }
   }
