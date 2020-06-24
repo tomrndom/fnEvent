@@ -1,8 +1,7 @@
-import { doLogin } from "openstack-uicore-foundation/lib/methods";
+import { navigate } from "gatsby";
 
+import { createAction, stopLoading } from "openstack-uicore-foundation/lib/methods";
 import { LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
-
-import { stopLoading } from 'openstack-uicore-foundation/lib/methods';
 
 export const customErrorHandler = (err, res) => (dispatch, state) => {
   let code = err.status;
@@ -20,14 +19,15 @@ export const customErrorHandler = (err, res) => (dispatch, state) => {
     case 401:
       let currentLocation = window.location.pathname;
       let clearing_session_state = window.clearing_session_state || false;
-      dispatch({
-        type: LOGOUT_USER,
-        payload: {}
-      });
+      dispatch(createAction(LOGOUT_USER)({}));
       if (!clearing_session_state) {
         window.clearing_session_state = true;
         console.log('authErrorHandler 401 - re login');
-        doLogin(currentLocation);
+        navigate('/a/expired', {
+          state: {
+            backUrl: currentLocation,
+          },
+        });
       }
       break;
     // case 404:
