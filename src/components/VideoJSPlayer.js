@@ -21,14 +21,18 @@ class VideoJSPlayer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props !== nextProps) this.setup()
+    if(this.props !== nextProps) this.setup()
   }
 
   componentDidUpdate(prevProps, prevState) {
     if(this.state.updateCount !== prevState.updateCount) {
-      if (this.player && !this.player.paused()) this.player.pause()
+      if (this.player) this.player.pause()
       this.player = videojs(this.videoNode, this.props, null)
     }
+  }
+
+  componentWillUnmount() {
+    if(this.player) this.player.dispose()
   }
 
   render() {
