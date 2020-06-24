@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from 'react';
 import videojs from 'video.js';
 import Youtube from 'videojs-youtube';
 
 import 'video.js/dist/video-js.css'
 
-export default class VideoPlayer extends Component {
+class VideoJSPlayer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -25,18 +25,15 @@ export default class VideoPlayer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // You should probably change this check
     if(this.props !== nextProps)
       this.setup();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if(this.state.updateCount !== prevState.updateCount) {
-      // If it has a player, dispose
       if(this.player) {
         this.player.dispose();
       }
-      // Create new player
       this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
         console.log('onPlayerReady', this)
       });
@@ -44,13 +41,11 @@ export default class VideoPlayer extends Component {
   }
 
   componentWillUnmount() {
-    // Dispose player on unmount
     if(this.player) {
       this.player.dispose();
     }
   }
   render() {
-    // Use `key` so React knows this item is going to change
     const key = `${this.props.id || ''}-${this.state.updateCount}`;
     return (
       <div key={key} data-vjs-player>
@@ -59,3 +54,5 @@ export default class VideoPlayer extends Component {
     )
   }
 }
+
+export default VideoJSPlayer;
