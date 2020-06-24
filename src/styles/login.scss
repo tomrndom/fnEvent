@@ -198,3 +198,14 @@ div.content {
     width: auto;
   }
 }
+
+@media (min-width: 768px) {
+  .disqus-container {
+    position: absolute;
+    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}

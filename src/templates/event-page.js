@@ -59,7 +59,7 @@ export const EventPageTemplate = class extends React.Component {
       return (
         <React.Fragment>
           <section className="section px-0 py-0">
-            <div className="columns mx-0 my-0">
+            <div className="columns is-gapless">
               <div className="column is-three-quarters px-0 py-0">
                 {event.streaming_url ?
                   <VideoComponent url={event.streaming_url} />
@@ -67,10 +67,10 @@ export const EventPageTemplate = class extends React.Component {
                   <TalkComponent event={event} summit={summit} noStream={true} />
                 }
               </div>
-              <div className="column is-one-quarter is-hidden-tablet">
+              <div className="column is-hidden-tablet">
                 <TalkComponent event={event} summit={summit} noStream={true} />
               </div>
-              <div className="column is-one-quarter" style={{ overflowY: 'auto' }}>
+              <div className="column" style={{ position: 'relative' }}>
                 <DisqusComponent disqusSSO={user.disqusSSO} event={event} />
               </div>
             </div>
@@ -91,7 +91,7 @@ export const EventPageTemplate = class extends React.Component {
                   <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />
                 </div>
                 <div className="column is-one-quarter">
-                {/* <div className="talk__docs">
+                  {/* <div className="talk__docs">
                   <div className="talk__docs--title">Documents</div>
                 </div> */}
                 </div>
