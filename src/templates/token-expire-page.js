@@ -19,22 +19,13 @@ export const TokenExpirePageTemplate = class extends React.Component {
     const { location, handleResetReducers } = this.props;
 
     let previousLocation = location.state?.backUrl ? location.state.backUrl : '/a/'
-    // console.log('previous', previousLocation);
     let url = URI(window.location.href);
-    let browserLocation = url.pathname();
-    if (browserLocation === '/') browserLocation = previousLocation
     let query = url.search(true);
     let fragment = url.fragment();
-    let backUrl = query.hasOwnProperty('BackUrl') ? query['BackUrl'] : browserLocation;
+    let backUrl = query.hasOwnProperty('BackUrl') ? query['BackUrl'] : previousLocation;
     if (fragment != null && fragment != '') {
       backUrl += `#${fragment}`;
     }
-    // console.log('back url', backUrl)
-    // console.log('pathname', url.pathname())
-    // console.log('browser location', browserLocation)
-    // console.log('url', url)
-    // console.log('query', query)
-    // console.log('fragment', fragment)
     setTimeout(() => {
       handleResetReducers();
       doLogin(backUrl);
