@@ -19,7 +19,7 @@ export const customErrorHandler = (err, res) => (dispatch, state) => {
     case 401:
       let currentLocation = window.location.pathname;
       let clearing_session_state = window.clearing_session_state || false;
-      dispatch(createAction(LOGOUT_USER)({}));
+      // dispatch(createAction(LOGOUT_USER)({}));
       if (!clearing_session_state) {
         window.clearing_session_state = true;
         console.log('authErrorHandler 401 - re login');
