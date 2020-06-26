@@ -3,6 +3,15 @@ module.exports = {
     title: 'Virtual Event POC',
     description:
       'POC for virtual events',
+    palette: {
+      primary: "#00CEC4",
+      primaryDark: "#1EAAA3",
+      secondary: "#6D6E71",
+      secondaryDark: "#F1F2F2",
+      textDark: "#006D68",
+      textLight: "#FFFFFF;",
+      highlight: "#FF5E32"
+    }
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -27,6 +36,13 @@ module.exports = {
       options: {
         path: `${__dirname}/src/img`,
         name: 'images',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-stackbit-static-sass`,
+      options: {
+        inputFile: `${__dirname}/src/styles/palette.scss`,
+        outputFile: `${__dirname}/public/assets/css/main.css`
       },
     },
     'gatsby-plugin-sharp',
