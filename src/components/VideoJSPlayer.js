@@ -1,47 +1,49 @@
-import React from 'react';
+import React from 'react'
 import videojs from 'video.js';
 import Youtube from 'videojs-youtube';
 
-import 'video.js/dist/video-js.css'
+import 'video.js/dist/video-js.css';
 
 class VideoJSPlayer extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = { updateCount: 0 }
-  }
-  
-  setup() {
-    let updateCount = this.state.updateCount
-    this.setState({ updateCount: updateCount + 1 })
-  }
-
   componentDidMount() {
-    this.setup();
-  }
 
-  componentWillReceiveProps(nextProps) {
-    if(this.props !== nextProps) this.setup()
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if(this.state.updateCount !== prevState.updateCount) {
-      if (this.player) this.player.pause()
-      this.player = videojs(this.videoNode, this.props, null)
-    }
+    const options = {
+      html5: {
+        hls: {
+          overrideNative: !videojs.browser.IS_SAFARI,
+        },
+      },
+      ...this.props,
+    };
+    this.player = videojs(this.videoNode, options, function onPlayerReady() {
+      // console.log('onPlayerReady', this);
+    });
   }
 
   componentWillUnmount() {
-    if(this.player) this.player.dispose()
+    if (this.player) {
+      this.player.dispose();
+    }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.sources !== this.props.sources) {
+      this.player.src(nextProps.sources);
+      this.player.poster(nextProps.poster);
+    }
+  }
   render() {
-    const key = `${this.props.id || ''}-${this.state.updateCount}`
     return (
-      <div key={key} data-vjs-player>
-        <video ref={ node => this.videoNode = node } className="video-js vjs-big-play-centered"></video>
+      <div>
+        <div data-vjs-player>
+          <video
+            ref={node => (this.videoNode = node)}
+            className="video-js vjs-big-play-centered"
+            playsInline={this.props.playsInline}
+          />
+        </div>
       </div>
-    )
+    );
   }
 }
 

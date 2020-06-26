@@ -1,5 +1,4 @@
 import React from 'react'
-
 import VideoJSPlayer from './VideoJSPlayer';
 
 const VideoComponent = class extends React.Component {
@@ -28,7 +27,8 @@ const VideoComponent = class extends React.Component {
           sources: [{
             src: url,
             type: 'application/x-mpegURL'
-          }]
+          }],
+          playsInline: true
         }
         return (
           <VideoJSPlayer {...videoJsOptions} />
@@ -46,7 +46,8 @@ const VideoComponent = class extends React.Component {
           youtube: {
             ytControls: 0,
             iv_load_policy: 1
-          }
+          },
+          playsInline: true
         }
         return (
           <VideoJSPlayer {...videoJsOptions} />
