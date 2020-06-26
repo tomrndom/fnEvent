@@ -193,8 +193,31 @@ div.content {
   }
 }
 
+.custom-video-modal {
+  position: absolute !important;
+  top: auto !important;
+  left: auto !important;
+  bottom: 0;
+  right: 0;
+  margin: 2rem;
+  width: 25% !important;
+  height: 25% !important;
+  background: rgba(0, 0, 0, 0.8) !important;  
+}
+
 @media (max-width: 768px) {
   div.login-form {
     width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .disqus-container {
+    position: absolute;
+    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }

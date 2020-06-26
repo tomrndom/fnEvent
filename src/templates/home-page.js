@@ -4,7 +4,7 @@ import { graphql, navigate } from 'gatsby'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 
-import { getSummitData } from '../state/summit-actions'
+import { getSummitData } from '../actions/summit-actions'
 
 import Loadable from "@loadable/component"
 

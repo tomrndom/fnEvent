@@ -1,11 +1,25 @@
 import React, { Component } from "react"
 import { Helmet } from 'react-helmet'
+import { navigate } from "gatsby";
 
 // these two libraries are client-side only
 import ScheduleLite from 'schedule-lite/dist';
 import 'schedule-lite/dist/index.css';
 
 const ScheduleComponent = class extends React.Component {
+
+  expiredToken(err) {
+
+    console.log(err);
+
+    let currentLocation = window.location.pathname;
+
+    return navigate('/a/expired', {
+      state: {
+        backUrl: currentLocation,
+      },
+    });
+  }
 
   render() {
 
@@ -22,7 +36,8 @@ const ScheduleComponent = class extends React.Component {
       summitId: parseInt(typeof window === 'object' ? window.SUMMIT_ID : process.env.GATSBY_GATSBY_SUMMIT_ID),
       landscape: true,
       updateCallback: ev => console.log('event updated', ev),
-      onEventClick: ev => this.props.eventClick(ev)
+      onEventClick: ev => this.props.eventClick(ev),
+      onAuthError: (err, res) => this.expiredToken(err)
     };
 
     return (

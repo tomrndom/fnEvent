@@ -1,7 +1,5 @@
 import React from 'react'
-import T from 'i18n-react/dist/i18n-react'
 import URI from 'urijs';
-
 
 export default class
   LogoutButton extends React.Component {
