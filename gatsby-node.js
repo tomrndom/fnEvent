@@ -8,6 +8,17 @@ const myEnv = require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+// makes Summit logo optional for graphql queries
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type Summit implements Node {
+      logo: String!
+    }
+  `
+  createTypes(typeDefs)
+}
+
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
