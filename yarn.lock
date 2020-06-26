@@ -12113,10 +12113,10 @@ openstack-uicore-foundation@^2.0.24:
   resolved "https://registry.yarnpkg.com/openstack-uicore-foundation/-/openstack-uicore-foundation-2.0.28.tgz#dc102201f9d8b104a167d5c7900c50842e1b8e3b"
   integrity sha512-otr2bkA+a1VgKHuyb0ylr+X4OyZViC4SJFYLX6r+nzhtIigUhwMwyZ+TUIlhLPUQ4gopdHPcO4Xz+yNMV27qDA==
 
-openstack-uicore-foundation@^2.0.40:
-  version "2.0.40"
-  resolved "https://registry.yarnpkg.com/openstack-uicore-foundation/-/openstack-uicore-foundation-2.0.40.tgz#169cc797402d1a96a0c750f0972d7daa33abbcaf"
-  integrity sha512-spzEMsE0YnOnqKzGpNjmc9pANYNsRQonE0etTCF0EC2ERqRLk8agfpkdpsb9FhSGSRfOXc7PukJv1GVeh8wnDA==
+openstack-uicore-foundation@^2.0.42:
+  version "2.0.42"
+  resolved "https://registry.yarnpkg.com/openstack-uicore-foundation/-/openstack-uicore-foundation-2.0.42.tgz#3e049b4ac98cffbb3cd77e59b30915fea0d3d934"
+  integrity sha512-R1nEkN6XVX90jZBm/MjIfom/CXPL9PIy6szzjFaN8a7ykjljpPZJ4G1eTwOIQbwU4d5/J/r6oy5aUNNAIkiomw==
 
 opentracing@^0.14.4:
   version "0.14.4"
@@ -15099,10 +15099,10 @@ sax@>=0.6.0, sax@~1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
-schedule-lite@^1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.14.tgz#52147b9952e757657220d977512c6d8040832956"
-  integrity sha512-ygVpCozdN1GLmMcnASgyfRF285D6XkceqEbpX81ZA4ZhleV9RzysMPP+g2tB1nRXn17XGKzFUvLQr9IMQVRTTQ==
+schedule-lite@^1.0.18:
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.18.tgz#10bf02c02683755bd0ab8602a0697332e6d29181"
+  integrity sha512-4aDqfwrTy8dxE2q50D3Nq+Q1xbqyHkd7OgSq8wYxuPNfltuHnVjK1NRM362vSwA3GOaJ3eOF/wmnYXh9Zh/FAQ==
 
 scheduler@^0.15.0:
   version "0.15.0"
