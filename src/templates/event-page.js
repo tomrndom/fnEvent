@@ -16,6 +16,7 @@ import { getEventBySlug } from '../actions/event-actions'
 import { getDisqusSSO, getRocketChatSSO } from '../actions/user-actions'
 
 import Loadable from "@loadable/component"
+import {AttendanceTracker} from "openstack-uicore-foundation/lib/components";
 
 const ScheduleLiteClientSide = Loadable(() => import('../components/ScheduleLiteComponent'))
 
@@ -57,7 +58,16 @@ export const EventPageTemplate = class extends React.Component {
 
     if (event) {
       return (
-        <React.Fragment>
+        <>
+          {event.id &&
+            <AttendanceTracker
+                key={event.id}
+                eventId={event.id}
+                summitId={summit.id}
+                apiBaseUrl={process.env.GATSBY_SUMMIT_API_BASE_URL}
+                accessToken={loggedUser.accessToken}
+            />
+          }
           <section className="section px-0 py-0">
             <div className="columns is-gapless">
               <div className="column is-three-quarters px-0 py-0">
@@ -113,7 +123,7 @@ export const EventPageTemplate = class extends React.Component {
               </div>
             </div>
           </section >
-        </React.Fragment >
+        </>
       )
     } else {
       return (
