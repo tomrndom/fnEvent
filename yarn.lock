@@ -10245,6 +10245,11 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
+live-event-widget@^1.0.16:
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-1.0.16.tgz#771ea28e58911a863cdc63a0666bc1b43e6b115c"
+  integrity sha512-XEHVLAqzYexYZfgNSV1R0Y9zyVBERtfyBkacfL1dFYHhCRkEaqrC7seyLO66C9izUo0wR6GV4vaE6AZwbpfVgQ==
+
 load-bmfont@^1.3.1, load-bmfont@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/load-bmfont/-/load-bmfont-1.4.0.tgz#75f17070b14a8c785fe7f5bee2e6fd4f98093b6b"
@@ -15099,10 +15104,10 @@ sax@>=0.6.0, sax@~1.2.4:
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
-schedule-lite@^1.0.18:
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.18.tgz#10bf02c02683755bd0ab8602a0697332e6d29181"
-  integrity sha512-4aDqfwrTy8dxE2q50D3Nq+Q1xbqyHkd7OgSq8wYxuPNfltuHnVjK1NRM362vSwA3GOaJ3eOF/wmnYXh9Zh/FAQ==
+schedule-lite@^1.0.19:
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.19.tgz#f39b08b4fecfaafeedb48bb81df6ee6904caade1"
+  integrity sha512-yXN78XlGZOq0vh9/l8Tg4PYJYUHt4JpiLJY1Eszo+FJWrrFSLRWhPhHeg3qPG7u1LpgMNhUiXGz1MzrlCVxTsQ==
 
 scheduler@^0.15.0:
   version "0.15.0"
