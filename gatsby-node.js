@@ -13,7 +13,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
     type Summit implements Node {
-      logo: String!
+      logo: String
     }
   `
   createTypes(typeDefs)
