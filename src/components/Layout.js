@@ -9,7 +9,7 @@ import { safePrefix } from '../utils/safePrefix';
 
 // import "../styles/all.scss"
 // import "../styles/palette.scss"
-// import "../styles/bulma.scss"
+import "../styles/bulma.scss"
 
 const TemplateWrapper = ({ children }) => {
   const { title, description } = useSiteMetadata()
@@ -38,7 +38,6 @@ const TemplateWrapper = ({ children }) => {
         />
         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,700;1,300&display=swap" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <link rel="stylesheet" href={safePrefix('assets/css/main.css')}/>
       </Helmet>
       <Header />
       <div id="content-wrapper">{children}</div>
