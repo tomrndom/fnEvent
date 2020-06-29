@@ -2,7 +2,13 @@
 @import "bulma/sass/elements/button.sass";
 @import "bulma/sass/components/navbar";
 
+.navbar {
+  background-color: #6d6e71;
+}
+
 .navbar-item {
+  color: #ffffff;
+
   img {
     max-height: 4rem;
   }

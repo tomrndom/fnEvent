@@ -4,13 +4,13 @@ module.exports = {
     description:
       'POC for virtual events',
     palette: {
-      primary: "#00CEC4",
-      primaryDark: "#1EAAA3",
-      secondary: "#6D6E71",
-      secondaryDark: "#F1F2F2",
-      textDark: "#006D68",
-      textLight: "#FFFFFF;",
-      highlight: "#FF5E32"
+      primary: "#00cec4",
+      primaryDark: "#1eaaa3",
+      secondary: "#6d6e71",
+      secondaryDark: "#f1f2f2",
+      textDark: "#006d68",
+      textLight: "#ffffff",
+      highlights: "#ff5e32"
     }
   },
   plugins: [

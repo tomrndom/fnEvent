@@ -40,7 +40,7 @@ const Navbar = class extends React.Component {
     let { isLoggedUser, clearState, logo } = this.props;
 
     return (
-      <nav className={`${styles.navbar} ${styles.isBlack}`} role="navigation" aria-label="main navigation">
+      <nav className={`${styles.navbar}`} role="navigation" aria-label="main navigation">
         <div className={styles.navbarBrand}>
           <Link to="/a/" className={styles.navbarItem}>
             <img src={logo} alt="Show Logo" />
@@ -55,7 +55,7 @@ const Navbar = class extends React.Component {
           </a>
         </div>
 
-        <div id="navbarBasicExample" className={`${styles.navbarMenu} ${styles.isBlack} ${this.state.navBarActiveClass}`}>
+        <div id="navbarBasicExample" className={`${styles.navbarMenu} ${this.state.navBarActiveClass}`}>
           <div className={styles.navbarStart}>
             {/* <Link to="/a/" className={styles.navbarItem}>
               Home
