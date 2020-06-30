@@ -8,7 +8,7 @@ const Header = ({ isLoggedUser, summit, handleResetReducers }) => (
 
   <StaticQuery
     query={graphql`
-        query HeadingQuery {
+        query HeaderQuery {
           summit {
             logo
           }

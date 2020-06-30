@@ -43,7 +43,9 @@ const Navbar = class extends React.Component {
       <nav className={`${styles.navbar}`} role="navigation" aria-label="main navigation">
         <div className={styles.navbarBrand}>
           <Link to="/a/" className={styles.navbarItem}>
+            { logo && 
             <img src={logo} alt="Show Logo" />
+            }
           </Link>
 
           <a role="button" className={`${styles.navbarBurger} ${styles.burger} ${this.state.navBarActiveClass}`}
