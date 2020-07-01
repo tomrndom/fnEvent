@@ -5,7 +5,10 @@ import Header from '../components/Header'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
+import { safePrefix } from '../utils/safePrefix';
+
 // import "../styles/all.scss"
+// import "../styles/palette.scss"
 import "../styles/bulma.scss"
 
 const TemplateWrapper = ({ children }) => {
@@ -33,9 +36,10 @@ const TemplateWrapper = ({ children }) => {
           property="og:image"
           content={`${withPrefix('/')}img/og-image.jpg`}
         />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,700;1,300&display=swap" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
       </Helmet>
-      <Header />      
+      <Header />
       <div id="content-wrapper">{children}</div>
       <Footer />
     </div>
