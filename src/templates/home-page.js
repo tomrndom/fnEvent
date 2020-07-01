@@ -8,7 +8,7 @@ import { getSummitData } from '../actions/summit-actions'
 import Loadable from "@loadable/component"
 
 const ScheduleLiteClientSide = Loadable(() => import('../components/ScheduleLiteComponent'))
-//const LiveEventWidgetClientSide = Loadable(() => import('live-event-widget/dist'))
+const LiveEventWidgetClientSide = Loadable(() => import('live-event-widget/dist'))
 
 
 export const HomePageTemplate = class extends React.Component {
@@ -44,15 +44,13 @@ export const HomePageTemplate = class extends React.Component {
               <br />
               <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
             </div>
-            {/*
             <div>
               <LiveEventWidgetClientSide
-                summitId={summit.id}
-                apiBaseUrl={`${typeof window === 'object' ? window.SUMMIT_API_BASE_URL : process.env.GATSBY_SUMMIT_API_BASE_URL}`}
-                marketingApiBaseUrl={`${typeof window === 'object' ? window.MARKETING_API_BASE_URL : process.env.GATSBY_MARKETING_API_BASE_URL}`}
+                  summitId={summit.id}
+                  apiBaseUrl={`${typeof window === 'object' ? window.SUMMIT_API_BASE_URL : process.env.GATSBY_SUMMIT_API_BASE_URL}`}
+                  marketingApiBaseUrl={`${typeof window === 'object' ? window.MARKETING_API_BASE_URL : process.env.GATSBY_MARKETING_API_BASE_URL}`}
               />
             </div>
-            */}
           </div>
           <div className="column is-one-quarter pb-6">
             <div className="sponsor-container">
