@@ -69,8 +69,8 @@ export default class
           <a className={`${styles.button}`} onClick={() => { this.props.clearState(); }}>
             <strong>Clear State</strong>
           </a>
-          <a className={`${styles.button} ${styles.isInfo}`} onClick={() => { this.initLogOut(); }}>
-            <strong>Logout</strong>
+          <a onClick={() => { this.initLogOut(); }}>
+            <i className="fa fa-sign-out icon is-medium" style={{fontSize: '1.5rem'}} />
           </a>
         </div>
       );
