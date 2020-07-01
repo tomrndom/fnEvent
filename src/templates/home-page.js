@@ -8,8 +8,8 @@ import { getSummitData } from '../actions/summit-actions'
 import Loadable from "@loadable/component"
 
 const ScheduleLiteClientSide = Loadable(() => import('../components/ScheduleLiteComponent'))
-const LiveEventWidgetClientSide = Loadable(() => import('live-event-widget/dist'))
-
+const LiveEventWidgetClientSide = Loadable(() => import('../components/LiveEventWidgetComponent'))
+const SpeakersWidgetClientSide = Loadable(() => import('../components/SpeakersWidgetComponent'))
 
 export const HomePageTemplate = class extends React.Component {
 
@@ -51,7 +51,15 @@ export const HomePageTemplate = class extends React.Component {
               summitId={summit.id}
               apiBaseUrl={`${typeof window === 'object' ? window.SUMMIT_API_BASE_URL : process.env.GATSBY_SUMMIT_API_BASE_URL}`}
               marketingApiBaseUrl={`${typeof window === 'object' ? window.MARKETING_API_BASE_URL : process.env.GATSBY_MARKETING_API_BASE_URL}`}
-            />            
+            />
+            <br />
+            {/*
+            <SpeakersWidgetClientSide
+              summitId={summit.id}
+              apiBaseUrl={`${typeof window === 'object' ? window.SUMMIT_API_BASE_URL : process.env.GATSBY_SUMMIT_API_BASE_URL}`}
+              marketingApiBaseUrl={`${typeof window === 'object' ? window.MARKETING_API_BASE_URL : process.env.GATSBY_MARKETING_API_BASE_URL}`}
+            />
+            */}
           </div>
           <div className="column is-one-quarter pb-6">
             <h2>My Info</h2>
