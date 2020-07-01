@@ -15881,6 +15881,11 @@ spdy@^4.0.2:
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
 
+speakers-widget@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/speakers-widget/-/speakers-widget-1.0.2.tgz#4f44c28b51a5e3bb3b876617c86298a5fb53bc0b"
+  integrity sha512-xrPxanmZgAQZIp7hVXkmlc81/HayF8csFLPI+xejwo0kU+0V266KE/sWiKyc6MaTWgDLzfFu6QPsF/vzfRbjkw==
+
 split-on-first@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/split-on-first/-/split-on-first-1.1.0.tgz#f610afeee3b12bce1d0c30425e76398b78249a5f"

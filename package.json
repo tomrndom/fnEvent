@@ -46,6 +46,7 @@
     "redux-persist": "^5.9.1",
     "redux-thunk": "^2.3.0",
     "schedule-lite": "^1.0.19",
+    "speakers-widget": "^1.0.2",
     "summit-schedule-app": "^1.0.19",
     "uuid": "^7.0.0",
     "video.js": "^7.8.2",
@@ -66,7 +67,7 @@
   },
   "devDependencies": {
     "babel-preset-gatsby": "^0.4.4",
-    "prettier": "^2.0.5",
-    "devcert": "1.1.0"
+    "devcert": "1.1.0",
+    "prettier": "^2.0.5"
   }
 }
