@@ -66,10 +66,10 @@ export default class
       return (
 
         <div className={styles.buttons}>
-          <a className={`${styles.button}`} onClick={() => { this.props.clearState(); }}>
-            <strong>Clear State</strong>
+          <a style={{color: '#FFF', marginBottom: '2px'}}>
+            <span onClick={() => { this.props.clearState(); }} style={{paddingRight: '15px'}}> Clear State </span>
           </a>
-          <a onClick={() => { this.initLogOut(); }}>
+          <a style={{color: '#FFF'}} onClick={() => { this.initLogOut(); }}>
             <i className="fa fa-sign-out icon is-medium" style={{fontSize: '1.5rem'}} />
           </a>
         </div>
