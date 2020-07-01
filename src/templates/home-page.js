@@ -45,7 +45,7 @@ export const HomePageTemplate = class extends React.Component {
             </div>
           </div>
           <div className="column is-half">
-            {summit && <h2>Welcome to {summit.name}</h2>}
+            <h2>Today's Sessions</h2>
             <br />
             <LiveEventWidgetClientSide
               summitId={summit.id}
