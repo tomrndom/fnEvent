@@ -19,7 +19,7 @@ const Footer = ({ summit }) => (
     render={data => (
       <footer className="footer">
         <div className="columns">
-          <div className="column is-one-fifth">
+          <div className="column is-one-fifth" style={{margin: '0 -1rem'}}>
             {footerContent.logo.display &&
               <img src={summit && summit.logo ?
                 summit.logo
@@ -28,7 +28,7 @@ const Footer = ({ summit }) => (
                   data.summit.logo
                   :
                   null
-              } />
+              } style={{maxHeight: '4rem'}}/>
             }
           </div>
         </div>

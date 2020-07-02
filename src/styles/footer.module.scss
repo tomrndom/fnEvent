@@ -1,20 +1,26 @@
-.footer-colummns{
+.footer-colummns {
   text-align: left;
+
   h3 {
     border-bottom: 2px solid #ffffff;
-    text-transform: uppercase;    
+    text-transform: uppercase;
     padding-bottom: 1rem;
     margin-bottom: 2rem;
   }
+
   a {
     color: #ffffff;
-    :hover, :visited {
+
+    :hover,
+    :visited {
       color: #ffffff;
     }
   }
+
   a i {
-    font-size: 2.5rem;    
+    font-size: 2.5rem;
   }
+
   .social-container {
     display: flex;
     justify-content: space-around;
