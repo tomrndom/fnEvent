@@ -19,7 +19,7 @@ const Footer = ({ summit }) => (
     render={data => (
       <footer className="footer">
         <div className="columns">
-          <div className="column is-one-fifth" style={{margin: '0 -1rem'}}>
+          <div className="column is-one-fifth">
             {footerContent.logo.display &&
               <img src={summit && summit.logo ?
                 summit.logo
@@ -33,17 +33,17 @@ const Footer = ({ summit }) => (
           </div>
         </div>
         <div className={`${styles.footerColummns} columns`}>
-          <div className="column is-three-quarter">
+          <div className="column is-three-quarters">
             <div className="columns">
               {footerContent.columns.map((col, index) => {
                 return (
                   <div className={`column is-3 ${index > 0 ? 'is-offset-1' : ''}`} key={index}>
-                    <h3>
+                    <h4>
                       {col.title}
-                    </h3>
+                    </h4>
                     {col.items.map((item, index) => (
                       <a href={item.link} key={index}>
-                        <h4>{item.title}</h4>
+                        <h5>{item.title}</h5>
                       </a>
                     ))}
                   </div>
@@ -53,7 +53,7 @@ const Footer = ({ summit }) => (
           </div>
 
           <div className="column is-one-quarter">
-            <h3>{footerContent.social.title}</h3>
+            <h4>{footerContent.social.title}</h4>
             <div className={styles.socialContainer}>
               {footerContent.social.networks.map((net, index) => (
                 net.display &&

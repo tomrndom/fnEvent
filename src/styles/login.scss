@@ -22,9 +22,7 @@ header div.current-user {
   color: #fff;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
+footer {  
   color: #fff;    
   width: 100%;
   padding-top: 12px;
@@ -32,6 +30,7 @@ footer {
 
 #content-wrapper {
   padding-bottom: 3rem;
+  min-height: 75vh;
 }
 
 div.login-form {

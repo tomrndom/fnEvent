@@ -5,6 +5,9 @@
 .navbar {
   background-color: #6d6e71;
   min-height: 7.25rem;
+  .navbar-brand {
+    padding-left: 1rem;
+  }
   .navbar-end {
     padding-right: 15px;
   }
