@@ -39,6 +39,15 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [          
+          `nunito sans\:300,700` // you can also specify font weights and styles
+        ],
+        display: 'swap'
+      }
+    },
+    {
       resolve: `gatsby-plugin-stackbit-static-sass`,
       options: {
         inputFile: `${__dirname}/src/styles/palette.scss`,

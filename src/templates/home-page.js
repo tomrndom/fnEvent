@@ -39,13 +39,13 @@ export const HomePageTemplate = class extends React.Component {
       <div className="px-5 py-5 mb-6">
         <div className="columns">
           <div className="column is-one-quarter">
-            <h2>Community</h2>
+            <h2><b>Community</b></h2>
             <div className="sponsor-container">
               <img src="/img/intel.png" alt="sponsor" />
             </div>
           </div>
           <div className="column is-half">
-            <h2>Today's Sessions</h2>
+            <h2><b>Today's Sessions</b></h2>
             <br />
             <LiveEventWidgetClientSide
               summitId={summit.id}
@@ -62,7 +62,7 @@ export const HomePageTemplate = class extends React.Component {
             */}
           </div>
           <div className="column is-one-quarter pb-6">
-            <h2>My Info</h2>
+            <h2><b>My Info</b></h2>
             <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />            
           </div>
         </div>
