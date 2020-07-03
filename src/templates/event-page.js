@@ -27,6 +27,7 @@ export const EventPageTemplate = class extends React.Component {
     super(props);
 
     this.onEventChange = this.onEventChange.bind(this);
+    this.getMaterials = this.getMaterials.bind(this);
   }
 
   componentWillMount() {
@@ -53,9 +54,20 @@ export const EventPageTemplate = class extends React.Component {
     this.props.getEventBySlug(ev);
   }
 
+  getMaterials(event) {
+    let materials = [];
+    if (event.links?.lengh > 0) materials = [...event.links]
+    if (event.videos?.lengh > 0) materials = [...event.videos]
+    if (event.slides?.lengh > 0) materials = [...event.slides]
+    console.log(materials);
+    return materials;
+  }
+
   render() {
 
-    const { loggedUser, event, event: { links, videos, slides }, summit, user } = this.props;
+    const { loggedUser, event, summit, user } = this.props;
+
+    this.getMaterials(event);
 
     if (event) {
       return (
@@ -121,7 +133,7 @@ export const EventPageTemplate = class extends React.Component {
                 {/* <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} /> */}
                 {/* </div> */}
               </div>
-              <DocumentsComponent materials={[...links, ...videos, ...slides]} />
+              <DocumentsComponent materials={this.getMaterials(event)} />
             </div>
           </section >
         </>
