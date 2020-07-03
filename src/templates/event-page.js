@@ -56,10 +56,9 @@ export const EventPageTemplate = class extends React.Component {
 
   getMaterials(event) {
     let materials = [];
-    if (event.links?.lengh > 0) materials = [...event.links]
-    if (event.videos?.lengh > 0) materials = [...event.videos]
-    if (event.slides?.lengh > 0) materials = [...event.slides]
-    console.log(materials);
+    if (event.links?.length > 0) materials = [...materials, ...event.links]
+    if (event.videos?.length > 0) materials = [...materials, ...event.videos]
+    if (event.slides?.length > 0) materials = [...materials, ...event.slides]
     return materials;
   }
 
