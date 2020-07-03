@@ -109,19 +109,6 @@ div.content {
     }
   }
 
-  &__docs {
-    border: 1px silver solid;
-    height: 420px;
-
-    &--title {
-      width: 100%;
-      padding: 10px;
-      font-weight: bold;
-      font-size: 20px;
-      border-bottom: 1px silver solid;
-    }
-  }
-
   &__etherpad {}
 }
 
@@ -130,7 +117,7 @@ div.content {
 }
 
 .sponsor-container img {
-  max-width: 100%;
+  width: 100%;
 }
 
 .schedule-container {

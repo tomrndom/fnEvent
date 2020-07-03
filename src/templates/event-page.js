@@ -11,12 +11,13 @@ import Etherpad from '../components/Etherpad'
 import RocketChatComponent from '../components/RocketChat'
 import VideoComponent from '../components/VideoComponent'
 import TalkComponent from '../components/TalkComponent'
+import DocumentsComponent from '../components/DocumentsComponent'
 
 import { getEventBySlug } from '../actions/event-actions'
 import { getDisqusSSO, getRocketChatSSO } from '../actions/user-actions'
 
 import Loadable from "@loadable/component"
-import {AttendanceTracker} from "openstack-uicore-foundation/lib/components";
+import { AttendanceTracker } from "openstack-uicore-foundation/lib/components";
 
 const ScheduleLiteClientSide = Loadable(() => import('../components/ScheduleLiteComponent'))
 
@@ -26,6 +27,7 @@ export const EventPageTemplate = class extends React.Component {
     super(props);
 
     this.onEventChange = this.onEventChange.bind(this);
+    this.getMaterials = this.getMaterials.bind(this);
   }
 
   componentWillMount() {
@@ -52,30 +54,41 @@ export const EventPageTemplate = class extends React.Component {
     this.props.getEventBySlug(ev);
   }
 
+  getMaterials(event) {
+    let materials = [];
+    if (event.links?.lengh > 0) materials = [...event.links]
+    if (event.videos?.lengh > 0) materials = [...event.videos]
+    if (event.slides?.lengh > 0) materials = [...event.slides]
+    console.log(materials);
+    return materials;
+  }
+
   render() {
 
     const { loggedUser, event, summit, user } = this.props;
+
+    this.getMaterials(event);
 
     if (event) {
       return (
         <>
           {event.id &&
             <AttendanceTracker
-                key={event.id}
-                eventId={event.id}
-                summitId={summit.id}
-                apiBaseUrl={process.env.GATSBY_SUMMIT_API_BASE_URL}
-                accessToken={loggedUser.accessToken}
+              key={event.id}
+              eventId={event.id}
+              summitId={summit.id}
+              apiBaseUrl={process.env.GATSBY_SUMMIT_API_BASE_URL}
+              accessToken={loggedUser.accessToken}
             />
           }
           <section className="section px-0 py-0">
             <div className="columns is-gapless">
               {event.streaming_url ?
                 <div className="column is-three-quarters px-0 py-0">
-                  <VideoComponent url={event.streaming_url} />                  
+                  <VideoComponent url={event.streaming_url} />
                 </div>
                 :
-                <div className="column is-three-quarters px-0 py-0 is-hidden-mobile">                  
+                <div className="column is-three-quarters px-0 py-0 is-hidden-mobile">
                   <TalkComponent event={event} summit={summit} noStream={true} />
                 </div>
               }
@@ -103,26 +116,24 @@ export const EventPageTemplate = class extends React.Component {
                   <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} />
                 </div>
                 <div className="column is-one-quarter">
-                  {/* <div className="talk__docs">
-                  <div className="talk__docs--title">Documents</div>
-                </div> */}
                 </div>
               </div>
             </section>
           }
           <section className="section px-4 py-6">
             <div className="columns">
-              <div className="column is-three-quarters pb-6">
+              <div className="column is-one-quarter pb-6">
+                <div className="sponsor-container">
+                  <img src="/img/intel.png" alt="sponsor" />
+                </div>
+              </div>
+              <div className="column is-two-quarters pb-6">
                 {/* <div className="rocket-container"> */}
                 <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
                 {/* <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} /> */}
                 {/* </div> */}
               </div>
-              <div className="column is-one-quarter has-text-centered pb-6">
-                <div className="sponsor-container">
-                  <img src="/img/intel.png" alt="sponsor" />
-                </div>
-              </div>
+              <DocumentsComponent materials={this.getMaterials(event)} />
             </div>
           </section >
         </>
