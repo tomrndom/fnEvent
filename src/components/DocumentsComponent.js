@@ -13,8 +13,6 @@ const DocumentsComponent = ({ materials }) => {
     }
   });
 
-  console.log(sortedMaterials)
-
   return (
     <div className="column is-one-quarter">
       <div className={`${styles.docsContainer}`}>
