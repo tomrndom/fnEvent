@@ -33,7 +33,7 @@ const DocumentsComponent = ({ materials }) => {
                       <span dangerouslySetInnerHTML={{ __html: material.description }}></span>
                     </div>
                     <div className="column is-2 has-text-right">
-                      <i className="fa fa-download icon is-large"></i>
+                      <a href={material.link}><i className="fa fa-download icon is-large"></i></a>
                     </div>
                     <div className="column is-1"></div>
                   </div>
@@ -43,7 +43,9 @@ const DocumentsComponent = ({ materials }) => {
                       <i className={`fa ${material.class_name === 'PresentationVideo' ? 'fa-video-camera' : 'fa-link'} icon is-large`}></i>
                     </div>
                     <div className="column is 8">
-                      <span dangerouslySetInnerHTML={{ __html: material.description }}></span>
+                      <a href={material.class_name === 'PresentationVideo' ? `https://www.youtube.com/watch?v=${material.youtube_id}` : material.link} target="_blank">
+                        <span dangerouslySetInnerHTML={{ __html: material.description }}></span>
+                      </a>
                     </div>
                     <div className="column is-1"></div>
                   </div>}
