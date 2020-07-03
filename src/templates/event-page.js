@@ -55,7 +55,7 @@ export const EventPageTemplate = class extends React.Component {
 
   render() {
 
-    const { loggedUser, event, summit, user } = this.props;
+    const { loggedUser, event, event: { links, videos, slides }, summit, user } = this.props;
 
     if (event) {
       return (
@@ -121,7 +121,7 @@ export const EventPageTemplate = class extends React.Component {
                 {/* <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} /> */}
                 {/* </div> */}
               </div>
-              <DocumentsComponent />
+              <DocumentsComponent materials={[...links, ...videos, ...slides]} />
             </div>
           </section >
         </>
