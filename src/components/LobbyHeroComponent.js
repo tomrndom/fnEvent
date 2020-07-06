@@ -3,8 +3,9 @@ import React from 'react'
 import LobbyHero from '../content/hero-banner.json'
 import styles from '../styles/lobby-hero.module.scss'
 
-const LobbyHeroComponent = ({ }) => (
+console.log(LobbyHero.image);
 
+const LobbyHeroComponent = ({ }) => (  
   <section class="hero is-medium">
     <div className={`${styles.heroColumns} columns`}>
       <div className={`${styles.leftColumn} column is-6 is-black`}>
@@ -20,7 +21,7 @@ const LobbyHeroComponent = ({ }) => (
         </div>
       </div>
       <div className={`${styles.midColumn} column is-1 is-info`}></div>
-      <div className={`${styles.rightColumn} column is-6 is-danger`} style={{backgroundImage: `${LobbyHero.image}`}}></div>
+      <div className={`${styles.rightColumn} column is-6 is-danger`} style={{backgroundImage: `url(${LobbyHero.image})`}}></div>
     </div>
   </section>
 

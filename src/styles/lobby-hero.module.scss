@@ -49,7 +49,9 @@ div.column:first-of-type {
   .right-column {
     width: 65%;
     z-index: 1;
-    background: url();
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     margin-left: -10%;
     min-height: 100%;
   }
@@ -75,8 +77,7 @@ div.column:first-of-type {
     }
     .right-column {
       width: 100%;
-      z-index: 1;
-      background: url();
+      z-index: 1;      
       margin-left: 0;
       min-height: 150px;
     }
