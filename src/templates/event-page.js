@@ -65,9 +65,6 @@ export const EventPageTemplate = class extends React.Component {
   render() {
 
     const { loggedUser, event, summit, user } = this.props;
-
-    this.getMaterials(event);
-
     if (event) {
       return (
         <>
