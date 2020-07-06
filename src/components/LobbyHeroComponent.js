@@ -6,7 +6,7 @@ import styles from '../styles/lobby-hero.module.scss'
 console.log(LobbyHero.image);
 
 const LobbyHeroComponent = ({ }) => (  
-  <section class="hero is-medium">
+  <section class="hero">
     <div className={`${styles.heroColumns} columns`}>
       <div className={`${styles.leftColumn} column is-6 is-black`}>
         <div class={`${styles.heroContainer} hero-body`}>
