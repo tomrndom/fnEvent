@@ -24,7 +24,7 @@ const DocumentsComponent = ({ materials }) => {
               return (
                 <React.Fragment>
                   {material.class_name === 'PresentationSlide' ?
-                    <div className="columns is-mobile is-vcentered" key={index}>
+                    <div className={`${styles.documentColumn} columns is-mobile is-vcentered`} key={index}>
                       <div className="column is-2 is-offset-1">
                         <i className={`fa fa-file-o icon is-large`}></i>
                       </div>
@@ -37,7 +37,7 @@ const DocumentsComponent = ({ materials }) => {
                       <div className="column is-1"></div>
                     </div>
                     :
-                    <div className="columns is-mobile is-vcentered" key={index}>
+                    <div className={`${styles.documentColumn} columns is-mobile is-vcentered`} key={index}>
                       <div className="column is-2 is-offset-1">
                         <i className={`fa ${material.class_name === 'PresentationVideo' ? 'fa-video-camera' : 'fa-link'} icon is-large`}></i>
                       </div>
