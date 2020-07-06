@@ -1,12 +1,16 @@
 .docs-container {
-  border: 1px silver solid;
+  border: 1px #f1f2f2 solid;
 
   .title {
     width: 100%;
-    padding: 10px;
+    padding: 1rem 1rem 0.5rem;
     font-weight: bold;
-    font-size: 20px;
-    padding-top: 1.5rem;
+    font-size: 20px;    
+  }
+
+  .columns {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   .docs-item {
@@ -17,7 +21,7 @@
   }
 
   span {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   p {
@@ -29,21 +33,21 @@
   }
 
   i {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   hr:first-of-type {
-    margin: 0 auto 2.5rem;
+    margin: 0 auto 0.5rem;
   }
 
   hr {
-    border-top: 1px solid silver;
-    margin: 1.5rem auto;
+    border-top: 1px solid #f1f2f2;
+    margin: 0.5rem auto 0.5rem;
     width: 94%;
   }
 
   hr:last-of-type {
     visibility: hidden;
-    margin: 1.5rem auto 0;
+    margin: 0.5rem auto 0;
   }
 }

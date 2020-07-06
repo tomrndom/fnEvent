@@ -16,7 +16,7 @@ const DocumentsComponent = ({ materials }) => {
   if (materials.length > 0) {
     return (
       <div className="column is-one-quarter">
-        <div className={`${styles.docsContainer}`}>
+        <div className={`${styles.docsContainer}`} style={{marginTop: '1em'}}>
           <div className={styles.title}>Documents</div>
           <hr />
           {sortedMaterials.length > 0 &&
@@ -29,7 +29,7 @@ const DocumentsComponent = ({ materials }) => {
                         <i className={`fa fa-file-o icon is-large`}></i>
                       </div>
                       <div className="column is 6">
-                        <span dangerouslySetInnerHTML={{ __html: material.description }}></span>
+                        <span><b>{material.name}</b></span>
                       </div>
                       <div className="column is-2 has-text-right">
                         <a href={material.link}><i className="fa fa-download icon is-large"></i></a>
@@ -43,7 +43,7 @@ const DocumentsComponent = ({ materials }) => {
                       </div>
                       <div className="column is 8">
                         <a href={material.class_name === 'PresentationVideo' ? `https://www.youtube.com/watch?v=${material.youtube_id}` : material.link} target="_blank">
-                          <span dangerouslySetInnerHTML={{ __html: material.description }}></span>
+                          <span><b>{material.name}</b></span>
                         </a>
                       </div>
                       <div className="column is-1"></div>
