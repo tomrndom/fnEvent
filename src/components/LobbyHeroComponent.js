@@ -1,6 +1,7 @@
 import React from 'react'
 
-import styles from '../styles/lobby-hero.module.scss';
+import LobbyHero from '../content/hero-banner.json'
+import styles from '../styles/lobby-hero.module.scss'
 
 const LobbyHeroComponent = ({ }) => (
 
@@ -10,16 +11,16 @@ const LobbyHeroComponent = ({ }) => (
         <div class={`${styles.heroContainer} hero-body`}>
           <div class="container">
             <h1 class="title">
-              Hero title
+              {LobbyHero.title}
             </h1>
             <h2 class="subtitle">
-              Hero subtitle
+              {LobbyHero.subTitle}
             </h2>
           </div>
         </div>
       </div>
       <div className={`${styles.midColumn} column is-1 is-info`}></div>
-      <div className={`${styles.rightColumn} column is-6 is-danger`}></div>
+      <div className={`${styles.rightColumn} column is-6 is-danger`} style={{backgroundImage: `${LobbyHero.image}`}}></div>
     </div>
   </section>
 
