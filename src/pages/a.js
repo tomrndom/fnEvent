@@ -6,7 +6,6 @@ import Layout from "../components/Layout"
 import LoginPage from "../templates/login-page"
 import HomePage from "../templates/home-page"
 import EventPage from "../templates/event-page"
-import TokenExpirePage from "../templates/token-expire-page"
 
 import Loadable from "@loadable/component"
 
@@ -18,7 +17,6 @@ const App = ({ isLoggedUser }) => (
       <Router basepath="/a" >
         <LoadablePrivateRoute path="/" component={HomePage} isLoggedIn={isLoggedUser} location={location} />
         <LoadablePrivateRoute path="/event/:eventId" component={EventPage} isLoggedIn={isLoggedUser} location={location} />
-        <TokenExpirePage path="/expired" location={location} />
         <LoginPage path="/login" location={location} />
       </Router>
     )}

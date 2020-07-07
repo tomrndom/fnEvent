@@ -2,22 +2,13 @@ import React, { Component } from "react"
 import { Helmet } from 'react-helmet'
 import { navigate } from "gatsby";
 
+import expiredToken from '../utils/expiredToken'
+
 // these two libraries are client-side only
 import SpeakersWidget from 'speakers-widget/dist';
 import 'speakers-widget/dist/index.css';
 
 const SpeakersWidgetComponent = class extends React.Component {
-
-  expiredToken(err) {
-    
-    let currentLocation = window.location.pathname;
-
-    return navigate('/a/expired', {
-      state: {
-        backUrl: currentLocation,
-      },
-    });
-  }
 
   render() {
 
@@ -31,7 +22,7 @@ const SpeakersWidgetComponent = class extends React.Component {
       speakerCount: 3,
       bigPics: true,
       speakerIds: [1, 187, 190],
-      onAuthError: (err, res) => this.expiredToken(err),
+      onAuthError: (err, res) => expiredToken(err),
     };
 
     return (

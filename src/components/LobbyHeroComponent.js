@@ -3,8 +3,6 @@ import React from 'react'
 import LobbyHero from '../content/hero-banner.json'
 import styles from '../styles/lobby-hero.module.scss'
 
-console.log(LobbyHero.image);
-
 const LobbyHeroComponent = ({ }) => (  
   <section class="hero">
     <div className={`${styles.heroColumns} columns`}>

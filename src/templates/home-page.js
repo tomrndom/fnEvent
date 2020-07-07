@@ -49,18 +49,13 @@ export const HomePageTemplate = class extends React.Component {
               </div>
             </div>
             <div className="column is-half">
-              <h2><b>Today's Sessions</b></h2>
               <LiveEventWidgetClientSide
                 summitId={summit.id}
-                apiBaseUrl={`${typeof window === 'object' ? window.SUMMIT_API_BASE_URL : process.env.GATSBY_SUMMIT_API_BASE_URL}`}
-                marketingApiBaseUrl={`${typeof window === 'object' ? window.MARKETING_API_BASE_URL : process.env.GATSBY_MARKETING_API_BASE_URL}`}
               />
               
               <SpeakersWidgetClientSide
                 accessToken={loggedUser.accessToken}
                 summitId={summit.id}
-                apiBaseUrl={`${typeof window === 'object' ? window.SUMMIT_API_BASE_URL : process.env.GATSBY_SUMMIT_API_BASE_URL}`}
-                marketingApiBaseUrl={`${typeof window === 'object' ? window.MARKETING_API_BASE_URL : process.env.GATSBY_MARKETING_API_BASE_URL}`}
               />
             </div>
             <div className="column is-one-quarter pb-6">

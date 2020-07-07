@@ -2,22 +2,13 @@ import React, { Component } from "react"
 import { Helmet } from 'react-helmet'
 import { navigate } from "gatsby";
 
+import expiredToken from '../utils/expiredToken'
+
 // these two libraries are client-side only
 import ScheduleLite from 'schedule-lite/dist';
 import 'schedule-lite/dist/index.css';
 
 const ScheduleComponent = class extends React.Component {
-
-  expiredToken(err) {
-    
-    let currentLocation = window.location.pathname;
-
-    return navigate('/a/expired', {
-      state: {
-        backUrl: currentLocation,
-      },
-    });
-  }
 
   render() {
 
@@ -35,7 +26,7 @@ const ScheduleComponent = class extends React.Component {
       landscape: true,
       updateCallback: ev => console.log('event updated', ev),
       onEventClick: ev => this.props.eventClick(ev),
-      onAuthError: (err, res) => this.expiredToken(err)
+      onAuthError: (err, res) => expiredToken(err)
     };
 
     return (
