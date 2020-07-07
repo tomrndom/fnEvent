@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import { navigate } from "gatsby"
 
+import envVariables from '../utils/envVariables';
+
 import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
 
 const PrivateRoute = ({ component: Component, isLoggedIn, location, ...rest }) => {
@@ -10,8 +12,8 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, ...rest }) =
     return null
   }
 
-  const clientId = typeof window === 'object' ? window.OAUTH2_CLIENT_ID : process.env.OAUTH2_CLIENT_ID
-  const idpBaseUrl = typeof window === 'object' ? window.IDP_BASE_URL : process.env.GATSBY_IDP_BASE_URL
+  const clientId = envVariables.OAUTH2_CLIENT_ID;
+  const idpBaseUrl = envVariables.IDP_BASE_URL;
 
   return (
     <React.Fragment>

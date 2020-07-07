@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import { Helmet } from 'react-helmet'
 import { navigate } from "gatsby";
 
-import expiredToken from '../utils/expiredToken'
+import envVariables from '../utils/envVariables';
+import expiredToken from '../utils/expiredToken';
 
 // these two libraries are client-side only
 import SpeakersWidget from 'speakers-widget/dist';
@@ -15,9 +16,9 @@ const SpeakersWidgetComponent = class extends React.Component {
     const { accessToken } = this.props;
 
     const widgetProps = {
-      apiBaseUrl: `${typeof window === 'object' ? window.SUMMIT_API_BASE_URL : process.env.GATSBY_SUMMIT_API_BASE_URL}`,
-      marketingApiBaseUrl: `${typeof window === 'object' ? window.MARKETING_API_BASE_URL : process.env.GATSBY_MARKETING_API_BASE_URL}`,
-      summitId: parseInt(typeof window === 'object' ? window.SUMMIT_ID : process.env.GATSBY_GATSBY_SUMMIT_ID),
+      apiBaseUrl: envVariables.SUMMIT_API_BASE_URL,
+      marketingApiBaseUrl: envVariables.MARKETING_API_BASE_URL,
+      summitId: parseInt(envVariables.SUMMIT_ID),
       accessToken: accessToken,
       speakerCount: 3,
       bigPics: true,
