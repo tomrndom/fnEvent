@@ -1,4 +1,7 @@
 import ReduxWrapper from "./src/state/ReduxWrapper"
 export const wrapRootElement = ReduxWrapper
 
-import { window, document, extend } from 'ssr-window';
+import { window, document } from 'ssr-window';
+
+global.window = window
+global.document = document
