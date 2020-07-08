@@ -21,7 +21,7 @@ const summitReducer = (state = DEFAULT_STATE, action) => {
       return { ...state, loading: false };
       break;
     case UPDATE_CLOCK:
-      let { timestamp } = payload;
+      const { timestamp } = payload;
       return { ...state, nowUtc: timestamp };
     case GET_SUMMIT_DATA:
       const summit = payload.response;
