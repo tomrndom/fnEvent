@@ -227,6 +227,10 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           {
             test: /react-rte-ref-fix/,
             use: loaders.null()
+          },
+          {
+            test: /react-tooltip/,
+            use: loaders.null()
           }
         ]
       }
