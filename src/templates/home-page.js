@@ -4,15 +4,14 @@ import { graphql, navigate } from 'gatsby'
 import { connect } from 'react-redux'
 
 import Layout from '../components/Layout'
+
 import LobbyHeroComponent from '../components/LobbyHeroComponent'
 import ClockComponent from '../components/ClockComponent'
+import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
+import LiveEventWidgetComponent from '../components/LiveEventWidgetComponent'
+import SpeakersWidgetComponent from '../components/SpeakersWidgetComponent'
 
 import { getSummitData } from '../actions/summit-actions'
-import Loadable from "@loadable/component"
-
-const ScheduleLiteClientSide = Loadable(() => import('../components/ScheduleLiteComponent'))
-const LiveEventWidgetClientSide = Loadable(() => import('../components/LiveEventWidgetComponent'))
-const SpeakersWidgetClientSide = Loadable(() => import('../components/SpeakersWidgetComponent'))
 
 export const HomePageTemplate = class extends React.Component {
 
@@ -50,10 +49,8 @@ export const HomePageTemplate = class extends React.Component {
               </div>
             </div>
             <div className="column is-half">
-              <LiveEventWidgetClientSide
-                summitId={summit.id}
-              />
-              <SpeakersWidgetClientSide
+              <LiveEventWidgetComponent summitId={summit.id} />
+              <SpeakersWidgetComponent
                 accessToken={loggedUser.accessToken}
                 summitId={summit.id}
                 now={now}
@@ -61,7 +58,10 @@ export const HomePageTemplate = class extends React.Component {
             </div>
             <div className="column is-one-quarter pb-6">
               <h2><b>My Info</b></h2>
-              <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
+              <ScheduleLiteComponent
+                accessToken={loggedUser.accessToken}
+                eventClick={(ev) => this.onEventChange(ev)}
+              />
             </div>
           </div>
         </div>

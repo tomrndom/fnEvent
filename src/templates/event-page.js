@@ -8,6 +8,7 @@ import Content, { HTMLContent } from '../components/Content'
 
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
+import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
 import RocketChatComponent from '../components/RocketChat'
 import VideoComponent from '../components/VideoComponent'
 import TalkComponent from '../components/TalkComponent'
@@ -16,10 +17,7 @@ import DocumentsComponent from '../components/DocumentsComponent'
 import { getEventBySlug } from '../actions/event-actions'
 import { getDisqusSSO, getRocketChatSSO } from '../actions/user-actions'
 
-import Loadable from "@loadable/component"
 import { AttendanceTracker } from "openstack-uicore-foundation/lib/components";
-
-const ScheduleLiteClientSide = Loadable(() => import('../components/ScheduleLiteComponent'))
 
 export const EventPageTemplate = class extends React.Component {
 
@@ -125,7 +123,7 @@ export const EventPageTemplate = class extends React.Component {
               </div>
               <div className="column is-two-quarters pb-6">
                 {/* <div className="rocket-container"> */}
-                <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
+                <ScheduleLiteComponent accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
                 {/* <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} /> */}
                 {/* </div> */}
               </div>
@@ -142,7 +140,7 @@ export const EventPageTemplate = class extends React.Component {
               {/* <div className="rocket-container"> */}
               <span>Event not found</span>
               <br />
-              <ScheduleLiteClientSide accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
+              <ScheduleLiteComponent accessToken={loggedUser.accessToken} eventClick={(ev) => this.onEventChange(ev)} />
               {/*   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
               {/* </div> */}
             </div>

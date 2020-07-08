@@ -5,11 +5,9 @@ import { navigate } from "gatsby"
 
 import { onUserAuth, doLogout, getUserInfo } from "openstack-uicore-foundation/lib/methods";
 import TokenExpirePage from "../templates/token-expire-page"
-import Loadable from "@loadable/component"
 
-// const LoadableAuthorizedRoute = Loadable(() => import('../routes/authorized-route')) 
-const LoadableAuthorizationCallbackRoute = Loadable(() => import('../routes/authorization-callback-route'))
-const LoadableLogOutCallbackRoute = Loadable(() => import('../routes/logout-callback-route'))
+import AuthorizationCallbackRoute from "../routes/authorization-callback-route"
+import LogOutCallbackRoute from "../routes/logout-callback-route"
 
 const Auth = class extends React.Component {
 
@@ -23,9 +21,8 @@ const Auth = class extends React.Component {
 
     return (
       <Router basepath="/auth">
-        {/* <LoadableAuthorizedRoute isLoggedUser={false} doLogin={this.onClickLogin.bind(this)} backUrl={backUrl} path="/home" component={HomePage} /> */}
-        <LoadableAuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
-        <LoadableLogOutCallbackRoute doLogout={doLogout} path='/logout' />
+        <AuthorizationCallbackRoute onUserAuth={onUserAuth} path='/callback' getUserInfo={getUserInfo} />
+        <LogOutCallbackRoute doLogout={doLogout} path='/logout' />
         <TokenExpirePage path="/expired" location={location} />
       </Router>
     )

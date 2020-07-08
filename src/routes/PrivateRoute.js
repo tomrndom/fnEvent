@@ -16,10 +16,10 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, ...rest }) =
   const idpBaseUrl = envVariables.IDP_BASE_URL;
 
   return (
-    <React.Fragment>
+    <>
       <OPSessionChecker clientId={clientId} idpBaseUrl={idpBaseUrl} />
       <Component location={location} {...rest} />
-    </React.Fragment>
+    </>
   );
 }
 

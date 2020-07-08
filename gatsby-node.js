@@ -213,24 +213,23 @@ exports.createPages = ({ actions, graphql }) => {
 }
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
+  actions.setWebpackConfig({
+    plugins: [
+      plugins.define({
+        'global.GENTLY': false
+      })
+    ]
+  })
   if (stage === "build-html") {
     actions.setWebpackConfig({
       module: {
         rules: [
           {
-            test: /openstack-uicore-foundation/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    })
-  } else {
-    actions.setWebpackConfig({
-      plugins: [
-        plugins.define({
-          'global.GENTLY': false,
-        }),
-      ],
+            test: /react-rte-ref-fix/,
+            use: loaders.null()
+          }
+        ]
+      }
     })
   }
 }
