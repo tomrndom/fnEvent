@@ -220,20 +220,4 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
       })
     ]
   })
-  if (stage === "build-html") {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /react-rte-ref-fix/,
-            use: loaders.null()
-          },
-          {
-            test: /react-tooltip/,
-            use: loaders.null()
-          }
-        ]
-      }
-    })
-  }
 }
