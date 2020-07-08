@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import Layout from '../components/Layout'
 import LobbyHeroComponent from '../components/LobbyHeroComponent'
+import ClockComponent from '../components/ClockComponent'
 
 import { getSummitData } from '../actions/summit-actions'
 import Loadable from "@loadable/component"
@@ -35,7 +36,7 @@ export const HomePageTemplate = class extends React.Component {
 
   render() {
 
-    const { loggedUser, summit } = this.props;
+    const { loggedUser, summit, now } = this.props;
 
     return (
       <React.Fragment>
@@ -52,10 +53,10 @@ export const HomePageTemplate = class extends React.Component {
               <LiveEventWidgetClientSide
                 summitId={summit.id}
               />
-              
               <SpeakersWidgetClientSide
                 accessToken={loggedUser.accessToken}
                 summitId={summit.id}
+                now={now}
               />
             </div>
             <div className="column is-one-quarter pb-6">
@@ -64,6 +65,7 @@ export const HomePageTemplate = class extends React.Component {
             </div>
           </div>
         </div>
+        <ClockComponent summit={summit} now={now} />
       </React.Fragment>
     )
   }
@@ -76,7 +78,7 @@ HomePageTemplate.propTypes = {
   getSummitData: PropTypes.func,
 }
 
-const HomePage = ({ loggedUser, location, summit, getSummitData }) => {
+const HomePage = ({ loggedUser, location, summit, getSummitData, now }) => {
 
   return (
     <Layout>
@@ -84,6 +86,7 @@ const HomePage = ({ loggedUser, location, summit, getSummitData }) => {
         loggedUser={loggedUser}
         location={location}
         summit={summit}
+        now={now}
         getSummitData={getSummitData}
       />
     </Layout>
@@ -99,7 +102,8 @@ HomePage.propTypes = {
 
 const mapStateToProps = ({ loggedUserState, summitState }) => ({
   loggedUser: loggedUserState,
-  summit: summitState.summit
+  summit: summitState.summit,
+  now: summitState.nowUtc,
 })
 
 export default connect(mapStateToProps,
