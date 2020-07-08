@@ -23,4 +23,4 @@ const ClockComponent = class extends React.Component {
   }
 }
 
-export default connect(({}), { updateClock })(ClockComponent);
+export default connect(null, { updateClock })(ClockComponent);
