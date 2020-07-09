@@ -1,8 +1,9 @@
 import ReduxWrapper from "./src/state/ReduxWrapper"
 export const wrapRootElement = ReduxWrapper
 
-import Browser from "zombie"
+import { JSDOM } from 'jsdom'
 
-const browser = new Browser();
-
-global.window = browser.window
+global.dom = new JSDOM(`...`)
+global.window = dom.window
+global.document = dom.window.document
+global.navigator = global.window.navigator
