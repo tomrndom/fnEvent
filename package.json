@@ -46,7 +46,7 @@
     "openstack-uicore-foundation": "^2.0.44",
     "prop-types": "^15.6.0",
     "react": "^16.8.4",
-    "react-bootstrap": "^0.33.1",
+    "react-bootstrap": "^0.31.5",
     "react-dom": "^16.8.4",
     "react-dropzone": "^11.0.1",
     "react-google-maps": "^9.4.5",
