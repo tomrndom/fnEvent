@@ -212,11 +212,13 @@ exports.createPages = ({ actions, graphql }) => {
   })
 }
 
-exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
+exports.onCreateWebpackConfig = ({ actions, plugins }) => {
   actions.setWebpackConfig({
+    // canvas is a jsdom external dependency
+    externals: ['canvas'],
     plugins: [
       plugins.define({
-        'global.GENTLY': false
+        'global.GENTLY': false,
       })
     ]
   })

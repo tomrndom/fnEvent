@@ -1,7 +1,9 @@
 import ReduxWrapper from "./src/state/ReduxWrapper"
 export const wrapRootElement = ReduxWrapper
 
-import { window, document } from 'ssr-window';
+import { JSDOM } from 'jsdom'
 
-global.window = window
-global.document = document
+global.dom = new JSDOM(`...`)
+global.window = dom.window
+global.document = dom.window.document
+global.navigator = global.window.navigator
