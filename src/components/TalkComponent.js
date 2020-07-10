@@ -1,5 +1,4 @@
-import React, { Component } from "react"
-import { Link } from 'gatsby'
+import React from "react"
 
 import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 
@@ -44,7 +43,7 @@ const TalkComponent = class extends React.Component {
 
   render() {
 
-    const { event: { start_date, end_date, speakers, title, description }, event, noStream, summit: { time_zone_id } } = this.props;
+    const { event: { start_date, end_date, speakers, title, description }, event, summit: { time_zone_id } } = this.props;
 
     return (
       <div className="columns px-5 py-5">
@@ -54,14 +53,14 @@ const TalkComponent = class extends React.Component {
             <b>{title}</b>
           </h1>
           <div className="talk__speaker">
-            <img />
+            <img alt="Speaker" />
             <span className="talk__speaker--name">{this.formatSpeakers(speakers)}</span>
             <br /><br />
             <div className="talk__description" dangerouslySetInnerHTML={{ __html: description }} />
           </div>
           <br />
           {event.meeting_url &&
-            <a href={event.meeting_url} target="_blank" style={{ textDecoration: 'none' }}>
+            <a href={event.meeting_url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
               <div className="button is-info is-uppercase" style={{ fontSize: '1.15em' }}>
                 join zoom to take the mic !
               </div>

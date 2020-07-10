@@ -1,6 +1,5 @@
-import React, { Component } from "react"
+import React from "react"
 import { Helmet } from 'react-helmet'
-import { navigate } from "gatsby";
 
 import envVariables from '../utils/envVariables';
 

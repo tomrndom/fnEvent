@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Layout from '../components/Layout'
 
 import URI from "urijs";
 import { handleResetReducers } from '../actions/event-actions'

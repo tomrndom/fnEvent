@@ -2,7 +2,6 @@ import React from "react"
 import { Router, Location } from "@reach/router"
 import { connect } from 'react-redux'
 
-import Layout from "../components/Layout"
 import LoginPage from "../templates/login-page"
 import HomePage from "../templates/home-page"
 import EventPage from "../templates/event-page"

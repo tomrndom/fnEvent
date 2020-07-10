@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Clock } from 'openstack-uicore-foundation/lib/components';
 import { updateClock } from "../actions/summit-actions";
