@@ -24,11 +24,11 @@ const TalkComponent = class extends React.Component {
   formatSpeakers(speakers) {
     let formatedSpeakers = '';
     if (speakers && speakers.length > 0) {
-      speakers.map((speaker, index) => {
+      speakers.forEach((speaker, index) => {
         formatedSpeakers += `${speaker.first_name} ${speaker.last_name}`;
         if (speakers.length > index + 2) formatedSpeakers += ', ';
         if (speakers.length - 2 === index) formatedSpeakers += ' & ';
-      })
+      });
     }
     return formatedSpeakers;
   }
