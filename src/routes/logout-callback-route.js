@@ -35,9 +35,8 @@ class LogOutCallbackRoute extends React.Component {
         let query = URI.parseQuery(location.search);
         if(!query.hasOwnProperty("state"))
             return (<p>Invalid Method</p>);
-        if(query["state"] != storedState)
+        if(query["state"] !== storedState)
             return (<p>Invalid State</p>);
-
         doLogout();
         backUrl ? navigate(backUrl) : navigate("/a/login");
         return null;

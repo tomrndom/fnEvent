@@ -22,7 +22,7 @@ export const TokenExpirePageTemplate = class extends React.Component {
     let query = url.search(true);
     let fragment = url.fragment();
     let backUrl = query.hasOwnProperty('BackUrl') ? query['BackUrl'] : previousLocation;
-    if (fragment != null && fragment != '') {
+    if (fragment !== null && fragment !== '') {
       backUrl += `#${fragment}`;
     }
     setTimeout(() => {
