@@ -8,6 +8,34 @@
           "text": "Learn more",
           "id": null
         }
+      ],
+      "columns": [
+        {
+          "column": "left",
+          "ads": [
+            {
+              "image": "/img/intel.png",
+              "button": {
+                "text": "Learn More",
+                "link": "#"
+              },
+              "text": "text"
+            }
+          ]
+        },
+        {
+          "column": "right",
+          "ads": [
+            {
+              "image": "/img/intel.png",
+              "button": {
+                "text": "Learn More !",
+                "link": "#"
+              },
+              "text": "text"
+            }
+          ]
+        }
       ]
     },
     {
