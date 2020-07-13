@@ -2,21 +2,78 @@
   "ads": [
     {
       "section": "lobby",
-      "ads": [
+      "columns": [
         {
-          "image": "/img/intel.png",
-          "text": "Learn more",
-          "id": null
+          "column": "left",
+          "columnAds": [
+            {
+              "image": "/img/intel.png",
+              "button": {
+                "text": "Learn more",
+                "link": "#"
+              },
+              "id": null
+            },
+            {
+              "image": "/img/ad_subscribe.png",
+              "button": {
+                "text": "Subscribe",
+                "link": "#"
+              },
+              "id": null
+            }
+          ]
+        },
+        {
+          "column": "center",
+          "columnAds": []
+        },
+        {
+          "column": "right",
+          "columnAds": [
+            {
+              "image": "/img/ad_Lenovo.png",
+              "button": {
+                "text": "Learn more",
+                "link": "#"
+              },
+              "id": null
+            },
+            {
+              "image": "/img/ad_YO.png",
+              "button": {
+                "text": "Learn more",
+                "link": "#"
+              },
+              "id": null
+            }
+          ]
         }
       ]
     },
     {
       "section": "event",
-      "ads": [
+      "columns": [
         {
-          "image": "/img/intel.png",
-          "text": "Learn more",
-          "id": null
+          "column": "left",
+          "columnAds": [
+            {
+              "image": "/img/intel.png",
+              "button": {
+                "text": "Learn more",
+                "link": "#"
+              },
+              "id": null
+            }
+          ]
+        },
+        {
+          "column": "left",
+          "columnAds": []
+        },
+        {
+          "column": "left",
+          "columnAds": []
         }
       ]
     }
