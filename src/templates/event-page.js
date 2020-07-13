@@ -90,7 +90,7 @@ export const EventPageTemplate = class extends React.Component {
                 <TalkComponent event={event} summit={summit} noStream={true} />
               </div>
               <div className="column" style={{ position: 'relative' }}>
-                <DisqusComponent disqusSSO={user.disqusSSO} room={event} title="Join the conversation"/>
+                <DisqusComponent disqusSSO={user.disqusSSO} event={event} summit={summit} title="Join the conversation"/>
               </div>
             </div>
           </section>
