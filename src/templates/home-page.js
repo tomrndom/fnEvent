@@ -62,6 +62,7 @@ export const HomePageTemplate = class extends React.Component {
               />
               <SpeakersWidgetComponent
                 accessToken={loggedUser.accessToken}
+                title={`Today's Speakers`}
                 summitId={summit.id}
                 now={now}
               />
