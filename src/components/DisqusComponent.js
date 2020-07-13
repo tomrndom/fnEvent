@@ -20,7 +20,7 @@ const DisqusComponent = class extends React.Component {
       return null;
     } else {
       return (
-        <div className="disqus-container" style={style}>
+        <div className={style ? '' : 'disqus-container'} style={style}>
           <h3>{title}</h3>
           <DiscussionEmbed
             shortname='fnvirtual-poc'
