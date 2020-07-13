@@ -10,8 +10,8 @@ const DisqusComponent = class extends React.Component {
 
     let disqusConfig = {
       url: window.location.href,
-      identifier: `${room.id}`,
-      title: room.title || room.name,
+      identifier: `${room.name ? room.name : `${room.id}-${room.title}`}`,
+      title: room.name ? room.name : room.title,
       remoteAuthS3: disqusSSO.auth,
       apiKey: disqusSSO.public_key,
     }
