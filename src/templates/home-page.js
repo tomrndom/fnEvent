@@ -11,6 +11,7 @@ import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import LiveEventWidgetComponent from '../components/LiveEventWidgetComponent'
 import SpeakersWidgetComponent from '../components/SpeakersWidgetComponent'
+import SponsorComponent from '../components/SponsorComponent'
 
 import { getSummitData } from '../actions/summit-actions'
 import { getDisqusSSO } from '../actions/user-actions'
@@ -51,6 +52,7 @@ export const HomePageTemplate = class extends React.Component {
             <div className="column is-one-quarter">
               <h2><b>Community</b></h2>
               <AdvertiseComponent section='lobby' column="left"/>
+              <SponsorComponent tier='silver'/>
             </div>            
             <div className="column is-half">
             <LiveEventWidgetComponent />
@@ -84,6 +86,7 @@ export const HomePageTemplate = class extends React.Component {
                 showNav={true}
               />
               <AdvertiseComponent section='lobby' column="right"/>
+              <SponsorComponent tier='gold'/>
             </div>
           </div>
         </div>
