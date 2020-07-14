@@ -1,8 +1,11 @@
 import React from "react"
 import { Helmet } from 'react-helmet'
+import { connect } from "react-redux";
 
 import envVariables from '../utils/envVariables';
 import expiredToken from '../utils/expiredToken';
+
+import ClockComponent from './ClockComponent'
 
 // these two libraries are client-side only
 import SpeakersWidget from 'speakers-widget/dist';
@@ -12,7 +15,7 @@ const SpeakersWidgetComponent = class extends React.Component {
 
   render() {
 
-    const { accessToken, title } = this.props;
+    const { accessToken, title, bigPics, now, summit } = this.props;
 
     const widgetProps = {
       apiBaseUrl: envVariables.SUMMIT_API_BASE_URL,
@@ -20,9 +23,11 @@ const SpeakersWidgetComponent = class extends React.Component {
       summitId: parseInt(envVariables.SUMMIT_ID),
       accessToken: accessToken,
       title,
+      bigPics,
       speakerCount: 3,
-      bigPics: true,
-      speakerIds: [1, 187, 190],
+      title: title,
+      date: parseInt(now, 10),
+      // speakerIds: [1, 187, 190],
       onAuthError: (err, res) => expiredToken(err),
     };
 
@@ -33,11 +38,18 @@ const SpeakersWidgetComponent = class extends React.Component {
           <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css" />
         </Helmet>
         <div>
-          <SpeakersWidget {...widgetProps} />
+          <ClockComponent summit={summit} />
+          {now && <SpeakersWidget {...widgetProps} />}
         </div>
       </>
     )
   }
 }
 
-export default SpeakersWidgetComponent
+const mapStateToProps = ({ summitState }) => ({
+  summit: summitState.summit,
+  now: summitState.nowUtc,
+})
+
+
+export default connect(mapStateToProps, {})(SpeakersWidgetComponent)

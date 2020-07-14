@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 
 import LobbyHeroComponent from '../components/LobbyHeroComponent'
-import ClockComponent from '../components/ClockComponent'
 import AdvertiseComponent from '../components/AdvertiseComponent'
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
 import DisqusComponent from '../components/DisqusComponent'
@@ -42,7 +41,7 @@ export const HomePageTemplate = class extends React.Component {
 
   render() {
 
-    const { loggedUser, user, summit, now } = this.props;
+    const { loggedUser, user, summit } = this.props;
 
     return (
       <React.Fragment>
@@ -52,19 +51,26 @@ export const HomePageTemplate = class extends React.Component {
             <div className="column is-one-quarter">
               <h2><b>Community</b></h2>
               <AdvertiseComponent section='lobby' column="left"/>
-            </div>
+            </div>            
             <div className="column is-half">
-              <LiveEventWidgetComponent summitId={summit.id} />
+            <LiveEventWidgetComponent />
               <DisqusComponent disqusSSO={user.disqusSSO} summit={summit} style={{ position: 'static' }} />
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
                 eventClick={(ev) => this.onEventChange(ev)}
+                landscape={false}
+                yourSchedule={false}
+                showNav={false}                                          
               />
               <SpeakersWidgetComponent
                 accessToken={loggedUser.accessToken}
-                title={`Today's Speakers`}
-                summitId={summit.id}
-                now={now}
+                title="Today's Speakers"
+                bigPics={true}
+              />
+              <SpeakersWidgetComponent
+                accessToken={loggedUser.accessToken}
+                title="Featured Speakers"
+                bigPics={false}
               />
               <AdvertiseComponent section='lobby' column="center"/>
             </div>
@@ -73,6 +79,9 @@ export const HomePageTemplate = class extends React.Component {
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
                 eventClick={(ev) => this.onEventChange(ev)}
+                landscape={true}
+                yourSchedule={true}                
+                showNav={true}
               />
               <AdvertiseComponent section='lobby' column="right"/>
             </div>
@@ -93,7 +102,7 @@ HomePageTemplate.propTypes = {
   getDisqusSSO: PropTypes.func,
 }
 
-const HomePage = ({ loggedUser, user, location, summit, getSummitData, getDisqusSSO, now }) => {
+const HomePage = ({ loggedUser, user, location, summit, getSummitData, getDisqusSSO }) => {
 
   return (
     <Layout>
@@ -102,7 +111,6 @@ const HomePage = ({ loggedUser, user, location, summit, getSummitData, getDisqus
         location={location}
         user={user}
         summit={summit}
-        now={now}
         getSummitData={getSummitData}
         getDisqusSSO={getDisqusSSO}
       />
@@ -121,7 +129,6 @@ const mapStateToProps = ({ loggedUserState, userState, summitState }) => ({
   loggedUser: loggedUserState,
   user: userState,
   summit: summitState.summit,
-  now: summitState.nowUtc,
 })
 
 export default connect(mapStateToProps,
