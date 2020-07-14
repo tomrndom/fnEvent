@@ -7,7 +7,7 @@ import Layout from '../components/Layout'
 
 import LobbyHeroComponent from '../components/LobbyHeroComponent'
 import ClockComponent from '../components/ClockComponent'
-import SidebarAdvertise from '../components/SidebarAdvertiseComponent'
+import AdvertiseComponent from '../components/AdvertiseComponent'
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import LiveEventWidgetComponent from '../components/LiveEventWidgetComponent'
@@ -51,7 +51,7 @@ export const HomePageTemplate = class extends React.Component {
           <div className="columns">
             <div className="column is-one-quarter">
               <h2><b>Community</b></h2>
-              <SidebarAdvertise section='lobby' column="left"/>
+              <AdvertiseComponent section='lobby' column="left"/>
             </div>
             <div className="column is-half">
               <LiveEventWidgetComponent summitId={summit.id} />
@@ -66,6 +66,7 @@ export const HomePageTemplate = class extends React.Component {
                 summitId={summit.id}
                 now={now}
               />
+              <AdvertiseComponent section='lobby' column="center"/>
             </div>
             <div className="column is-one-quarter pb-6">
               <h2><b>My Info</b></h2>
@@ -73,7 +74,7 @@ export const HomePageTemplate = class extends React.Component {
                 accessToken={loggedUser.accessToken}
                 eventClick={(ev) => this.onEventChange(ev)}
               />
-              <SidebarAdvertise section='lobby' column="right"/>
+              <AdvertiseComponent section='lobby' column="right"/>
             </div>
           </div>
         </div>
