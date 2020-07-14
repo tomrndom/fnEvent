@@ -6,12 +6,12 @@ const DisqusComponent = class extends React.Component {
 
   render() {
 
-    const { room, disqusSSO, title, style } = this.props;
+    const { disqusSSO, title, style, summit, event } = this.props;
 
     let disqusConfig = {
       url: window.location.href,
-      identifier: `${room.id}`,
-      title: room.title || room.name,
+      identifier: `${event ? `summit/${summit.id}/event/${event.id}` : `summit/${summit.id}/lobby`}`,
+      title: summit.name ? summit.name : event.title,
       remoteAuthS3: disqusSSO.auth,
       apiKey: disqusSSO.public_key,
     }
@@ -20,7 +20,7 @@ const DisqusComponent = class extends React.Component {
       return null;
     } else {
       return (
-        <div className="disqus-container" style={style}>
+        <div className={style ? '' : 'disqus-container'} style={style}>
           <h3>{title}</h3>
           <DiscussionEmbed
             shortname='fnvirtual-poc'
