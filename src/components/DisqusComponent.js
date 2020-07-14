@@ -1,5 +1,4 @@
 import React from 'react'
-//import { Disqus } from 'gatsby-plugin-disqus'
 import { DiscussionEmbed } from 'disqus-react';
 
 const DisqusComponent = class extends React.Component {
@@ -11,7 +10,7 @@ const DisqusComponent = class extends React.Component {
     let disqusConfig = {
       url: window.location.href,
       identifier: `${event ? `summit/${summit.id}/event/${event.id}` : `summit/${summit.id}/lobby`}`,
-      title: summit.name ? summit.name : event.title,
+      title: event ? event.title : summit.name,
       remoteAuthS3: disqusSSO.auth,
       apiKey: disqusSSO.public_key,
     }
