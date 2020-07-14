@@ -14,10 +14,10 @@ exports.onPreBootstrap = async () => {
   const colours = await axios.get(
     `${process.env.GATSBY_MARKETING_API_BASE_URL}/api/public/v1/config-values/all/shows/${process.env.GATSBY_SUMMIT_ID}`
   ).then((response) => {
-    let colorObject = { colors: {}}
+    let colorObject = { colors: {} }
     response.data.data.map((color) => {
-      colorObject.colors[color.key] = color.value;
-    })    
+      if (color.key.startsWith('color_')) colorObject.colors[color.key] = color.value;
+    })
     return colorObject;
   }).catch(e => console.log('ERROR: ', e));
 
