@@ -58,22 +58,22 @@
       {
         "icon": "fa-facebook",
         "display": true,
-        "link": ""
+        "link": "#"
       },
       {
         "icon": "fa-twitter",
         "display": true,
-        "link": ""
+        "link": "#"
       },
       {
         "icon": "fa-linkedin",
         "display": true,
-        "link": ""
+        "link": "#"
       },
       {
         "icon": "fa-google-plus",
         "display": true,
-        "link": ""
+        "link": "#"
       }
     ]
   }

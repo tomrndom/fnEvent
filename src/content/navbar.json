@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "title": "About the event",
+      "link": "#",
+      "display": true
+    },
+    {
+      "title": "Who we are",
+      "link": "#",
+      "display": true
+    },
+    {
+      "title": "Past events",
+      "link": "#",
+      "display": true
+    },
+    {
+      "title": "Contact",
+      "link": "#",
+      "display": true
+    },
+    {
+      "title": "Help",
+      "link": "#",
+      "display": true
+    }
+  ]
+}

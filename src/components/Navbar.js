@@ -81,7 +81,7 @@ const Navbar = class extends React.Component {
             </div>
           </div>
         </nav>
-        <UserNavbar isLoggedUser={isLoggedUser} clearState={clearState} />
+        {isLoggedUser && <UserNavbar isLoggedUser={isLoggedUser} clearState={clearState} />}
       </React.Fragment>
     )
   }
