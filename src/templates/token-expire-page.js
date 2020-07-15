@@ -28,7 +28,7 @@ export const TokenExpirePageTemplate = class extends React.Component {
     setTimeout(() => {
       handleResetReducers();
       doLogin(backUrl);
-    }, 5000);
+    }, 3000);
   }
 
   render() {
@@ -40,7 +40,8 @@ export const TokenExpirePageTemplate = class extends React.Component {
         <div className="columns">
           <div className="column is-three-quarters">
             <div className="rocket-container">
-              <h3>Your session has timed out. You will be redirected to the login page</h3>
+              <h3>Your session has timed out.</h3>
+              <h3>You will be redirected to the login page.</h3>
             </div>
           </div>
         </div>
