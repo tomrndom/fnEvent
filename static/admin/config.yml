@@ -19,11 +19,11 @@ collections:
       preview: false
     files:
       - file: "src/content/ads.json"
-        label: "Sponsor Ads"
+        label: "Advertisement"
         name: "ads"
         fields:
-          - {label: "Sponsor Ads", name: "ads", widget: list, fields: [
-              {label: "Section", name: "section", widget: string},
+          - {label: "Ads", name: "ads", widget: list, fields: [
+              {label: "Page", name: "section", widget: string},
               {label: "Columns", name: "columns", widget: list, fields: [
                 {label: "Column", name: "column", widget: select, options: [
                   { label: "Left", value: "left" },
@@ -40,3 +40,29 @@ collections:
                 ]}
               ]},
             ]}
+      - file: "src/content/sponsor.json"
+        label: "Sponsors"
+        name: "sponsor"
+        fields:
+          - {label: "Sponsors", name: "sponsors", widget: object, fields: [
+              {label: "Gold Tier", name: "gold", widget: object, fields: [
+                {label: "Sponsors", name: "sponsors", widget: object, fields: [
+                  {label: "Name", name: "name", widget: string },
+                  {label: "Image", name: "image", widget: image }
+                ]},
+                {label: "Button", name: button, widget: object, fields: [
+                  {label: "Text", name: "text", widget: string, required: false },
+                  {label: "Link", name: "link", widget: string, required: false }
+                ]}
+              ]},
+              {label: "Silver Tier", name: "silver", widget: object, fields: [
+                {label: "Sponsors", name: "sponsors", widget: object, fields: [
+                  {label: "Name", name: "name", widget: string },
+                  {label: "Image", name: "image", widget: image }
+                ]},
+                {label: "Button", name: button, widget: object, fields: [
+                  {label: "Text", name: "text", widget: string, required: false },
+                  {label: "Link", name: "link", widget: string, required: false }
+                ]}
+              ]},
+            ]}            

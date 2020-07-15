@@ -6,7 +6,8 @@ import Content from '../content/sponsor.json'
 
 const SponsorComponent = ({ tier }) => {
 
-  const sponsors = Content.sponsors[tier];
+  const sponsors = Content.sponsors[tier].sponsors;
+  const button = Content.sponsors[tier].button;
 
   if (sponsors.length > 0) {
     switch (tier) {
@@ -19,11 +20,13 @@ const SponsorComponent = ({ tier }) => {
                 <img src={sponsor.image} alt={sponsor.name} key={index} />
               )
             })}
-            <a className={styles.link} href="#">
-              <button className={`${styles.button} button is-large`}>
-                View all
-              </button>
-            </a>
+            {button.text && button.link &&
+              <a className={styles.link} href={button.link}>
+                <button className={`${styles.button} button is-large`}>
+                  {button.text}
+                </button>
+              </a>
+            }
           </div>
         )
       case 'silver':
@@ -37,11 +40,13 @@ const SponsorComponent = ({ tier }) => {
                 </div>
               )
             })}
-            <a className={styles.link} href="#">
-              <button className={`${styles.button} button is-large`}>
-                View all
-              </button>
-            </a>
+            {button.text && button.link &&
+              <a className={styles.link} href={button.link}>
+                <button className={`${styles.button} button is-large`}>
+                  {button.text}
+                </button>
+              </a>
+            }
           </div>
         )
     }
