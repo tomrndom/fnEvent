@@ -191,8 +191,8 @@ exports.createPages = ({ actions, graphql }) => {
 
       posts.forEach((edge) => {
         const id = edge.node.id
-        if (edge.node.fields.slug.match(/pages/)) {
-          edge.node.fields.slug = edge.node.fields.slug.replace('/pages/', '/');
+        if (edge.node.fields.slug.match(/custom-pages/)) {
+          edge.node.fields.slug = edge.node.fields.slug.replace('/custom-pages/', '/');
         }
         createPage({
           path: edge.node.fields.slug,

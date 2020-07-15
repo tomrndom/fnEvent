@@ -31,6 +31,14 @@
   height: auto;
 }
 
+.link {
+  color: #ffffff;
+  &:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
 .user-navbar {
   background-color: #616266;
   min-height: 4.25rem;

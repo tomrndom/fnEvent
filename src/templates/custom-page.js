@@ -50,8 +50,8 @@ CustomPage.propTypes = {
 export default CustomPage
 
 export const customPageQuery = graphql`
-  query CustomPageTemplate {
-    markdownRemark(frontmatter: { templateKey: { eq: "custom-page" } }) {
+  query CustomPageTemplate($id: String!) {    
+    markdownRemark(id: { eq: $id }) {
       html
       frontmatter {        
         title
