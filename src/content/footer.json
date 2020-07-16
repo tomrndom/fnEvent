@@ -1,12 +1,8 @@
 {
-  "logo": {
-    "display": true,
-    "src": ""
-  },
   "columns": [
     {
       "title": "The Event",
-      "display": true,
+      "display": false,
       "items": [
         {
           "title": "All Projects",
@@ -24,7 +20,7 @@
     },
     {
       "title": "The Vision",
-      "display": true,
+      "display": false,
       "items": [
         {
           "title": "About",
@@ -38,7 +34,7 @@
     },
     {
       "title": "Membership",
-      "display": true,
+      "display": false,
       "items": [
         {
           "title": "Corporate members",
@@ -57,6 +53,7 @@
   ],
   "social": {
     "title": "Follow Us",
+    "display": true,
     "networks": [
       {
         "icon": "fa-facebook",

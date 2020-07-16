@@ -4,6 +4,8 @@ import { Link } from 'gatsby'
 import UserNavbar from './UserNavbar';
 import styles from '../styles/navbar.module.scss';
 
+import LogoutButton from './LogoutButton';
+
 import Content from '../content/navbar.json'
 
 const Navbar = class extends React.Component {
@@ -74,11 +76,12 @@ const Navbar = class extends React.Component {
                     </a>
                   </div>
                 )
-              })}              
+              })}
+              <LogoutButton styles={styles} isLoggedUser={isLoggedUser} clearState={clearState} />
             </div>
           </div>
         </nav>
-        {isLoggedUser && <UserNavbar isLoggedUser={isLoggedUser} clearState={clearState} />}
+        {/* {isLoggedUser && <UserNavbar isLoggedUser={isLoggedUser} clearState={clearState} />} */}
       </React.Fragment>
     )
   }

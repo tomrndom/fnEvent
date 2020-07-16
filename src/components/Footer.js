@@ -20,16 +20,14 @@ const Footer = ({ summit }) => (
       <footer className="footer">
         <div className="columns">
           <div className="column is-one-fifth">
-            {footerContent.logo.display &&
-              <img alt="logo" src={summit && summit.logo ?
-                summit.logo
+            <img alt="logo" src={summit && summit.logo ?
+              summit.logo
+              :
+              data.summit && data.summit.logo ?
+                data.summit.logo
                 :
-                data.summit && data.summit.logo ?
-                  data.summit.logo
-                  :
-                  null
-              } style={{maxHeight: '4rem'}}/>
-            }
+                null
+            } style={{ maxHeight: '4rem' }} />
           </div>
         </div>
         <div className={`${styles.footerColummns} columns`}>
@@ -37,6 +35,7 @@ const Footer = ({ summit }) => (
             <div className="columns">
               {footerContent.columns.map((col, index) => {
                 return (
+                  col.display &&
                   <div className={`column is-3 ${index > 0 ? 'is-offset-1' : ''}`} key={index}>
                     <h4>
                       {col.title}
@@ -52,17 +51,19 @@ const Footer = ({ summit }) => (
             </div>
           </div>
 
-          <div className="column is-one-quarter">
-            <h4>{footerContent.social.title}</h4>
-            <div className={styles.socialContainer}>
-              {footerContent.social.networks.map((net, index) => (
-                net.display &&
-                <a href={net.link} key={index}>
-                  <i className={`fa icon is-large ${net.icon}`}></i>
-                </a>
-              ))}
+          {footerContent.social.display &&
+            <div className="column is-one-quarter">
+              <h4>{footerContent.social.title}</h4>
+              <div className={styles.socialContainer}>
+                {footerContent.social.networks.map((net, index) => (
+                  net.display &&
+                  <a href={net.link} key={index}>
+                    <i className={`fa icon is-large ${net.icon}`}></i>
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          }
         </div>
       </footer>
     )}

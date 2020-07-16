@@ -1,6 +1,11 @@
 {
   "items": [
     {
+      "title": "Lobby",
+      "link": "/",
+      "display": true
+    },
+    {
       "title": "About the event",
       "link": "/about-event",
       "display": true

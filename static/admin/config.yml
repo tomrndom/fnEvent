@@ -79,10 +79,6 @@ collections:
         label: "Footer"
         name: "footer"
         fields:
-          - {label: "Logo", name: "logo", widget: object, fields: [
-              {label: "Display", name: "display", widget: boolean},
-              {label: "Image", name: "src", widget: image}
-            ]}
           - {label: "Columns", name: "columns", widget: list, fields: [
               {label: "Title", name: "title", widget: string},
               {label: "Display", name: "display", widget: boolean, required: false},
@@ -93,6 +89,7 @@ collections:
             ]}
           - {label: "Social", name: "social", widget: object, fields: [
               {label: "Title", name: "title", widget: string},
+              {label: "Display", name: "display", widget: boolean, required: false},
               {label: "Networks", name: "networks", widget: list, fields: [
                 {label: "Icon", name: "icon", widget: string},
                 {label: "Link", name: "link", widget: string},
