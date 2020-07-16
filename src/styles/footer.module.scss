@@ -27,3 +27,29 @@
     width: 60%;
   }
 }
+
+.legals-bar {
+  color: #ffffff;
+  background-color: #494a4c;
+  padding: 1rem 2rem;
+  display: flex;
+
+  .link {
+    color: #ffffff;
+  }
+
+  a:hover.link,
+  a:visited.link {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .legal-item {
+    text-transform: uppercase;
+    margin-right: 3rem;
+  }
+
+  .copyright {
+    margin-left: auto;
+  }
+}

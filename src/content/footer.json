@@ -76,5 +76,19 @@
         "display": true
       }
     ]
-  }
+  },
+  "legal": [
+    {
+      "title": "Privacy Policy",
+      "link": "#"
+    },
+    {
+      "title": "Legals",
+      "link": "#"
+    },
+    {
+      "title": "Disclaimer",
+      "link": "#"
+    }
+  ]
 }
