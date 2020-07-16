@@ -8,7 +8,7 @@
     margin-bottom: 2rem;
   }
 
-  a {
+  .link {
     color: #ffffff;
 
     :hover,
@@ -25,5 +25,32 @@
     display: flex;
     justify-content: space-around;
     width: 60%;
+  }
+}
+
+.legals-bar {
+  color: #ffffff;
+  background-color: #494a4c;
+  padding: 1rem 2rem;
+  display: flex;
+
+  .link {
+    color: #ffffff;
+  }
+
+  a:hover.link,
+  a:visited.link {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .legal-item {
+    text-transform: uppercase;
+    margin-right: 3rem;
+    font-size: 13px;
+  }
+
+  .copyright {
+    margin-left: auto;
   }
 }

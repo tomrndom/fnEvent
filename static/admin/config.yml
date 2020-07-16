@@ -1,6 +1,6 @@
 backend:
   name: github
-  branch: master
+  branch: navbar-footer-cms
   repo: fntechgit/virtualevent-poc
   commit_messages:
     create: 'Create {{collection}} “{{slug}}”'
@@ -51,8 +51,8 @@ collections:
                   {label: "Image", name: "image", widget: image }
                 ]},
                 {label: "Button", name: button, widget: object, fields: [
-                  {label: "Text", name: "text", widget: string, required: false },
-                  {label: "Link", name: "link", widget: string, required: false }
+                  {label: "Text", name: "text", widget: string, required: false},
+                  {label: "Link", name: "link", widget: string, required: false}
                 ]}
               ]},
               {label: "Silver Tier", name: "silver", widget: object, fields: [
@@ -61,8 +61,47 @@ collections:
                   {label: "Image", name: "image", widget: image }
                 ]},
                 {label: "Button", name: button, widget: object, fields: [
-                  {label: "Text", name: "text", widget: string, required: false },
-                  {label: "Link", name: "link", widget: string, required: false }
+                  {label: "Text", name: "text", widget: string, required: false},
+                  {label: "Link", name: "link", widget: string, required: false}
                 ]}
               ]},
-            ]}            
+            ]}
+      - file: "src/content/navbar.json"
+        label: "Navbar"
+        name: "navbar"
+        fields:
+          - {label: "Navbar", name: "items", widget: list, fields: [
+              {label: "Title", name: "title", widget: string},
+              {label: "Link", name: "link", widget: string},
+              {label: "Display", name: "display", widget: boolean, required: false},
+            ]}
+      - file: "src/content/footer.json"
+        label: "Footer"
+        name: "footer"
+        fields:
+          - {label: "Columns", name: "columns", widget: list, fields: [
+              {label: "Title", name: "title", widget: string},
+              {label: "Display", name: "display", widget: boolean, required: false},
+              {label: "Items", name: "items", widget: list, fields: [
+                {label: "Title", name: "title", widget: string},
+                {label: "Link", name: "link", widget: string},         
+              ]}
+            ]}
+          - {label: "Social", name: "social", widget: object, fields: [
+              {label: "Title", name: "title", widget: string},
+              {label: "Display", name: "display", widget: boolean, required: false},
+              {label: "Networks", name: "networks", widget: list, fields: [
+                {label: "Icon", name: "icon", widget: string},
+                {label: "Link", name: "link", widget: string},
+                {label: "Display", name: "display", widget: boolean, required: false},
+              ]}
+            ]}
+  - name: "pages"
+    label: "Pages"
+    folder: "src/pages/custom-pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "custom-page"}
+      - {label: Title, name: title, widget: string}
+      - {label: "Body", name: body, widget: markdown}

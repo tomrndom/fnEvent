@@ -4,6 +4,10 @@ import { Link } from 'gatsby'
 import UserNavbar from './UserNavbar';
 import styles from '../styles/navbar.module.scss';
 
+import LogoutButton from './LogoutButton';
+
+import Content from '../content/navbar.json'
+
 const Navbar = class extends React.Component {
   constructor(props) {
     super(props)
@@ -63,25 +67,21 @@ const Navbar = class extends React.Component {
             </Link> */}
             </div>
             <div className={styles.navbarEnd}>
-              <div className={styles.navbarItem}>
-                <span>About the event</span>
-              </div>
-              <div className={styles.navbarItem}>
-                <span>Who we are</span>
-              </div>
-              <div className={styles.navbarItem}>
-                <span>Past events</span>
-              </div>
-              <div className={styles.navbarItem}>
-                <span>Contact</span>
-              </div>
-              <div className={styles.navbarItem}>
-                <span>Help</span>
-              </div>
+              {Content.items.map((item, index) => {
+                return (
+                  item.display &&
+                  <div className={styles.navbarItem} key={index}>
+                    <Link to={item.link} className={styles.link}>
+                      <span>{item.title}</span>
+                    </Link>
+                  </div>
+                )
+              })}
+              <LogoutButton styles={styles} isLoggedUser={isLoggedUser} clearState={clearState} />
             </div>
           </div>
         </nav>
-        <UserNavbar isLoggedUser={isLoggedUser} clearState={clearState} />
+        {/* {isLoggedUser && <UserNavbar isLoggedUser={isLoggedUser} clearState={clearState} />} */}
       </React.Fragment>
     )
   }
