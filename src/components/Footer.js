@@ -73,7 +73,7 @@ const Footer = ({ summit }) => (
                             {col.title}
                           </h4>
                           {col.items.map((item, index) => (
-                            <a href={item.link} key={index}>
+                            <a href={item.link} className={styles.link} key={index}>
                               <h5>{item.title}</h5>
                             </a>
                           ))}
@@ -89,7 +89,7 @@ const Footer = ({ summit }) => (
                     <div className={styles.socialContainer}>
                       {footerContent.social.networks.map((net, index) => (
                         net.display &&
-                        <a href={net.link} key={index}>
+                        <a href={net.link} className={styles.link} key={index}>
                           <i className={`fa icon is-large ${net.icon}`}></i>
                         </a>
                       ))}
