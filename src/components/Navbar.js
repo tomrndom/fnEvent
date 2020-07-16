@@ -71,9 +71,9 @@ const Navbar = class extends React.Component {
                 return (
                   item.display &&
                   <div className={styles.navbarItem} key={index}>
-                    <a href={item.link} className={styles.link}>
+                    <Link to={item.link} className={styles.link}>
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </div>
                 )
               })}
