@@ -66,7 +66,7 @@ export default class
       return (
 
         <div className={styles.buttons}>          
-          <a className={`${styles.userIcon}`} onClick={() => { this.props.clearState(); }}>
+          <a className={`${styles.userIcon}`} title="Clear state" onClick={() => { this.props.clearState(); }}>
             <i className="fa fa-trash icon is-medium" style={{fontSize: '1.5rem'}} />
           </a>
           {/* <a className={`${styles.userIcon}`}>
@@ -78,7 +78,7 @@ export default class
           <a className={`${styles.userIcon}`}>
             <i className="fa fa-bell icon is-medium" style={{fontSize: '1.5rem'}} />
           </a>           */}
-          <a className={`${styles.userIcon}`} onClick={() => { this.initLogOut(); }}>
+          <a className={`${styles.userIcon}`} title="Logout" onClick={() => { this.initLogOut(); }}>
             <i className="fa fa-sign-out icon is-medium" style={{fontSize: '1.5rem'}} />
           </a>
         </div>
