@@ -73,9 +73,9 @@ const Footer = ({ summit }) => (
                             {col.title}
                           </h4>
                           {col.items.map((item, index) => (
-                            <a href={item.link} className={styles.link} key={index}>
+                            <Link to={item.link} className={styles.link} key={index}>
                               <h5>{item.title}</h5>
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       )
