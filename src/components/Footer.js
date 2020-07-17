@@ -111,7 +111,7 @@ const Footer = ({ summit }) => (
             )
           })}
           <span className={styles.copyright}>
-            All Rights Reserver &copy; 2020
+            All Rights Reserved &copy; 2020
           </span>
         </div>
       </React.Fragment>
