@@ -10068,10 +10068,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-live-event-widget@^1.0.20:
-  version "1.0.20"
-  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-1.0.20.tgz#06f43ffe49d33b955228cda16d5d928f658796ae"
-  integrity sha512-IYBBP9qMxwVigCqvSccnH3cDeXOeJKGdF00jy3zfNLAGx9fsX81PR0NqI2oz4Bs+qeGO2OlWHBP3RAYsAcM9sA==
+live-event-widget@^1.0.22:
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-1.0.22.tgz#3c45f8fb9f11298895480c2e1fa4917a59666e9c"
+  integrity sha512-kEYZ3ST2lZljRg3KcttLSWp99sFXetlQGYza8rJGzpmeJYK257Tjq0wVQp7jP7NUqzxpHzfMeK0A9RXg8Wcb7w==
 
 load-bmfont@^1.3.1, load-bmfont@^1.4.0:
   version "1.4.0"
@@ -15504,10 +15504,10 @@ spdy@^4.0.2:
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
 
-speakers-widget@^1.0.7:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/speakers-widget/-/speakers-widget-1.0.8.tgz#8db6750068c87122abc385332022dbd1924c4091"
-  integrity sha512-7o1+TTNzfMmqxLtC2+OAc76qeuv4rWTK46aCzwP05GcMzNZs1hBkx76jTh9ulLhfwurb2Vks+zUm3C0IE8kauQ==
+speakers-widget@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/speakers-widget/-/speakers-widget-1.0.9.tgz#fe8f52b7de95dc9c4fd16d71f86ee7f032492b2b"
+  integrity sha512-kTHgbosm5sU/j2tF6LBxfBuGXz7SBxkCh83Tb70zDiOqbUfEmV9DGoRU35bFNGe/HVIps3eHCoLXLEd3HoP5NA==
 
 split-on-first@^1.0.0:
   version "1.1.0"
