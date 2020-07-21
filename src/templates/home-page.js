@@ -56,7 +56,12 @@ export const HomePageTemplate = class extends React.Component {
             </div>            
             <div className="column is-half">
             <LiveEventWidgetComponent />
-              <DisqusComponent disqusSSO={user.disqusSSO} summit={summit} title="Conversations" style={{ position: 'static' }} />
+              <DisqusComponent 
+                disqusSSO={user.disqusSSO} 
+                summit={summit} 
+                title="Conversations" 
+                style={{ position: 'static', maxHeight: '1000px', overflowY: 'scroll'}} 
+              />
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
                 eventClick={(ev) => this.onEventChange(ev)}
