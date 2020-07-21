@@ -7,3 +7,11 @@ global.dom = new JSDOM(`...`)
 global.window = dom.window
 global.document = dom.window.document
 global.navigator = global.window.navigator
+
+global.window.matchMedia = function() {
+	return {
+    matches: false,
+    addListener: function() {},
+    removeListener: function() {}
+  }
+}
