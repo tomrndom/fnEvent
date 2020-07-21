@@ -8,7 +8,7 @@
     {
       "title": "About the event",
       "link": "/about-event",
-      "display": false
+      "display": true
     },
     {
       "title": "Who we are",
