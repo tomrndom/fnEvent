@@ -71,7 +71,7 @@
     "redux-persist": "^5.9.1",
     "redux-thunk": "^2.3.0",
     "schedule-lite": "^1.0.24",
-    "speakers-widget": "^1.0.6",
+    "speakers-widget": "^1.0.7",
     "superagent": "^5.3.1",
     "sweetalert2": "^8.19.0",
     "theme-ui": "^0.3.1",
