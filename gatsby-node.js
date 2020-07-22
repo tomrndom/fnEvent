@@ -217,16 +217,8 @@ exports.onCreateWebpackConfig = ({ actions, plugins, loaders }) => {
     plugins: [
       plugins.define({
         'global.GENTLY': false,
-        'global.Blob': false
+        'global.BLOB': false
       })
-    ],
-    module: {
-      rules: [
-        {
-          test: /stream-chat-react/,
-          use: loaders.null(),
-        },
-      ],
-    },
+    ]
   })
 }
