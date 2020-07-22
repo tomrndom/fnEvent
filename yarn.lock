@@ -10068,10 +10068,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-live-event-widget@^1.0.22:
-  version "1.0.22"
-  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-1.0.22.tgz#3c45f8fb9f11298895480c2e1fa4917a59666e9c"
-  integrity sha512-kEYZ3ST2lZljRg3KcttLSWp99sFXetlQGYza8rJGzpmeJYK257Tjq0wVQp7jP7NUqzxpHzfMeK0A9RXg8Wcb7w==
+live-event-widget@^1.0.23:
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-1.0.23.tgz#58103470417f615412dd20e5b3450127bbf14c64"
+  integrity sha512-VjafAs9VgmhHFtHRqeIRt4MIL5jwefSRY2n03ZG6zihPvkFdO/HsADZIYHpb5VNul95lbDFDn+W5FOTimlSvFQ==
 
 load-bmfont@^1.3.1, load-bmfont@^1.4.0:
   version "1.4.0"
@@ -14775,10 +14775,10 @@ saxes@^5.0.0:
   dependencies:
     xmlchars "^2.2.0"
 
-schedule-lite@^1.0.24:
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.24.tgz#550d9edd83026bb2cd313af408bc8ef03cd610a5"
-  integrity sha512-ga0aDDrbE/7LBexAWiALUW2jRo7URyit33goxAAlg8zyuvVhoClDFx3IMubXPHNmXitsSAzzBEep0N8Xepf/Bg==
+schedule-lite@^1.0.25:
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.25.tgz#3bcc89c01f0c8dff40f6f3e924952cfebf7b8471"
+  integrity sha512-DKPwQSQeMEyZx6Z8audM0KdWmqunvk7DIbAQCF3/WrkflypFfahyaoEytekGPxSuR9VjUaqz7Sio+un5P+ElhQ==
 
 scheduler@^0.18.0:
   version "0.18.0"

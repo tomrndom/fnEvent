@@ -55,7 +55,7 @@ export const HomePageTemplate = class extends React.Component {
               <SponsorComponent tier='silver'/>
             </div>            
             <div className="column is-half">
-            <LiveEventWidgetComponent />
+              <LiveEventWidgetComponent />
               <DisqusComponent disqusSSO={user.disqusSSO} summit={summit} title="Conversations" style={{ position: 'static' }} />
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
