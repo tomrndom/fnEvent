@@ -217,6 +217,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     plugins: [
       plugins.define({
         'global.GENTLY': false,
+        'global.Blob': null
       })
     ]
   })
