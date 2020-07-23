@@ -3,7 +3,7 @@ export const wrapRootElement = ReduxWrapper
 
 import { JSDOM } from 'jsdom'
 import { Blob } from 'blob-polyfill';
-import { xmlhttprequest } from 'xmlhttprequest';
+import { XMLHttpRequest } from 'xmlhttprequest';
 
 global.dom = new JSDOM(`...`)
 global.window = dom.window
@@ -19,4 +19,4 @@ global.window.matchMedia = function() {
 }
 
 global.Blob = Blob
-global.XMLHttpRequest = xmlhttprequest.XMLHttpRequest;
+global.XMLHttpRequest = XMLHttpRequest;
