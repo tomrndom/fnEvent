@@ -2,6 +2,8 @@ import ReduxWrapper from "./src/state/ReduxWrapper"
 export const wrapRootElement = ReduxWrapper
 
 import { JSDOM } from 'jsdom'
+import { Blob } from 'blob-polyfill';
+import { XMLHttpRequest } from 'node-http-xhr';
 
 global.dom = new JSDOM(`...`)
 global.window = dom.window
@@ -15,3 +17,6 @@ global.window.matchMedia = function() {
     removeListener: function() {}
   }
 }
+
+global.Blob = Blob
+global.XMLHttpRequest = XMLHttpRequest;
