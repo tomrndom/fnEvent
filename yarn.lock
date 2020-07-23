@@ -10068,10 +10068,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-live-event-widget@^1.0.26:
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-1.0.26.tgz#037884311a041ea6153573d670ed8b2796c98b64"
-  integrity sha512-RlTLM8ebsN09TS/m1OrDolkutxHagFc4XcWxVUoZwZ9EnZP+ynuAl/nLNlHOa7s278yKqGNT4/ggqcqiEWkGlQ==
+live-event-widget@^1.0.27:
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-1.0.27.tgz#606053853dbcd6c2d9df0beacf79e7aae441a67a"
+  integrity sha512-KpZxX+bobYab+NP0G4bVDVctssL9S1q2kSwDJAiocoMnruzU9m0uiAUSM9dTIMsn4ZgDbeq75giOuMup94RiTQ==
 
 load-bmfont@^1.3.1, load-bmfont@^1.4.0:
   version "1.4.0"
