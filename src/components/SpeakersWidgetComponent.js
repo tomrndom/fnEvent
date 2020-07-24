@@ -24,7 +24,6 @@ const SpeakersWidgetComponent = class extends React.Component {
       accessToken: accessToken,
       title,
       bigPics,
-      speakerCount: 3,
       title: title,
       date: parseInt(now, 10),
       // speakerIds: [1, 187, 190],
