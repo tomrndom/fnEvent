@@ -103,7 +103,7 @@ const Footer = ({ summit }) => (
         <div className={styles.legalsBar}>
           {footerContent.legal.map((item, index) => {
             return (
-              <Link to={item.link} className={styles.link}>
+              <Link to={item.link} className={styles.link} key={index}>
                 <span className={styles.legalItem}>
                   {item.title}
                 </span>
