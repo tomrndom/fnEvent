@@ -15504,10 +15504,10 @@ spdy@^4.0.2:
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
 
-speakers-widget@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/speakers-widget/-/speakers-widget-1.0.9.tgz#fe8f52b7de95dc9c4fd16d71f86ee7f032492b2b"
-  integrity sha512-kTHgbosm5sU/j2tF6LBxfBuGXz7SBxkCh83Tb70zDiOqbUfEmV9DGoRU35bFNGe/HVIps3eHCoLXLEd3HoP5NA==
+speakers-widget@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/speakers-widget/-/speakers-widget-1.0.10.tgz#85016e7237353cd81f1b5a926284f1ef19dbf211"
+  integrity sha512-87+7fVGm4UnDNxANlE/pKxHZfGO1O47GsAapkuAtTpxq7apYE8oYjDs3dVisNqzTom+TrcvrL4iLiZpp4VjVLg==
 
 split-on-first@^1.0.0:
   version "1.1.0"

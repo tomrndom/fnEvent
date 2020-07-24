@@ -35,8 +35,8 @@ const SponsorComponent = ({ tier }) => {
             <span><b>Silver Sponsors</b></span>
             {sponsors.map((sponsor, index) => {
               return (
-                <div className={styles.imageBox}>
-                  <img src={sponsor.image} alt={sponsor.name} key={index} />
+                <div className={styles.imageBox} key={index}>
+                  <img src={sponsor.image} alt={sponsor.name} />
                 </div>
               )
             })}
