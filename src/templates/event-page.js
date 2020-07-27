@@ -28,17 +28,26 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    const { loggedUser, eventId } = this.props;
+    const { loggedUser, eventId, location } = this.props;
     if (!loggedUser.isLoggedUser) {
-      navigate('/a/login');
+      let currentLocation = location.pathname;
+      navigate('/a/login', {
+        state: {
+          backUrl: currentLocation,
+        },
+      });
+      return null
     } else {
-      this.props.getEventBySlug(eventId ? eventId : '99');
+      this.props.getEventBySlug(eventId);
     }
   }
 
   componentDidMount() {
-    this.props.getDisqusSSO();
-    this.props.getRocketChatSSO();
+    const { loggedUser } = this.props;
+    if (loggedUser.isLoggedUser) {
+      this.props.getDisqusSSO();
+      this.props.getRocketChatSSO();
+    }
   }
 
   componentDidUpdate() {
@@ -61,91 +70,94 @@ export const EventPageTemplate = class extends React.Component {
   render() {
 
     const { loggedUser, event, summit, user } = this.props;
-    if (event) {
-      return (
-        <>
-          {event.id &&
-            <AttendanceTracker
-              key={event.id}
-              eventId={event.id}
-              summitId={summit.id}
-              apiBaseUrl={process.env.GATSBY_SUMMIT_API_BASE_URL}
-              accessToken={loggedUser.accessToken}
-            />
-          }
-          <section className="section px-0 py-0">
-            <div className="columns is-gapless">
-              {event.streaming_url ?
-                <div className="column is-three-quarters px-0 py-0">
-                  <VideoComponent url={event.streaming_url} />
-                </div>
-                :
-                <div className="column is-three-quarters px-0 py-0 is-hidden-mobile">
-                  <TalkComponent event={event} summit={summit} noStream={true} />
-                </div>
-              }
-              <div className="column is-hidden-tablet">
-                <TalkComponent event={event} summit={summit} noStream={true} />
-              </div>
-              <div className="column" style={{ position: 'relative' }}>
-                <DisqusComponent disqusSSO={user.disqusSSO} event={event} summit={summit} title="Join the conversation"/>
-              </div>
-            </div>
-          </section>
-          {event.streaming_url &&
+
+    if (loggedUser) {
+      if (event) {
+        return (
+          <>
+            {event.id &&
+              <AttendanceTracker
+                key={event.id}
+                eventId={event.id}
+                summitId={summit.id}
+                apiBaseUrl={process.env.GATSBY_SUMMIT_API_BASE_URL}
+                accessToken={loggedUser.accessToken}
+              />
+            }
             <section className="section px-0 py-0">
-              <div className="columns mx-0 my-0">
-                <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
+              <div className="columns is-gapless">
+                {event.streaming_url ?
+                  <div className="column is-three-quarters px-0 py-0">
+                    <VideoComponent url={event.streaming_url} />
+                  </div>
+                  :
+                  <div className="column is-three-quarters px-0 py-0 is-hidden-mobile">
+                    <TalkComponent event={event} summit={summit} noStream={true} />
+                  </div>
+                }
+                <div className="column is-hidden-tablet">
                   <TalkComponent event={event} summit={summit} noStream={true} />
+                </div>
+                <div className="column" style={{ position: 'relative' }}>
+                  <DisqusComponent disqusSSO={user.disqusSSO} event={event} summit={summit} title="Join the conversation" />
                 </div>
               </div>
             </section>
-          }
-          {event.etherpad_link &&
+            {event.streaming_url &&
+              <section className="section px-0 py-0">
+                <div className="columns mx-0 my-0">
+                  <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
+                    <TalkComponent event={event} summit={summit} noStream={true} />
+                  </div>
+                </div>
+              </section>
+            }
+            {event.etherpad_link &&
+              <section className="section px-4 py-6">
+                <div className="columns">
+                  <div className="column is-three-quarters">
+                    <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link + `&userName=${user.userProfile.first_name}`} />
+                  </div>
+                  <div className="column is-one-quarter">
+                  </div>
+                </div>
+              </section>
+            }
             <section className="section px-4 py-6">
               <div className="columns">
-                <div className="column is-three-quarters">
-                  <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link+`&userName=${user.userProfile.first_name}`} />
+                <div className="column is-one-quarter pb-6">
+                  <AdvertiseComponent section='event' column="left" />
                 </div>
-                <div className="column is-one-quarter">
+                <div className="column is-two-quarters pb-6">
+                  {/* <div className="rocket-container"> */}
+                  <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} eventClick={(ev) => this.onEventChange(ev)} />
+                  {/* <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} /> */}
+                  {/* </div> */}
                 </div>
+                <DocumentsComponent materials={this.getMaterials(event)} />
               </div>
-            </section>
-          }
+            </section >
+          </>
+        )
+      } else {
+        return (
           <section className="section px-4 py-6">
             <div className="columns">
-              <div className="column is-one-quarter pb-6">
-                <AdvertiseComponent section='event' column="left" />
-              </div>
-              <div className="column is-two-quarters pb-6">
+              <div className="column is-three-quarters pb-6">
                 {/* <div className="rocket-container"> */}
+                <span>Event not found</span>
+                <br />
                 <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} eventClick={(ev) => this.onEventChange(ev)} />
-                {/* <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} /> */}
+                {/*   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
                 {/* </div> */}
               </div>
-              <DocumentsComponent materials={this.getMaterials(event)} />
+              <div className="column is-one-quarter has-text-centered pb-6">
+                <AdvertiseComponent section='event' id={event.id} />
+              </div>
             </div>
           </section >
-        </>
-      )
-    } else {
-      return (
-        <section className="section px-4 py-6">
-          <div className="columns">
-            <div className="column is-three-quarters pb-6">
-              {/* <div className="rocket-container"> */}
-              <span>Event not found</span>
-              <br />
-              <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} eventClick={(ev) => this.onEventChange(ev)} />
-              {/*   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
-              {/* </div> */}
-            </div>
-            <div className="column is-one-quarter has-text-centered pb-6">
-              <AdvertiseComponent section='event' id={event.id} />
-            </div>
-          </div>
-        </section >
-      )
+        )
+      }
     }
   }
 }
