@@ -11,27 +11,26 @@
  * limitations under the License.
  **/
 
-import history from '../history.js'
 import React from 'react'
-import { Redirect } from '@reach/router'
+import { Redirect, navigate } from '@reach/router'
 import { connect } from 'react-redux';
 import { AbstractAuthorizationCallbackRoute } from "openstack-uicore-foundation/lib/components";
-import { getUserInfo } from "openstack-uicore-foundation/lib/methods";
+import { getUserProfile } from '../actions/user-actions'
 
-import { customErrorHandler } from '../utils/customErrorHandler';
+import envVariables from '../utils/envVariables'
 
 class AuthorizationCallbackRoute extends AbstractAuthorizationCallbackRoute {
 
     constructor(props){
-        if (typeof window !== 'undefined') {
-            super(process.env.GATSBY_IDP_BASE_URL, process.env.GATSBY_OAUTH2_CLIENT_ID, props);
-        } else {
-            super(window.IDP_BASE_URL, window.OAUTH2_CLIENT_ID, props);
-        }
+        super(envVariables.IDP_BASE_URL, envVariables.OAUTH2_CLIENT_ID, props);
     }
 
     _callback(backUrl) {
-        this.props.getUserInfo(backUrl, history, customErrorHandler);
+        this.props.getUserProfile();
+        console.log('backing url ... .... ... ', backUrl);
+        setTimeout(() => {
+          navigate(backUrl);
+        }, 1000);
     }
 
     _redirect2Error(error){
@@ -50,5 +49,5 @@ const mapStateToProps = ({ loggedUserState }) => ({
 })
 
 export default connect(mapStateToProps,{
-  getUserInfo
+  getUserProfile
 })(AuthorizationCallbackRoute)

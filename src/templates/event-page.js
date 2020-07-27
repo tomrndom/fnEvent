@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
-import { createBrowserHistory } from 'history'
 
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
@@ -40,6 +39,15 @@ export const EventPageTemplate = class extends React.Component {
   componentDidMount() {
     this.props.getDisqusSSO();
     this.props.getRocketChatSSO();
+
+    setTimeout(() => {
+      let currentLocation = window.location.pathname;
+      navigate('/auth/expired', {
+        state: {
+          backUrl: currentLocation,
+        },
+      });
+    }, 5000);
   }
 
   componentDidUpdate() {
@@ -47,8 +55,7 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   onEventChange(ev) {
-    const history = createBrowserHistory()
-    history.push(`/a/event/${ev}`);
+    navigate(`/a/event/${ev}`);
     this.props.getEventBySlug(ev);
   }
 
