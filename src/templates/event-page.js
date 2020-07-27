@@ -39,15 +39,6 @@ export const EventPageTemplate = class extends React.Component {
   componentDidMount() {
     this.props.getDisqusSSO();
     this.props.getRocketChatSSO();
-
-    setTimeout(() => {
-      let currentLocation = window.location.pathname;
-      navigate('/auth/expired', {
-        state: {
-          backUrl: currentLocation,
-        },
-      });
-    }, 5000);
   }
 
   componentDidUpdate() {
