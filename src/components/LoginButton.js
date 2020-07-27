@@ -5,15 +5,16 @@ import { doLogin } from "openstack-uicore-foundation/lib/methods";
 const LoginButton = class extends React.Component {
 
   getBackURL() {
+    let { location } = this.props;
     let defaultLocation = '/a/';
-    let previousURL = this.props.location.state?.backUrl ? this.props.location.state.backUrl : null;      
-    let backUrl = previousURL ? previousURL : defaultLocation;    
+    let previousURL = location.state?.backUrl ? location.state.backUrl : null;
+    let backUrl = previousURL ? previousURL : defaultLocation;
     return backUrl;
   }
 
   onClickLogin() {
-      this.getBackURL();
-      doLogin(this.getBackURL());
+    this.getBackURL();
+    doLogin(this.getBackURL());
   }
 
   render() {
