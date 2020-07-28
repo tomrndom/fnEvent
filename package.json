@@ -9,6 +9,7 @@
     "@types/react": "^16.9.42",
     "awesome-bootstrap-checkbox": "^1.0.1",
     "axios": "^0.19.2",
+    "blob-polyfill": "^4.0.20200601",
     "bulma": "^0.9.0",
     "canvas": "^2.6.1",
     "codemirror": "^5.55.0",
@@ -72,8 +73,10 @@
     "redux-persist": "^5.9.1",
     "redux-thunk": "^2.3.0",
     "schedule-lite": "^1.0.27",
+    "simple-chat-widget": "^1.0.4",
     "slick-carousel": "^1.8.1",
     "speakers-widget": "^1.0.12",
+    "stream-chat-react": "^2.0.3",
     "superagent": "^5.3.1",
     "sweetalert2": "^8.19.0",
     "theme-ui": "^0.3.1",
@@ -81,7 +84,8 @@
     "uuid": "^7.0.0",
     "validator": "^9.4.1",
     "video.js": "^7.8.2",
-    "videojs-youtube": "^2.6.1"
+    "videojs-youtube": "^2.6.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "keywords": [
     "gatsby"

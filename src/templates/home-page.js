@@ -12,6 +12,7 @@ import DisqusComponent from '../components/DisqusComponent'
 import LiveEventWidgetComponent from '../components/LiveEventWidgetComponent'
 import SpeakersWidgetComponent from '../components/SpeakersWidgetComponent'
 import SponsorComponent from '../components/SponsorComponent'
+import SimpleChatWidgetComponent from '../components/SimpleChatWidgetComponent'
 
 import { getSummitData } from '../actions/summit-actions'
 import { getDisqusSSO, getUserProfile } from '../actions/user-actions'
@@ -78,6 +79,7 @@ export const HomePageTemplate = class extends React.Component {
               <AdvertiseComponent section='lobby' column="center"/>
             </div>
             <div className="column is-one-quarter pb-6">
+              <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} />
               <h2><b>My Schedule</b></h2>
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
