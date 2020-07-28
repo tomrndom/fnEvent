@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from "gatsby"
 import { handleResetReducers } from '../actions/event-actions'
 import Navbar from './Navbar'
 
-const Header = ({ isLoggedUser, summit, handleResetReducers, location }) => (
+const Header = ({ isLoggedUser, summit, handleResetReducers }) => (
 
   <StaticQuery
     query={graphql`
@@ -16,7 +16,7 @@ const Header = ({ isLoggedUser, summit, handleResetReducers, location }) => (
       `}
     render={data => (
       <header>
-        <Navbar isLoggedUser={isLoggedUser} clearState={handleResetReducers} location={location}
+        <Navbar isLoggedUser={isLoggedUser} clearState={handleResetReducers}
           logo={
             summit && summit.logo ?
               summit.logo

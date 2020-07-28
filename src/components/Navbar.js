@@ -39,13 +39,13 @@ const Navbar = class extends React.Component {
 
   render() {
 
-    let { isLoggedUser, clearState, logo, location } = this.props;
+    let { isLoggedUser, clearState, logo } = this.props;
 
     return (
       <React.Fragment>
         <nav className={`${styles.navbar}`} role="navigation" aria-label="main navigation">
           <div className={styles.navbarBrand}>
-            <Link to={`/a/${location.hash ? location.hash : ''}`} className={styles.navbarItem}>
+            <Link to="/a/" className={styles.navbarItem}>
               {logo &&
                 <img src={logo} alt="Show Logo" />
               }

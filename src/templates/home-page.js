@@ -25,13 +25,9 @@ export const HomePageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    const { loggedUser, location } = this.props;
+    const { loggedUser } = this.props;
     if (!loggedUser.isLoggedUser) {
-      navigate('/a/login', {
-        state: {
-          hash: location.state?.hash ? location.state.hash : location.hash
-        }
-      });
+      navigate('/a/login');
     }
     this.props.getUserProfile();
     this.props.getSummitData();
@@ -42,12 +38,7 @@ export const HomePageTemplate = class extends React.Component {
   }
 
   onEventChange(ev) {
-    const { location } = this.props;
-    navigate(`/a/event/${ev}${location.hash ? location.hash : ''}`, {
-      state: {
-        hash: location.state?.hash ? location.state.hash : location.hash
-      }
-    });
+    navigate(`/a/event/${ev}`);
   }
 
   render() {
@@ -61,9 +52,9 @@ export const HomePageTemplate = class extends React.Component {
           <div className="columns">
             <div className="column is-one-quarter">
               <h2><b>Community</b></h2>
-              <AdvertiseComponent section='lobby' column="left" />
-              <SponsorComponent tier='silver' />
-            </div>
+              <AdvertiseComponent section='lobby' column="left"/>
+              <SponsorComponent tier='silver'/>
+            </div>            
             <div className="column is-half">
               <LiveEventWidgetComponent />
               <DisqusComponent disqusSSO={user.disqusSSO} summit={summit} title="Conversations" style={{ position: 'static' }} />
@@ -72,7 +63,7 @@ export const HomePageTemplate = class extends React.Component {
                 eventClick={(ev) => this.onEventChange(ev)}
                 landscape={false}
                 yourSchedule={false}
-                showNav={false}
+                showNav={false}                                          
               />
               <SpeakersWidgetComponent
                 accessToken={loggedUser.accessToken}
@@ -84,7 +75,7 @@ export const HomePageTemplate = class extends React.Component {
                 title="Featured Speakers"
                 bigPics={false}
               />
-              <AdvertiseComponent section='lobby' column="center" />
+              <AdvertiseComponent section='lobby' column="center"/>
             </div>
             <div className="column is-one-quarter pb-6">
               <h2><b>My Schedule</b></h2>
@@ -92,11 +83,11 @@ export const HomePageTemplate = class extends React.Component {
                 accessToken={loggedUser.accessToken}
                 eventClick={(ev) => this.onEventChange(ev)}
                 landscape={true}
-                yourSchedule={true}
+                yourSchedule={true}                
                 showNav={true}
               />
-              <AdvertiseComponent section='lobby' column="right" />
-              <SponsorComponent tier='gold' />
+              <AdvertiseComponent section='lobby' column="right"/>
+              <SponsorComponent tier='gold'/>
             </div>
           </div>
         </div>
@@ -118,7 +109,7 @@ HomePageTemplate.propTypes = {
 const HomePage = ({ loggedUser, user, location, summit, getSummitData, getDisqusSSO, getUserProfile }) => {
 
   return (
-    <Layout location={location}>
+    <Layout>
       <HomePageTemplate
         loggedUser={loggedUser}
         location={location}

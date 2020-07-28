@@ -11,8 +11,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, ...rest }) =
     let previousURL = location.state?.backUrl ? location.state.backUrl : null;
     navigate('/a/login', {
       state: {
-        backUrl: previousURL,
-        hash: location.state?.hash ? location.state.hash : location.hash 
+        backUrl: previousURL
       }
     })
     return null
