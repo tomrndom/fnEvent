@@ -12,36 +12,32 @@
  **/
 import URI from "urijs"
 import React from 'react'
+import { connect } from 'react-redux'
 import { navigate } from "gatsby"
+
+import { handleResetReducers } from '../actions/event-actions'
 
 class LogOutCallbackRoute extends React.Component {
 
-    // constructor(props){
-    //     super(props);
-    //     // control variable to avoid double api call
-    // }
-    // componentWillMount() {
+  render() {
 
-    // }
+    let { location, handleResetReducers } = this.props;
 
-    render() {
-        console.log('render logout route')
-        let storedState = window.localStorage.getItem('post_logout_state');
-        window.localStorage.removeItem('post_logout_state');
-        console.log(`retrieved state ${storedState}`);
-        let backUrl = window.localStorage.getItem('post_logout_back_uri');
-        window.localStorage.removeItem('post_logout_back_uri');
-        let { doLogout, location } = this.props;
-        let query = URI.parseQuery(location.search);
-        if(!query.hasOwnProperty("state"))
-            return (<p>Invalid Method</p>);
-        if(query["state"] !== storedState)
-            return (<p>Invalid State</p>);
-        doLogout();
-        backUrl ? navigate(backUrl) : navigate("/a/login");
-        return null;
+    let postLogoutState = window.localStorage.getItem('post_logout_state');
+
+    if (postLogoutState) {
+      window.localStorage.removeItem('post_logout_state');
+      let query = URI.parseQuery(location.search);
+      if (query.hasOwnProperty("state") && query["state"] === postLogoutState) {
+        handleResetReducers()
+      }
     }
+
+    // must get back url from state
+    let backUrl = null
+    navigate(backUrl ? backUrl : '/a/')
+    return null
+  }
 }
 
-export default LogOutCallbackRoute;
-
+export default connect(null, { handleResetReducers })(LogOutCallbackRoute)
