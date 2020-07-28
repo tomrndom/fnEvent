@@ -27,7 +27,7 @@ class AuthorizationCallbackRoute extends AbstractAuthorizationCallbackRoute {
   }
 
   _callback(backUrl) {
-    this.props.getUserProfile();    
+    this.props.getUserProfile();
     navigate(URI.decode(backUrl));
   }
 
