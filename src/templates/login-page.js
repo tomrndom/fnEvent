@@ -23,7 +23,7 @@ export const LoginPageTemplate = ({ loggedUserState, location }) => {
 
 const LoginPage = ({ loggedUserState, location }) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <LoginPageTemplate
         loggedUserState={loggedUserState}
         location={location}

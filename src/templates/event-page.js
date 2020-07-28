@@ -55,7 +55,12 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   onEventChange(ev) {
-    navigate(`/a/event/${ev}`);
+    const { location } = this.props;
+    navigate(`/a/event/${ev}${location.hash ? location.hash : ''}`, {
+      state: {
+        hash: location.state?.hash ? location.state.hash : location.hash
+      }
+    });
     this.props.getEventBySlug(ev);
   }
 
@@ -187,7 +192,7 @@ const EventPage = (
 ) => {
 
   return (
-    <Layout>
+    <Layout location={location}>
       <EventPageTemplate
         loggedUser={loggedUser}
         event={event}
