@@ -1,4 +1,5 @@
 import React from 'react'
+import URI from "urijs"
 
 import { doLogin } from "openstack-uicore-foundation/lib/methods";
 
@@ -7,13 +8,11 @@ const LoginButton = class extends React.Component {
   getBackURL() {
     let { location } = this.props;
     let defaultLocation = '/a/';
-    let previousURL = location.state?.backUrl ? location.state.backUrl : null;
-    let backUrl = previousURL ? previousURL : defaultLocation;
-    return backUrl;
+    let backUrl = location.state?.backUrl ? location.state.backUrl : defaultLocation;    
+    return URI.encode(backUrl);
   }
 
-  onClickLogin() {
-    this.getBackURL();
+  onClickLogin() {    
     doLogin(this.getBackURL());
   }
 

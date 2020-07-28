@@ -12,6 +12,7 @@
  **/
 
 import React from 'react'
+import URI from "urijs"
 import { Redirect, navigate } from '@reach/router'
 import { connect } from 'react-redux';
 import { AbstractAuthorizationCallbackRoute } from "openstack-uicore-foundation/lib/components";
@@ -21,33 +22,30 @@ import envVariables from '../utils/envVariables'
 
 class AuthorizationCallbackRoute extends AbstractAuthorizationCallbackRoute {
 
-    constructor(props){
-        super(envVariables.IDP_BASE_URL, envVariables.OAUTH2_CLIENT_ID, props);
-    }
+  constructor(props) {
+    super(envVariables.IDP_BASE_URL, envVariables.OAUTH2_CLIENT_ID, props);
+  }
 
-    _callback(backUrl) {
-        this.props.getUserProfile();
-        console.log('backing url ... .... ... ', backUrl);
-        setTimeout(() => {
-          navigate(backUrl);
-        }, 1000);
-    }
+  _callback(backUrl) {
+    this.props.getUserProfile();    
+    navigate(URI.decode(backUrl));
+  }
 
-    _redirect2Error(error){
-        return (
-            <div render={ props => {
-                return <Redirect to={`/error?error=${error}`} />
-            }} />
-        )
-    }
+  _redirect2Error(error) {
+    return (
+      <div render={props => {
+        return <Redirect to={`/error?error=${error}`} />
+      }} />
+    )
+  }
 }
 
 const mapStateToProps = ({ loggedUserState }) => ({
   accessToken: loggedUserState.accessToken,
-  idToken:  loggedUserState.idToken,
+  idToken: loggedUserState.idToken,
   sessionState: loggedUserState.sessionState,
 })
 
-export default connect(mapStateToProps,{
+export default connect(mapStateToProps, {
   getUserProfile
 })(AuthorizationCallbackRoute)

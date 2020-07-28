@@ -25,10 +25,6 @@ export const HomePageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    const { loggedUser } = this.props;
-    if (!loggedUser.isLoggedUser) {
-      navigate('/a/login');
-    }
     this.props.getUserProfile();
     this.props.getSummitData();
   }

@@ -28,18 +28,8 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    const { loggedUser, eventId, location } = this.props;
-    if (!loggedUser.isLoggedUser) {
-      let currentLocation = location.pathname;
-      navigate('/a/login', {
-        state: {
-          backUrl: currentLocation,
-        },
-      });
-      return null
-    } else {
-      this.props.getEventBySlug(eventId);
-    }
+    const { eventId } = this.props;
+    this.props.getEventBySlug(eventId);
   }
 
   componentDidMount() {
@@ -54,7 +44,7 @@ export const EventPageTemplate = class extends React.Component {
 
   }
 
-  onEventChange(ev) {
+  onEventChange(ev) {    
     navigate(`/a/event/${ev}`);
     this.props.getEventBySlug(ev);
   }
@@ -187,7 +177,7 @@ const EventPage = (
 ) => {
 
   return (
-    <Layout>
+    <Layout location={location}>
       <EventPageTemplate
         loggedUser={loggedUser}
         event={event}

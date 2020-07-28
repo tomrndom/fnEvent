@@ -3,21 +3,11 @@ import { connect } from 'react-redux'
 
 const IndexPage = ({ location, isLoggedUser }) => {
   
-  let currentLocation = location.pathname;
-
   if (!isLoggedUser) {
-    navigate('/a/login', {
-      state: {
-        backUrl: currentLocation,
-      },
-    });
+    navigate('/a/login');
     return null
   } else {
-    navigate('/a/', {
-      state: {
-        backUrl: currentLocation,
-      },
-    });
+    navigate('/a/');
     return null
   }
 }
