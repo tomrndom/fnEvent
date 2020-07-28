@@ -8,11 +8,9 @@ import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
 const PrivateRoute = ({ component: Component, isLoggedIn, location, ...rest }) => {
 
   if (!isLoggedIn && location.pathname !== `/a/login`) {
-    let currentUrl = location.pathname;
-    let hash = location.hash;
     navigate('/a/login', {
       state: {
-        backUrl: `${currentUrl}${hash}`
+        backUrl: `${location.href}`
       }
     })
     return null

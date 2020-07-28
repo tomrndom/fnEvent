@@ -17,18 +17,13 @@ export const customErrorHandler = (err, res) => (dispatch, state) => {
     //     dispatch(showMessage( error_message, initLogOut ));
     //     break;
     case 401:
-      let currentLocation = window.location.pathname;
-      let clearing_session_state = window.clearing_session_state || false;
-      // dispatch(createAction(LOGOUT_USER)({}));
-      if (!clearing_session_state) {
-        window.clearing_session_state = true;
-        console.log('authErrorHandler 401 - re login');
-        navigate('/auth/expired', {
-          state: {
-            backUrl: currentLocation,
-          },
-        });
-      }
+      let currentLocation = window.location.href;
+      console.log('authErrorHandler 401 - re login');
+      navigate('/auth/expired', {
+        state: {
+          backUrl: currentLocation,
+        },
+      });
       break;
     // case 404:
     //     msg = "";
