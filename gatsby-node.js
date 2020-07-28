@@ -11,9 +11,12 @@ const myEnv = require("dotenv").config({
 
 exports.onPreBootstrap = async () => {
 
+  let marketingData;
+
   const colours = await axios.get(
     `${process.env.GATSBY_MARKETING_API_BASE_URL}/api/public/v1/config-values/all/shows/${process.env.GATSBY_SUMMIT_ID}`
   ).then((response) => {
+    marketingData = response.data.data;
     let colorObject = { colors: {} }
     response.data.data.map((color) => {
       if (color.key.startsWith('color_')) colorObject.colors[color.key] = color.value;
@@ -25,6 +28,18 @@ exports.onPreBootstrap = async () => {
     if (err) throw err;
     console.log('Saved!');
   });
+
+  let heroBanner = JSON.parse(fs.readFileSync('src/content/hero-banner.json'));
+
+  marketingData.map((item) => {    
+    if (item.key.startsWith('hero_')) heroBanner[item.key] = item.value;
+  });
+
+  fs.writeFileSync('src/content/hero-banner.json', JSON.stringify(heroBanner), 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+  
 }
 
 // makes Summit logo optional for graphql queries

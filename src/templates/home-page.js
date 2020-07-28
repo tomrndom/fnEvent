@@ -15,7 +15,7 @@ import SponsorComponent from '../components/SponsorComponent'
 import SimpleChatWidgetComponent from '../components/SimpleChatWidgetComponent'
 
 import { getSummitData } from '../actions/summit-actions'
-import { getDisqusSSO } from '../actions/user-actions'
+import { getDisqusSSO, getUserProfile } from '../actions/user-actions'
 
 export const HomePageTemplate = class extends React.Component {
 
@@ -30,6 +30,7 @@ export const HomePageTemplate = class extends React.Component {
     if (!loggedUser.isLoggedUser) {
       navigate('/a/login');
     }
+    this.props.getUserProfile();
     this.props.getSummitData();
   }
 
@@ -107,7 +108,7 @@ HomePageTemplate.propTypes = {
   getDisqusSSO: PropTypes.func,
 }
 
-const HomePage = ({ loggedUser, user, location, summit, getSummitData, getDisqusSSO }) => {
+const HomePage = ({ loggedUser, user, location, summit, getSummitData, getDisqusSSO, getUserProfile }) => {
 
   return (
     <Layout>
@@ -117,6 +118,7 @@ const HomePage = ({ loggedUser, user, location, summit, getSummitData, getDisqus
         user={user}
         summit={summit}
         getSummitData={getSummitData}
+        getUserProfile={getUserProfile}
         getDisqusSSO={getDisqusSSO}
       />
     </Layout>
@@ -139,6 +141,7 @@ const mapStateToProps = ({ loggedUserState, userState, summitState }) => ({
 export default connect(mapStateToProps,
   {
     getSummitData,
-    getDisqusSSO
+    getDisqusSSO,
+    getUserProfile
   }
 )(HomePage);

@@ -31,7 +31,7 @@ const AdvertiseComponent = ({ section, column, id }) => {
               null
             :
             column === 'center' ?
-              <div className={`${styles.sponsorContainerCenter}`}>
+              <div className={`${styles.sponsorContainerCenter}`} key={index}>
                 <div className={styles.containerText}>
                   <span className={styles.adText} style={ad.image ? { textAlign: 'left' } : null}>
                     <b>Upload your picture and participate with the #yocovirtualsummit</b>
