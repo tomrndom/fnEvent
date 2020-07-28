@@ -20,7 +20,6 @@ export const HomePageTemplate = class extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.onEventChange = this.onEventChange.bind(this);
   }
 
@@ -93,43 +92,53 @@ export const HomePageTemplate = class extends React.Component {
   }
 }
 
-HomePageTemplate.propTypes = {
-  loggedUser: PropTypes.object,
-  summit: PropTypes.object,
-  user: PropTypes.object,
-  eventId: PropTypes.string,
-  getSummitData: PropTypes.func,
-  getDisqusSSO: PropTypes.func,
-}
-
-const HomePage = ({ loggedUser, user, location, summit, getSummitData, getDisqusSSO, getUserProfile }) => {
+const HomePage = (
+  {
+    loggedUser,
+    summit,
+    user,
+    getSummitData,
+    getUserProfile,
+    getDisqusSSO
+  }
+) => {
 
   return (
     <Layout>
       <HomePageTemplate
         loggedUser={loggedUser}
-        location={location}
-        user={user}
         summit={summit}
+        user={user}
         getSummitData={getSummitData}
         getUserProfile={getUserProfile}
         getDisqusSSO={getDisqusSSO}
       />
     </Layout>
   )
-
 }
 
 HomePage.propTypes = {
   summit: PropTypes.object,
   loggedUser: PropTypes.object,
-  location: PropTypes.object,
+  user: PropTypes.object,
+  getSummitData: PropTypes.func,
+  getUserProfile: PropTypes.func,
+  getDisqusSSO: PropTypes.func,
+}
+
+HomePageTemplate.propTypes = {
+  loggedUser: PropTypes.object,
+  summit: PropTypes.object,
+  user: PropTypes.object,
+  getSummitData: PropTypes.func,
+  getUserProfile: PropTypes.func,
+  getDisqusSSO: PropTypes.func,
 }
 
 const mapStateToProps = ({ loggedUserState, userState, summitState }) => ({
   loggedUser: loggedUserState,
-  user: userState,
   summit: summitState.summit,
+  user: userState,
 })
 
 export default connect(mapStateToProps,
