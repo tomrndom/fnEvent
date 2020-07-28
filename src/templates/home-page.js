@@ -24,7 +24,6 @@ export const HomePageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getUserProfile();
     this.props.getSummitData();
   }
 

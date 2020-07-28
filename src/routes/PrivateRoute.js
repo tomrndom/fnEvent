@@ -5,7 +5,9 @@ import envVariables from '../utils/envVariables';
 
 import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
 
-const PrivateRoute = ({ component: Component, isLoggedIn, location, ...rest }) => {
+const PrivateRoute = ({ component: Component, isLoggedIn, location, user, ...rest }) => {
+
+  const ticketPurchased = user.summit_tickets.includes(envVariables.SUMMIT_ID);  
 
   if (!isLoggedIn && location.pathname !== `/a/login`) {
     navigate('/a/login', {
@@ -14,6 +16,12 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, ...rest }) =
       }
     })
     return null
+  } else if (!ticketPurchased) {
+    // navigate('/a/login', {
+    //   state: {
+    //     backUrl: `${location.href}`
+    //   }
+    // })    
   }
 
   const clientId = envVariables.OAUTH2_CLIENT_ID;
