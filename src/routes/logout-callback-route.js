@@ -15,29 +15,34 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { navigate } from "gatsby"
 
-import { handleResetReducers } from '../actions/event-actions'
+import { doLogout, initLogOut } from 'openstack-uicore-foundation/lib/methods'
+//import { handleResetReducers } from '../actions/event-actions'
 
 class LogOutCallbackRoute extends React.Component {
 
   render() {
 
-    let { location, handleResetReducers } = this.props;
+    let { location } = this.props;
 
     let postLogoutState = window.localStorage.getItem('post_logout_state');
-
     if (postLogoutState) {
       window.localStorage.removeItem('post_logout_state');
       let query = URI.parseQuery(location.search);
       if (query.hasOwnProperty("state") && query["state"] === postLogoutState) {
-        handleResetReducers()
+        doLogout()
       }
+    } else {
+      let backUrl = location.state?.backUrl ? location.state.backUrl : '/a/';
+      window.localStorage.setItem('post_logout_redirect_path', backUrl);
+      initLogOut()
+      return null
     }
 
-    // must get back url from state
-    let backUrl = null
+    let backUrl = window.localStorage.getItem('post_logout_redirect_path');
+    window.localStorage.removeItem('post_logout_redirect_path');
     navigate(backUrl ? backUrl : '/a/')
     return null
   }
 }
 
-export default connect(null, { handleResetReducers })(LogOutCallbackRoute)
+export default LogOutCallbackRoute

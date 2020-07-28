@@ -9,9 +9,6 @@ import EventPage from "../templates/event-page"
 import PrivateRoute from "../routes/PrivateRoute"
 
 const App = ({ isLoggedUser, user }) => {
-
-  console.log(user)
-
   return (
     <Location>
       {({ location }) => (

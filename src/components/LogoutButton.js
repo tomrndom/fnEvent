@@ -1,9 +1,16 @@
 import React from 'react'
-
-import { initLogOut } from 'openstack-uicore-foundation/lib/methods'
+import { navigate } from "gatsby"
 
 export default class
   LogoutButton extends React.Component {
+
+  onClickLogout() {
+    navigate('/auth/logout', {
+      state: {
+        backUrl: window.location.pathname
+      }
+    })
+  }
 
   render() {
     let { isLoggedUser, styles } = this.props;
@@ -21,7 +28,7 @@ export default class
           <a className={`${styles.userIcon}`}>
             <i className="fa fa-bell icon is-medium" style={{fontSize: '1.5rem'}} />
           </a>           */}
-          <a className={`${styles.userIcon}`} title="Logout" onClick={() => { initLogOut(); }}>
+          <a className={`${styles.userIcon}`} title="Logout" onClick={() => this.onClickLogout()}>
             <i className="fa fa-sign-out icon is-medium" style={{fontSize: '1.5rem'}} />
           </a>
         </div>
