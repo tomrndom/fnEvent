@@ -7,5 +7,5 @@
   YARN_FLAGS = "--no-ignore-optional"
 [[redirects]]
   from = "/etherpad/*"
-  to = "https://fnpad.dev.fnopen.com/p/:pad"
+  to = "https://fnpad.dev.fnopen.com/p/:splat"
   status = 200
