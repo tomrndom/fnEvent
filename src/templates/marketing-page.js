@@ -6,6 +6,8 @@ import LobbyHeroMarketing from '../components/LobbyHeroMarketing'
 import ScheduleLiteComponent from "../components/ScheduleLiteComponent";
 import Content, { HTMLContent } from '../components/Content'
 
+import MarketingSite from '../content/marketing-site.json'
+
 export const MarketingPageTemplate = ({
   title,
   content,
@@ -23,38 +25,13 @@ export const MarketingPageTemplate = ({
         </div>
         <div className="column is-half px-0">
 
-          <div className="marketing-images">
-            <div className="marketing-img" style={{ backgroundColor: 'green' }}>
-              1
-            </div>
-            <div className="marketing-img-double" style={{ backgroundColor: 'pink' }}>
-              1</div>
-            <div className="marketing-img" style={{ backgroundColor: 'red' }}>
-              1</div>
-            <div className="marketing-img" style={{ backgroundColor: 'brown' }}>
-              1</div>
-            <div className="marketing-img" style={{ backgroundColor: 'white' }}>
-              1</div>
-            <div className="marketing-img-double" style={{ backgroundColor: 'black' }}>
-              1</div>
+          <div className="grid">
+            {MarketingSite.sponsors.map((item, index) => {
+              return (
+                <div className={`grid-item-${index+1}`} style={{ backgroundImage: `url(${item.image})` }} />
+              )
+            })}
           </div>
-
-
-          {/* <div className="grid">
-            <div className="grid-item-1" style={{ backgroundColor: 'green' }}>
-              1
-            </div>
-            <div className="grid-item-2" style={{ backgroundColor: 'pink' }}>
-              1</div>
-            <div className="grid-item-3" style={{ backgroundColor: 'red' }}>
-              1</div>
-            <div className="grid-item-4" style={{ backgroundColor: 'brown' }}>
-              1</div>
-            <div className="grid-item-5" style={{ backgroundColor: 'white' }}>
-              1</div>
-            <div className="grid-item-6" style={{ backgroundColor: 'black' }}>
-              1</div>
-          </div> */}
         </div>
       </div>
       <PageContent content={content} />
