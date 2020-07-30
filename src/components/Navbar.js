@@ -39,7 +39,7 @@ const Navbar = class extends React.Component {
 
   render() {
 
-    let { isLoggedUser, clearState, logo } = this.props;
+    let { isLoggedUser, logo } = this.props;
 
     return (
       <React.Fragment>
@@ -77,11 +77,11 @@ const Navbar = class extends React.Component {
                   </div>
                 )
               })}
-              <LogoutButton styles={styles} isLoggedUser={isLoggedUser} clearState={clearState} />
+              <LogoutButton styles={styles} isLoggedUser={isLoggedUser} />
             </div>
           </div>
         </nav>
-        {/* {isLoggedUser && <UserNavbar isLoggedUser={isLoggedUser} clearState={clearState} />} */}
+        {/* {isLoggedUser && <UserNavbar isLoggedUser={isLoggedUser} />} */}
       </React.Fragment>
     )
   }
