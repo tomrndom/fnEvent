@@ -100,7 +100,7 @@ export const EventPageTemplate = class extends React.Component {
             <section className="section px-4 py-6">
               <div className="columns">
                 <div className="column is-three-quarters">
-                  <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link + `&userName=${user.userProfile.first_name}`} />
+                  <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} userName={user.userProfile.first_name} />
                 </div>
                 <div className="column is-one-quarter">
                 </div>
