@@ -1,5 +1,5 @@
 /**
- * Copyright 2019
+ * Copyright 2020
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,39 +10,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import URI from "urijs"
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 import { navigate } from "gatsby"
+import URI from "urijs"
 
 import { doLogout, initLogOut } from 'openstack-uicore-foundation/lib/methods'
-//import { handleResetReducers } from '../actions/event-actions'
 
-class LogOutCallbackRoute extends React.Component {
+export class LogOutCallbackRoute extends React.Component {
 
-  render() {
-
+  componentDidMount() {
     let { location } = this.props;
 
-    let postLogoutState = window.localStorage.getItem('post_logout_state');
+    let postLogoutState = window.localStorage.getItem('post_logout_state')
     if (postLogoutState) {
       window.localStorage.removeItem('post_logout_state');
       let query = URI.parseQuery(location.search);
       if (query.hasOwnProperty("state") && query["state"] === postLogoutState) {
-        doLogout()
+        this.props.doLogout();
       }
+      let backUrl = window.localStorage.getItem('post_logout_redirect_path');
+      window.localStorage.removeItem('post_logout_redirect_path');
+      navigate(backUrl ? backUrl : '/');
     } else {
-      let backUrl = location.state?.backUrl ? location.state.backUrl : '/a/';
+      let backUrl = location.state?.backUrl ? location.state.backUrl : '/';
       window.localStorage.setItem('post_logout_redirect_path', backUrl);
-      initLogOut()
-      return null
+      initLogOut();
     }
+  }
 
-    let backUrl = window.localStorage.getItem('post_logout_redirect_path');
-    window.localStorage.removeItem('post_logout_redirect_path');
-    navigate(backUrl ? backUrl : '/a/')
-    return null
+  render() {
+    return null;
   }
 }
 
-export default LogOutCallbackRoute
+export default connect(
+  null,
+  {
+    doLogout
+  }
+)(LogOutCallbackRoute)
