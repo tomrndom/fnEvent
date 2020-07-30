@@ -81,7 +81,7 @@
   }
 
   .social-networks {
-    margin-right: auto;    
+    margin-right: auto;
   }
 
   .legal-items {
@@ -92,5 +92,22 @@
     text-transform: uppercase;
     margin-right: 3rem;
     font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-marketing {
+    display: flex;
+    flex-direction: column;
+    .social-networks {
+      margin-bottom: 1rem;
+      margin-right: 0;
+    }
+    .legal-items {
+      margin-left: -5px;      
+    }
+    .legal-item {
+      margin-right: 1rem;
+    }
   }
 }

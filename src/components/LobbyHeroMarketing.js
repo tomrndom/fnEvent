@@ -43,7 +43,7 @@ const LobbyHeroMarketing = () => (
           </div>
         </div>
       </div>
-      <div className={`${styles.rightColumn} column is-6 px-0`}>
+      <div className={`${styles.rightColumn} column is-6 px-0`} id="marketing-slider">
         <Slider {...sliderSettings}>
           <div style={{height: '350px'}}>
             <div className={styles.imageSlider} style={{backgroundImage: `url(${MarketingSite.heroBanner.image})`}}>

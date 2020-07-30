@@ -5,6 +5,10 @@
     "subTitle": "Live from San Jose, CA",
     "image": "/img/flavor_wheel.jpg"
   },
+  "leftColumn": {
+    "schedule": true,
+    "disqus": true
+  },
   "sponsors": [
     {      
       "image": "/img/marketing/ad_landing_hp.jpg",

@@ -76,7 +76,7 @@ h2 {
   }
 }
 
-.lobby-hero-module--right-column--AAyuU {
+#marketing-slider {
   .slick-track {
     height: 350px;
   }
@@ -266,6 +266,24 @@ h2 {
 @media (max-width: 768px) {
   div.login-form {
     width: auto;
+  }
+
+  #marketing-columns {
+    margin-bottom: 4rem;
+  }
+
+  #marketing-slider {
+    .slick-track {
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 978px) {
+  #marketing-slider {
+    .slick-track {
+      height: 520px;
+    }
   }
 }
 
