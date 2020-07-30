@@ -54,3 +54,43 @@
     margin-left: auto;
   }
 }
+
+.footer-marketing {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #ffffff;
+  background-color: #494a4c;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+
+  .link {
+    color: #ffffff;
+  }
+
+  a i {
+    font-size: 2rem;
+    padding-top: 5px;
+  }
+
+  a:hover.link,
+  a:visited.link {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .social-networks {
+    margin-right: auto;    
+  }
+
+  .legal-items {
+    margin-left: auto;
+  }
+
+  .legal-item {
+    text-transform: uppercase;
+    margin-right: 3rem;
+    font-size: 13px;
+  }
+}

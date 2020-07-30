@@ -12,7 +12,7 @@ const ScheduleComponent = class extends React.Component {
 
   render() {
 
-    const { accessToken, landscape, yourSchedule, showNav } = this.props;
+    const { accessToken, landscape, yourSchedule, showNav, eventCount } = this.props;
 
     const scheduleProps = {
       apiBaseUrl: envVariables.SUMMIT_API_BASE_URL,
@@ -26,6 +26,7 @@ const ScheduleComponent = class extends React.Component {
       landscape,
       yourSchedule,
       showNav,
+      eventCount,
       updateCallback: ev => console.log('event updated', ev),
       onEventClick: ev => this.props.eventClick(ev),
       onAuthError: (err, res) => expiredToken(err)
