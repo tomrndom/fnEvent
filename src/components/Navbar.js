@@ -45,7 +45,7 @@ const Navbar = class extends React.Component {
       <React.Fragment>
         <nav className={`${styles.navbar}`} role="navigation" aria-label="main navigation">
           <div className={styles.navbarBrand}>
-            <Link to="/a/" className={styles.navbarItem}>
+            <Link to={isLoggedUser ? '/a/' : '/'} className={styles.navbarItem}>
               {logo &&
                 <img src={logo} alt="Show Logo" />
               }
