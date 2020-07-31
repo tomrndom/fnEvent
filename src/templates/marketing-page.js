@@ -11,65 +11,77 @@ import envVariables from '../utils/envVariables';
 
 import MarketingSite from '../content/marketing-site.json'
 
-export const MarketingPageTemplate = ({
-  title,
-  content,
-  contentComponent,
-  user
-}) => {
-  const PageContent = contentComponent || Content
+import { getSummitData } from '../actions/summit-actions'
+import { getDisqusSSO } from '../actions/user-actions'
 
-  return (
-    <React.Fragment>
-      <LobbyHeroMarketing />
-      <div className="columns" id="marketing-columns">
-        <div className="column is-half px-6 py-6">
-          {MarketingSite.leftColumn.schedule &&
-            <React.Fragment>
-              <h2 style={{ fontWeight: 'bold' }}>Full Event Schedule</h2>
-              <ScheduleLiteComponent accessToken={false} landscape={true} eventCount={10} eventClick={(ev) => this.onEventChange(ev)} />
-            </React.Fragment>
-          }
-          {MarketingSite.leftColumn.disqus &&
-            <React.Fragment>
-              <h2 style={{ fontWeight: 'bold' }}>Join the conversation</h2>
-              <DisqusComponent disqusSSO={user?.disqusSSO} summit={envVariables.SUMMIT_ID} title="" style={{ position: 'static' }}/>
-            </React.Fragment>
-          }
-        </div>
-        <div className="column is-half px-0">
+export const MarketingPageTemplate = class extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-          <div className="grid">
-            {MarketingSite.sponsors.map((item, index) => {
-              return (
-                <div className={`grid-item-${index + 1}`} style={{ backgroundImage: `url(${item.image})` }} />
-              )
-            })}
+  componentWillMount() {
+    this.props.getSummitData();
+  }
+
+  render() {
+    let { content, contentComponent, user, summit } = this.props;
+
+    const PageContent = contentComponent || Content
+
+    return (
+      <React.Fragment>
+        <LobbyHeroMarketing summit={summit} />
+        <div className="columns" id="marketing-columns">
+          <div className="column is-half px-6 py-6">
+            {MarketingSite.leftColumn.schedule &&
+              <React.Fragment>
+                <h2 style={{ fontWeight: 'bold' }}>Full Event Schedule</h2>
+                <ScheduleLiteComponent accessToken={false} landscape={true} eventCount={10} eventClick={(ev) => this.onEventChange(ev)} />
+              </React.Fragment>
+            }
+            {MarketingSite.leftColumn.disqus &&
+              <React.Fragment>
+                <h2 style={{ fontWeight: 'bold' }}>Join the conversation</h2>
+                <DisqusComponent disqusSSO={user?.disqusSSO} summit={envVariables.SUMMIT_ID} style={{ position: 'static' }} />
+              </React.Fragment>
+            }
+          </div>
+          <div className="column is-half px-0">
+
+            <div className="grid">
+              {MarketingSite.sponsors.map((item, index) => {
+                return (
+                  <div className={`grid-item-${index + 1}`} style={{ backgroundImage: `url(${item.image})` }} key={index}/>
+                )
+              })}
+            </div>
           </div>
         </div>
-      </div>
-      <PageContent content={content} />
-    </React.Fragment>
-  )
+        <PageContent content={content} />
+      </React.Fragment>
+    )
+  }
 }
 
 MarketingPageTemplate.propTypes = {
-  title: PropTypes.string,
   content: PropTypes.string,
   contentComponent: PropTypes.func,
   user: PropTypes.object,
+  summit: PropTypes.object,
 }
 
-const MarketingPage = ({ data, user }) => {
+const MarketingPage = ({ data, user, summit, getSummitData, getDisqusSSO }) => {
   const { frontmatter, html } = data.markdownRemark
 
   return (
     <Layout marketing={true}>
       <MarketingPageTemplate
         contentComponent={HTMLContent}
-        title={frontmatter.title}
         content={html}
         user={user}
+        summit={summit}
+        getSummitData={getSummitData}
+        getDisqusSSO={getDisqusSSO}
       />
     </Layout>
   )
@@ -81,14 +93,20 @@ MarketingPage.propTypes = {
       frontmatter: PropTypes.object,
     }),
   }),
-  user: PropTypes.object
+  user: PropTypes.object,
+  getSummitData: PropTypes.func,
+  getDisqusSSO: PropTypes.func,
 }
 
-const mapStateToProps = ({ userState }) => ({  
+const mapStateToProps = ({ userState, summitState }) => ({
   user: userState,
+  summit: summitState.summit,
 })
 
-export default connect(mapStateToProps, {})(MarketingPage)
+export default connect(mapStateToProps, {
+  getSummitData,
+  getDisqusSSO
+})(MarketingPage)
 
 export const marketingPageQuery = graphql`
   query MarketingPageTemplate($id: String!) {    
