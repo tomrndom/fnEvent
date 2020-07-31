@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql, navigate } from 'gatsby'
+import { graphql } from 'gatsby'
+import { Redirect } from '@reach/router'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import LobbyHeroMarketing from '../components/LobbyHeroMarketing'
@@ -20,52 +21,52 @@ export const MarketingPageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    let { isLoggedUser } = this.props;
-    if (isLoggedUser) {
-      navigate('/a/')
-      return null
-    }
     this.props.getSummitData();
   }
 
   render() {
-    let { content, contentComponent, user, summit } = this.props;
+    let { content, contentComponent, user, summit, isLoggedUser } = this.props;
 
     const PageContent = contentComponent || Content
 
-    return (
-      <React.Fragment>
-        <LobbyHeroMarketing summit={summit} />
-        <div className="columns" id="marketing-columns">
-          <div className="column is-half px-6 py-6">
-            {MarketingSite.leftColumn.schedule &&
-              <React.Fragment>
-                <h2 style={{ fontWeight: 'bold' }}>Full Event Schedule</h2>
-                <ScheduleLiteComponent accessToken={false} landscape={true} eventCount={10} />
-              </React.Fragment>
-            }
-            {MarketingSite.leftColumn.disqus &&
-              <React.Fragment>
-                <h2 style={{ fontWeight: 'bold' }}>Join the conversation</h2>
-                <DisqusComponent disqusSSO={user?.disqusSSO} summit={envVariables.SUMMIT_ID} style={{ position: 'static' }} />
-              </React.Fragment>
-            }
-          </div>
-          <div className="column is-half px-0">
+    if (isLoggedUser) {
+      return <Redirect noThrow to="/a/" />
+    } else {
+      return (
+        <React.Fragment>
+          <LobbyHeroMarketing summit={summit} />
+          <div className="columns" id="marketing-columns">
+            <div className="column is-half px-6 py-6">
+              {MarketingSite.leftColumn.schedule &&
+                <React.Fragment>
+                  <h2 style={{ fontWeight: 'bold' }}>Full Event Schedule</h2>
+                  <ScheduleLiteComponent accessToken={false} landscape={true} eventCount={10} />
+                </React.Fragment>
+              }
+              {MarketingSite.leftColumn.disqus &&
+                <React.Fragment>
+                  <h2 style={{ fontWeight: 'bold' }}>Join the conversation</h2>
+                  <DisqusComponent disqusSSO={user?.disqusSSO} summit={envVariables.SUMMIT_ID} style={{ position: 'static' }} />
+                </React.Fragment>
+              }
+            </div>
+            <div className="column is-half px-0">
 
-            <div className="grid">
-              {MarketingSite.sponsors.map((item, index) => {
-                return (
-                  <div className={`grid-item-${index + 1}`} style={{ backgroundImage: `url(${item.image})` }} key={index} />
-                )
-              })}
+              <div className="grid">
+                {MarketingSite.sponsors.map((item, index) => {
+                  return (
+                    <div className={`grid-item-${index + 1}`} style={{ backgroundImage: `url(${item.image})` }} key={index} />
+                  )
+                })}
+              </div>
             </div>
           </div>
-        </div>
-        <PageContent content={content} />
-      </React.Fragment>
-    )
+          <PageContent content={content} />
+        </React.Fragment>
+      )
+    }
   }
+
 }
 
 MarketingPageTemplate.propTypes = {
