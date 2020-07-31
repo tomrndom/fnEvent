@@ -68,14 +68,18 @@ const Navbar = class extends React.Component {
             </div>
             <div className={styles.navbarEnd}>
               {Content.items.map((item, index) => {
-                return (
-                  item.display &&
-                  <div className={styles.navbarItem} key={index}>
-                    <Link to={item.link} className={styles.link}>
-                      <span>{item.title}</span>
-                    </Link>
-                  </div>
-                )
+                if (!isLoggedUser && item.link.startsWith('/a/')) {
+                  return null
+                } else {
+                  return (
+                    item.display &&
+                    <div className={styles.navbarItem} key={index}>
+                      <Link to={item.link} className={styles.link}>
+                        <span>{item.title}</span>
+                      </Link>
+                    </div>
+                  )
+                }
               })}
               <LogoutButton styles={styles} isLoggedUser={isLoggedUser} />
             </div>

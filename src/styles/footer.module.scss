@@ -74,6 +74,18 @@
     padding-top: 5px;
   }
 
+  i {
+    text-align: center;
+  }
+
+  a>i {
+    margin-right: 1rem;
+  }
+
+  a:last-child>i {
+    margin-right: 0;
+  }
+
   a:hover.link,
   a:visited.link {
     color: #ffffff;
@@ -81,11 +93,11 @@
   }
 
   .social-networks {
-    margin-right: auto;
+    margin-left: auto;
   }
 
   .legal-items {
-    margin-left: auto;
+    margin-right: auto;
   }
 
   .legal-item {
@@ -98,14 +110,18 @@
 @media (max-width: 768px) {
   .footer-marketing {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+
     .social-networks {
       margin-bottom: 1rem;
+      margin-left: 0;
+    }
+
+    .legal-items {
+      margin-left: 0;
       margin-right: 0;
     }
-    .legal-items {
-      margin-left: -5px;      
-    }
+
     .legal-item {
       margin-right: 1rem;
     }

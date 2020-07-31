@@ -12,23 +12,15 @@ const ScheduleComponent = class extends React.Component {
 
   render() {
 
-    const { accessToken, landscape, yourSchedule, showNav, eventCount } = this.props;
-
     const scheduleProps = {
       apiBaseUrl: envVariables.SUMMIT_API_BASE_URL,
       marketingApiBaseUrl: envVariables.MARKETING_API_BASE_URL,
-      accessToken: accessToken,
       eventBaseUrl: "/a/event",
       trackBaseUrl: "/a/tracks",
       speakerBaseUrl: "/a/speakers",
       roomBaseUrl: "/a/rooms",
       summitId: parseInt(envVariables.SUMMIT_ID),
-      landscape,
-      yourSchedule,
-      showNav,
-      eventCount,
       updateCallback: ev => console.log('event updated', ev),
-      onEventClick: ev => this.props.eventClick(ev),
       onAuthError: (err, res) => expiredToken(err)
     };
 
@@ -38,7 +30,7 @@ const ScheduleComponent = class extends React.Component {
           <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css" />
         </Helmet>
         <div>
-          <ScheduleLite {...scheduleProps} />
+          <ScheduleLite {...scheduleProps} {...this.props} />
         </div>
       </React.Fragment>
     )

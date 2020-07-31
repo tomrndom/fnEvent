@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import LobbyHeroMarketing from '../components/LobbyHeroMarketing'
@@ -20,6 +20,11 @@ export const MarketingPageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
+    let { isLoggedUser } = this.props;
+    if (isLoggedUser) {
+      navigate('/a/')
+      return null
+    }
     this.props.getSummitData();
   }
 
@@ -36,7 +41,7 @@ export const MarketingPageTemplate = class extends React.Component {
             {MarketingSite.leftColumn.schedule &&
               <React.Fragment>
                 <h2 style={{ fontWeight: 'bold' }}>Full Event Schedule</h2>
-                <ScheduleLiteComponent accessToken={false} landscape={true} eventCount={10} eventClick={(ev) => this.onEventChange(ev)} />
+                <ScheduleLiteComponent accessToken={false} landscape={true} eventCount={10} />
               </React.Fragment>
             }
             {MarketingSite.leftColumn.disqus &&
@@ -51,7 +56,7 @@ export const MarketingPageTemplate = class extends React.Component {
             <div className="grid">
               {MarketingSite.sponsors.map((item, index) => {
                 return (
-                  <div className={`grid-item-${index + 1}`} style={{ backgroundImage: `url(${item.image})` }} key={index}/>
+                  <div className={`grid-item-${index + 1}`} style={{ backgroundImage: `url(${item.image})` }} key={index} />
                 )
               })}
             </div>
@@ -68,9 +73,10 @@ MarketingPageTemplate.propTypes = {
   contentComponent: PropTypes.func,
   user: PropTypes.object,
   summit: PropTypes.object,
+  isLoggedUser: PropTypes.bool,
 }
 
-const MarketingPage = ({ data, user, summit, getSummitData, getDisqusSSO }) => {
+const MarketingPage = ({ data, user, summit, isLoggedUser, getSummitData, getDisqusSSO }) => {
   const { frontmatter, html } = data.markdownRemark
 
   return (
@@ -80,6 +86,7 @@ const MarketingPage = ({ data, user, summit, getSummitData, getDisqusSSO }) => {
         content={html}
         user={user}
         summit={summit}
+        isLoggedUser={isLoggedUser}
         getSummitData={getSummitData}
         getDisqusSSO={getDisqusSSO}
       />
@@ -94,11 +101,14 @@ MarketingPage.propTypes = {
     }),
   }),
   user: PropTypes.object,
+  summit: PropTypes.object,
+  isLoggedUser: PropTypes.bool,
   getSummitData: PropTypes.func,
   getDisqusSSO: PropTypes.func,
 }
 
-const mapStateToProps = ({ userState, summitState }) => ({
+const mapStateToProps = ({ userState, summitState, loggedUserState }) => ({
+  isLoggedUser: loggedUserState.isLoggedUser,
   user: userState,
   summit: summitState.summit,
 })
