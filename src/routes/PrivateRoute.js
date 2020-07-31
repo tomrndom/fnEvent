@@ -9,8 +9,8 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, user, ...res
 
   const ticketPurchased = user.summit_tickets?.includes(envVariables.SUMMIT_ID);
 
-  if (!isLoggedIn && location.pathname !== `/a/login`) {
-    navigate('/a/login', {
+  if (!isLoggedIn && location.pathname !== `/`) {
+    navigate('/', {
       state: {
         backUrl: `${location.href}`
       }
