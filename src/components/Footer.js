@@ -9,8 +9,6 @@ import styles from '../styles/footer.module.scss';
 
 const Footer = ({ summit, marketing }) => {
 
-  console.log('marketing', marketing);
-
   if (marketing) {
     return (
       <FooterMarketing />

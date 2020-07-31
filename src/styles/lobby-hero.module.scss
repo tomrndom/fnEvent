@@ -117,6 +117,10 @@ div.column:first-of-type {
           width: 100%;
           text-align: center;
         }
+        &:hover,
+        &:active {
+          border-color: #fff;
+        }
       }
 
       &:hover,

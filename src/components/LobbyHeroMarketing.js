@@ -30,7 +30,7 @@ const getBackURL = () => {
   return backUrl;
 }
 
-const onClickLogin = () => {  
+const onClickLogin = () => {
   doLogin(getBackURL());
 }
 
@@ -67,25 +67,14 @@ const LobbyHeroMarketing = ({ ...props }) => (
       </div>
       <div className={`${styles.rightColumn} column is-6 px-0`} id="marketing-slider">
         <Slider {...sliderSettings}>
-          <div style={{ height: '350px' }}>
-            <div className={styles.imageSlider} style={{ backgroundImage: `url(${MarketingSite.heroBanner.image})` }}>
-            </div>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
+          {MarketingSite.heroBanner.images.map((img, index) => {
+            return (
+              <div key={index}>
+                <div className={styles.imageSlider} style={{ backgroundImage: `url(${img.image})` }}>
+                </div>
+              </div>
+            )
+          })}          
         </Slider>
       </div>
     </div>
