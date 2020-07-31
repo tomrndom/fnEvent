@@ -119,7 +119,11 @@ div.column:first-of-type {
         }
         &:hover,
         &:active {
+          border-color: #fff;          
+        }
+        &:focus {
           border-color: #fff;
+          box-shadow: none; 
         }
       }
 
