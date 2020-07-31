@@ -7,7 +7,7 @@
   },
   "leftColumn": {
     "schedule": true,
-    "disqus": true
+    "disqus": false
   },
   "sponsors": [
     {      
