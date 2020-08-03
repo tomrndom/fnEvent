@@ -56,7 +56,7 @@ export const HomePageTemplate = class extends React.Component {
               <DisqusComponent disqusSSO={user.disqusSSO} summit={summit} title="Conversations" style={{ position: 'static' }} />
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
-                eventClick={(ev) => this.onEventChange(ev)}
+                onEventClick={(ev) => this.onEventChange(ev)}
                 landscape={false}
                 yourSchedule={false}
                 showNav={false}
@@ -80,7 +80,7 @@ export const HomePageTemplate = class extends React.Component {
               <h2><b>My Schedule</b></h2>
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
-                eventClick={(ev) => this.onEventChange(ev)}
+                onEventClick={(ev) => this.onEventChange(ev)}
                 landscape={true}
                 yourSchedule={true}                
                 showNav={true}
