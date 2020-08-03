@@ -153,7 +153,7 @@ div.column:first-of-type {
   .hero-marketing-columns {
 
     .left-column {
-      background-color: #ff5a32;
+      background-color: var(--color_secondary_contrast);
       z-index: 3;
       min-height: 100%;
     }
