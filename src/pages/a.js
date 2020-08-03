@@ -10,22 +10,24 @@ import SchedulePage from "../templates/schedule-page";
 import PrivateRoute from "../routes/PrivateRoute"
 import PublicRoute from "../routes/PublicRoute"
 
-const App = ({ isLoggedUser }) => (
-  <Location>
-    {({ location }) => (
-      <Router basepath="/a" >
-        <PrivateRoute path="/" component={HomePage} isLoggedIn={isLoggedUser} location={location} />
-        <PrivateRoute path="/event/:eventId" component={EventPage} isLoggedIn={isLoggedUser} location={location} />
-        <PublicRoute path="/schedule" component={SchedulePage} location={location} />
-        <LoginPage path="/login" location={location} />
-      </Router>
-    )}
-  </Location>
-)
+const App = ({ isLoggedUser, user }) => {
+  return (
+    <Location>
+      {({ location }) => (
+        <Router basepath="/a" >
+          <PrivateRoute path="/" component={HomePage} isLoggedIn={isLoggedUser} user={user} location={location} />
+          <PrivateRoute path="/event/:eventId" component={EventPage} isLoggedIn={isLoggedUser} user={user} location={location}
+          <PublicRoute path="/schedule" component={SchedulePage} location={location} /> />
+          <LoginPage path="/login" location={location} />
+        </Router>
+      )}
+    </Location>
+  )
+}
 
-const mapStateToProps = ({ loggedUserState }) => ({
+const mapStateToProps = ({ loggedUserState, userState }) => ({
   isLoggedUser: loggedUserState.isLoggedUser,
-  backUrl: loggedUserState.backUrl,
+  user: userState.userProfile
 })
 
 export default connect(mapStateToProps)(App)

@@ -4,9 +4,11 @@ import CMS from 'netlify-cms-app'
 
 import IndexPagePreview from './preview-templates/IndexPagePreview'
 import CustomPagePreview from './preview-templates/CustomPagePreview'
+import MarketingPagePreview from './preview-templates/MarketingPagePreview'
 
 // CMS.registerMediaLibrary(uploadcare)
 // CMS.registerMediaLibrary(cloudinary)
 
 CMS.registerPreviewTemplate('index', IndexPagePreview)
 CMS.registerPreviewTemplate('pages', CustomPagePreview)
+CMS.registerPreviewTemplate('marketing', MarketingPagePreview)

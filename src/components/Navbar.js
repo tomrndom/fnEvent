@@ -39,13 +39,13 @@ const Navbar = class extends React.Component {
 
   render() {
 
-    let { isLoggedUser, clearState, logo } = this.props;
+    let { isLoggedUser, logo } = this.props;
 
     return (
       <React.Fragment>
         <nav className={`${styles.navbar}`} role="navigation" aria-label="main navigation">
           <div className={styles.navbarBrand}>
-            <Link to="/a/" className={styles.navbarItem}>
+            <Link to={isLoggedUser ? '/a/' : '/'} className={styles.navbarItem}>
               {logo &&
                 <img src={logo} alt="Show Logo" />
               }
@@ -68,20 +68,24 @@ const Navbar = class extends React.Component {
             </div>
             <div className={styles.navbarEnd}>
               {Content.items.map((item, index) => {
-                return (
-                  item.display &&
-                  <div className={styles.navbarItem} key={index}>
-                    <Link to={item.link} className={styles.link}>
-                      <span>{item.title}</span>
-                    </Link>
-                  </div>
-                )
+                if (!isLoggedUser && item.link.startsWith('/a/')) {
+                  return null
+                } else {
+                  return (
+                    item.display &&
+                    <div className={styles.navbarItem} key={index}>
+                      <Link to={item.link} className={styles.link}>
+                        <span>{item.title}</span>
+                      </Link>
+                    </div>
+                  )
+                }
               })}
-              <LogoutButton styles={styles} isLoggedUser={isLoggedUser} clearState={clearState} />
+              <LogoutButton styles={styles} isLoggedUser={isLoggedUser} />
             </div>
           </div>
         </nav>
-        {/* {isLoggedUser && <UserNavbar isLoggedUser={isLoggedUser} clearState={clearState} />} */}
+        {/* {isLoggedUser && <UserNavbar isLoggedUser={isLoggedUser} />} */}
       </React.Fragment>
     )
   }

@@ -4,6 +4,7 @@ import { navigate } from 'gatsby'
 import { connect } from 'react-redux'
 
 import Layout from '../components/Layout'
+import withOrchestra from "../utils/widgetOrchestra";
 
 import LobbyHeroComponent from '../components/LobbyHeroComponent'
 import AdvertiseComponent from '../components/AdvertiseComponent'
@@ -21,16 +22,10 @@ export const HomePageTemplate = class extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.onEventChange = this.onEventChange.bind(this);
   }
 
   componentWillMount() {
-    const { loggedUser } = this.props;
-    if (!loggedUser.isLoggedUser) {
-      navigate('/a/login');
-    }
-    this.props.getUserProfile();
     this.props.getSummitData();
   }
 
@@ -44,7 +39,7 @@ export const HomePageTemplate = class extends React.Component {
 
   render() {
 
-    const { loggedUser, user, summit } = this.props;
+    const { loggedUser, user, summit, addWidgetRef, updateWidgets } = this.props;
 
     return (
       <React.Fragment>
@@ -61,10 +56,12 @@ export const HomePageTemplate = class extends React.Component {
               <DisqusComponent disqusSSO={user.disqusSSO} summit={summit} title="Conversations" style={{ position: 'static' }} />
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
-                eventClick={(ev) => this.onEventChange(ev)}
+                onEventClick={(ev) => this.onEventChange(ev)}
                 landscape={false}
                 yourSchedule={false}
-                showNav={false}                                          
+                showNav={false}
+                onRef={addWidgetRef}
+                updateCallback={updateWidgets}
               />
               <SpeakersWidgetComponent
                 accessToken={loggedUser.accessToken}
@@ -83,10 +80,12 @@ export const HomePageTemplate = class extends React.Component {
               <h2><b>My Schedule</b></h2>
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
-                eventClick={(ev) => this.onEventChange(ev)}
+                onEventClick={(ev) => this.onEventChange(ev)}
                 landscape={true}
                 yourSchedule={true}                
                 showNav={true}
+                onRef={addWidgetRef}
+                updateCallback={updateWidgets}
               />
               <AdvertiseComponent section='lobby' column="right"/>
               <SponsorComponent tier='gold'/>
@@ -97,45 +96,57 @@ export const HomePageTemplate = class extends React.Component {
       </React.Fragment>
     )
   }
-}
+};
 
-HomePageTemplate.propTypes = {
-  loggedUser: PropTypes.object,
-  summit: PropTypes.object,
-  user: PropTypes.object,
-  eventId: PropTypes.string,
-  getSummitData: PropTypes.func,
-  getDisqusSSO: PropTypes.func,
-}
+const OrchestedTemplate = withOrchestra(HomePageTemplate);
 
-const HomePage = ({ loggedUser, user, location, summit, getSummitData, getDisqusSSO, getUserProfile }) => {
+const HomePage = (
+  {
+    loggedUser,
+    summit,
+    user,
+    getSummitData,
+    getUserProfile,
+    getDisqusSSO
+  }
+) => {
 
   return (
     <Layout>
-      <HomePageTemplate
+      <OrchestedTemplate
         loggedUser={loggedUser}
-        location={location}
-        user={user}
         summit={summit}
+        user={user}
         getSummitData={getSummitData}
         getUserProfile={getUserProfile}
         getDisqusSSO={getDisqusSSO}
       />
     </Layout>
   )
-
 }
 
 HomePage.propTypes = {
   summit: PropTypes.object,
   loggedUser: PropTypes.object,
-  location: PropTypes.object,
+  user: PropTypes.object,
+  getSummitData: PropTypes.func,
+  getUserProfile: PropTypes.func,
+  getDisqusSSO: PropTypes.func,
+}
+
+HomePageTemplate.propTypes = {
+  loggedUser: PropTypes.object,
+  summit: PropTypes.object,
+  user: PropTypes.object,
+  getSummitData: PropTypes.func,
+  getUserProfile: PropTypes.func,
+  getDisqusSSO: PropTypes.func,
 }
 
 const mapStateToProps = ({ loggedUserState, userState, summitState }) => ({
   loggedUser: loggedUserState,
-  user: userState,
   summit: summitState.summit,
+  user: userState,
 })
 
 export default connect(mapStateToProps,

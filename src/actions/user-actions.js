@@ -63,6 +63,7 @@ export const getUserProfile = () => (dispatch, getState) => {
 
   let params = {
       access_token : accessToken,      
+      expand: 'summit_tickets'
   };
 
   return getRequest(

@@ -96,6 +96,31 @@ collections:
                 {label: "Display", name: "display", widget: boolean, required: false},
               ]}
             ]}
+  - name: "marketing"
+    label: "Marketing Site"
+    editor:
+      preview: false
+    files:
+      - file: "src/content/marketing-site.json"
+        name: "marketingSite"
+        label: "Marketing Site"
+        fields:
+          - {label: "Hero Banner", name: "heroBanner", widget: "object", fields: [
+              {label: "Title", name: "title", widget: string},
+              {label: "Date", name: "date", widget: string, required: false},
+              {label: "Sub Title", name: "subTitle", widget: string, required: false},
+              {label: "Images", name: "images", widget: list, fields: [
+                {label: "Image", name: "image", widget: image}
+              ]},
+            ]}
+          - {label: "Widgets", name: "leftColumn", widget: object, fields: [
+              {label: "Schedule", name: "schedule", widget: boolean, required: false},
+              {label: "Disqus", name: "disqus", widget: boolean, required: false},
+            ]}
+          - {label: "Sponsors", name: "sponsors", widget: list, fields: [
+              {label: "Image", name: "image", widget: image},
+              {label: "Size", name: "size", widget: hidden}
+            ]}
   - name: "pages"
     label: "Pages"
     folder: "src/pages/custom-pages"

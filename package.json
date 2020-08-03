@@ -72,7 +72,7 @@
     "redux": "^4.0.5",
     "redux-persist": "^5.9.1",
     "redux-thunk": "^2.3.0",
-    "schedule-lite": "^1.0.31",
+    "schedule-lite": "^1.0.33",
     "simple-chat-widget": "^1.0.4",
     "slick-carousel": "^1.8.1",
     "speakers-widget": "^1.0.12",
@@ -96,7 +96,7 @@
     "clean": "gatsby clean",
     "start": "npm run develop",
     "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
-    "develop": "npm run clean && gatsby develop -S",
+    "develop": "npm run clean && gatsby develop --S -H 0.0.0.0",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

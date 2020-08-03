@@ -15,7 +15,6 @@ const ScheduleComponent = class extends React.Component {
     const scheduleProps = {
       apiBaseUrl: envVariables.SUMMIT_API_BASE_URL,
       marketingApiBaseUrl: envVariables.MARKETING_API_BASE_URL,
-      accessToken: null,
       eventBaseUrl: "/a/event",
       trackBaseUrl: "/a/tracks",
       speakerBaseUrl: "/a/speakers",
@@ -23,7 +22,8 @@ const ScheduleComponent = class extends React.Component {
       summitId: parseInt(envVariables.SUMMIT_ID),
       updateCallback: ev => console.log('event updated', ev),
       onEventClick: ev => this.props.eventClick(ev),
-      onAuthError: (err, res) => expiredToken(err)
+      onAuthError: (err, res) => expiredToken(err),
+      onRef: ref => this.child = ref,
     };
 
     return (
