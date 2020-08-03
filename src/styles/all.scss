@@ -6,6 +6,10 @@ body {
   height: 100%;
 }
 
+html[data-body-class='no-js'] {
+  display: none;
+}
+
 label {
   font-weight: 300;
 }
