@@ -9,7 +9,7 @@ import { withPrefix } from 'gatsby'
 // import "../styles/palette.scss"
 import "../styles/bulma.scss"
 
-const TemplateWrapper = ({ children }) => {
+const TemplateWrapper = ({ children, marketing }) => {
   const { title, description } = useSiteMetadata()
   return (
     <div id="container">
@@ -39,7 +39,7 @@ const TemplateWrapper = ({ children }) => {
       </Helmet>
       <Header />
       <div id="content-wrapper">{children}</div>
-      <Footer />
+      <Footer marketing={marketing} />
     </div>
   )
 }
