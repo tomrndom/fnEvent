@@ -3,6 +3,17 @@
     "title": "YOCO Summit",
     "date": "May 20-22, 2021",
     "subTitle": "Live from San Jose, CA",
+    "buttons": {
+      "registerButton": {
+        "text": "Register now",
+        "display": true
+      },
+      "loginButton": {
+        "text": "Log in",
+        "display": true
+      }
+    },
+    "background": "",
     "images": [
       {
         "image": "/img/flavor_wheel.jpg"
