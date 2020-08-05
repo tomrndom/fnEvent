@@ -53,6 +53,13 @@ class Countdown extends React.Component {
     let summitDate = epochToMomentTimeZone(summit.start_date, summit.time_zone_id)
     let nowFormatted = epochToMomentTimeZone(timestamp, summit.time_zone_id)
 
+<<<<<<< HEAD
+=======
+    console.log('summit date', summitDate)
+    
+    console.log('now date', nowFormatted)
+
+>>>>>>> e3e6126d1c88f43a79bce1089e30db5701ac2215
     let diff = moment.duration(summitDate.diff(nowFormatted));
     let days = parseInt(diff.asDays());
     let hours = parseInt(diff.asHours()); //2039 hours, but it gives total hours in given miliseconds which is not expacted.
