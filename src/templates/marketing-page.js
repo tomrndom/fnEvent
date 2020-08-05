@@ -46,7 +46,7 @@ export const MarketingPageTemplate = class extends React.Component {
               {MarketingSite.leftColumn.disqus &&
                 <React.Fragment>
                   <h2 style={{ fontWeight: 'bold' }}>Join the conversation</h2>
-                  <DisqusComponent disqusSSO={user?.disqusSSO} summit={envVariables.SUMMIT_ID} style={{ position: 'static' }} />
+                  <DisqusComponent page="marketing-site" disqusSSO={user?.disqusSSO} summit={envVariables.SUMMIT_ID} style={{ position: 'static' }} />
                 </React.Fragment>
               }
             </div>
