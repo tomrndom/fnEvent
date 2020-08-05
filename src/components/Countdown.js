@@ -48,15 +48,10 @@ class Countdown extends React.Component {
     const { summit } = this.props;
     const { timestamp } = this.state;
 
-    console.log('summit', summit)
-
-    if (!timestamp || !summit) return null;
+    if (!timestamp || !summit.start_date || !summit.time_zone_id) return null;
 
     let summitDate = epochToMomentTimeZone(summit.start_date, summit.time_zone_id)
     let nowFormatted = epochToMomentTimeZone(timestamp, summit.time_zone_id)
-
-    console.log('summit date', summitDate)
-    console.log('now date', nowFormatted)
 
     let diff = moment.duration(summitDate.diff(nowFormatted));
     let days = parseInt(diff.asDays());
