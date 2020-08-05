@@ -50,10 +50,10 @@ class Countdown extends React.Component {
 
     if (!timestamp || !summit) return null;
 
-    const summitDate = epochToMomentTimeZone(summit.start_date, summit.time_zone_id).format('MM-DD-YYYY hh:mm A')
-    let nowFormatted = epochToMomentTimeZone(timestamp, summit.time_zone_id).format('MM-DD-YYYY hh:mm A')
+    let summitDate = epochToMomentTimeZone(summit.start_date, summit.time_zone_id)
+    let nowFormatted = epochToMomentTimeZone(timestamp, summit.time_zone_id)
 
-    let diff = moment.duration(moment(summitDate).diff(moment(nowFormatted)));
+    let diff = moment.duration(summitDate.diff(nowFormatted));
     let days = parseInt(diff.asDays());
     let hours = parseInt(diff.asHours()); //2039 hours, but it gives total hours in given miliseconds which is not expacted.
     hours = hours - days * 24;
