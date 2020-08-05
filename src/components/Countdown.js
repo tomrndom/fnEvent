@@ -56,6 +56,7 @@ class Countdown extends React.Component {
     let nowFormatted = epochToMomentTimeZone(timestamp, summit.time_zone_id)
 
     console.log('summit date', summitDate)
+    
     console.log('now date', nowFormatted)
 
     let diff = moment.duration(summitDate.diff(nowFormatted));
