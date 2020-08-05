@@ -7,7 +7,7 @@ import styles from '../styles/countdown.module.scss'
 
 const Countdown = ({ ...props }) => {
 
-  const summitDate = moment('08-17-202020 09:00 AM', 'MM-DD-YYYY hh:mm A')
+  const summitDate = epochToMomentTimeZone(props.summit.start_date, props.summit.time_zone.name).format('MM-DD-YYYY hh:mm A') 
   const nowFormatted = epochToMomentTimeZone(props.now, props.summit.time_zone.name).format('MM-DD-YYYY hh:mm A')
 
   let diff = moment.duration(moment(summitDate).diff(moment(nowFormatted)));
