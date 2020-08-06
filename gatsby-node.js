@@ -29,6 +29,14 @@ exports.onPreBootstrap = async () => {
     console.log('Saved!');
   });
 
+  let sassColors = '';
+  Object.keys(colours.colors).forEach(e => sassColors += `$${e} : ${colours.colors[e]};\n`);  
+
+  fs.writeFileSync('src/styles/colors.scss', sassColors, 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+
   let heroBanner = JSON.parse(fs.readFileSync('src/content/hero-banner.json'));
 
   marketingData.map((item) => {
@@ -42,7 +50,7 @@ exports.onPreBootstrap = async () => {
 
   let disqusSettings = JSON.parse(fs.readFileSync('src/content/disqus-settings.json'));
 
-  marketingData.map((item) => {    
+  marketingData.map((item) => {
     if (item.key.startsWith('disqus_')) disqusSettings[item.key] = item.value;
   });
 
