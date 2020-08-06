@@ -4,7 +4,7 @@
     "subTitle": "Live from San Jose, CA",
     "date": "May 20-22, 2021",
     "time": "9AM - 12PM (PDT)",
-    "dateLayout": true,
+    "dateLayout": false,
     "buttons": {
       "registerButton": {
         "text": "Register now",
