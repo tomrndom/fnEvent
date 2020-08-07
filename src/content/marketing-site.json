@@ -23,8 +23,8 @@
     ]
   },
   "leftColumn": {
-    "schedule": true,
-    "disqus": false
+    "schedule": false,
+    "disqus": true
   },
   "sponsors": [
     {
