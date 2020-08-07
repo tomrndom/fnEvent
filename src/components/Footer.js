@@ -26,34 +26,38 @@ const Footer = ({ summit, marketing }) => {
         render={data => (
           <React.Fragment>
             <footer className="footer">
-
               {footerContent.columns.filter(col => col.display === false).length === footerContent.columns.length ?
                 <React.Fragment>
-                  <div className={`${styles.footerColummns} columns`}>
-                    <div className="column is-one-quarter">
-                      <img alt="logo" src={summit && summit.logo ?
-                        summit.logo
-                        :
-                        data.summit && data.summit.logo ?
-                          data.summit.logo
+                {footerContent.logo.display && footerContent.social.display ?
+                  <React.Fragment>
+                    <div className={`${styles.footerColummns} columns`}>
+                      <div className="column is-one-quarter">
+                        <img alt="logo" src={summit && summit.logo ?
+                          summit.logo
                           :
-                          null
-                      } style={{ marginTop: '10px' }} />
-                    </div>
-                    {footerContent.social.display &&
-                      <div className="column is-one-quarter is-offset-half">
-                        <h4>{footerContent.social.title}</h4>
-                        <div className={styles.socialContainer}>
-                          {footerContent.social.networks.map((net, index) => (
-                            net.display &&
-                            <a href={net.link} key={index}>
-                              <i className={`fa icon is-large ${net.icon}`}></i>
-                            </a>
-                          ))}
-                        </div>
+                          data.summit && data.summit.logo ?
+                            data.summit.logo
+                            :
+                            null
+                        } style={{ marginTop: '10px' }} />
                       </div>
-                    }
-                  </div>
+                      {footerContent.social.display &&
+                        <div className="column is-one-quarter is-offset-half">
+                          <h4>{footerContent.social.title}</h4>
+                          <div className={styles.socialContainer}>
+                            {footerContent.social.networks.map((net, index) => (
+                              net.display &&
+                              <a href={net.link} key={index}>
+                                <i className={`fa icon is-large ${net.icon}`}></i>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  </React.Fragment>
+                  : null
+                }
                 </React.Fragment>
                 :
                 <React.Fragment>
