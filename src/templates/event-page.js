@@ -82,7 +82,7 @@ export const EventPageTemplate = class extends React.Component {
               <div className="column is-hidden-tablet">
                 <TalkComponent event={event} summit={summit} noStream={true} />
               </div>
-              <div className="column" style={{ position: 'relative' }}>
+              <div className="column" style={{ position: 'relative', borderBottom: '1px solid #d3d3d3' }}>
                 <DisqusComponent disqusSSO={user.disqusSSO} event={event} summit={summit} title="Join the conversation" />
               </div>
             </div>
