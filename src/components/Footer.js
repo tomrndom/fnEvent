@@ -25,11 +25,10 @@ const Footer = ({ summit, marketing }) => {
       `}
         render={data => (
           <React.Fragment>
-            <footer className="footer">
-              {footerContent.columns.filter(col => col.display === false).length === footerContent.columns.length ?
-                <React.Fragment>
+            {footerContent.columns.filter(col => col.display === false).length === footerContent.columns.length ?
+              <React.Fragment>
                 {footerContent.logo.display && footerContent.social.display ?
-                  <React.Fragment>
+                  <footer className="footer">
                     <div className={`${styles.footerColummns} columns`}>
                       <div className="column is-one-quarter">
                         <img alt="logo" src={summit && summit.logo ?
@@ -55,12 +54,13 @@ const Footer = ({ summit, marketing }) => {
                         </div>
                       }
                     </div>
-                  </React.Fragment>
+                  </footer>
                   : null
                 }
-                </React.Fragment>
-                :
-                <React.Fragment>
+              </React.Fragment>
+              :
+              <footer className="footer">
+                {footerContent.logo.display ?
                   <div className="columns">
                     <div className="column is-one-quarter">
                       <img alt="logo" src={summit && summit.logo ?
@@ -73,44 +73,45 @@ const Footer = ({ summit, marketing }) => {
                       } style={{ margin: '10px 0 4rem' }} />
                     </div>
                   </div>
-                  <div className={`${styles.footerColummns} columns`}>
-                    <div className="column is-three-quarters">
-                      <div className="columns" style={{ flexWrap: 'wrap' }}>
-                        {footerContent.columns.map((col, index) => {
-                          return (
-                            col.display &&
-                            <div className={`column is-3 ${index > 0 && index % 3 !== 0 ? 'is-offset-1' : ''}`} key={index}>
-                              <h4>
-                                {col.title}
-                              </h4>
-                              {col.items.map((item, index) => (
-                                <Link to={item.link} className={styles.link} key={index}>
-                                  <h5>{item.title}</h5>
-                                </Link>
-                              ))}
-                            </div>
-                          )
-                        })}
+                  : null
+                }
+                <div className={`${styles.footerColummns} columns`}>
+                  <div className="column is-three-quarters">
+                    <div className="columns" style={{ flexWrap: 'wrap' }}>
+                      {footerContent.columns.map((col, index) => {
+                        return (
+                          col.display &&
+                          <div className={`column is-3 ${index > 0 && index % 3 !== 0 ? 'is-offset-1' : ''}`} key={index}>
+                            <h4>
+                              {col.title}
+                            </h4>
+                            {col.items.map((item, index) => (
+                              <Link to={item.link} className={styles.link} key={index}>
+                                <h5>{item.title}</h5>
+                              </Link>
+                            ))}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  {footerContent.social.display &&
+                    <div className="column is-one-quarter">
+                      <h4>{footerContent.social.title}</h4>
+                      <div className={styles.socialContainer}>
+                        {footerContent.social.networks.map((net, index) => (
+                          net.display &&
+                          <a href={net.link} className={styles.link} key={index}>
+                            <i className={`fa icon is-large ${net.icon}`}></i>
+                          </a>
+                        ))}
                       </div>
                     </div>
-
-                    {footerContent.social.display &&
-                      <div className="column is-one-quarter">
-                        <h4>{footerContent.social.title}</h4>
-                        <div className={styles.socialContainer}>
-                          {footerContent.social.networks.map((net, index) => (
-                            net.display &&
-                            <a href={net.link} className={styles.link} key={index}>
-                              <i className={`fa icon is-large ${net.icon}`}></i>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    }
-                  </div>
-                </React.Fragment>
-              }
-            </footer>
+                  }
+                </div>
+              </footer>
+            }
             <div className={styles.legalsBar}>
               {footerContent.legal.map((item, index) => {
                 return (
