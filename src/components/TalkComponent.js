@@ -53,10 +53,10 @@ const TalkComponent = class extends React.Component {
             <b>{title}</b>
           </h1>
           <div className="talk__speaker">
-            {speakers && speakers.length === 0 ?
+            {speakers && speakers?.length === 0 ?
               null
               :
-              speakers.length < 3 ?
+              speakers?.length < 3 ?
                 speakers.map((s, index) => {
                   return (
                     <div className="talk__speaker-container" key={index}>
