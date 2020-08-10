@@ -15511,10 +15511,10 @@ signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
 
-simple-chat-widget@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/simple-chat-widget/-/simple-chat-widget-1.0.11.tgz#2d98e014f8447c8c011994db3c48f62ea15f94ac"
-  integrity sha512-1X0yPR1LF0vq95vwJXCF6K4ksruyWqdPajkZhTBsNOz0xcUIosPiquAbZ/X/cFn/1ebuPuRtAOYCa0FiEEPSzg==
+simple-chat-widget@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/simple-chat-widget/-/simple-chat-widget-1.0.12.tgz#63dc21880f28963ea53eb590bed15a4f3b58664c"
+  integrity sha512-yk6PWk3LJE0lGXqVALtTipiS64zEAsgHhRrRZWr5oVPnj5HBSyDG110rTIwVRnZBrBAOd1GpZru/ltmpm2V0LA==
 
 simple-concat@^1.0.0:
   version "1.0.0"
