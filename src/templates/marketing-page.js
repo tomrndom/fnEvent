@@ -38,47 +38,43 @@ export const MarketingPageTemplate = class extends React.Component {
 
     const PageContent = contentComponent || Content
 
-    if (isLoggedUser && summit.start_date < marketingNow) {
-      return <Redirect noThrow to="/a/" />
-    } else {
-      return (
-        <React.Fragment>
-          <LobbyHeroMarketing summit={summit} />
-          {marketingNow && summit && <Countdown now={marketingNow} summit={summit} />}
-          <div className="columns" id="marketing-columns">
-            <div className="column is-half px-6 pt-6 pb-0" style={{ position: 'relative' }}>
-              {MarketingSite.leftColumn.schedule &&
-                <React.Fragment>
-                  <h2 style={{ fontWeight: 'bold' }}>Full Event Schedule</h2>
-                  <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} eventCount={10} />
-                </React.Fragment>
-              }
-              {MarketingSite.leftColumn.disqus &&
-                <React.Fragment>
-                  <h2 style={{ fontWeight: 'bold' }}>Join the conversation</h2>
-                  <DisqusComponent page="marketing-site" disqusSSO={user?.disqusSSO} summit={summit} />
-                </React.Fragment>
-              }
-            </div>
-            <div className="column is-half px-0 pb-0">
-              <Masonry
-                breakpointCols={2}
-                className="my-masonry-grid"
-                columnClassName="my-masonry-grid_column">
-                {MarketingSite.sponsors.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <img src={item.image} />
-                    </div>
-                  )
-                })}
-              </Masonry>
-            </div>
+    return (
+      <React.Fragment>
+        <LobbyHeroMarketing summit={summit} />
+        {marketingNow && summit && <Countdown now={marketingNow} summit={summit} />}
+        <div className="columns" id="marketing-columns">
+          <div className="column is-half px-6 pt-6 pb-0" style={{ position: 'relative' }}>
+            {MarketingSite.leftColumn.schedule &&
+              <React.Fragment>
+                <h2 style={{ fontWeight: 'bold' }}>Full Event Schedule</h2>
+                <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} eventCount={10} />
+              </React.Fragment>
+            }
+            {MarketingSite.leftColumn.disqus &&
+              <React.Fragment>
+                <h2 style={{ fontWeight: 'bold' }}>Join the conversation</h2>
+                <DisqusComponent page="marketing-site" disqusSSO={user?.disqusSSO} summit={summit} />
+              </React.Fragment>
+            }
           </div>
-          <PageContent content={content} />
-        </React.Fragment>
-      )
-    }
+          <div className="column is-half px-0 pb-0">
+            <Masonry
+              breakpointCols={2}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column">
+              {MarketingSite.sponsors.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <img src={item.image} />
+                  </div>
+                )
+              })}
+            </Masonry>
+          </div>
+        </div>
+        <PageContent content={content} />
+      </React.Fragment>
+    )
   }
 
 }
