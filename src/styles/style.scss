@@ -1,3 +1,5 @@
+@import './colors.scss';
+
 html,
 body {
   font-family: 'Nunito Sans', sans-serif !important;
@@ -112,6 +114,17 @@ h2 {
 
 .talk {
 
+  &__break {
+    align-self: center;
+    background-color: $color_secondary;
+    color: $color_text_light;
+    display: flex;
+    font-size: 42px;
+    justify-content: flex-start;
+    padding: 23% 3rem;
+    width: 100%;
+  }
+
   h1 {
     font-size: 40px;
   }
@@ -126,13 +139,16 @@ h2 {
     &--name {
       text-transform: capitalize;
     }
+
     &-container {
       display: inline-flex;
+
       img {
         height: 40px;
         width: 40px;
         border-radius: 5px;
       }
+
       div {
         padding-left: 5px;
       }
@@ -170,6 +186,31 @@ h2 {
   }
 
   &__etherpad {}
+}
+
+.join-zoom-container {
+  height: 130px;
+  background-color: $color_secondary;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: $color_text_light;
+
+  span {
+    font-size: 42px;
+  }
+
+  a:hover.zoom-link,
+  a:visited.zoom-link {    
+    text-decoration: none;
+  }  
+
+  button {
+    font-size: 28px;
+    padding-left: 4em;
+    padding-right: 4em;
+    text-transform: uppercase;
+  }
 }
 
 .outerWrapper___lGus2 {

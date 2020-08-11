@@ -11,14 +11,13 @@ import Layout from '../components/Layout'
 import DisqusComponent from '../components/DisqusComponent'
 import Etherpad from '../components/Etherpad'
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
-// import RocketChatComponent from '../components/RocketChat'
+import SimpleChatWidgetComponent from '../components/SimpleChatWidgetComponent'
 import VideoComponent from '../components/VideoComponent'
 import TalkComponent from '../components/TalkComponent'
-import DocumentsComponent from '../components/DocumentsComponent'
 import AdvertiseComponent from '../components/AdvertiseComponent'
 
 import { getEventBySlug } from '../actions/event-actions'
-import { getDisqusSSO, getRocketChatSSO } from '../actions/user-actions'
+import { getDisqusSSO } from '../actions/user-actions'
 
 import { AttendanceTracker } from "openstack-uicore-foundation/lib/components";
 
@@ -27,7 +26,6 @@ export const EventPageTemplate = class extends React.Component {
   constructor(props) {
     super(props);
     this.onEventChange = this.onEventChange.bind(this);
-    this.getMaterials = this.getMaterials.bind(this);
   }
 
   componentWillMount() {
@@ -37,20 +35,11 @@ export const EventPageTemplate = class extends React.Component {
 
   componentDidMount() {
     this.props.getDisqusSSO();
-    this.props.getRocketChatSSO();
   }
 
-  onEventChange(ev) {    
+  onEventChange(ev) {
     navigate(`/a/event/${ev}`);
     this.props.getEventBySlug(ev);
-  }
-
-  getMaterials(event) {
-    let materials = [];
-    if (event.links?.length > 0) materials = [...materials, ...event.links]
-    if (event.videos?.length > 0) materials = [...materials, ...event.videos]
-    if (event.slides?.length > 0) materials = [...materials, ...event.slides]
-    return materials;
   }
 
   render() {
@@ -75,6 +64,20 @@ export const EventPageTemplate = class extends React.Component {
               {event.streaming_url ?
                 <div className="column is-three-quarters px-0 py-0">
                   <VideoComponent url={event.streaming_url} />
+                  {event.meeting_url &&
+                    <div className="join-zoom-container">
+                      <span>
+                        Take the Virtual Mic and participate!
+                      </span>
+                      <a className="zoom-link" href={event.meeting_url}>
+                        <button className="zoom-button button">
+                          <b>Join now</b>
+                        </button>
+                      </a>
+                      <a target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+                      </a>
+                    </div>
+                  }
                 </div>
                 :
                 <div className="column is-three-quarters px-0 py-0 is-hidden-mobile">
@@ -85,14 +88,14 @@ export const EventPageTemplate = class extends React.Component {
                 <TalkComponent event={event} summit={summit} noStream={true} />
               </div>
               <div className="column" style={{ position: 'relative', borderBottom: '1px solid #d3d3d3' }}>
-                <DisqusComponent disqusSSO={user.disqusSSO} event={event} summit={summit} title="Join the conversation" />
+                <DisqusComponent disqusSSO={user.disqusSSO} event={event} summit={summit} title="Public Conversation" />
               </div>
             </div>
           </section>
           {event.streaming_url &&
             <section className="section px-0 py-0">
               <div className="columns mx-0 my-0">
-                <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
+                <div className="column px-0 py-0 is-full is-hidden-mobile">
                   <TalkComponent event={event} summit={summit} noStream={true} />
                 </div>
               </div>
@@ -105,24 +108,11 @@ export const EventPageTemplate = class extends React.Component {
                   <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} userName={user.userProfile.first_name} />
                 </div>
                 <div className="column is-one-quarter">
+                  <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} />
                 </div>
               </div>
             </section>
           }
-          <section className="section px-4 py-6">
-            <div className="columns">
-              <div className="column is-one-quarter pb-6">
-                <AdvertiseComponent section='event' column="left" />
-              </div>
-              <div className="column is-two-quarters pb-6">
-                {/* <div className="rocket-container"> */}
-                <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} onEventClick={(ev) => this.onEventChange(ev)} />
-                {/* <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} /> */}
-                {/* </div> */}
-              </div>
-              <DocumentsComponent materials={this.getMaterials(event)} />
-            </div>
-          </section >
         </>
       )
     } else {
@@ -130,12 +120,9 @@ export const EventPageTemplate = class extends React.Component {
         <section className="section px-4 py-6">
           <div className="columns">
             <div className="column is-three-quarters pb-6">
-              {/* <div className="rocket-container"> */}
               <span>Event not found</span>
               <br />
               <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} onEventClick={(ev) => this.onEventChange(ev)} />
-              {/*   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
-              {/* </div> */}
             </div>
             <div className="column is-one-quarter has-text-centered pb-6">
               <AdvertiseComponent section='event' id={event.id} />
@@ -154,8 +141,7 @@ const EventPage = (
     eventId,
     user,
     getEventBySlug,
-    getDisqusSSO,
-    getRocketChatSSO
+    getDisqusSSO
   }
 ) => {
 
@@ -168,7 +154,6 @@ const EventPage = (
         user={user}
         getEventBySlug={getEventBySlug}
         getDisqusSSO={getDisqusSSO}
-        getRocketChatSSO={getRocketChatSSO}
       />
     </Layout>
   )
@@ -181,7 +166,6 @@ EventPage.propTypes = {
   user: PropTypes.object,
   getEventBySlug: PropTypes.func,
   getDisqusSSO: PropTypes.func,
-  getRocketChatSSO: PropTypes.func
 }
 
 EventPageTemplate.propTypes = {
@@ -191,7 +175,6 @@ EventPageTemplate.propTypes = {
   user: PropTypes.object,
   getEventBySlug: PropTypes.func,
   getDisqusSSO: PropTypes.func,
-  getRocketChatSSO: PropTypes.func
 }
 
 const mapStateToProps = (
@@ -211,7 +194,6 @@ export default connect(
   mapStateToProps,
   {
     getEventBySlug,
-    getDisqusSSO,
-    getRocketChatSSO
+    getDisqusSSO
   }
 )(EventPage);
