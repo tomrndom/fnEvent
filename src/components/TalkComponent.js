@@ -81,24 +81,14 @@ const TalkComponent = class extends React.Component {
                     <div className="columns is-multiline">
                       {speakers.map((s, index) => {
                         return (
-                          <React.Fragment>
-                            <div className="column is-one-third talk__speaker-container" key={index}>
-                              <img src={s.pic} alt={`${s.first_name} ${s.last_name}`} />
-                              <div>
-                                {`${s.first_name} ${s.last_name}`}
-                                <br />
-                                <b>{s.title}</b>
-                              </div>
+                          <div className="column is-one-third talk__speaker-container" key={index}>
+                            <img src={s.pic} alt={`${s.first_name} ${s.last_name}`} />
+                            <div>
+                              {`${s.first_name} ${s.last_name}`}
+                              <br />
+                              <b>{s.title}</b>
                             </div>
-                            <div className="column is-one-third talk__speaker-container" key={index}>
-                              <img src={s.pic} alt={`${s.first_name} ${s.last_name}`} />
-                              <div>
-                                {`${s.first_name} ${s.last_name}`}
-                                <br />
-                                <b>{s.title}</b>
-                              </div>
-                            </div>
-                          </React.Fragment>
+                          </div>
                         )
                       })
                       }
