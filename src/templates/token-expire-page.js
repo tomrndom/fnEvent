@@ -26,15 +26,13 @@ export const TokenExpirePageTemplate = class extends React.Component {
   }
 
   render() {
-
     this.redirectToLogin();
 
     return (
       <div className="container pt-5">
         <div className="columns">
           <div className="column">
-            <h3>Your session has timed out.</h3>
-            <h3>You will be redirected to the login page.</h3>
+            <h3>Checking credentials...</h3>
           </div>
         </div>
       </div>
