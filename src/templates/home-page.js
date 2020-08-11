@@ -16,7 +16,10 @@ import SponsorComponent from '../components/SponsorComponent'
 import SimpleChatWidgetComponent from '../components/SimpleChatWidgetComponent'
 
 import { getSummitData } from '../actions/summit-actions'
+import { getScheduleEvents } from '../actions/schedule-actions'
 import { getDisqusSSO, getUserProfile } from '../actions/user-actions'
+
+import { sortEvents } from '../utils/schedule'
 
 export const HomePageTemplate = class extends React.Component {
 
@@ -27,6 +30,7 @@ export const HomePageTemplate = class extends React.Component {
 
   componentWillMount() {
     this.props.getSummitData();
+    this.props.getScheduleEvents();
   }
 
   componentDidMount() {
@@ -39,7 +43,9 @@ export const HomePageTemplate = class extends React.Component {
 
   render() {
 
-    const { loggedUser, user, summit, addWidgetRef, updateWidgets } = this.props;
+    const { loggedUser, user, schedule, summit, addWidgetRef, updateWidgets } = this.props;
+
+    // console.log(schedule, sortEvents(schedule));
 
     return (
       <React.Fragment>
@@ -48,9 +54,9 @@ export const HomePageTemplate = class extends React.Component {
           <div className="columns">
             <div className="column is-one-quarter">
               <h2><b>Community</b></h2>
-              <AdvertiseComponent section='lobby' column="left"/>
-              <SponsorComponent tier='silver'/>
-            </div>            
+              <AdvertiseComponent section='lobby' column="left" />
+              <SponsorComponent tier='silver' />
+            </div>
             <div className="column is-half">
               <LiveEventWidgetComponent />
               <DisqusComponent page="lobby" disqusSSO={user.disqusSSO} summit={summit} title="Conversations" style={{ position: 'static' }} />
@@ -73,7 +79,7 @@ export const HomePageTemplate = class extends React.Component {
                 title="Featured Speakers"
                 bigPics={false}
               />
-              <AdvertiseComponent section='lobby' column="center"/>
+              <AdvertiseComponent section='lobby' column="center" />
             </div>
             <div className="column is-one-quarter pb-6">
               <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} />
@@ -82,13 +88,13 @@ export const HomePageTemplate = class extends React.Component {
                 accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
                 landscape={true}
-                yourSchedule={true}                
+                yourSchedule={true}
                 showNav={true}
                 onRef={addWidgetRef}
                 updateCallback={updateWidgets}
               />
-              <AdvertiseComponent section='lobby' column="right"/>
-              <SponsorComponent tier='gold'/>
+              <AdvertiseComponent section='lobby' column="right" />
+              <SponsorComponent tier='gold' />
             </div>
           </div>
         </div>
@@ -105,8 +111,10 @@ const HomePage = (
     loggedUser,
     summit,
     user,
+    schedule,
     getSummitData,
     getUserProfile,
+    getScheduleEvents,
     getDisqusSSO
   }
 ) => {
@@ -117,8 +125,10 @@ const HomePage = (
         loggedUser={loggedUser}
         summit={summit}
         user={user}
+        schedule={schedule}
         getSummitData={getSummitData}
         getUserProfile={getUserProfile}
+        getScheduleEvents={getScheduleEvents}
         getDisqusSSO={getDisqusSSO}
       />
     </Layout>
@@ -129,30 +139,36 @@ HomePage.propTypes = {
   summit: PropTypes.object,
   loggedUser: PropTypes.object,
   user: PropTypes.object,
+  schedule: PropTypes.object,
   getSummitData: PropTypes.func,
   getUserProfile: PropTypes.func,
   getDisqusSSO: PropTypes.func,
+  getScheduleEvents: PropTypes.func,
 }
 
 HomePageTemplate.propTypes = {
   loggedUser: PropTypes.object,
   summit: PropTypes.object,
   user: PropTypes.object,
+  schedule: PropTypes.object,
   getSummitData: PropTypes.func,
   getUserProfile: PropTypes.func,
   getDisqusSSO: PropTypes.func,
+  getScheduleEvents: PropTypes.func,
 }
 
-const mapStateToProps = ({ loggedUserState, userState, summitState }) => ({
+const mapStateToProps = ({ loggedUserState, scheduleState, userState, summitState }) => ({
   loggedUser: loggedUserState,
   summit: summitState.summit,
   user: userState,
+  schedule: scheduleState.schedule
 })
 
 export default connect(mapStateToProps,
   {
     getSummitData,
     getDisqusSSO,
-    getUserProfile
+    getUserProfile,
+    getScheduleEvents
   }
 )(HomePage);
