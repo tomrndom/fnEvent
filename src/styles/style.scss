@@ -175,27 +175,28 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     align-items: flex-end;
-  }  
+  }
 
   &__etherpad {}
 }
 
 .join-zoom-container {
-  height: 130px;
-  background-color: $color_secondary;
-  display: flex;
   align-items: center;
-  justify-content: space-around;
+  background-color: $color_secondary;
   color: $color_text_light;
+  display: flex;  
+  height: 130px;
+  justify-content: space-around;
+  padding: 0 3rem;
 
   span {
     font-size: 42px;
   }
 
   a:hover.zoom-link,
-  a:visited.zoom-link {    
+  a:visited.zoom-link {
     text-decoration: none;
-  }  
+  }
 
   button {
     font-size: 28px;
@@ -306,12 +307,34 @@ h2 {
       height: auto;
     }
   }
+
+  .join-zoom-container {
+    flex-direction: column;    
+    button {
+      padding-left: 2em;
+      padding-right: 2em;
+      font-size: 20px;
+    }
+  }  
 }
 
 @media (max-width: 978px) {
   #marketing-slider {
     .slick-track {
       height: 520px;
+    }
+  }
+}
+
+@media (max-width: 1430px) {
+  .join-zoom-container {
+    span {
+      font-size: 28px;
+    }
+    button {
+      padding-left: 3em;
+      padding-right: 3em;
+      font-size: 26px;
     }
   }
 }

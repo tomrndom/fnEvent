@@ -78,10 +78,10 @@ const TalkComponent = class extends React.Component {
                   null
                   :
                   speakers?.length < 6 ?
-                    <div className="columns is-multiline">
+                    <div className="columns is-multiline is-mobile">
                       {speakers.map((s, index) => {
                         return (
-                          <div className="column is-one-third talk__speaker-container" key={index}>
+                          <div className="column is-one-third-desktop is-half-mobile talk__speaker-container" key={index}>
                             <img src={s.pic} alt={`${s.first_name} ${s.last_name}`} />
                             <div>
                               {`${s.first_name} ${s.last_name}`}
