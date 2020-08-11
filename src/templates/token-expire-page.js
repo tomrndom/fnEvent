@@ -30,13 +30,11 @@ export const TokenExpirePageTemplate = class extends React.Component {
     this.redirectToLogin();
 
     return (
-      <div className="container pt-5 pb-5">
+      <div className="container pt-5">
         <div className="columns">
-          <div className="column is-three-quarters">
-            <div className="rocket-container">
-              <h3>Your session has timed out.</h3>
-              <h3>You will be redirected to the login page.</h3>
-            </div>
+          <div className="column">
+            <h3>Your session has timed out.</h3>
+            <h3>You will be redirected to the login page.</h3>
           </div>
         </div>
       </div>
@@ -45,7 +43,9 @@ export const TokenExpirePageTemplate = class extends React.Component {
 }
 
 TokenExpirePageTemplate.propTypes = {
-  loggedUser: PropTypes.object
+  loggedUser: PropTypes.object,
+  location: PropTypes.object,
+  handleResetReducers: PropTypes.func,
 }
 
 const TokenExpirePage = ({ loggedUser, location, handleResetReducers }) => {
@@ -61,9 +61,9 @@ const TokenExpirePage = ({ loggedUser, location, handleResetReducers }) => {
 }
 
 TokenExpirePage.propTypes = {
-  summit: PropTypes.object,
   loggedUser: PropTypes.object,
   location: PropTypes.object,
+  handleResetReducers: PropTypes.func,
 }
 
 const mapStateToProps = ({ loggedUserState }) => ({

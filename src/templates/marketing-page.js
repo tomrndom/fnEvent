@@ -14,8 +14,9 @@ import Content, { HTMLContent } from '../components/Content'
 import '../styles/style.scss'
 
 import MarketingSite from '../content/marketing-site.json'
+import SummitObject from '../content/summit.json'
 
-import { getSummitData, getTimeNow } from '../actions/summit-actions'
+import { getTimeNow } from '../actions/summit-actions'
 import { getDisqusSSO } from '../actions/user-actions'
 
 export const MarketingPageTemplate = class extends React.Component {
@@ -26,14 +27,14 @@ export const MarketingPageTemplate = class extends React.Component {
   componentWillMount() {
     let { isLoggedUser } = this.props;
 
-    this.props.getSummitData();
     this.props.getTimeNow();
 
     if (isLoggedUser) { this.props.getDisqusSSO(); }
   }
 
   render() {
-    let { content, contentComponent, user, summit, loggedUser, isLoggedUser, marketingNow } = this.props;
+    let { content, contentComponent, user, loggedUser, isLoggedUser, marketingNow } = this.props;
+    let { summit } = SummitObject;
 
     const PageContent = contentComponent || Content
 
@@ -86,11 +87,10 @@ MarketingPageTemplate.propTypes = {
   content: PropTypes.string,
   contentComponent: PropTypes.func,
   user: PropTypes.object,
-  summit: PropTypes.object,
   isLoggedUser: PropTypes.bool,
 }
 
-const MarketingPage = ({ data, user, summit, marketingNow, loggedUser, isLoggedUser, getSummitData, getTimeNow, getDisqusSSO }) => {
+const MarketingPage = ({ data, user, marketingNow, loggedUser, isLoggedUser, getTimeNow, getDisqusSSO }) => {
   const { frontmatter, html } = data.markdownRemark
 
   return (
@@ -99,11 +99,9 @@ const MarketingPage = ({ data, user, summit, marketingNow, loggedUser, isLoggedU
         contentComponent={HTMLContent}
         content={html}
         user={user}
-        summit={summit}
         loggedUser={loggedUser}
         marketingNow={marketingNow}
         isLoggedUser={isLoggedUser}
-        getSummitData={getSummitData}
         getTimeNow={getTimeNow}
         getDisqusSSO={getDisqusSSO}
       />
@@ -118,7 +116,6 @@ MarketingPage.propTypes = {
     }),
   }),
   user: PropTypes.object,
-  summit: PropTypes.object,
   loggedUser: PropTypes.object,
   isLoggedUser: PropTypes.bool,
   getSummitData: PropTypes.func,
@@ -130,11 +127,9 @@ const mapStateToProps = ({ userState, summitState, loggedUserState }) => ({
   loggedUser: loggedUserState,
   marketingNow: summitState.marketingNow,
   user: userState,
-  summit: summitState.summit,
 })
 
 export default connect(mapStateToProps, {
-  getSummitData,
   getTimeNow,
   getDisqusSSO
 })(MarketingPage)
