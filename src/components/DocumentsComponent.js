@@ -15,7 +15,7 @@ const DocumentsComponent = ({ materials }) => {
 
   if (materials.length > 0) {
     return (
-      <div className="column is-one-quarter">
+      <div>
         <div className={`${styles.docsContainer}`} style={{marginTop: '1em'}}>
           <div className={styles.title}>Documents</div>
           <hr />
@@ -57,7 +57,7 @@ const DocumentsComponent = ({ materials }) => {
       </div>
     )
   } else {
-    return <div className="column is-one-quarter"></div>;
+    return <div></div>;
   }
 }
 
