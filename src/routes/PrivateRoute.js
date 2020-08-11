@@ -31,17 +31,15 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startD
 
   const isAuthorized = authorizedUser(user.groups);
 
-  if (envVariables.REGISTRATION_BASE_URL) {
-    const ticketPurchased = user.summit_tickets?.includes(envVariables.SUMMIT_ID);
+  const ticketPurchased = user.summit_tickets?.includes(envVariables.SUMMIT_ID);
 
-    if (!ticketPurchased && !isAuthorized) {
-      navigate('/authz/ticket', {
-        state: {
-          error: 'no-ticket'
-        }
-      })
-      return null
-    }
+  if (!ticketPurchased && !isAuthorized) {
+    navigate('/authz/ticket', {
+      state: {
+        error: 'no-ticket'
+      }
+    })
+    return null
   }
 
   if (!(startDate < marketingNow) && !isAuthorized) {
