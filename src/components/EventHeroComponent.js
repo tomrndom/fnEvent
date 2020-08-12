@@ -9,12 +9,14 @@ const EventHeroComponent = () => (
       <div className={'column is-12'}>
         <div className={`${styles.heroBody} hero-body`}>
           <div className={`${styles.heroEventContainer} container`}>
-            <span className={styles.title}>
-              All Hands
-            </span>
-            <span className={styles.subtitle}>
-              Meeting
-            </span>
+            <div>
+              <span className={styles.title}>
+                All Hands
+              </span>
+              <span className={styles.subtitle}>
+                Meeting
+              </span>
+            </div>
             <div className={styles.date}>
               <span>August 17, 2020</span>
             </div>
