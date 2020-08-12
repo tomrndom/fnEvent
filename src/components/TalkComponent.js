@@ -46,13 +46,14 @@ const TalkComponent = class extends React.Component {
     const { event: { class_name, start_date, end_date, speakers, title, description }, event, summit: { time_zone_id } } = this.props;
 
     return (
-      <div className={`columns talk ${class_name !== 'Presentation' ? 'px-3 py-3' : 'px-5 py-5'}`}>
-        {class_name !== 'Presentation' ?
+      <div className={`columns talk ${class_name !== 'Presentation' || !event.streaming_url ? 'px-3 py-3' : 'px-5 py-5'}`}>
+        {class_name !== 'Presentation' || !event.streaming_url ?
           <div className="talk__break">
             <div>
               <b>{title}</b>
               <br />
-              Next session will start soon...
+              {class_name !== 'Presentation' && <span>Next session will start soon...</span>}
+              {!event.streaming_url && <span>Your session will be available the {event.start_date}</span>}
             </div>
           </div>
           :

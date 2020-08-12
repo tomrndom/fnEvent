@@ -62,7 +62,7 @@ export const EventPageTemplate = class extends React.Component {
               accessToken={loggedUser.accessToken}
             />
           }
-          <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' ? '-3rem' : '' }}>
+          <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || !event.streaming_url ? '-3rem' : '' }}>
             <div className="columns is-gapless">
               {event.streaming_url ?
                 <div className="column is-three-quarters px-0 py-0">
