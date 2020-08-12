@@ -283,6 +283,7 @@ div.column:first-of-type {
 @media (max-width: 860px) {
   .hero-events {
     .hero-body {
+      padding: 2rem 1.5rem;
       .hero-event-container {
         flex-direction: column;
         text-align: center;
