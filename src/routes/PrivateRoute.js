@@ -44,13 +44,9 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startD
       navigate('/')
     }, 3000);
     return (
-      <div className="container pt-5">
-        <div className="columns">
-          <div className="column">
-            <h3>Its not yet show time!</h3>
-          </div>
-        </div>
-      </div>
+      <FullscreenMessageComponent
+        title="Its not yet show time!"
+      />
     )
   }
 
