@@ -18,7 +18,7 @@ const TemplateWrapper = ({ children, marketing }) => {
     <div id="container">
       <Helmet>
         <html lang="en" />
-        <title>{`${summit.name} - ${title}`}</title>
+        <title>{`${summit.name} | ${title}`}</title>
         <meta name="description" content={description} />
 
         <link
