@@ -5,6 +5,7 @@ import { navigate } from 'gatsby'
 import envVariables from '../utils/envVariables'
 
 import SummitObject from '../content/summit.json'
+import FullscreenMessageComponent from '../components/FullscreenMessageComponent'
 
 export const TicketErrorPageTemplate = class extends React.Component {
 
@@ -80,14 +81,10 @@ export const TicketErrorPageTemplate = class extends React.Component {
     if (error) {
       this.redirect();
       return (
-        <div className="container pt-5">
-          <div className="columns">
-            <div className="column">
-              <h3>{this.getErrorMessage()}</h3>
-              <h3>{this.getRedirectMessage()}</h3>
-            </div>
-          </div>
-        </div>
+        <FullscreenMessageComponent
+          title={this.getErrorMessage()}
+          subtitle={this.getRedirectMessage()}
+        />
       )
     } else {
       navigate('/')
