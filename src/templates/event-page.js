@@ -62,7 +62,7 @@ export const EventPageTemplate = class extends React.Component {
               accessToken={loggedUser.accessToken}
             />
           }
-          <section className="section px-0 py-0">
+          <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' ? '-3rem' : '' }}>
             <div className="columns is-gapless">
               {event.streaming_url ?
                 <div className="column is-three-quarters px-0 py-0">
@@ -96,7 +96,7 @@ export const EventPageTemplate = class extends React.Component {
             </div>
           </section>
           {event.streaming_url &&
-            <section className="section px-0 py-0">
+            <section className="section px-0 pt-6 pb-0">
               <div className="columns mx-0 my-0 is-multiline">
                 <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
                   <TalkComponent event={event} summit={summit} noStream={true} />
@@ -107,7 +107,7 @@ export const EventPageTemplate = class extends React.Component {
                     <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} userName={user.userProfile.first_name} />
                   </div>
                 }
-                <div className="column is-one-quarter">
+                <div className="column is-one-quarter" style={{ marginLeft: 'auto' }}>
                   <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} />
                 </div>
               </div>
