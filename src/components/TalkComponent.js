@@ -1,5 +1,4 @@
 import React from "react"
-import DocumentsComponent from '../components/DocumentsComponent'
 
 import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 
@@ -11,7 +10,6 @@ const TalkComponent = class extends React.Component {
     this.formatEventDate = this.formatEventDate.bind(this);
     this.formatSpeakers = this.formatSpeakers.bind(this);
     this.formatEventLocation = this.formatEventLocation.bind(this);
-    this.getMaterials = this.getMaterials.bind(this);
   }
 
   formatEventDate(start_date, end_date, timezone) {
@@ -43,21 +41,12 @@ const TalkComponent = class extends React.Component {
     return event === {} ? 'Select an event from the schedule' : formattedLocation;
   }
 
-  getMaterials(event) {
-    let materials = [];
-    if (event.links?.length > 0) materials = [...materials, ...event.links]
-    if (event.videos?.length > 0) materials = [...materials, ...event.videos]
-    if (event.slides?.length > 0) materials = [...materials, ...event.slides]
-    return materials;
-  }
-
-
   render() {
 
     const { event: { class_name, start_date, end_date, speakers, title, description }, event, summit: { time_zone_id } } = this.props;
 
     return (
-      <div className={`columns talk ${class_name !== 'Presentation' ? 'p0 pr-3 pb-3' : 'px-5 py-5'}`}>
+      <div className={`columns talk ${class_name !== 'Presentation' ? 'px-3 py-3' : 'px-5 py-5'}`}>
         {class_name !== 'Presentation' ?
           <div className="talk__break">
             <div>
@@ -67,46 +56,41 @@ const TalkComponent = class extends React.Component {
             </div>
           </div>
           :
-          <React.Fragment>
-            <div className="column is-three-quarters">
-              <span className="talk__date">{this.formatEventDate(start_date, end_date, time_zone_id)} {this.formatEventLocation(event)}</span>
-              <h1>
-                <b>{title}</b>
-              </h1>
-              <div className="talk__speaker">
-                {speakers && speakers?.length === 0 ?
-                  null
-                  :
-                  speakers?.length < 6 ?
-                    <div className="columns is-multiline is-mobile">
-                      {speakers.map((s, index) => {
-                        return (
-                          <div className="column is-one-third-desktop is-half-mobile talk__speaker-container" key={index}>
-                            <img src={s.pic} alt={`${s.first_name} ${s.last_name}`} />
-                            <div>
-                              {`${s.first_name} ${s.last_name}`}
-                              <br />
-                              <b>{s.title}</b>
-                            </div>
+          <div className="column is-full">
+            <span className="talk__date">{this.formatEventDate(start_date, end_date, time_zone_id)} {this.formatEventLocation(event)}</span>
+            <h1>
+              <b>{title}</b>
+            </h1>
+            <div className="talk__speaker">
+              {speakers && speakers?.length === 0 ?
+                null
+                :
+                speakers?.length < 6 ?
+                  <div className="columns is-multiline is-mobile">
+                    {speakers.map((s, index) => {
+                      return (
+                        <div className="column is-one-third-desktop is-half-mobile talk__speaker-container" key={index}>
+                          <img src={s.pic} alt={`${s.first_name} ${s.last_name}`} />
+                          <div>
+                            {`${s.first_name} ${s.last_name}`}
+                            <br />
+                            <b>{s.title}</b>
                           </div>
-                        )
-                      })
-                      }
-                    </div>
-                    :
-                    <span className="talk__speaker--name">
-                      {this.formatSpeakers(speakers)}
-                    </span>
-                }
-                <br /><br />
-                <div className="talk__description" dangerouslySetInnerHTML={{ __html: description }} />
-              </div>
-              <br />
+                        </div>
+                      )
+                    })
+                    }
+                  </div>
+                  :
+                  <span className="talk__speaker--name">
+                    {this.formatSpeakers(speakers)}
+                  </span>
+              }
+              <br /><br />
+              <div className="talk__description" dangerouslySetInnerHTML={{ __html: description }} />
             </div>
-            <div className="column is-one-quarters">
-              <DocumentsComponent materials={this.getMaterials(event)} />
-            </div>
-          </React.Fragment>
+            <br />
+          </div>
         }
       </div>
     )

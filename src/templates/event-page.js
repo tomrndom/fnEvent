@@ -15,6 +15,8 @@ import SimpleChatWidgetComponent from '../components/SimpleChatWidgetComponent'
 import VideoComponent from '../components/VideoComponent'
 import TalkComponent from '../components/TalkComponent'
 import AdvertiseComponent from '../components/AdvertiseComponent'
+import DocumentsComponent from '../components/DocumentsComponent'
+import EventHeroComponent from '../components/EventHeroComponent'
 
 import { getEventBySlug } from '../actions/event-actions'
 import { getDisqusSSO } from '../actions/user-actions'
@@ -50,6 +52,7 @@ export const EventPageTemplate = class extends React.Component {
     if (event) {
       return (
         <>
+          <EventHeroComponent />
           {event.id &&
             <AttendanceTracker
               key={event.id}
@@ -94,19 +97,16 @@ export const EventPageTemplate = class extends React.Component {
           </section>
           {event.streaming_url &&
             <section className="section px-0 py-0">
-              <div className="columns mx-0 my-0">
-                <div className="column px-0 py-0 is-full is-hidden-mobile">
+              <div className="columns mx-0 my-0 is-multiline">
+                <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
                   <TalkComponent event={event} summit={summit} noStream={true} />
                 </div>
-              </div>
-            </section>
-          }
-          {event.etherpad_link &&
-            <section className="section px-4 py-6">
-              <div className="columns">
-                <div className="column is-three-quarters">
-                  <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} userName={user.userProfile.first_name} />
-                </div>
+                <DocumentsComponent event={event} />
+                {event.etherpad_link &&
+                  <div className="column is-three-quarters">
+                    <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} userName={user.userProfile.first_name} />
+                  </div>
+                }
                 <div className="column is-one-quarter">
                   <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} />
                 </div>
