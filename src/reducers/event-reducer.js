@@ -4,7 +4,7 @@ import { GET_EVENT_DATA } from '../actions/event-actions'
 
 const DEFAULT_STATE = {
   loading: false,
-  event: {},
+  event: null,
 }
 
 const eventReducer = (state = DEFAULT_STATE, action) => {

@@ -310,6 +310,13 @@ h2 {
     }
   }
 
+  .talk {
+
+    &__break {
+      height: auto;
+    }
+  }
+
   .join-zoom-container {
     flex-direction: column;    
     button {

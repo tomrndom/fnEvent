@@ -124,8 +124,7 @@ export const EventPageTemplate = class extends React.Component {
               <br />
               <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} onEventClick={(ev) => this.onEventChange(ev)} />
             </div>
-            <div className="column is-one-quarter has-text-centered pb-6">
-              <AdvertiseComponent section='event' id={event.id} />
+            <div className="column is-one-quarter has-text-centered pb-6">              
             </div>
           </div>
         </section >

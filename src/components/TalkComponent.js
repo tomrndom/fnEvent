@@ -53,7 +53,7 @@ const TalkComponent = class extends React.Component {
               <b>{title}</b>
               <br />
               {class_name !== 'Presentation' && <span>Next session will start soon...</span>}
-              {!event.streaming_url && <span>This session will be available on {epochToMomentTimeZone(event.start_date, time_zone_id).format('MMMM Do')}</span>}
+              {!event.streaming_url && <span>This session will be available on {epochToMomentTimeZone(start_date, time_zone_id).format('MMMM Do')}</span>}
             </div>
           </div>
           :
