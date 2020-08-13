@@ -70,9 +70,9 @@ export const EventPageTemplate = class extends React.Component {
                   {event.meeting_url &&
                     <div className="join-zoom-container">
                       <span>
-                        Take the Virtual Mic and participate!
+                        Take the virtual mic and participate!
                       </span>
-                      <a className="zoom-link" href={event.meeting_url}>
+                      <a className="zoom-link" href={event.meeting_url} target="_blank">
                         <button className="zoom-button button">
                           <b>Join now</b>
                         </button>
