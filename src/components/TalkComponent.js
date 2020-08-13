@@ -76,7 +76,7 @@ const TalkComponent = class extends React.Component {
                     {speakers.map((s, index) => {
                       return (
                         <div className="column is-one-third-desktop is-half-mobile talk__speaker-container" key={index}>
-                          <img src={s.pic} alt={`${s.first_name} ${s.last_name}`} />
+                          <img src={s.pic} />
                           <div>
                             {`${s.first_name} ${s.last_name}`}
                             <br />
@@ -92,7 +92,7 @@ const TalkComponent = class extends React.Component {
                     {this.formatSpeakers(speakers)}
                   </span>
               }
-              <br /><br />
+              <br />
               <div className="talk__description" dangerouslySetInnerHTML={{ __html: description }} />
             </div>
             <br />

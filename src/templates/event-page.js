@@ -99,7 +99,7 @@ export const EventPageTemplate = class extends React.Component {
               </div>
             </section>
             {event.streaming_url &&
-              <section className="section px-0 pt-6 pb-0">
+              <section className="section px-0 pt-5 pb-0">
                 <div className="columns mx-0 my-0 is-multiline">
                   <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
                     <TalkComponent event={event} summit={summit} noStream={true} />
