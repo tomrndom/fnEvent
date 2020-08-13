@@ -298,6 +298,18 @@ div.column:first-of-type {
   }
 }
 
+@media (max-width: 890px) {
+  .hero-events {
+    .hero-body {      
+      .hero-event-container {        
+        .subtitle {          
+          padding-left: 0;
+        }        
+      }
+    }
+  }
+}
+
 @media (max-width: 978px) {
   .hero-marketing {
 
