@@ -71,7 +71,7 @@ const TalkComponent = class extends React.Component {
               {speakers && speakers?.length === 0 ?
                 null
                 :
-                speakers?.length < 6 ?
+                speakers?.length < 10 ?
                   <div className="columns is-multiline is-mobile">
                     {speakers.map((s, index) => {
                       return (
