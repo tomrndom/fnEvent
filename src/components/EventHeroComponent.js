@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LobbyHero from '../content/hero-banner.json'
+import Content from '../content/marketing-site.json'
 import styles from '../styles/lobby-hero.module.scss'
 
 const EventHeroComponent = () => (
@@ -8,17 +8,17 @@ const EventHeroComponent = () => (
     <div className={`${styles.heroEvents} columns`}>
       <div className={'column is-12'}>
         <div className={`${styles.heroBody} hero-body`}>
-          <div className={`${styles.heroEventContainer} container`}>
+          <div className={`${styles.heroEventContainer}`}>
             <div>
               <span className={styles.title}>
-                All Hands
+                {Content.heroBanner.title}
               </span>
               <span className={styles.subtitle}>
-                Meeting
+              {Content.heroBanner.subTitle}
               </span>
             </div>
             <div className={styles.date}>
-              <span>August 17, 2020</span>
+              <span>{Content.heroBanner.date}</span>
             </div>
           </div>
         </div>
