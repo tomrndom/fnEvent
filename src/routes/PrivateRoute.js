@@ -4,6 +4,7 @@ import { navigate } from "gatsby"
 import envVariables from '../utils/envVariables';
 import authorizedUser from '../utils/authorizedGroups';
 
+import FullscreenMessageComponent from '../components/FullscreenMessageComponent'
 import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
 
 const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startDate, marketingNow, ...rest }) => {
@@ -19,13 +20,9 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startD
 
   if (!user || !user.groups) { 
     return (
-      <div className="container pt-5">
-        <div className="columns">
-          <div className="column">
-            <h3>Checking credentials...</h3>
-          </div>
-        </div>
-      </div>
+      <FullscreenMessageComponent
+        title="Checking credentials..."
+      />
     )
   }
 
@@ -47,13 +44,9 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startD
       navigate('/')
     }, 3000);
     return (
-      <div className="container pt-5">
-        <div className="columns">
-          <div className="column">
-            <h3>Its not yet show time!</h3>
-          </div>
-        </div>
-      </div>
+      <FullscreenMessageComponent
+        title="Its not yet show time!"
+      />
     )
   }
 

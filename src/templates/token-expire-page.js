@@ -6,6 +6,8 @@ import URI from "urijs";
 import { handleResetReducers } from '../actions/event-actions'
 import { doLogin } from "openstack-uicore-foundation/lib/methods";
 
+import FullscreenMessageComponent from '../components/FullscreenMessageComponent'
+
 export const TokenExpirePageTemplate = class extends React.Component {
 
   constructor(props) {
@@ -26,18 +28,11 @@ export const TokenExpirePageTemplate = class extends React.Component {
   }
 
   render() {
-
     this.redirectToLogin();
-
     return (
-      <div className="container pt-5">
-        <div className="columns">
-          <div className="column">
-            <h3>Your session has timed out.</h3>
-            <h3>You will be redirected to the login page.</h3>
-          </div>
-        </div>
-      </div>
+      <FullscreenMessageComponent
+        title="Checking credentials..."
+      />
     )
   }
 }
