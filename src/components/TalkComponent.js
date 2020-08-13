@@ -1,5 +1,5 @@
 import React from "react"
-import FullscreenMessageComponent from '../components/FullscreenMessageComponent'
+import HeroComponent from '../components/HeroComponent'
 import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 
 const TalkComponent = class extends React.Component {
@@ -48,17 +48,19 @@ const TalkComponent = class extends React.Component {
     return (
       <div className={`columns talk ${class_name !== 'Presentation' || !event.streaming_url ? 'px-3 py-3' : 'px-5 py-5'}`}>
         {class_name !== 'Presentation' || !event.streaming_url ?
-          <div className="talk__break">
-            <div>
-              <b>{title}</b>
-              <br />
-              {class_name !== 'Presentation' && <span>Next session will start soon...</span>}
-              {class_name === 'Presentation' && !event.streaming_url && <span>This session will be available on {epochToMomentTimeZone(start_date, time_zone_id).format('MMMM Do')}</span>}
-            </div>
-          </div>
-          // <FullscreenMessageComponent
-          //   title="Checking credentials..."
-          // />
+          <HeroComponent
+            title={title}
+            subtitle={
+              class_name !== 'Presentation' ?
+                'Next session will start soon...'
+                :
+                !event.streaming_url ?
+                  `This session will be available on ${epochToMomentTimeZone(start_date, time_zone_id).format('MMMM Do')}`
+                  :
+                  ''
+            }
+            event={true}
+          />
           :
           <div className="column is-full">
             <span className="talk__date">{this.formatEventDate(start_date, end_date, time_zone_id)} {this.formatEventLocation(event)}</span>
