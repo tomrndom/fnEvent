@@ -4,6 +4,8 @@ import { navigate } from "gatsby"
 import envVariables from '../utils/envVariables';
 import authorizedUser from '../utils/authorizedGroups';
 
+import MarketingSite from '../content/marketing-site.json'
+
 import HeroComponent from '../components/HeroComponent'
 import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
 
@@ -39,7 +41,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startD
     return null
   }
 
-  if (!isAuthorized && !(startDate < marketingNow + 900)) {
+  if (!isAuthorized && !(startDate < marketingNow + MarketingSite.summit_delta_start_time)) {
     setTimeout(() => {
       navigate('/')
     }, 3000);

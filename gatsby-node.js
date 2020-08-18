@@ -13,8 +13,12 @@ exports.onPreBootstrap = async () => {
 
   let marketingData;
 
+  let params = {    
+    per_page: 100,
+};
+
   const colours = await axios.get(
-    `${process.env.GATSBY_MARKETING_API_BASE_URL}/api/public/v1/config-values/all/shows/${process.env.GATSBY_SUMMIT_ID}`
+    `${process.env.GATSBY_MARKETING_API_BASE_URL}/api/public/v1/config-values/all/shows/${process.env.GATSBY_SUMMIT_ID}`, { params }
   ).then((response) => {
     marketingData = response.data.data;
     let colorObject = { colors: {} }
@@ -58,6 +62,23 @@ exports.onPreBootstrap = async () => {
     if (err) throw err;
     console.log('Saved!');
   });
+
+  let marketingSite = JSON.parse(fs.readFileSync('src/content/marketing-site.json'));
+
+  console.log(marketingData)
+
+  marketingData.map((item) => {
+    if (item.key.startsWith('summit_')) {
+      console.log(item);
+      marketingSite[item.key] = item.value;
+    }
+  });
+
+  fs.writeFileSync('src/content/marketing-site.json', JSON.stringify(marketingSite), 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+
 }
 
 // makes Summit logo optional for graphql queries
