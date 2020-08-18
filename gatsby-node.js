@@ -65,11 +65,8 @@ exports.onPreBootstrap = async () => {
 
   let marketingSite = JSON.parse(fs.readFileSync('src/content/marketing-site.json'));
 
-  console.log(marketingData)
-
   marketingData.map((item) => {
     if (item.key.startsWith('summit_')) {
-      console.log(item);
       marketingSite[item.key] = item.value;
     }
   });
