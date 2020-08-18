@@ -65,6 +65,8 @@ class MarketingHeroComponent extends React.Component {
     const { summit, isLoggedUser } = this.props;
     const { timestamp } = this.state;
 
+    const deltaSummit = MarketingSite.summit_delta_start_time ? MarketingSite.summit_delta_start_time : 0;
+
     return (
       <section className={styles.heroMarketing}>
         <div className={`${styles.heroMarketingColumns} columns is-gapless`}>
@@ -83,7 +85,7 @@ class MarketingHeroComponent extends React.Component {
                 </div>
                 <h4>{MarketingSite.heroBanner.time}</h4>
                 <div className={styles.heroButtons}>
-                  {summit.start_date - MarketingSite.summit_delta_start_time < timestamp && isLoggedUser ?
+                  {summit.start_date - deltaSummit < timestamp && isLoggedUser ?
                     <a className={styles.link} href={`${envVariables.AUTHORIZED_DEFAULT_PATH ? envVariables.AUTHORIZED_DEFAULT_PATH : '/a/'}`} target="_blank" rel="noreferrer">
                       <button className={`${styles.button} button is-large`}>
                         <i className={`fa fa-2x fa-sign-in icon is-large`}></i>
