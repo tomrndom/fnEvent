@@ -11,6 +11,8 @@ import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
 
 const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startDate, marketingNow, ...rest }) => {
 
+  const deltaSummit = MarketingSite.summit_delta_start_time ? MarketingSite.summit_delta_start_time : 0;
+
   if (!isLoggedIn && location.pathname !== `/`) {
     navigate('/', {
       state: {
@@ -41,7 +43,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startD
     return null
   }
 
-  if (!isAuthorized && !(startDate < marketingNow + MarketingSite.summit_delta_start_time)) {
+  if (!isAuthorized && !(startDate < marketingNow + deltaSummit)) {
     setTimeout(() => {
       navigate('/')
     }, 3000);
