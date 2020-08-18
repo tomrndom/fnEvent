@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from "react-redux";
 import Slider from "react-slick";
 import URI from "urijs";
 import { doLogin } from "openstack-uicore-foundation/lib/methods";
@@ -12,10 +13,6 @@ class MarketingHeroComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.interval = null;
-    this.state = {
-      timestamp: 0
-    }
 
     const sliderSettings = {
       autoplay: true,
@@ -25,16 +22,6 @@ class MarketingHeroComponent extends React.Component {
       slidesToShow: 1,
       slidesToScroll: 1
     };
-  }
-
-  componentDidMount() {
-    const { now } = this.props;
-    this.setState({ timestamp: now });
-    this.interval = setInterval(this.tick, 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
 
   getBackURL = () => {
@@ -55,15 +42,9 @@ class MarketingHeroComponent extends React.Component {
     doLogin(this.getBackURL());
   }
 
-  tick = () => {
-    const { timestamp } = this.state;
-    this.setState({ timestamp: timestamp + 1 })
-  };
-
   render() {
 
-    const { summit, isLoggedUser } = this.props;
-    const { timestamp } = this.state;
+    const { summit, now, isLoggedUser } = this.props;    
 
     return (
       <section className={styles.heroMarketing}>
@@ -83,7 +64,7 @@ class MarketingHeroComponent extends React.Component {
                 </div>
                 <h4>{MarketingSite.heroBanner.time}</h4>
                 <div className={styles.heroButtons}>
-                  {summit.start_date - MarketingSite.summit_delta_start_time < timestamp && isLoggedUser ?
+                  {summit.start_date - MarketingSite.summit_delta_start_time < now && isLoggedUser ?
                     <a className={styles.link} href={`${envVariables.AUTHORIZED_DEFAULT_PATH ? envVariables.AUTHORIZED_DEFAULT_PATH : '/a/'}`} target="_blank" rel="noreferrer">
                       <button className={`${styles.button} button is-large`}>
                         <i className={`fa fa-2x fa-sign-in icon is-large`}></i>
@@ -133,4 +114,8 @@ class MarketingHeroComponent extends React.Component {
   }
 }
 
-export default MarketingHeroComponent
+const mapStateToProps = ({ summitState }) => ({  
+  now: summitState.nowUtc,
+})
+
+export default connect(mapStateToProps, null)(MarketingHeroComponent);

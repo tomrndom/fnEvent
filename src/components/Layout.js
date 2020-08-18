@@ -2,6 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import ClockComponent from '../components/ClockComponent'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
@@ -41,6 +42,7 @@ const TemplateWrapper = ({ children, marketing }) => {
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
       </Helmet>
       <Header />
+      <ClockComponent summit={summit} />
       <div id="content-wrapper">{children}</div>
       <Footer marketing={marketing} />
     </div>
