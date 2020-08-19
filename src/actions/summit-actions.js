@@ -8,7 +8,7 @@ import {
 import SummitObject from '../content/summit.json';
 
 import { customErrorHandler } from '../utils/customErrorHandler';
-import getPhase from '../utils/getPhase';
+import { getSummitPhase } from '../utils/getPhase';
 
 export const GET_SUMMIT_DATA = 'GET_SUMMIT_DATA';
 export const SUMMIT_PHASE_AFTER = 'SUMMIT_PHASE_AFTER'
@@ -59,17 +59,17 @@ export const updateClock = (timestamp) => (dispatch, getState) => {
   const { summitState: { nowUtc, summit_phase } } = getState();
 
   if (nowUtc) {
-    const phase = getPhase(SummitObject, nowUtc, summit_phase);
+    const phase = getSummitPhase(SummitObject, nowUtc, summit_phase);
     if (summit_phase !== phase) {
       switch (phase) {
-        case 'before':
-          dispatch(createAction(SUMMIT_PHASE_AFTER)('before'))
+        case -1:
+          dispatch(createAction(SUMMIT_PHASE_AFTER)(-1))
           break;
-        case 'during':
-          dispatch(createAction(SUMMIT_PHASE_DURING)('during'))
+        case 0:
+          dispatch(createAction(SUMMIT_PHASE_DURING)(0))
           break;
-        case 'after':
-          dispatch(createAction(SUMMIT_PHASE_BEFORE)('after'))
+        case 1:
+          dispatch(createAction(SUMMIT_PHASE_BEFORE)(1))
           break;
         default:
           break;

@@ -44,9 +44,7 @@ class MarketingHeroComponent extends React.Component {
 
   render() {
 
-    const { summit, now, isLoggedUser } = this.props;    
-
-    const deltaSummit = MarketingSite.summit_delta_start_time ? MarketingSite.summit_delta_start_time : 0;
+    const { summit, summit_phase, isLoggedUser } = this.props;
 
     return (
       <section className={styles.heroMarketing}>
@@ -66,7 +64,7 @@ class MarketingHeroComponent extends React.Component {
                 </div>
                 <h4>{MarketingSite.heroBanner.time}</h4>
                 <div className={styles.heroButtons}>
-                  {summit.start_date - deltaSummit < now && isLoggedUser ?                  
+                  {summit_phase >= 0 && isLoggedUser ?
                     <a className={styles.link} href={`${envVariables.AUTHORIZED_DEFAULT_PATH ? envVariables.AUTHORIZED_DEFAULT_PATH : '/a/'}`} target="_blank" rel="noreferrer">
                       <button className={`${styles.button} button is-large`}>
                         <i className={`fa fa-2x fa-sign-in icon is-large`}></i>
@@ -117,7 +115,7 @@ class MarketingHeroComponent extends React.Component {
 }
 
 const mapStateToProps = ({ summitState }) => ({  
-  now: summitState.nowUtc,
+  summit_phase: summitState.summit_phase,
 })
 
 export default connect(mapStateToProps, null)(MarketingHeroComponent);

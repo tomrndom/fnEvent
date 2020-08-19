@@ -23,10 +23,6 @@ const summitReducer = (state = DEFAULT_STATE, action) => {
       const { timestamp } = payload;
       return { ...state, nowUtc: timestamp };
     }
-    case TIME_NOW: {
-      const { timestamp } = payload;      
-      return { ...state, marketingNow: timestamp };
-    }
     case SUMMIT_PHASE_AFTER: {
       return { ...state, summit_phase: payload }
     }

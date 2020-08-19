@@ -9,7 +9,7 @@ import MarketingSite from '../content/marketing-site.json'
 import HeroComponent from '../components/HeroComponent'
 import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
 
-const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startDate, marketingNow, ...rest }) => {
+const PrivateRoute = ({ component: Component, isLoggedIn, location, user, summit_phase, ...rest }) => {
 
   const deltaSummit = MarketingSite.summit_delta_start_time ? MarketingSite.summit_delta_start_time : 0;
 
@@ -43,7 +43,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, user, startD
     return null
   }
 
-  if (!isAuthorized && !(startDate < marketingNow + deltaSummit)) {
+  if (!isAuthorized && summit_phase === -1) {
     setTimeout(() => {
       navigate('/')
     }, 3000);
