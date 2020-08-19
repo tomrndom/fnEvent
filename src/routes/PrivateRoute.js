@@ -5,6 +5,7 @@ import envVariables from '../utils/envVariables';
 import authorizedUser from '../utils/authorizedGroups';
 
 import MarketingSite from '../content/marketing-site.json'
+import { PHASES } from '../utils/phasesUtils'
 
 import HeroComponent from '../components/HeroComponent'
 import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
@@ -43,7 +44,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, user, summit
     return null
   }
 
-  if (!isAuthorized && summit_phase === -1) {
+  if (!isAuthorized && summit_phase === PHASES.BEFORE) {
     setTimeout(() => {
       navigate('/')
     }, 3000);
