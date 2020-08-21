@@ -45,8 +45,9 @@ export const HomePageTemplate = class extends React.Component {
           <div className="columns">
             <div className="column is-one-quarter">
               <h2><b>Community</b></h2>
-              <AdvertiseComponent section='lobby' column="left"/>
+              <SponsorComponent tier='gold'/>
               <SponsorComponent tier='silver'/>
+              <AdvertiseComponent section='lobby' column="left" style={{marginTop: '2em'}}/>
             </div>            
             <div className="column is-half">
               <LiveEventWidgetComponent />
@@ -85,7 +86,6 @@ export const HomePageTemplate = class extends React.Component {
                 updateCallback={updateWidgets}
               />
               <AdvertiseComponent section='lobby' column="right"/>
-              <SponsorComponent tier='gold'/>
             </div>
           </div>
         </div>
