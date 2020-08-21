@@ -134,7 +134,7 @@ collections:
               {label: "Disqus", name: "disqus", widget: boolean, required: false},
             ]}
           - {label: "Sponsors", name: "sponsors", widget: list, fields: [
-              {label: "Image", name: "image", widget: image},
+              {label: "Image", name: "image", widget: image, required: false},
               {label: "Size", name: "size", widget: hidden}
             ]}
   - name: "pages"
