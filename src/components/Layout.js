@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -13,8 +13,42 @@ import SummitObject from '../content/summit.json'
 import "../styles/bulma.scss"
 
 const TemplateWrapper = ({ children, marketing }) => {
-  const { title, description } = useSiteMetadata()
+
+  const { title, description } = useSiteMetadata();
   const { summit } = SummitObject;
+
+  const [seconds, setSeconds] = useState(0);
+
+  let interval = useRef(null);
+
+  const onFocus = useCallback(() => {
+    console.log("Tab is in focus");
+    clearInterval(interval.current);
+    console.log(seconds, " seconds passed");
+    if (seconds > 60) {
+      console.log("call hour api");
+    }
+    setSeconds(0);
+  }, [seconds]);
+
+  const onBlur = useCallback(() => {
+    console.log("Tab is blurred");
+    interval.current = setInterval(
+      () => setSeconds((prevSeconds) => prevSeconds + 1),
+      1000
+    );
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("focus", onFocus);
+    window.addEventListener("blur", onBlur);
+    // Specify how to clean up after this effect:
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("blur", onBlur);
+    };
+  });
+
   return (
     <div id="container">
       <Helmet>
