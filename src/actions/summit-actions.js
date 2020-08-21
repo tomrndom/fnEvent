@@ -46,7 +46,7 @@ export const getTimeNow = () => (dispatch) => {
   )({})(dispatch).then((response) => {
     const payload = response.response;
     dispatch(stopLoading());
-    dispatch(createAction(TIME_NOW)(payload));
+    dispatch(createAction(UPDATE_CLOCK)(payload));
   }
   ).catch(e => {
     dispatch(stopLoading());

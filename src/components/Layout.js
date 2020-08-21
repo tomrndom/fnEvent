@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { connect } from "react-redux";
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -7,12 +8,13 @@ import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
 import SummitObject from '../content/summit.json'
+import { updateClock } from "../actions/summit-actions";
 
 // import "../styles/all.scss"
 // import "../styles/palette.scss"
 import "../styles/bulma.scss"
 
-const TemplateWrapper = ({ children, marketing }) => {
+const TemplateWrapper = ({ children, marketing, updateClock }) => {
 
   const { title, description } = useSiteMetadata();
   const { summit } = SummitObject;
@@ -21,18 +23,15 @@ const TemplateWrapper = ({ children, marketing }) => {
 
   let interval = useRef(null);
 
-  const onFocus = useCallback(() => {
-    console.log("Tab is in focus");
-    clearInterval(interval.current);
-    console.log(seconds, " seconds passed");
-    if (seconds > 60) {
-      console.log("call hour api");
+  const onFocus = useCallback(() => {    
+    clearInterval(interval.current);    
+    if (seconds > 60) {           
+      updateClock();
     }
     setSeconds(0);
   }, [seconds]);
 
   const onBlur = useCallback(() => {
-    console.log("Tab is blurred");
     interval.current = setInterval(
       () => setSeconds((prevSeconds) => prevSeconds + 1),
       1000
@@ -83,4 +82,4 @@ const TemplateWrapper = ({ children, marketing }) => {
   )
 }
 
-export default TemplateWrapper
+export default connect(null, { updateClock })(TemplateWrapper);
