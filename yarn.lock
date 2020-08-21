@@ -16040,10 +16040,10 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@^2.0.3:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-2.1.1.tgz#de309a564a571975352cd0f26a4423ad91eb464d"
-  integrity sha512-1LRKDlmyx41w8vQeZVHKFNEfe9gQ8gcNQ/980SIKTaGEx9nZruCuPXqJxBKKdtudxVbdapSo8kfOBI17tL9twg==
+stream-chat-react@^2.2.1:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-2.2.2.tgz#a9a1c00da54729ff48945043df6001aaf213b861"
+  integrity sha512-KgB/VQjnGgbBF/Bq65cy2w6EdmOEngTa79yIzc1+VHwn75x0+K/c5ITjexglx7bUoYkSTi7ny1r8YzlX108INw==
   dependencies:
     "@braintree/sanitize-url" "4.0.0"
     custom-event "^1.0.1"
@@ -16066,14 +16066,14 @@ stream-chat-react@^2.0.3:
     react-player "^2.5.0"
     react-textarea-autosize "^8.2.0"
     seamless-immutable "^7.1.4"
-    stream-chat "^1.13.0"
+    stream-chat "^1.14.1"
     textarea-caret "^3.1.0"
     uuid "^7.0.3"
 
-stream-chat@^1.13.0:
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-1.13.2.tgz#d158e5f35dc75915772d0466d43969f874f53ac9"
-  integrity sha512-taVAAzjHeHGQjwml8wqbPBaiErJCcVtiMSa9iUgq75hiPssQ2fJlsMzAw+0IiCx8w/s8gUcVBxdqOIhHb8X02A==
+stream-chat@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-1.14.1.tgz#c2e7786e6865647902cf81a43adfa48ff8ae12ba"
+  integrity sha512-1WeTpNqXhDmuOo5QGixBXGASjZYoGbMZIFZ83MzfgsJh0rMoGIR5Hwx+P/qtAffwlSktXxf7+6GKidgSEYcQRw==
   dependencies:
     "@babel/runtime" "^7.3.1"
     "@types/seamless-immutable" "7.1.12"
