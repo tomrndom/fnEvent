@@ -233,6 +233,24 @@ h2 {
   padding: 0 15px;
 }
 
+.disqus-container-home {
+  padding: 0 15px;
+  margin-bottom: 5px;
+  position: static;
+  border: 1px solid #eee;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 1500px;
+
+  >span {        
+    border-bottom: 1px solid #eee;
+    padding-left: 15px !important;
+    margin-right: -15px;
+    margin-left: -15px;
+    width: 110%;
+  }
+}
+
 .schedule-container {
   display: flex;
   flex-direction: column;

@@ -45,14 +45,20 @@ export const HomePageTemplate = class extends React.Component {
           <div className="columns">
             <div className="column is-one-quarter">
               <h2><b>Community</b></h2>
-              <SponsorComponent tier='gold'/>
-              <SponsorComponent tier='silver'/>
-              <AdvertiseComponent section='lobby' column="left" style={{marginTop: '2em'}}/>
-            </div>            
+              <SponsorComponent tier='gold' />
+              <SponsorComponent tier='silver' />
+              <AdvertiseComponent section='lobby' column="left" style={{ marginTop: '2em' }} />
+            </div>
             <div className="column is-half">
               <h2><b>Today's Sessions</b></h2>
               <LiveEventWidgetComponent />
-              <DisqusComponent page="lobby" disqusSSO={user.disqusSSO} summit={summit} title="Public conversation" style={{ position: 'static' }} />
+              <DisqusComponent
+                page="lobby"
+                disqusSSO={user.disqusSSO}
+                summit={summit}
+                className="disqus-container-home"
+                title="Public conversation"
+              />
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
@@ -73,7 +79,7 @@ export const HomePageTemplate = class extends React.Component {
                 title="Featured Speakers"
                 bigPics={false}
               />
-              <AdvertiseComponent section='lobby' column="center"/>
+              <AdvertiseComponent section='lobby' column="center" />
             </div>
             <div className="column is-one-quarter pb-6">
               <h2><b>My Info</b></h2>
@@ -82,12 +88,12 @@ export const HomePageTemplate = class extends React.Component {
                 accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
                 landscape={true}
-                yourSchedule={true}                
+                yourSchedule={true}
                 showNav={true}
                 onRef={addWidgetRef}
                 updateCallback={updateWidgets}
               />
-              <AdvertiseComponent section='lobby' column="right"/>
+              <AdvertiseComponent section='lobby' column="right" />
             </div>
           </div>
         </div>
