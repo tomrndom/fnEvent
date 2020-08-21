@@ -50,6 +50,7 @@ export const HomePageTemplate = class extends React.Component {
               <AdvertiseComponent section='lobby' column="left" style={{marginTop: '2em'}}/>
             </div>            
             <div className="column is-half">
+              <h2><b>Today's Sessions</b></h2>
               <LiveEventWidgetComponent />
               <DisqusComponent page="lobby" disqusSSO={user.disqusSSO} summit={summit} title="Public conversation" style={{ position: 'static' }} />
               <ScheduleLiteComponent
@@ -74,8 +75,8 @@ export const HomePageTemplate = class extends React.Component {
               <AdvertiseComponent section='lobby' column="center"/>
             </div>
             <div className="column is-one-quarter pb-6">
+              <h2><b>My Info</b></h2>
               <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} title="Private Chat" />
-              <h2><b>My Schedule</b></h2>
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
