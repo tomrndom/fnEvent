@@ -99,6 +99,10 @@ collections:
                 {label: "Display", name: "display", widget: boolean, required: false},
               ]}
             ]}
+          - {label: "Legal", name: "legal", widget: list, fields: [
+              {label: "Title", name: "title", widget: string},
+              {label: "Link", name: "link", widget: string},         
+            ]}
   - name: "marketing"
     label: "Marketing Site"
     editor:
