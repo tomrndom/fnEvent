@@ -61,6 +61,7 @@ export const HomePageTemplate = class extends React.Component {
                 showNav={false}
                 onRef={addWidgetRef}
                 updateCallback={updateWidgets}
+                title="Up Next"
               />
               <SpeakersWidgetComponent
                 accessToken={loggedUser.accessToken}

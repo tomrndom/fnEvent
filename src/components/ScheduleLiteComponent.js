@@ -31,7 +31,8 @@ const ScheduleComponent = class extends React.Component {
         <Helmet>
           <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css" />
         </Helmet>
-        <div>
+        <div className="schedule-container">
+          {this.props.title && <span className="navbar-brand title" style={{ paddingLeft: "0px" }}>{this.props.title}</span>}
           <ScheduleLite {...scheduleProps} {...this.props} />
         </div>
       </React.Fragment>
