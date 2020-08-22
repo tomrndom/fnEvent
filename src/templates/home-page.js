@@ -7,6 +7,7 @@ import Layout from '../components/Layout'
 import withOrchestra from "../utils/widgetOrchestra";
 
 import SummitObject from '../content/summit.json'
+import HomeSettings from '../content/home-settings.json'
 
 import LobbyHeroComponent from '../components/LobbyHeroComponent'
 import AdvertiseComponent from '../components/AdvertiseComponent'
@@ -72,6 +73,7 @@ export const HomePageTemplate = class extends React.Component {
                 landscape={false}
                 yourSchedule={false}
                 showNav={false}
+                showAllEvents={HomeSettings.centerColumn.schedule.showAllEvents}
                 onRef={addWidgetRef}
                 updateCallback={updateWidgets}
                 title="Up Next"

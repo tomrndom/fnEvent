@@ -29,7 +29,7 @@ const ScheduleComponent = class extends React.Component {
         <Helmet>
           <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css" />
         </Helmet>
-        <div className="schedule-container">
+        <div className={this.props.page === 'marketing-site' ? 'schedule-container-marketing': 'schedule-container'}>
           <ScheduleLite {...scheduleProps} {...this.props} />
         </div>
       </React.Fragment>
