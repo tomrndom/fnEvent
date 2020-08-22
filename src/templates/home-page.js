@@ -34,6 +34,10 @@ export const HomePageTemplate = class extends React.Component {
     navigate(`/a/event/${ev}`);
   }
 
+  onViewAllEventsClick() {
+    navigate('/a/schedule')
+  }
+
   render() {
     const { loggedUser, user, addWidgetRef, updateWidgets } = this.props;
     let { summit } = SummitObject;
@@ -62,6 +66,7 @@ export const HomePageTemplate = class extends React.Component {
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
+                onViewAllEventsClick={() => this.onViewAllEventsClick()}
                 landscape={false}
                 yourSchedule={false}
                 showNav={false}
@@ -87,6 +92,7 @@ export const HomePageTemplate = class extends React.Component {
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
+                title='My Schedule'
                 landscape={true}
                 yourSchedule={true}
                 showNav={true}
@@ -97,7 +103,6 @@ export const HomePageTemplate = class extends React.Component {
             </div>
           </div>
         </div>
-        {/* <ClockComponent summit={summit} now={now} /> */}
       </React.Fragment>
     )
   }
