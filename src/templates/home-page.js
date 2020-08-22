@@ -96,6 +96,8 @@ export const HomePageTemplate = class extends React.Component {
                 landscape={true}
                 yourSchedule={true}
                 showNav={true}
+                eventCount={10}
+                slotCount={1}
                 onRef={addWidgetRef}
                 updateCallback={updateWidgets}
               />
