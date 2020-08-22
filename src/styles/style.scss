@@ -250,6 +250,15 @@ h2 {
   }
 }
 
+.schedule-container-home {  
+  margin-top: 15px;
+  position: static;  
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 10px;
+  max-height: 1500px;
+}
+
 .schedule-container {
   display: flex;
   flex-direction: column;

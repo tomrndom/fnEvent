@@ -70,13 +70,15 @@ export const HomePageTemplate = class extends React.Component {
                 accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
                 onViewAllEventsClick={() => this.onViewAllEventsClick()}
-                landscape={false}
+                landscape={HomeSettings.centerColumn.schedule.showAllEvents}
                 yourSchedule={false}
                 showNav={false}
                 showAllEvents={HomeSettings.centerColumn.schedule.showAllEvents}
                 onRef={addWidgetRef}
                 updateCallback={updateWidgets}
-                title="Up Next"
+                title={HomeSettings.centerColumn.schedule.showAllEvents ? "Full Schedule" : "Up Next"}
+                eventCount={HomeSettings.centerColumn.schedule.showAllEvents ? 100 : 3}
+                className={HomeSettings.centerColumn.schedule.showAllEvents ? "schedule-container-home" : ""}
               />
               <SpeakersWidgetComponent
                 accessToken={loggedUser.accessToken}
