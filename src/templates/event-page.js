@@ -55,9 +55,9 @@ export const EventPageTemplate = class extends React.Component {
                 accessToken={loggedUser.accessToken}
               />
             }
-            <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || !event.streaming_url || phase < PHASES.DURING ? '-3rem' : '' }}>
+            <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || !event.streaming_url || (phase && phase < PHASES.DURING) ? '-3rem' : '' }}>
               <div className="columns is-gapless">
-                {phase >= PHASES.DURING && event.streaming_url ?
+                {phase && phase >= PHASES.DURING && event.streaming_url ?
                   <div className="column is-three-quarters px-0 py-0">
                     <VideoComponent url={event.streaming_url} />
                     {event.meeting_url &&
@@ -88,7 +88,7 @@ export const EventPageTemplate = class extends React.Component {
                 </div>
               </div>
             </section>
-            {phase >= PHASES.DURING && event.streaming_url &&
+            {phase && phase >= PHASES.DURING && event.streaming_url &&
               <section className="section px-0 pt-5 pb-0">
                 <div className="columns mx-0 my-0 is-multiline">
                   <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
@@ -108,7 +108,7 @@ export const EventPageTemplate = class extends React.Component {
             }
           </>
         )
-      } else {        
+      } else {
         return <HeroComponent title="Loading event" />
       }
     }
