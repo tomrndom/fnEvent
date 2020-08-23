@@ -1,8 +1,8 @@
 {
   "heroBanner": {
-    "title": "YOCO QA Summit",
-    "subTitle": "Coming Soon!",
-    "date": "AUG 16, 4:30PM (PDT) – AUG 30, 2020",
+    "title": "YOCO Summit",
+    "subTitle": "Now Live!",
+    "date": "virtual • pacific time zone",
     "time": "",
     "dateLayout": false,
     "buttons": {
@@ -23,32 +23,29 @@
     ]
   },
   "leftColumn": {
-    "schedule": false,
-    "disqus": true
+    "schedule": true,
+    "disqus": false
   },
   "sponsors": [
     {
-      "image": "/img/marketing/ad_landing_hp.jpg",
+      "image": "/img/yoco-sponsor-ads-large-wherehol-vert.png",
       "size": "simple"
     },
     {
-      "image": "/img/marketing/ad_landing_spotify.jpg",
+      "image": "/img/yoco-sponsor-ads-medium-tilted.png",
       "size": "simple"
     },
     {
-      "image": "/img/marketing/ad_landing_huawei.jpg",
+      "image": "/img/yoco-sponsor-ads-large-mobility-vert-new.png",
+      "size": "simple"
+    },
+    {
+      "image": "/img/yoco-sponsor-ads-large-apex-vert.png",
       "size": "double"
     },
+    {},
     {
-      "image": "/img/marketing/ad_landing_intel.jpg",
-      "size": "simple"
-    },
-    {
-      "image": "/img/marketing/ad_landing_allianz.jpg",
-      "size": "simple"
-    },
-    {
-      "image": "/img/marketing/ad_landing_redhat.jpg",
+      "image": "/img/yoco-sponsor-ads-medium-treva.png",
       "size": "double"
     }
   ]

@@ -6,15 +6,15 @@
       "items": [
         {
           "title": "All Projects",
-          "link": "#"
+          "link": "/footer-content/"
         },
         {
           "title": "Host a project",
-          "link": "#"
+          "link": "/footer-content/"
         },
         {
           "title": "Services",
-          "link": "#"
+          "link": "/footer-content/"
         }
       ]
     },
@@ -24,11 +24,11 @@
       "items": [
         {
           "title": "About",
-          "link": "#"
+          "link": "/footer-content/"
         },
         {
           "title": "Supporters",
-          "link": "#"
+          "link": "/footer-content/"
         }
       ]
     },
@@ -38,15 +38,15 @@
       "items": [
         {
           "title": "Corporate members",
-          "link": "#"
+          "link": "/footer-content/"
         },
         {
           "title": "Join us",
-          "link": "#"
+          "link": "/footer-content/"
         },
         {
           "title": "Services",
-          "link": "#"
+          "link": "p/footer-content/"
         }
       ]
     }
@@ -60,22 +60,17 @@
     "networks": [
       {
         "icon": "fa-facebook",
-        "link": "#",
+        "link": "/footer-content/",
         "display": true
       },
       {
         "icon": "fa-twitter",
-        "link": "#",
+        "link": "/footer-content/",
         "display": true
       },
       {
         "icon": "fa-linkedin",
-        "link": "#",
-        "display": true
-      },
-      {
-        "icon": "fa-google-plus",
-        "link": "#",
+        "link": "/footer-content/",
         "display": true
       }
     ]
@@ -83,15 +78,15 @@
   "legal": [
     {
       "title": "Privacy Policy",
-      "link": "#"
+      "link": "/footer-content/"
     },
     {
       "title": "Legals",
-      "link": "#"
+      "link": "/footer-content/"
     },
     {
       "title": "Disclaimer",
-      "link": "#"
+      "link": "/footer-content/"
     }
   ]
 }
