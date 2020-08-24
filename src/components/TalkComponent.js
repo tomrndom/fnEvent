@@ -46,7 +46,7 @@ const TalkComponent = class extends React.Component {
 
     let { event: { class_name, start_date, end_date, speakers, title, description }, event, summit: { time_zone_id }, phase } = this.props;
 
-    let showHero = class_name !== 'Presentation' || !event.streaming_url || (phase && phase < PHASES.DURING);
+    let showHero = class_name !== 'Presentation' || !event.streaming_url || phase < PHASES.DURING;    
 
     return (
       <div className={`columns talk ${showHero ? 'px-3 py-3' : 'px-5 py-5'}`}>
@@ -57,7 +57,7 @@ const TalkComponent = class extends React.Component {
               class_name !== 'Presentation' ?
                 'Next session will start soon...'
                 :
-                !event.streaming_url || (phase && phase < PHASES.DURING) ?
+                !event.streaming_url || phase < PHASES.DURING ?
                   `This session will be available on ${epochToMomentTimeZone(start_date, time_zone_id).format('MMMM Do hh:mm A (z)')}`
                   :
                   ''

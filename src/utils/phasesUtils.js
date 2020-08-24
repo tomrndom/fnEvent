@@ -26,16 +26,13 @@ export const getEventPhase = function (event, now) {
 
   let { start_date, end_date } = event;
 
-  if (!start_date || !end_date) {
-    return null;
-  } else {
-    let newPhase =
-      start_date < now && end_date > now ? PHASES.DURING
+  let newPhase =
+    start_date < now && end_date > now ? PHASES.DURING
+      :
+      start_date > now ? PHASES.BEFORE
         :
-        start_date > now ? PHASES.BEFORE
-          :
-          end_date < now ? PHASES.AFTER : null;
+        end_date < now ? PHASES.AFTER : null;
 
-    return newPhase;
-  }
+  return newPhase;
+
 }
