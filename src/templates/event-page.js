@@ -42,17 +42,21 @@ export const EventPageTemplate = class extends React.Component {
 
   componentDidMount() {
     this.props.getDisqusSSO();
-    const now = new Date()
-    const secondsSinceEpoch = Math.round(now.getTime() / 1000)
+    const now = new Date();
+    const secondsSinceEpoch = Math.round(now.getTime() / 1000);
     this.setState({ timestamp: secondsSinceEpoch });
     this.interval = setInterval(this.tick, 1000);
   }
 
   tick = () => {
     const { timestamp } = this.state;
-    const { event: { start_date } } = this.props;
-    this.setState({ timestamp: timestamp + 1 }, () => {      
-      if (this.state.timestamp > start_date) {
+    const { event } = this.props;
+    const now = new Date();
+    const secondsSinceEpoch = Math.round(now.getTime() / 1000);
+    this.setState({ timestamp: secondsSinceEpoch }, () => {
+      console.log(this.state.timestamp, event?.start_date)
+      console.log(this.state.timestamp > event?.start_date)
+      if (event.start_date && this.state.timestamp > event?.start_date) {
         this.setState({ eventStarted: true });
       }
     })
