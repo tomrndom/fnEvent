@@ -1,4 +1,5 @@
 import React from "react"
+import { connect } from "react-redux";
 import HeroComponent from '../components/HeroComponent'
 import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 
@@ -43,9 +44,11 @@ const TalkComponent = class extends React.Component {
 
   render() {
 
-    const { event: { class_name, start_date, end_date, speakers, title, description }, event, summit: { time_zone_id } } = this.props;
+    const { now, event: { class_name, start_date, end_date, speakers, title, description }, event, summit: { time_zone_id, nowUtc } } = this.props;
 
-    let showHero = class_name !== 'Presentation' || !event.streaming_url
+    const eventStarted = now > event.start_date
+    const showHero = class_name !== 'Presentation' || !eventStarted || !event.streaming_url
+
     return (
       <div className={`columns talk ${showHero ? 'px-3 py-3' : 'px-5 py-5'}`}>
         {showHero ?
@@ -55,7 +58,7 @@ const TalkComponent = class extends React.Component {
               class_name !== 'Presentation' ?
                 'Next session will start soon...'
                 :
-                !event.streaming_url ?
+                !eventStarted || !event.streaming_url ?
                   `This session will be available on ${epochToMomentTimeZone(start_date, time_zone_id).format('MMMM Do hh:mm A (z)')}`
                   :
                   ''
@@ -104,4 +107,8 @@ const TalkComponent = class extends React.Component {
   }
 }
 
-export default TalkComponent
+const mapStateToProps = ({ summitState }) => ({  
+  now: summitState.nowUtc,
+})
+
+export default connect(mapStateToProps, null)(TalkComponent);

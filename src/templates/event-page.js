@@ -33,14 +33,26 @@ export const EventPageTemplate = class extends React.Component {
     this.props.getDisqusSSO();
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.loading !== nextProps.loading) return true;
+    if (this.props.event !== nextProps.event) return true;
+    if (this.props.user !== nextProps.user) return true;
+    if (this.props.loggedUser !== nextProps.loggedUser) return true;
+    return false
+  }
+
   render() {
-    const { loggedUser, event, user, loading } = this.props;
+    const { loggedUser, event, user, loading, now } = this.props;
     let { summit } = SummitObject;
 
     if (loading) {
       return <HeroComponent title="Loading event" />
     } else {
       if (event) {
+        const eventStarted = now > event.start_date
+        console.log(nowDelta)
+        console.log(event.start_date)
+        console.log(eventStarted)
         return (
           <>
             {/* <EventHeroComponent /> */}
@@ -53,9 +65,9 @@ export const EventPageTemplate = class extends React.Component {
                 accessToken={loggedUser.accessToken}
               />
             }
-            <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || !event.streaming_url ? '-3rem' : '' }}>
+            <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || !eventStarted || !event.streaming_url ? '-3rem' : '' }}>
               <div className="columns is-gapless">
-                {event.streaming_url ?
+                {eventStarted && event.streaming_url ?
                   <div className="column is-three-quarters px-0 py-0">
                     <VideoComponent url={event.streaming_url} />
                     {event.meeting_url &&
@@ -86,7 +98,7 @@ export const EventPageTemplate = class extends React.Component {
                 </div>
               </div>
             </section>
-            {event.streaming_url &&
+            {eventStarted && event.streaming_url &&
               <section className="section px-0 pt-5 pb-0">
                 <div className="columns mx-0 my-0 is-multiline">
                   <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
@@ -120,6 +132,7 @@ const EventPage = (
     event,
     eventId,
     user,
+    now,
     getEventBySlug,
     getDisqusSSO
   }
@@ -133,6 +146,7 @@ const EventPage = (
         loading={loading}
         eventId={eventId}
         user={user}
+        now={now}
         getEventBySlug={getEventBySlug}
         getDisqusSSO={getDisqusSSO}
       />
@@ -165,7 +179,8 @@ const mapStateToProps = (
     loggedUserState,
     loading,
     eventState,
-    userState
+    userState,
+    summitState
   }
 ) => ({
 
@@ -173,6 +188,7 @@ const mapStateToProps = (
   loading: eventState.loading,
   event: eventState.event,
   user: userState,
+  now: summitState.nowUtc,
 })
 
 export default connect(
