@@ -1,6 +1,5 @@
 import React from "react"
 import HeroComponent from '../components/HeroComponent'
-import { PHASES } from '../utils/phasesUtils';
 import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 
 const TalkComponent = class extends React.Component {
@@ -44,10 +43,9 @@ const TalkComponent = class extends React.Component {
 
   render() {
 
-    let { event: { class_name, start_date, end_date, speakers, title, description }, event, summit: { time_zone_id }, phase } = this.props;
+    const { event: { class_name, start_date, end_date, speakers, title, description }, event, summit: { time_zone_id } } = this.props;
 
-    let showHero = class_name !== 'Presentation' || !event.streaming_url || phase < PHASES.DURING;    
-
+    let showHero = class_name !== 'Presentation' || !event.streaming_url
     return (
       <div className={`columns talk ${showHero ? 'px-3 py-3' : 'px-5 py-5'}`}>
         {showHero ?
@@ -57,7 +55,7 @@ const TalkComponent = class extends React.Component {
               class_name !== 'Presentation' ?
                 'Next session will start soon...'
                 :
-                !event.streaming_url || phase < PHASES.DURING ?
+                !event.streaming_url ?
                   `This session will be available on ${epochToMomentTimeZone(start_date, time_zone_id).format('MMMM Do hh:mm A (z)')}`
                   :
                   ''

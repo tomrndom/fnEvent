@@ -17,8 +17,6 @@ import DocumentsComponent from '../components/DocumentsComponent'
 import EventHeroComponent from '../components/EventHeroComponent'
 import HeroComponent from '../components/HeroComponent'
 
-import { PHASES } from '../utils/phasesUtils';
-
 import { getEventBySlug } from '../actions/event-actions'
 import { getDisqusSSO } from '../actions/user-actions'
 
@@ -36,7 +34,7 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   render() {
-    const { loggedUser, event, user, loading, phase } = this.props;
+    const { loggedUser, event, user, loading } = this.props;
     let { summit } = SummitObject;
 
     if (loading) {
@@ -55,9 +53,9 @@ export const EventPageTemplate = class extends React.Component {
                 accessToken={loggedUser.accessToken}
               />
             }
-            <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || !event.streaming_url || phase < PHASES.DURING ? '-3rem' : '' }}>
+            <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || !event.streaming_url ? '-3rem' : '' }}>
               <div className="columns is-gapless">
-                {phase >= PHASES.DURING && event.streaming_url ?
+                {event.streaming_url ?
                   <div className="column is-three-quarters px-0 py-0">
                     <VideoComponent url={event.streaming_url} />
                     {event.meeting_url &&
@@ -77,22 +75,22 @@ export const EventPageTemplate = class extends React.Component {
                   </div>
                   :
                   <div className="column is-three-quarters px-0 py-0 is-hidden-mobile">
-                    <TalkComponent phase={phase} event={event} summit={summit} noStream={true} />
+                    <TalkComponent event={event} summit={summit} noStream={true} />
                   </div>
                 }
                 <div className="column is-hidden-tablet">
-                  <TalkComponent phase={phase} event={event} summit={summit} noStream={true} />
+                  <TalkComponent event={event} summit={summit} noStream={true} />
                 </div>
                 <div className="column" style={{ position: 'relative', borderBottom: '1px solid #d3d3d3' }}>
                   <DisqusComponent disqusSSO={user.disqusSSO} event={event} summit={summit} title="Public Conversation" />
                 </div>
               </div>
             </section>
-            {phase >= PHASES.DURING && event.streaming_url &&
+            {event.streaming_url &&
               <section className="section px-0 pt-5 pb-0">
                 <div className="columns mx-0 my-0 is-multiline">
                   <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
-                    <TalkComponent phase={phase} event={event} summit={summit} noStream={true} />
+                    <TalkComponent event={event} summit={summit} noStream={true} />
                   </div>
                   <DocumentsComponent event={event} />
                   {event.etherpad_link &&
@@ -122,7 +120,6 @@ const EventPage = (
     event,
     eventId,
     user,
-    phase,
     getEventBySlug,
     getDisqusSSO
   }
@@ -136,7 +133,6 @@ const EventPage = (
         loading={loading}
         eventId={eventId}
         user={user}
-        phase={phase}
         getEventBySlug={getEventBySlug}
         getDisqusSSO={getDisqusSSO}
       />
@@ -150,7 +146,6 @@ EventPage.propTypes = {
   event: PropTypes.object,
   eventId: PropTypes.string,
   user: PropTypes.object,
-  phase: PropTypes.number,
   getEventBySlug: PropTypes.func,
   getDisqusSSO: PropTypes.func,
 }
@@ -161,7 +156,6 @@ EventPageTemplate.propTypes = {
   loading: PropTypes.bool,
   eventId: PropTypes.string,
   user: PropTypes.object,
-  phase: PropTypes.number,
   getEventBySlug: PropTypes.func,
   getDisqusSSO: PropTypes.func,
 }
@@ -169,7 +163,7 @@ EventPageTemplate.propTypes = {
 const mapStateToProps = (
   {
     loggedUserState,
-    summitState,
+    loading,
     eventState,
     userState
   }
@@ -179,7 +173,6 @@ const mapStateToProps = (
   loading: eventState.loading,
   event: eventState.event,
   user: userState,
-  phase: summitState.summit_phase
 })
 
 export default connect(
