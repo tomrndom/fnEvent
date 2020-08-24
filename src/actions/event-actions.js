@@ -13,9 +13,6 @@ import { LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
 
 export const GET_EVENT_DATA         = 'GET_EVENT_DATA';
 export const GET_EVENT_DATA_ERROR   = 'GET_EVENT_DATA_ERROR';
-export const EVENT_PHASE_BEFORE     = 'EVENT_PHASE_BEFORE'
-export const EVENT_PHASE_DURING     = 'EVENT_PHASE_DURING'
-export const EVENT_PHASE_AFTER      = 'EVENT_PHASE_AFTER'
 
 export const handleResetReducers = () => (dispatch, getState) => {
   dispatch(createAction(LOGOUT_USER)({}));

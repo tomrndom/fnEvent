@@ -169,6 +169,7 @@ EventPageTemplate.propTypes = {
 const mapStateToProps = (
   {
     loggedUserState,
+    summitState,
     eventState,
     userState
   }
@@ -178,7 +179,7 @@ const mapStateToProps = (
   loading: eventState.loading,
   event: eventState.event,
   user: userState,
-  phase: eventState.event_phase,
+  phase: summitState.summit_phase
 })
 
 export default connect(

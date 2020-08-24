@@ -8,9 +8,7 @@ import {
 import SummitObject from '../content/summit.json';
 
 import { customErrorHandler } from '../utils/customErrorHandler';
-import { PHASES, getSummitPhase, getEventPhase } from '../utils/phasesUtils';
-
-import { EVENT_PHASE_BEFORE, EVENT_PHASE_DURING, EVENT_PHASE_AFTER } from './event-actions';
+import { PHASES, getSummitPhase } from '../utils/phasesUtils';
 
 export const GET_SUMMIT_DATA = 'GET_SUMMIT_DATA';
 export const SUMMIT_PHASE_AFTER = 'SUMMIT_PHASE_AFTER'
@@ -58,12 +56,12 @@ export const getTimeNow = () => (dispatch) => {
 
 export const updateClock = (timestamp) => (dispatch, getState) => {
 
-  const { summitState: { nowUtc, summit_phase }, eventState: { event, event_phase } } = getState();
+  const { summitState: { nowUtc, summit_phase } } = getState();
 
   if (nowUtc) {
-    const summitPhase = getSummitPhase(SummitObject, nowUtc, summit_phase);
-    if (summit_phase !== summitPhase) {
-      switch (summitPhase) {
+    const phase = getSummitPhase(SummitObject, nowUtc, summit_phase);
+    if (summit_phase !== phase) {
+      switch (phase) {
         case PHASES.BEFORE:
           dispatch(createAction(SUMMIT_PHASE_BEFORE)(PHASES.BEFORE))
           break;
@@ -72,22 +70,6 @@ export const updateClock = (timestamp) => (dispatch, getState) => {
           break;
         case PHASES.AFTER:
           dispatch(createAction(SUMMIT_PHASE_AFTER)(PHASES.AFTER))
-          break;
-        default:
-          break;
-      }
-    }
-    const eventPhase = getEventPhase(event, nowUtc, event_phase);
-    if (event_phase !== eventPhase) {
-      switch (eventPhase) {
-        case PHASES.BEFORE:
-          dispatch(createAction(EVENT_PHASE_BEFORE)(PHASES.BEFORE))
-          break;
-        case PHASES.DURING:
-          dispatch(createAction(EVENT_PHASE_DURING)(PHASES.DURING))
-          break;
-        case PHASES.AFTER:
-          dispatch(createAction(EVENT_PHASE_AFTER)(PHASES.AFTER))
           break;
         default:
           break;
