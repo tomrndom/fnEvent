@@ -1,5 +1,4 @@
 import React from "react"
-import { connect } from "react-redux";
 import HeroComponent from '../components/HeroComponent'
 import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 
@@ -44,9 +43,8 @@ const TalkComponent = class extends React.Component {
 
   render() {
 
-    const { now, event: { class_name, start_date, end_date, speakers, title, description }, event, summit: { time_zone_id, nowUtc } } = this.props;
+    const { eventStarted, event: { class_name, start_date, end_date, speakers, title, description }, event, summit: { time_zone_id } } = this.props;
 
-    const eventStarted = now > event.start_date
     const showHero = class_name !== 'Presentation' || !eventStarted || !event.streaming_url
 
     return (
@@ -107,8 +105,4 @@ const TalkComponent = class extends React.Component {
   }
 }
 
-const mapStateToProps = ({ summitState }) => ({  
-  now: summitState.nowUtc,
-})
-
-export default connect(mapStateToProps, null)(TalkComponent);
+export default TalkComponent;
