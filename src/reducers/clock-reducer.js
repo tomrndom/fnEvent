@@ -9,7 +9,7 @@ import {
   EVENT_PHASE_DURING,
   EVENT_PHASE_BEFORE,
   EVENT_PHASE_ADD
-} from '../actions/summit-actions'
+} from '../actions/clock-actions'
 
 const DEFAULT_STATE = {
   loading: false,
@@ -46,13 +46,16 @@ const clockReducer = (state = DEFAULT_STATE, action) => {
       return { ...state, events_phases: [...state.events_phases, payload] };
     }
     case EVENT_PHASE_AFTER: {
-      return { ...state, events_phases: [...state.events_phases, payload] };
+      let eventsPhases = [...new Set(state.events_phases.filter(s => s.id !== payload.id))];
+      return { ...state, events_phases: [...eventsPhases, payload] };
     }
     case EVENT_PHASE_DURING: {
-      return { ...state, events_phases: [...state.events_phases, payload] };
+      let eventsPhases = [...new Set(state.events_phases.filter(s => s.id !== payload.id))];
+      return { ...state, events_phases: [...eventsPhases, payload] };
     }
     case EVENT_PHASE_BEFORE: {
-      return { ...state, events_phases: [...state.events_phases, payload] };
+      let eventsPhases = [...new Set(state.events_phases.filter(s => s.id !== payload.id))];
+      return { ...state, events_phases: [...eventsPhases, payload] };
     }    
     default:
       return state;

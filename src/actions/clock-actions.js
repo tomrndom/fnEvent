@@ -85,7 +85,7 @@ export const updateEventsPhase = () => (dispatch, getState) => {
 
   if (events_phases.length > 0) {
     events_phases.map(event => {
-      const eventPhase = getEventPhase(event, nowUtc);
+      const eventPhase = getEventPhase(event, nowUtc);      
       if (event.phase !== eventPhase) {
         switch (eventPhase) {
           case PHASES.BEFORE: {
