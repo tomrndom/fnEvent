@@ -31,6 +31,5 @@ export const getEventPhase = function (event, now) {
       start_date > now ? PHASES.BEFORE
         :
         end_date < now ? PHASES.AFTER : null;
-
   return newPhase;
 }

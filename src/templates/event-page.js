@@ -30,6 +30,7 @@ export const EventPageTemplate = class extends React.Component {
   constructor(props) {
     super(props);
     this.onEventChange = this.onEventChange.bind(this);
+    this.onViewAllEventsClick = this.onViewAllEventsClick.bind(this);
   }
 
   componentWillMount() {
@@ -46,7 +47,7 @@ export const EventPageTemplate = class extends React.Component {
   onViewAllEventsClick() {
     navigate('/a/schedule')
   }
-  
+
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.loading !== nextProps.loading) return true;
     if (this.props.eventId !== nextProps.eventId) return true;
@@ -59,7 +60,7 @@ export const EventPageTemplate = class extends React.Component {
     const { loggedUser, event, eventsPhases, user, loading } = this.props;
     let { summit } = SummitObject;
     let currentEvent = eventsPhases.find(e => e.id === event.id);
-    let eventStarted = currentEvent && currentEvent.phase ? currentEvent.phase : -1;    
+    let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : -1;
 
     if (loading) {
       return <HeroComponent title="Loading event" />
@@ -138,6 +139,17 @@ export const EventPageTemplate = class extends React.Component {
                       eventCount={3}
                       title={event.track ? `Up Next on ${event.track.name}` : 'Up Next'}
                     />
+                    {/* <ScheduleLiteComponent
+                      accessToken={loggedUser.accessToken}
+                      onEventClick={(ev) => this.onEventChange(ev)}
+                      onViewAllEventsClick={() => this.onViewAllEventsClick()}
+                      landscape={true}
+                      showNav={true}
+                      showFilters={true}
+                      showAllEvents={true}
+                      eventCount={100}
+                      title={event.track ? `Up Next on ${event.track.name}` : 'Up Next'}
+                    /> */}
                   </div>
                 </div>
               </section>

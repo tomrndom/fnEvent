@@ -83,32 +83,30 @@ export const updateEventsPhase = () => (dispatch, getState) => {
     }
   }
 
-  if (events_phases.length > 0) {
-    events_phases.map(event => {
-      const eventPhase = getEventPhase(event, nowUtc);      
-      if (event.phase !== eventPhase) {
-        switch (eventPhase) {
-          case PHASES.BEFORE: {
-            const updatedEvent = { ...event, phase: PHASES.BEFORE };
-            dispatch(createAction(EVENT_PHASE_BEFORE)(updatedEvent));
-            break;
-          }
-          case PHASES.DURING: {
-            const updatedEvent = { ...event, phase: PHASES.DURING };
-            dispatch(createAction(EVENT_PHASE_DURING)(updatedEvent));
-            break;
-          }
-          case PHASES.AFTER: {
-            const updatedEvent = { ...event, phase: PHASES.AFTER };
-            dispatch(createAction(EVENT_PHASE_AFTER)(updatedEvent));
-            break;
-          }
-          default:
-            break;
+  events_phases.map(event => {
+    const eventPhase = getEventPhase(event, nowUtc);
+    if (event.phase !== eventPhase) {
+      switch (eventPhase) {
+        case PHASES.BEFORE: {
+          const updatedEvent = { ...event, phase: PHASES.BEFORE };
+          dispatch(createAction(EVENT_PHASE_BEFORE)(updatedEvent));
+          break;
         }
+        case PHASES.DURING: {
+          const updatedEvent = { ...event, phase: PHASES.DURING };
+          dispatch(createAction(EVENT_PHASE_DURING)(updatedEvent));
+          break;
+        }
+        case PHASES.AFTER: {
+          const updatedEvent = { ...event, phase: PHASES.AFTER };
+          dispatch(createAction(EVENT_PHASE_AFTER)(updatedEvent));
+          break;
+        }
+        default:
+          break;
       }
-    })
-  }
+    }
+  })
 
 
 }
