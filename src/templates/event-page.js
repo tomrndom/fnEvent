@@ -21,6 +21,8 @@ import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
 import { getEventBySlug } from '../actions/event-actions'
 import { getDisqusSSO } from '../actions/user-actions'
 
+import { PHASES } from '../utils/phasesUtils';
+
 import { AttendanceTracker } from "openstack-uicore-foundation/lib/components";
 
 export const EventPageTemplate = class extends React.Component {
@@ -28,23 +30,13 @@ export const EventPageTemplate = class extends React.Component {
   constructor(props) {
     super(props);
 
-    this.interval = null;
-    this.state = {
-      timestamp: 0,
-      eventStarted: false,
-    }
+    this.interval = null;    
   }
 
-  componentWillMount() {
+  onEventChange(ev) {    
     const { eventId } = this.props;
-    this.setState({ eventStarted: false });
-    clearInterval(this.interval);
+    navigate(`/a/event/${ev.id}`);
     this.props.getEventBySlug(eventId);
-  }
-
-  onEventChange(ev) {
-    this.setState({ eventStarted: false });
-    window.location.href = `/a/event/${ev.id}`;
   }
 
   onViewAllEventsClick() {
@@ -52,37 +44,22 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getDisqusSSO();
-    const now = new Date();
-    const secondsSinceEpoch = Math.round(now.getTime() / 1000);
-    this.setState({ timestamp: secondsSinceEpoch });
-    this.interval = setInterval(this.tick, 1000);
-  }
-
-  tick = () => {
-    const { timestamp } = this.state;
-    const { event } = this.props;
-    const now = new Date();
-    const secondsSinceEpoch = Math.round(now.getTime() / 1000);
-    this.setState({ timestamp: secondsSinceEpoch }, () => {
-      if (event?.start_date && this.state.timestamp > event?.start_date) {
-        this.setState({ eventStarted: true });
-      }
-    })
-  };
+    this.props.getDisqusSSO();    
+  }  
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.loading !== nextProps.loading) return true;
     if (this.props.eventId !== nextProps.eventId) return true;
     if (this.props.event?.id !== nextProps.event?.id) return true;
-    if (this.state.eventStarted !== nextState.eventStarted) return true;
+    if (this.props.eventsPhases !== nextProps.eventsPhases) return true;
     return false
   }
 
   render() {
-    const { loggedUser, event, user, loading } = this.props;
-    const { eventStarted } = this.state;
+    const { loggedUser, event, eventsPhases, user, loading } = this.props;
     let { summit } = SummitObject;
+    let currentEvent = eventsPhases.find(e => e.id === event.id);
+    let eventStarted = currentEvent && currentEvent.phase ? currentEvent.phase : -1;    
 
     if (loading) {
       return <HeroComponent title="Loading event" />
@@ -100,9 +77,9 @@ export const EventPageTemplate = class extends React.Component {
                 accessToken={loggedUser.accessToken}
               />
             }
-            <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || !eventStarted || !event.streaming_url ? '-3rem' : '' }}>
+            <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || eventStarted < PHASES.DURING || !event.streaming_url ? '-3rem' : '' }}>
               <div className="columns is-gapless">
-                {eventStarted && event.streaming_url ?
+                {eventStarted >= PHASES.DURING && event.streaming_url ?
                   <div className="column is-three-quarters px-0 py-0">
                     <VideoComponent url={event.streaming_url} />
                     {event.meeting_url &&
@@ -133,7 +110,7 @@ export const EventPageTemplate = class extends React.Component {
                 </div>
               </div>
             </section>
-            {eventStarted && event.streaming_url &&
+            {eventStarted >= PHASES.DURING && event.streaming_url &&
               <section className="section px-0 pt-5 pb-0">
                 <div className="columns mx-0 my-0 is-multiline">
                   <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
@@ -181,6 +158,7 @@ const EventPage = (
     event,
     eventId,
     user,
+    eventsPhases,
     getEventBySlug,
     getDisqusSSO
   }
@@ -194,6 +172,7 @@ const EventPage = (
         loading={loading}
         eventId={eventId}
         user={user}
+        eventsPhases={eventsPhases}
         getEventBySlug={getEventBySlug}
         getDisqusSSO={getDisqusSSO}
       />
@@ -207,6 +186,7 @@ EventPage.propTypes = {
   event: PropTypes.object,
   eventId: PropTypes.string,
   user: PropTypes.object,
+  eventsPhases: PropTypes.array,
   getEventBySlug: PropTypes.func,
   getDisqusSSO: PropTypes.func,
 }
@@ -217,6 +197,7 @@ EventPageTemplate.propTypes = {
   loading: PropTypes.bool,
   eventId: PropTypes.string,
   user: PropTypes.object,
+  eventsPhases: PropTypes.array,
   getEventBySlug: PropTypes.func,
   getDisqusSSO: PropTypes.func,
 }
@@ -224,16 +205,16 @@ EventPageTemplate.propTypes = {
 const mapStateToProps = (
   {
     loggedUserState,
-    loading,
     eventState,
     userState,
-    summitState
+    clockState,
   }
 ) => ({
 
   loggedUser: loggedUserState,
   loading: eventState.loading,
   event: eventState.event,
+  eventsPhases: clockState.events_phases,
   user: userState,
 })
 
