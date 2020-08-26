@@ -16,6 +16,7 @@ export const SUMMIT_PHASE_BEFORE = 'SUMMIT_PHASE_BEFORE'
 export const EVENT_PHASE_BEFORE = 'EVENT_PHASE_BEFORE'
 export const EVENT_PHASE_DURING = 'EVENT_PHASE_DURING'
 export const EVENT_PHASE_AFTER = 'EVENT_PHASE_AFTER'
+export const EVENT_PHASE_ADD = 'EVENT_PHASE_ADD'
 export const UPDATE_CLOCK = 'UPDATE_CLOCK';
 export const GET_TIME_NOW = 'GET_TIME_NOW';
 export const TIME_NOW = 'TIME_NOW';
@@ -41,7 +42,14 @@ export const getTimeNow = () => (dispatch) => {
 
 export const updateClock = (timestamp) => (dispatch, getState) => {
 
-  const { summitState: { nowUtc, summit_phase }, eventState: { event, event_phase } } = getState();
+  dispatch(createAction(UPDATE_CLOCK)({ timestamp }));
+  dispatch(updateSummitPhase());
+  dispatch(updateEventsPhase());
+};
+
+export const updateSummitPhase = () => (dispatch, getState) => {
+
+  const { clockState: { nowUtc, summit_phase } } = getState();
 
   if (nowUtc) {
     const summitPhase = getSummitPhase(SummitObject, nowUtc, summit_phase);
@@ -60,22 +68,47 @@ export const updateClock = (timestamp) => (dispatch, getState) => {
           break;
       }
     }
-    const eventPhase = getEventPhase(event, nowUtc, event_phase);
-    if (event_phase !== eventPhase) {
-      switch (eventPhase) {
-        case PHASES.BEFORE:
-          dispatch(createAction(EVENT_PHASE_BEFORE)(PHASES.BEFORE))
-          break;
-        case PHASES.DURING:
-          dispatch(createAction(EVENT_PHASE_DURING)(PHASES.DURING))
-          break;
-        case PHASES.AFTER:
-          dispatch(createAction(EVENT_PHASE_AFTER)(PHASES.AFTER))
-          break;
-        default:
-          break;
-      }
+  }
+}
+
+export const updateEventsPhase = () => (dispatch, getState) => {
+
+  const { eventState: { event }, clockState: { nowUtc, events_phases } } = getState();
+
+  if (event && event.id) {
+    const newEvent = { id: event.id, start_date: event.start_date, end_date: event.end_date, phase: null };
+
+    if (!events_phases.some(event => event.id === newEvent.id)) {
+      dispatch(createAction(EVENT_PHASE_ADD)(newEvent));
+    }
   }
 
-  dispatch(createAction(UPDATE_CLOCK)({ timestamp }));
-};
+  if (events_phases.length > 0) {
+    events_phases.map(event => {
+      const eventPhase = getEventPhase(event, nowUtc);
+      if (event.phase !== eventPhase) {
+        switch (eventPhase) {
+          case PHASES.BEFORE: {
+            const updatedEvent = { ...event, phase: PHASES.BEFORE };
+            dispatch(createAction(EVENT_PHASE_BEFORE)(updatedEvent));
+            break;
+          }
+          case PHASES.DURING: {
+            const updatedEvent = { ...event, phase: PHASES.DURING };
+            dispatch(createAction(EVENT_PHASE_DURING)(updatedEvent));
+            break;
+          }
+          case PHASES.AFTER: {
+            const updatedEvent = { ...event, phase: PHASES.AFTER };
+            dispatch(createAction(EVENT_PHASE_AFTER)(updatedEvent));
+            break;
+          }
+          default:
+            break;
+        }
+      }
+    })
+  }
+
+
+}

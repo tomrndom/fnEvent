@@ -8,7 +8,7 @@ import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
 import SummitObject from '../content/summit.json'
-import { updateClock } from "../actions/summit-actions";
+import { updateClock } from "../actions/clock-actions";
 
 // import "../styles/all.scss"
 // import "../styles/palette.scss"

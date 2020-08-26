@@ -7,14 +7,15 @@ import {
   SUMMIT_PHASE_BEFORE,
   EVENT_PHASE_AFTER,
   EVENT_PHASE_DURING,
-  EVENT_PHASE_BEFORE
+  EVENT_PHASE_BEFORE,
+  EVENT_PHASE_ADD
 } from '../actions/summit-actions'
 
 const DEFAULT_STATE = {
   loading: false,
   nowUtc: null,
   summit_phase: null,
-  event_phases: [],
+  events_phases: [],
 }
 
 const clockReducer = (state = DEFAULT_STATE, action) => {
@@ -32,23 +33,27 @@ const clockReducer = (state = DEFAULT_STATE, action) => {
       return { ...state, nowUtc: timestamp };
     }
     case SUMMIT_PHASE_AFTER: {
-      return { ...state, summit_phase: payload }
+      return { ...state, summit_phase: payload };
     }
     case SUMMIT_PHASE_DURING: {
-      return { ...state, summit_phase: payload }
+      return { ...state, summit_phase: payload };
     }
     case SUMMIT_PHASE_BEFORE: {
-      return { ...state, summit_phase: payload }
+      return { ...state, summit_phase: payload };
+    }
+    case EVENT_PHASE_ADD: {
+      console.log('payload', payload);
+      return { ...state, events_phases: [...state.events_phases, payload] };
     }
     case EVENT_PHASE_AFTER: {
-      return { ...state, event_phase: payload }
+      return { ...state, events_phases: [...state.events_phases, payload] };
     }
     case EVENT_PHASE_DURING: {
-      return { ...state, event_phase: payload }
+      return { ...state, events_phases: [...state.events_phases, payload] };
     }
     case EVENT_PHASE_BEFORE: {
-      return { ...state, event_phase: payload }
-    }
+      return { ...state, events_phases: [...state.events_phases, payload] };
+    }    
     default:
       return state;
   }
