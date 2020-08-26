@@ -27,10 +27,9 @@ import { AttendanceTracker } from "openstack-uicore-foundation/lib/components";
 
 export const EventPageTemplate = class extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.interval = null;    
+  componentWillMount() {
+    const { eventId } = this.props;    
+    this.props.getEventBySlug(eventId);
   }
 
   onEventChange(ev) {    
