@@ -8,14 +8,14 @@ import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
 import SummitObject from '../content/summit.json'
-import { updateClock } from "../actions/clock-actions";
+import { getTimeNow } from "../actions/clock-actions";
 import { getUserProfile } from "../actions/user-actions";
 
 // import "../styles/all.scss"
 // import "../styles/palette.scss"
 import "../styles/bulma.scss"
 
-const TemplateWrapper = ({ children, marketing, user, updateClock, getUserProfile }) => {
+const TemplateWrapper = ({ children, marketing, user, getTimeNow, getUserProfile }) => {
 
   const { title, description } = useSiteMetadata();
   const { summit } = SummitObject;
@@ -31,7 +31,7 @@ const TemplateWrapper = ({ children, marketing, user, updateClock, getUserProfil
     if (!hasTicket && seconds > 20) {
       getUserProfile();
     } else if (seconds > 60) {
-      updateClock();
+      getTimeNow();
     }
     setSeconds(0);
   }, [seconds]);
@@ -95,4 +95,4 @@ const mapStateToProps = (
   user: userState.userProfile,
 })
 
-export default connect(mapStateToProps, { updateClock, getUserProfile })(TemplateWrapper);
+export default connect(mapStateToProps, { getTimeNow, getUserProfile })(TemplateWrapper);
