@@ -35,7 +35,7 @@ export const MarketingPageTemplate = class extends React.Component {
 
     let scheduleProps = {}
     if (MarketingSite.leftColumn.schedule &&
-        isLoggedUser && summit_phase === PHASES.BEFORE) {
+        isLoggedUser && summit_phase !== PHASES.BEFORE) {
       scheduleProps = { ...scheduleProps,
         onEventClick: (ev) => navigate(`/a/event/${ev.id}`),
       }
