@@ -26,7 +26,6 @@ const TemplateWrapper = ({ children, marketing, updateClock, getUserProfile }) =
 
   const onFocus = useCallback(() => {
     clearInterval(interval.current);
-    console.log('seconds!', seconds);
     if (seconds > 20) {
       getUserProfile();
     } else if (seconds > 60) {
