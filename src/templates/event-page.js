@@ -39,7 +39,10 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   onEventChange(ev) {
-    navigate(`/a/event/${ev.id}`);
+    const { eventId } = this.props;
+    if (eventId !== `${ev.id}`) {
+      navigate(`/a/event/${ev.id}`);
+    }
   }
 
   onViewAllEventsClick() {
@@ -64,7 +67,7 @@ export const EventPageTemplate = class extends React.Component {
   render() {
     const { loggedUser, event, eventsPhases, user, loading } = this.props;
     let { summit } = SummitObject;
-    let currentEvent = eventsPhases.find(e => e.id === event.id);
+    let currentEvent = eventsPhases.find(e => e.id === event?.id);
     let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;
 
     if (loading || eventStarted === null) {
@@ -144,17 +147,6 @@ export const EventPageTemplate = class extends React.Component {
                       eventCount={3}
                       title={event.track ? `Up Next on ${event.track.name}` : 'Up Next'}
                     />
-                    {/* <ScheduleLiteComponent
-                      accessToken={loggedUser.accessToken}
-                      onEventClick={(ev) => this.onEventChange(ev)}
-                      onViewAllEventsClick={() => this.onViewAllEventsClick()}
-                      landscape={true}
-                      showNav={true}
-                      showFilters={true}
-                      showAllEvents={true}
-                      eventCount={100}
-                      title={event.track ? `Up Next on ${event.track.name}` : 'Up Next'}
-                    /> */}
                   </div>
                 </div>
               </section>
