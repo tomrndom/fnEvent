@@ -9,12 +9,13 @@ import { withPrefix } from 'gatsby'
 
 import SummitObject from '../content/summit.json'
 import { updateClock } from "../actions/clock-actions";
+import { getUserProfile } from "../actions/user-actions";
 
 // import "../styles/all.scss"
 // import "../styles/palette.scss"
 import "../styles/bulma.scss"
 
-const TemplateWrapper = ({ children, marketing, updateClock }) => {
+const TemplateWrapper = ({ children, marketing, updateClock, getUserProfile }) => {
 
   const { title, description } = useSiteMetadata();
   const { summit } = SummitObject;
@@ -23,9 +24,12 @@ const TemplateWrapper = ({ children, marketing, updateClock }) => {
 
   let interval = useRef(null);
 
-  const onFocus = useCallback(() => {    
-    clearInterval(interval.current);    
-    if (seconds > 60) {           
+  const onFocus = useCallback(() => {
+    clearInterval(interval.current);
+    console.log('seconds!', seconds);
+    if (seconds > 20) {
+      getUserProfile();
+    } else if (seconds > 60) {
       updateClock();
     }
     setSeconds(0);
@@ -82,4 +86,4 @@ const TemplateWrapper = ({ children, marketing, updateClock }) => {
   )
 }
 
-export default connect(null, { updateClock })(TemplateWrapper);
+export default connect(null, { updateClock, getUserProfile })(TemplateWrapper);
