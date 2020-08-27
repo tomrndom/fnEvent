@@ -65,9 +65,9 @@ export const EventPageTemplate = class extends React.Component {
     const { loggedUser, event, eventsPhases, user, loading } = this.props;
     let { summit } = SummitObject;
     let currentEvent = eventsPhases.find(e => e.id === event.id);
-    let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : -1;
+    let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;
 
-    if (loading) {
+    if (loading || eventStarted === null) {
       return <HeroComponent title="Loading event" />
     } else {
       if (event) {
