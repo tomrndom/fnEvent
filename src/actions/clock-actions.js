@@ -107,6 +107,4 @@ export const updateEventsPhase = () => (dispatch, getState) => {
       }
     }
   })
-
-
 }

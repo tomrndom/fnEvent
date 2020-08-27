@@ -34,18 +34,23 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    const { eventId } = this.props;
-    this.props.getEventBySlug(eventId);
     this.props.getDisqusSSO();
+    this.props.getEventBySlug(this.props.eventId);
   }
 
   onEventChange(ev) {
-    this.props.getEventBySlug(ev.id);
     navigate(`/a/event/${ev.id}`);
   }
 
   onViewAllEventsClick() {
     navigate('/a/schedule')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { eventId } = this.props;
+    if (eventId !== nextProps.eventId) {
+      this.props.getEventBySlug(nextProps.eventId);
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {

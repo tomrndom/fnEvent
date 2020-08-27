@@ -42,7 +42,6 @@ const clockReducer = (state = DEFAULT_STATE, action) => {
       return { ...state, summit_phase: payload };
     }
     case EVENT_PHASE_ADD: {
-      console.log('payload', payload);
       return { ...state, events_phases: [...state.events_phases, payload] };
     }
     case EVENT_PHASE_AFTER: {
