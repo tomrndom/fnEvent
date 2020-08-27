@@ -28,7 +28,7 @@ export const MarketingPageTemplate = class extends React.Component {
   }
 
   render() {
-    let { content, contentComponent, summit_phase, user, loggedUser, isLoggedUser } = this.props;
+    let { content, contentComponent, summit_phase, user, loggedUser, isLoggedUser, location } = this.props;
     let { summit } = SummitObject;
 
     const PageContent = contentComponent || Content
@@ -43,7 +43,7 @@ export const MarketingPageTemplate = class extends React.Component {
 
     return (
       <React.Fragment>
-        <MarketingHeroComponent summit={summit} isLoggedUser={isLoggedUser}/>
+        <MarketingHeroComponent summit={summit} isLoggedUser={isLoggedUser} location={location}/>
         {summit && <Countdown summit={summit} />}
         <div className="columns" id="marketing-columns">
           <div className="column is-half px-6 pt-6 pb-0" style={{ position: 'relative' }}>
@@ -100,7 +100,7 @@ MarketingPageTemplate.propTypes = {
   isLoggedUser: PropTypes.bool,
 }
 
-const MarketingPage = ({ data, summit_phase, user, loggedUser, isLoggedUser, getDisqusSSO }) => {
+const MarketingPage = ({ location, data, summit_phase, user, loggedUser, isLoggedUser, getDisqusSSO }) => {
   const { frontmatter, html } = data.markdownRemark
 
   return (
@@ -108,6 +108,7 @@ const MarketingPage = ({ data, summit_phase, user, loggedUser, isLoggedUser, get
       <MarketingPageTemplate
         contentComponent={HTMLContent}
         content={html}
+        location={location}
         summit_phase={summit_phase}
         user={user}
         loggedUser={loggedUser}
