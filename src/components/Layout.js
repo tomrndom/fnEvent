@@ -15,7 +15,7 @@ import { getUserProfile } from "../actions/user-actions";
 // import "../styles/palette.scss"
 import "../styles/bulma.scss"
 
-const TemplateWrapper = ({ children, marketing, updateClock, getUserProfile }) => {
+const TemplateWrapper = ({ children, marketing, user, updateClock, getUserProfile }) => {
 
   const { title, description } = useSiteMetadata();
   const { summit } = SummitObject;
@@ -24,9 +24,11 @@ const TemplateWrapper = ({ children, marketing, updateClock, getUserProfile }) =
 
   let interval = useRef(null);
 
+  const hasTicket = user.summit_tickets?.length > 0;
+
   const onFocus = useCallback(() => {
     clearInterval(interval.current);
-    if (seconds > 20) {
+    if (!hasTicket && seconds > 20) {
       getUserProfile();
     } else if (seconds > 60) {
       updateClock();
@@ -85,4 +87,12 @@ const TemplateWrapper = ({ children, marketing, updateClock, getUserProfile }) =
   )
 }
 
-export default connect(null, { updateClock, getUserProfile })(TemplateWrapper);
+const mapStateToProps = (
+  {
+    userState,
+  }
+) => ({
+  user: userState.userProfile,
+})
+
+export default connect(mapStateToProps, { updateClock, getUserProfile })(TemplateWrapper);
