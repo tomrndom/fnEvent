@@ -91,15 +91,6 @@ export const EventPageTemplate = class extends React.Component {
         return (
           <>
             {/* <EventHeroComponent /> */}
-            {event.id &&
-              <AttendanceTracker
-                key={event.id}
-                eventId={event.id}
-                summitId={summit.id}
-                apiBaseUrl={envVariables.SUMMIT_API_BASE_URL}
-                accessToken={loggedUser.accessToken}
-              />
-            }
             <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || eventStarted < PHASES.DURING || !event.streaming_url ? '-3rem' : '' }}>
               <div className="columns is-gapless">
                 {eventStarted >= PHASES.DURING && event.streaming_url ?
@@ -189,6 +180,15 @@ const EventPage = (
 
   return (
     <Layout>
+      {event && event.id &&
+      <AttendanceTracker
+          key={`att-tracker-${event.id}`}
+          eventId={event.id}
+          summitId={SummitObject.summit.id}
+          apiBaseUrl={envVariables.SUMMIT_API_BASE_URL}
+          accessToken={loggedUser.accessToken}
+      />
+      }
       <EventPageTemplate
         loggedUser={loggedUser}
         event={event}
