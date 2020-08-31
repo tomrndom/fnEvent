@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -15,7 +15,27 @@ import "../styles/bulma.scss"
 const TemplateWrapper = ({ children, marketing }) => {
 
   const { title, description } = useSiteMetadata();
-  const { summit } = SummitObject;  
+  const { summit } = SummitObject;
+
+  const [isFocus, setIsFocus] = useState(true);
+
+  const onFocus = useCallback(() => {
+    setIsFocus(true);
+  });
+
+  const onBlur = useCallback(() => {
+    setIsFocus(false);
+  });
+
+  useEffect(() => {
+    window.addEventListener("focus", onFocus);
+    window.addEventListener("blur", onBlur);
+    // Specify how to clean up after this effect:
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("blur", onBlur);
+    };
+  });
 
   return (
     <div id="container">
@@ -44,7 +64,7 @@ const TemplateWrapper = ({ children, marketing }) => {
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
       </Helmet>
       <Header />
-      <ClockComponent summit={summit} />
+      <ClockComponent summit={summit} display={isFocus} />
       <div id="content-wrapper">{children}</div>
       <Footer marketing={marketing} />
     </div>

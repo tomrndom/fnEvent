@@ -6,16 +6,16 @@ import { updateClock } from "../actions/clock-actions";
 const ClockComponent = class extends React.Component {
 
   handleClockTick = (timestamp) => {
-    const { updateClock } = this.props;
-    updateClock(timestamp);
+    const { updateClock, display } = this.props;
+    if (display) updateClock(timestamp);
   };
 
   render() {
-    const { summit } = this.props;
+    const { summit, display } = this.props;
 
     return (
       <div>
-        {summit &&
+        {summit && display &&
           <Clock onTick={this.handleClockTick} timezone={summit.time_zone_id} />
         }
       </div>
