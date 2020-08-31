@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { connect } from "react-redux";
+import React from 'react'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -8,49 +7,15 @@ import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
 import SummitObject from '../content/summit.json'
-import { getTimeNow } from "../actions/clock-actions";
-import { getUserProfile } from "../actions/user-actions";
 
 // import "../styles/all.scss"
 // import "../styles/palette.scss"
 import "../styles/bulma.scss"
 
-const TemplateWrapper = ({ children, marketing, user, getTimeNow, getUserProfile }) => {
+const TemplateWrapper = ({ children, marketing }) => {
 
   const { title, description } = useSiteMetadata();
-  const { summit } = SummitObject;
-
-  const [seconds, setSeconds] = useState(0);
-
-  let interval = useRef(null);
-
-  const hasTicket = user.summit_tickets?.length > 0;
-
-  const onFocus = useCallback(() => {
-    clearInterval(interval.current);
-    if (!hasTicket) {
-      getUserProfile();
-    }
-    getTimeNow();
-    setSeconds(0);
-  }, [seconds]);
-
-  const onBlur = useCallback(() => {
-    interval.current = setInterval(
-      () => setSeconds((prevSeconds) => prevSeconds + 1),
-      1000
-    );
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("focus", onFocus);
-    window.addEventListener("blur", onBlur);
-    // Specify how to clean up after this effect:
-    return () => {
-      window.removeEventListener("focus", onFocus);
-      window.removeEventListener("blur", onBlur);
-    };
-  });
+  const { summit } = SummitObject;  
 
   return (
     <div id="container">
@@ -86,12 +51,4 @@ const TemplateWrapper = ({ children, marketing, user, getTimeNow, getUserProfile
   )
 }
 
-const mapStateToProps = (
-  {
-    userState,
-  }
-) => ({
-  user: userState.userProfile,
-})
-
-export default connect(mapStateToProps, { getTimeNow, getUserProfile })(TemplateWrapper);
+export default TemplateWrapper;
