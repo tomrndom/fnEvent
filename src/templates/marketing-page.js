@@ -83,7 +83,13 @@ export const MarketingPageTemplate = class extends React.Component {
                 if(item.image) {
                   return (
                     <div key={index}>
-                      <img src={item.image} />
+                      {item.link ?
+                        <Link to={item.link}>
+                          <img src={item.image} />
+                        </Link>
+                        :
+                        <img src={item.image} />
+                      }
                     </div>
                   )
                 } else {
