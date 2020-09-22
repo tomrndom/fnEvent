@@ -1,0 +1,20 @@
+{
+  "sponsors": [
+    {
+      "id": 1,
+      "name": "Lenovo",
+      "tier": "gold",
+      "title": "We are Lenovo",
+      "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, ac euismod augue velit at justo. Cras porta lacus est, nec rhoncus augue luctus quis. Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.",
+      "marquee": "Lenovo - Smart Technologies"
+    },
+    {
+      "id": 2,
+      "name": "Intel",
+      "tier": "silver",
+      "title": "We are Intel",
+      "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, ac euismod augue velit at justo. Cras porta lacus est, nec rhoncus augue luctus quis. Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.",
+      "marquee": "Intel Shapes the Future of Technology"
+    }
+  ]
+}

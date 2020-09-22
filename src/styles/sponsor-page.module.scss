@@ -11,7 +11,7 @@
   .hero-sponsor {
     .hero-body {
       padding: 2rem;
-      height: 450px;
+      height: 450px;      
 
       .hero-sponsor-container {
         display: flex;
@@ -38,6 +38,7 @@
           .buttons {
             display: flex;
             flex-direction: column;
+            align-self: flex-end;
             .link {
               .button {
                 background-color: $color_secondary_contrast;

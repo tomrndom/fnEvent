@@ -10,9 +10,11 @@ import AdvertiseComponent from '../components/AdvertiseComponent'
 import DocumentsComponent from '../components/DocumentsComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import SponsorBanner from '../components/SponsorBanner'
+import HeroComponent from '../components/HeroComponent'
 
 import envVariables from '../utils/envVariables';
 import SummitObject from '../content/summit.json'
+import SponsorData from '../content/sponsor-data.json'
 
 import Layout from '../components/Layout'
 
@@ -22,68 +24,92 @@ export const SponsorPageTemplate = class extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      sponsor: null
+    }
   }
 
   componentWillMount() {
+    const { sponsorId } = this.props;
+    const sponsor = SponsorData.sponsors.find(e => e.id === parseInt(sponsorId));
+    if (sponsor) this.setState({ sponsor: sponsor });
   }
 
   componentDidMount() {
+    console.log(this.state.sponsor)
   }
 
   render() {
     const { loggedUser, user } = this.props;
+    const { sponsor } = this.state;
     let { summit } = SummitObject;
 
-    return (
-      <>
-        <SponsorHeader />
-        <section className="section px-0 pt-5 pb-0">
-          <div className="columns mx-0 my-0 is-multiline">
-            <div className="column is-three-quarters px-5 py-0">
-              <h2>We are Lenovo</h2>
-              <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem 
-                interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at 
-                posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales 
-                tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, 
-                ac euismod augue velit at justo. Cras porta lacus est, nec rhoncus augue luctus quis. 
-                Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.
-              </span>
+    if (!sponsor) {
+      return <HeroComponent title="Sponsor not found" redirectTo="/a/" />
+    } else {
+      return (
+        <>
+          <SponsorHeader sponsor={sponsor} />
+          <section className={`section px-0 ${sponsor.tier === 'gold' ? 'pt-5' : 'pt-0' } pb-0`}>
+            <div className="columns mx-0 my-0 is-multiline">
+              {sponsor.tier === 'gold' ?
+                <React.Fragment>
+                  <div className="column is-three-quarters px-5 py-0">
+                    <h2>{sponsor.title}</h2>
+                    <span>
+                      {sponsor.intro}
+                    </span>
+                  </div>
+                  <div className="column is-one-quarter px-5 py-0">
+                    <DisqusComponent disqusSSO={user.disqusSSO} className={styles.disqusContainerSponsor} summit={summit} title="" />
+                  </div>
+                </React.Fragment>
+                :
+                <React.Fragment>
+                  <div className="column is-half px-5 py-0">
+                  <h2>{sponsor.title}</h2>
+                    <span>
+                      {sponsor.intro}
+                    </span>
+                  </div>
+                  <div className="column is-half px-0 py-0">
+                    <img src="/img/chemex.jpg" />
+                  </div>
+                </React.Fragment>
+              }
+              <div className="column is-three-quarters px-5 py-0">
+                <LiveEventWidgetComponent
+                  onEventClick={(ev) => this.onEventChange(ev)}
+                />
+              </div>
+              <div className="column is-one-quarter px-5 py-0">
+                {/* <DocumentsComponent /> */}
+                documents
+              </div>
+              <div className="column is-three-quarters px-5 py-0">
+                <ScheduleLiteComponent
+                  accessToken={loggedUser.accessToken}
+                  onEventClick={(ev) => this.onEventChange(ev)}
+                  onViewAllEventsClick={() => this.onViewAllEventsClick()}
+                  landscape={false}
+                  yourSchedule={false}
+                  showNav={false}
+                  showAllEvents={false}
+                  eventCount={3}
+                />
+              </div>
+              <div className="column is-one-quarter px-5 py-0">
+                <AdvertiseComponent section='lobby' column="left" style={{ marginTop: '2em' }} />
+              </div>
+              <div className="column is-three-quarters px-5 py-0">
+                <SponsorBanner />
+              </div>
             </div>
-            <div className="column is-one-quarter px-5 py-0">
-              <DisqusComponent disqusSSO={user.disqusSSO} className={styles.disqusContainerSponsor} summit={summit} title="" />
-            </div>
-            <div className="column is-three-quarters px-5 py-0">
-              <LiveEventWidgetComponent
-                onEventClick={(ev) => this.onEventChange(ev)}
-              />
-            </div>
-            <div className="column is-one-quarter px-5 py-0">
-              {/* <DocumentsComponent /> */}
-              documents
-            </div>
-            <div className="column is-three-quarters px-5 py-0">
-              <ScheduleLiteComponent
-                accessToken={loggedUser.accessToken}
-                onEventClick={(ev) => this.onEventChange(ev)}
-                onViewAllEventsClick={() => this.onViewAllEventsClick()}
-                landscape={false}
-                yourSchedule={false}
-                showNav={false}
-                showAllEvents={false}                
-                eventCount={3}                
-              />
-            </div>
-            <div className="column is-one-quarter px-5 py-0">
-              <AdvertiseComponent section='lobby' column="left" style={{ marginTop: '2em' }} />
-            </div>
-            <div className="column is-three-quarters px-5 py-0">
-              <SponsorBanner />
-            </div>
-          </div>
-        </section>
-      </>
-    )
+          </section>
+        </>
+      )
+    }
   }
 }
 

@@ -6,10 +6,10 @@ import footerContent from '../content/footer.json';
 
 import styles from '../styles/sponsor-page.module.scss'
 
-const SponsorHeader = () => (
+const SponsorHeader = ({ sponsor }) => (
   <section className={styles.hero}>
     <div className={`${styles.heroSponsor}`}>
-      <div className={`${styles.heroBody}`}>
+      <div className={`${styles.heroBody}`} style={{height: `${sponsor.tier !== 'gold' ? '250px' : ''}`}}>
         <div className={`${styles.heroSponsorContainer}`}>
           {footerContent.social.display &&
             <div className={styles.leftContainer}>
@@ -35,7 +35,7 @@ const SponsorHeader = () => (
                   <i className={`fa fa-2x fa-calendar icon is-large`}></i>
                   <b>Schedule Call</b>
                 </button>
-              </a>              
+              </a>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@ const SponsorHeader = () => (
     <div className={styles.bottomBar}>
       <div className={styles.track}>
         <div>
-          Lenovo - Smart Technologies / Lenovo - Smart Technologies / Lenovo - Smart Technologies / Lenovo - Smart Technologies / Lenovo - Smart Technologies / Lenovo - Smart Technologies / Lenovo - Smart Technologies / Lenovo - Smart Technologies / Lenovo - Smart Technologies /
+          {`${sponsor.marquee} / `.repeat(10)}
         </div>
       </div>
     </div>
