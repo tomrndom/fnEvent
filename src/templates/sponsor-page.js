@@ -40,6 +40,13 @@ export const SponsorPageTemplate = class extends React.Component {
     console.log(this.state.sponsor)
   }
 
+  onEventChange = (ev) => {
+    const { eventId } = this.props;
+    if (eventId !== `${ev.id}`) {
+      navigate(`/a/event/${ev.id}`);
+    }
+  }
+
   render() {
     const { loggedUser, user } = this.props;
     const { sponsor } = this.state;
@@ -51,7 +58,7 @@ export const SponsorPageTemplate = class extends React.Component {
       return (
         <>
           <SponsorHeader sponsor={sponsor} />
-          <section className={`section px-0 ${sponsor.tier === 'gold' ? 'pt-5' : 'pt-0' } pb-0`}>
+          <section className={`section px-0 ${sponsor.tier === 'gold' ? 'pt-5' : 'pt-0'} pb-0`}>
             <div className="columns mx-0 my-0 is-multiline">
               {sponsor.tier === 'gold' ?
                 <React.Fragment>
@@ -68,7 +75,7 @@ export const SponsorPageTemplate = class extends React.Component {
                 :
                 <React.Fragment>
                   <div className="column is-half px-5 py-0">
-                  <h2>{sponsor.title}</h2>
+                    <h2>{sponsor.title}</h2>
                     <span>
                       {sponsor.intro}
                     </span>
@@ -84,8 +91,7 @@ export const SponsorPageTemplate = class extends React.Component {
                 />
               </div>
               <div className="column is-one-quarter px-5 py-0">
-                {/* <DocumentsComponent /> */}
-                documents
+                <DocumentsComponent event={sponsor} sponsor={true} />
               </div>
               <div className="column is-three-quarters px-5 py-0">
                 <ScheduleLiteComponent

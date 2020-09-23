@@ -6,7 +6,50 @@
       "tier": "gold",
       "title": "We are Lenovo",
       "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, ac euismod augue velit at justo. Cras porta lacus est, nec rhoncus augue luctus quis. Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.",
-      "marquee": "Lenovo - Smart Technologies"
+      "marquee": "Lenovo - Smart Technologies",
+      "slides": [],
+      "links": [
+        {
+          "id": 55243,
+          "created": 1596072520,
+          "last_edited": 1596072520,
+          "name": "http://relaxdiego.com/2017/05/swampup-2017-slides.html",
+          "description": null,
+          "display_on_site": false,
+          "featured": false,
+          "order": 1,
+          "presentation_id": 24533,
+          "class_name": "PresentationLink",
+          "link": "http://relaxdiego.com/2017/05/swampup-2017-slides.html"
+        },
+        {
+          "id": 55244,
+          "created": 1596072520,
+          "last_edited": 1596072520,
+          "name": "http://relaxdiego.com/2018/02/jenkins-on-jenkins-shared-libraries.html",
+          "description": null,
+          "display_on_site": false,
+          "featured": false,
+          "order": 2,
+          "presentation_id": 24533,
+          "class_name": "PresentationLink",
+          "link": "http://relaxdiego.com/2018/02/jenkins-on-jenkins-shared-libraries.html"
+        },
+        {
+          "id": 55245,
+          "created": 1596072520,
+          "last_edited": 1596072520,
+          "name": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html",
+          "description": null,
+          "display_on_site": false,
+          "featured": false,
+          "order": 3,
+          "presentation_id": 24533,
+          "class_name": "PresentationLink",
+          "link": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
+        }
+      ],
+      "videos": []
     },
     {
       "id": 2,
@@ -14,7 +57,10 @@
       "tier": "silver",
       "title": "We are Intel",
       "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, ac euismod augue velit at justo. Cras porta lacus est, nec rhoncus augue luctus quis. Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.",
-      "marquee": "Intel Shapes the Future of Technology"
+      "marquee": "Intel Shapes the Future of Technology",
+      "slides": [],
+      "links": [],
+      "videos": []
     }
   ]
 }

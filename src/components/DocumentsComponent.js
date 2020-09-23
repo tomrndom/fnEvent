@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../styles/documents.module.scss'
 
-const DocumentsComponent = ({ event }) => {
+const DocumentsComponent = ({ event, sponsor }) => {
 
   const getMaterials = (event) => {
     let materials = [];
@@ -23,7 +23,7 @@ const DocumentsComponent = ({ event }) => {
 
   if (sortedMaterials.length > 0) {
     return (
-      <div className="column is-one-quarter">
+      <div className={`${sponsor ? '' : 'column is-one-quarter'}`}>
         <div className={`${styles.docsContainer}`} style={{ marginTop: '1em' }}>
           <div className={`navbar-brand ${styles.title}`}>Documents</div>
           <hr />
