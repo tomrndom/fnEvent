@@ -63,7 +63,7 @@ export const SponsorPageTemplate = class extends React.Component {
               {sponsor.tier === 'gold' ?
                 <React.Fragment>
                   <div className="column is-three-quarters px-5 py-0">
-                    <h2>{sponsor.title}</h2>
+                    <h1>{sponsor.title}</h1>
                     <span>
                       {sponsor.intro}
                     </span>
@@ -74,8 +74,8 @@ export const SponsorPageTemplate = class extends React.Component {
                 </React.Fragment>
                 :
                 <React.Fragment>
-                  <div className="column is-half px-5 py-0">
-                    <h2>{sponsor.title}</h2>
+                  <div className={`column is-half px-5 py-0 ${styles.introHalf}`}>
+                    <h1>{sponsor.title}</h1>
                     <span>
                       {sponsor.intro}
                     </span>
