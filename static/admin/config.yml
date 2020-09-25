@@ -45,8 +45,8 @@ collections:
         name: "sponsorsTiers"
         fields:
           - {label: "Tiers", name: "tiers", widget: list, fields: [
-              {label: "ID", name: "id", widget: ncw-id, prefix: tier, hidden: true},
               {label: "Tier", name: "name", widget: string},
+              {label: "ID", name: "id", widget: ncw-id, prefix: tier, hidden: true},
               {label: "Lobby Template", name: "lobby-template", widget: select, required: false, options: [
                 { label: "Big Images", value: "big-images" },
                 { label: "Small Images", value: "small-images" },
@@ -67,7 +67,7 @@ collections:
         name: "sponsor"
         fields:
           - {label: "Sponsors", name: "sponsors", widget: list, fields: [
-              {label: "Tier", name: "tier", widget: string},
+              {label: "Tier", name: "tier", widget: ncw-file-relation, collection: configurations, file: sponsorsTiers, target_field: name, id_field: id, display_fields: text },
               {label: "Sponsors", name: "sponsors", widget: list, fields: [
                 {label: "Name", name: "name", widget: string },
                 {label: "Image", name: "image", widget: image },
@@ -76,11 +76,7 @@ collections:
               {label: "Button", name: button, widget: object, fields: [
                 {label: "Text", name: "text", widget: string, required: false},
                 {label: "Link", name: "link", widget: string, required: false}
-              ]},
-              {label: "Template", name: template, widget: select, options: [
-                { label: "Big Images", value: "big-images" },
-                { label: "Small Images", value: "small-images" },                
-              ]}
+              ]}              
             ]}
       - file: "src/content/navbar.json"
         label: "Navbar"
