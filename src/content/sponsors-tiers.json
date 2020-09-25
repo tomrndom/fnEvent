@@ -1,14 +1,14 @@
 {
   "tiers": [
     {
-      "id": 1,
+      "id": "tier-cYGYq5-ae",
       "name": "Gold",
       "lobby-template": "big-images",
       "page-template": "big-header",
       "event-template": ""
     },
     {
-      "id": 2,
+      "id": "tier-DHcI3dWGk",
       "name": "Silver",
       "lobby-template": "small-images",
       "page-template": "small-header",

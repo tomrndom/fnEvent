@@ -1,6 +1,6 @@
 backend:
   name: github
-  branch: sponsors-page
+  branch: sponsor-page
   repo: fntechgit/virtualevent-poc
   commit_messages:
     create: 'Create {{collection}} “{{slug}}”'
@@ -45,7 +45,7 @@ collections:
         name: "sponsorsTiers"
         fields:
           - {label: "Tiers", name: "tiers", widget: list, fields: [
-              {label: "ID", name: "id", widget: ncw-id, prefix: tier},
+              {label: "ID", name: "id", widget: ncw-id, prefix: tier, hidden: true},
               {label: "Tier", name: "name", widget: string},
               {label: "Lobby Template", name: "lobby-template", widget: select, required: false, options: [
                 { label: "Big Images", value: "big-images" },
