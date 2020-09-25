@@ -24,7 +24,13 @@
         "text": "View all",
         "link": "/virtual-booth/"
       },
-      "template": "big-images"
+      "template": "big-images",
+      "tier": [
+        {
+          "value": "tier-cYGYq5-ae",
+          "label": "Gold"
+        }
+      ]
     },
     {
       "id": "tier-DHcI3dWGk",
@@ -75,7 +81,13 @@
         "text": "View all",
         "link": "/virtual-booth/"
       },
-      "template": "small-images"
+      "template": "small-images",
+      "tier": [
+        {
+          "value": "tier-DHcI3dWGk",
+          "label": "Silver"
+        }
+      ]
     }
   ]
 }
