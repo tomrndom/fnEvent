@@ -40,22 +40,28 @@ collections:
                 ]}
               ]},
             ]}
-    - file: "src/content/sponsors-tiers.json"
-      label: "Sponsors Tiers"
-      name: "sponsorsTiers"
-      fields:
-        - {label: "Tiers", name: "tiers", widget: list, fields: [            
-            {label: "ID", name: "id", widget: ncw-id, prefix: tier, hidden: true},
-            {label: "Tier", name: "name", widget: string},
-            {label: "Lobby Template", name: "lobby-template", widget: select, options: [
-              { label: "Big Images", value: "big-images" },
-              { label: "Small Images", value: "small-images" },                
-            ]},
-            {label: "Page Template", name: "page-template", widget: string, select, options: [
-              { label: "Big Header", value: "big-header" },
-              { label: "Small Header", value: "small-header" },                
+      - file: "src/content/sponsors-tiers.json"
+        label: "Sponsors Tiers"
+        name: "sponsorsTiers"
+        fields:
+          - {label: "Tiers", name: "tiers", widget: list, fields: [
+              {label: "ID", name: "id", widget: ncw-id, prefix: tier},
+              {label: "Tier", name: "name", widget: string},
+              {label: "Lobby Template", name: "lobby-template", widget: select, required: false, options: [
+                { label: "Big Images", value: "big-images" },
+                { label: "Small Images", value: "small-images" },
+                { label: "Horizontal Images", value: "horizontal-images" },
+              ]},
+              {label: "Page Template", name: "page-template", widget: select, options: [
+                { label: "Big Header", value: "big-header" },
+                { label: "Small Header", value: "small-header" },
+              ]},
+              {label: "Event Template", name: "event-template", widget: select, required: false, options: [
+                { label: "Big Images", value: "big-images" },
+                { label: "Small Images", value: "small-images" },
+                { label: "Horizontal Images", value: "horizontal-images" },
+              ]},
             ]}
-          ]}
       - file: "src/content/sponsor.json"
         label: "Sponsors"
         name: "sponsor"

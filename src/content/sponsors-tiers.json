@@ -4,13 +4,15 @@
       "id": 1,
       "name": "Gold",
       "lobby-template": "big-images",
-      "page-template": "big-header"
+      "page-template": "big-header",
+      "event-template": ""
     },
     {
       "id": 2,
       "name": "Silver",
       "lobby-template": "small-images",
-      "page-template": "small-header"
+      "page-template": "small-header",
+      "event-template": ""
     }
   ]
 }
