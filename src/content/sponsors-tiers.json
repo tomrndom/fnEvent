@@ -1,0 +1,16 @@
+{
+  "tiers": [
+    {
+      "id": 1,
+      "name": "Gold",
+      "lobby-template": "big-images",
+      "page-template": "big-header"
+    },
+    {
+      "id": 2,
+      "name": "Silver",
+      "lobby-template": "small-images",
+      "page-template": "small-header"
+    }
+  ]
+}
