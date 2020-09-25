@@ -1,10 +1,8 @@
 {
   "sponsors": [
     {
-      "tier": {
-        "id": "tier-cYGYq5-ae",
-        "name": "Gold"
-      },
+      "id": "tier-cYGYq5-ae",
+      "name": "Gold",
       "sponsors": [
         {
           "name": "flow",
@@ -29,10 +27,8 @@
       "template": "big-images"
     },
     {
-      "tier": {
-        "id": "tier-DHcI3dWGk",
-        "name": "Silver"
-      },
+      "id": "tier-DHcI3dWGk",
+      "name": "Silver",
       "sponsors": [
         {
           "name": "System Squared",
