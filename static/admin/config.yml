@@ -47,6 +47,7 @@ collections:
           - {label: "Tiers", name: "tiers", widget: list, fields: [
               {label: "Tier", name: "name", widget: string},
               {label: "ID", name: "id", widget: ncw-id, prefix: tier, hidden: true},
+              {label: "Badge", name: "badge", widget: image, required: false},
               {label: "Lobby", name: "lobby", widget: object, options: [
                 {label: "Button", name: button, widget: object, fields: [
                   {label: "Text", name: "text", widget: string, required: false},
