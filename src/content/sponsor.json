@@ -1,7 +1,7 @@
 {
-  "sponsors": [
+  "tierSponsors": [
     {
-      "tierSponsor": [
+      "tier": [
         {
           "value": "tier-cYGYq5-ae",
           "label": "Headline"
@@ -21,7 +21,7 @@
       ]      
     },
     {
-      "tierSponsor": [
+      "tier": [
         {
           "value": "tier-DHcI3dWGk",
           "label": "Premier"
@@ -41,7 +41,7 @@
       ]      
     },
     {
-      "tierSponsor": [
+      "tier": [
         {
           "value": "tier-U_wEwGX8a",
           "label": "Exhibitor"

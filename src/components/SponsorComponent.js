@@ -11,9 +11,9 @@ const SponsorComponent = () => {
 
   return (
 
-    Data.sponsors.map(s => {
+    Data.tierSponsors.map(s => {
       const sponsors = s.sponsors;
-      const tier = Tiers.tiers.find(t => t.id === s.tierSponsor[0].value);
+      const tier = Tiers.tiers.find(t => t.id === s.tier[0].value);
       const template = tier.lobby.lobbyTemplate;
       const button = tier.lobby.button;
 
