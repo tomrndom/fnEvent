@@ -21,8 +21,6 @@ const DocumentsComponent = ({ event, sponsor }) => {
     }
   });
 
-  console.log(sortedMaterials)
-
   if (sortedMaterials.length > 0) {
     return (
       <div className={`${sponsor ? '' : 'column is-one-quarter'}`}>
