@@ -51,9 +51,7 @@ export const SponsorPageTemplate = class extends React.Component {
     const { loggedUser, user } = this.props;
     const { sponsor, tier } = this.state;
     let { summit } = SummitObject;
-
-    console.log(sponsor)
-
+    
     const mocketDocuments = {
       slides: [
         {
