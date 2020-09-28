@@ -9,6 +9,9 @@
   color: $color_text_light;
 
   .hero-sponsor {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     .hero-body {
       padding: 2rem;
       height: 450px;
@@ -33,6 +36,9 @@
 
           .category {
             align-self: flex-end;
+            img {
+              max-height: 75px;
+            }
           }
 
           .buttons {

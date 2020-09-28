@@ -2,17 +2,27 @@
   "tiers": [
     {
       "id": "tier-cYGYq5-ae",
-      "name": "Gold",
-      "lobby-template": "big-images",
-      "page-template": "big-header",
-      "event-template": ""
+      "name": "Headline",
+      "badge": "/img/sponsors/headline/badge_headline.svg",
+      "lobbyTemplate": "big-images",
+      "pageTemplate": "big-header",
+      "eventTemplate": ""
     },
     {
       "id": "tier-DHcI3dWGk",
-      "name": "Silver",
-      "lobby-template": "small-images",
-      "page-template": "small-header",
-      "event-template": ""
+      "name": "Premier",
+      "badge": "/img/sponsors/premier/badge_premier.svg",
+      "lobbyTemplate": "big-images",
+      "pageTemplate": "big-header",
+      "eventTemplate": ""
+    },
+    {
+      "id": "tier-U_wEwGX8a",
+      "name": "Exhibitor",
+      "badge": "/img/sponsors/exhibitor/badge_exhibitor.svg",
+      "lobbyTemplate": "small-images",
+      "pageTemplate": "small-header",
+      "eventTemplate": ""
     }
   ]
 }

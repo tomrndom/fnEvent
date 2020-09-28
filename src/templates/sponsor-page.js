@@ -12,9 +12,9 @@ import DisqusComponent from '../components/DisqusComponent'
 import SponsorBanner from '../components/SponsorBanner'
 import HeroComponent from '../components/HeroComponent'
 
-import envVariables from '../utils/envVariables';
 import SummitObject from '../content/summit.json'
-import SponsorData from '../content/sponsor-data.json'
+import Sponsors from '../content/sponsor.json'
+import SponsorsTiers from '../content/sponsors-tiers.json'
 
 import Layout from '../components/Layout'
 
@@ -26,18 +26,18 @@ export const SponsorPageTemplate = class extends React.Component {
     super(props);
 
     this.state = {
-      sponsor: null
+      sponsor: null,
+      tier: null
     }
   }
 
   componentWillMount() {
     const { sponsorId } = this.props;
-    const sponsor = SponsorData.sponsors.find(e => e.id === parseInt(sponsorId));
-    if (sponsor) this.setState({ sponsor: sponsor });
-  }
+    const sponsor = Sponsors.sponsors.map(t => t.sponsors.find(s => s.id === parseInt(sponsorId))).filter(e => e !== undefined)[0];
+    const tier = Sponsors.sponsors.find(t => t.sponsors.find(s => s === sponsor)).tier;
+    const tierData = SponsorsTiers.tiers.find(t => t.id === tier.id);
 
-  componentDidMount() {
-    console.log(this.state.sponsor)
+    if (sponsor) this.setState({ sponsor: sponsor, tier: tierData });
   }
 
   onEventChange = (ev) => {
@@ -49,18 +49,68 @@ export const SponsorPageTemplate = class extends React.Component {
 
   render() {
     const { loggedUser, user } = this.props;
-    const { sponsor } = this.state;
+    const { sponsor, tier } = this.state;
     let { summit } = SummitObject;
+
+    console.log(sponsor)
+
+    const mocketDocuments = {
+      slides: [
+        {
+          id: 55244,
+          created: 1596072520,
+          last_edited: 1596072520,
+          name: "http://relaxdiego.com/2018/02/jenkins-on-jenkins-shared-libraries.html",
+          description: null,
+          display_on_site: false,
+          featured: false,
+          order: 2,
+          presentation_id: 24533,
+          class_name: "PresentationSlide",
+          link: "http://relaxdiego.com/2018/02/jenkins-on-jenkins-shared-libraries.html"
+        }
+      ],
+      links: [
+        {
+          id: 55243,
+          created: 1596072520,
+          last_edited: 1596072520,
+          name: "http://relaxdiego.com/2017/05/swampup-2017-slides.html",
+          description: null,
+          display_on_site: false,
+          featured: false,
+          order: 1,
+          presentation_id: 24533,
+          class_name: "PresentationLink",
+          link: "http://relaxdiego.com/2017/05/swampup-2017-slides.html"
+        }
+      ],
+      videos: [
+        {
+          id: 55245,
+          created: 1596072520,
+          last_edited: 1596072520,
+          name: "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html",
+          description: null,
+          display_on_site: false,
+          featured: false,
+          order: 3,
+          presentation_id: 24533,
+          class_name: "PresentationVideo",
+          youtube_id: "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
+        }
+      ],
+    }
 
     if (!sponsor) {
       return <HeroComponent title="Sponsor not found" redirectTo="/a/" />
     } else {
       return (
         <>
-          <SponsorHeader sponsor={sponsor} />
-          <section className={`section px-0 ${sponsor.tier === 'gold' ? 'pt-5' : 'pt-0'} pb-0`}>
+          <SponsorHeader sponsor={sponsor} tier={tier} />
+          <section className={`section px-0 ${tier.pageTemplate === 'big-header' ? 'pt-5' : 'pt-0'} pb-0`}>
             <div className="columns mx-0 my-0 is-multiline">
-              {sponsor.tier === 'gold' ?
+              {tier.pageTemplate === 'big-header' ?
                 <React.Fragment>
                   <div className="column is-three-quarters px-5 py-0">
                     <h1>{sponsor.title}</h1>
@@ -81,7 +131,7 @@ export const SponsorPageTemplate = class extends React.Component {
                     </span>
                   </div>
                   <div className="column is-half px-0 py-0">
-                    <img src="/img/chemex.jpg" />
+                    <img src={sponsor.pageImage} />
                   </div>
                 </React.Fragment>
               }
@@ -91,7 +141,7 @@ export const SponsorPageTemplate = class extends React.Component {
                 />
               </div>
               <div className="column is-one-quarter px-5 py-0">
-                <DocumentsComponent event={sponsor} sponsor={true} />
+                <DocumentsComponent event={mocketDocuments} sponsor={true} />
               </div>
               <div className="column is-three-quarters px-5 py-0">
                 <ScheduleLiteComponent

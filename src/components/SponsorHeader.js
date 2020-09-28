@@ -6,10 +6,10 @@ import footerContent from '../content/footer.json';
 
 import styles from '../styles/sponsor-page.module.scss'
 
-const SponsorHeader = ({ sponsor }) => (
+const SponsorHeader = ({ sponsor, tier }) => (
   <section className={styles.hero}>
-    <div className={`${styles.heroSponsor}`}>
-      <div className={`${styles.heroBody}`} style={{height: `${sponsor.tier !== 'gold' ? '250px' : ''}`}}>
+    <div className={`${styles.heroSponsor}`} style={{backgroundImage: `url(${sponsor.headerImage})`}}>
+      <div className={`${styles.heroBody}`} style={{height: `${tier.pageTemplate !== 'big-header' ? '250px' : ''}`}}>
         <div className={`${styles.heroSponsorContainer}`}>
           {footerContent.social.display &&
             <div className={styles.leftContainer}>
@@ -22,7 +22,9 @@ const SponsorHeader = ({ sponsor }) => (
             </div>
           }
           <div className={styles.rightContainer}>
-            <div className={styles.category}>Sponsor category</div>
+            <div className={styles.category}>
+              <img src={tier.badge} />
+            </div>
             <div className={styles.buttons}>
               <a className={styles.link}>
                 <button className={`${styles.button} button is-large`}>

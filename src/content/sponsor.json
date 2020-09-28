@@ -3,63 +3,17 @@
     {
       "tier": {
         "id": "tier-cYGYq5-ae",
-        "name": "Gold"
+        "name": "Headline"
       },
       "sponsors": [
         {
           "id": 1,
-          "name": "Lenovo",
-          "tier": "gold",
-          "title": "We are Lenovo",
+          "name": "Huawei",
+          "title": "We are Huawei",
           "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, ac euismod augue velit at justo. Cras porta lacus est, nec rhoncus augue luctus quis. Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.",
-          "marquee": "Lenovo - Smart Technologies",
-          "slides": [
-            {
-              "id": 55244,
-              "created": 1596072520,
-              "last_edited": 1596072520,
-              "name": "http://relaxdiego.com/2018/02/jenkins-on-jenkins-shared-libraries.html",
-              "description": null,
-              "display_on_site": false,
-              "featured": false,
-              "order": 2,
-              "presentation_id": 24533,
-              "class_name": "PresentationSlide",
-              "link": "http://relaxdiego.com/2018/02/jenkins-on-jenkins-shared-libraries.html"
-            }
-          ],
-          "links": [
-            {
-              "id": 55243,
-              "created": 1596072520,
-              "last_edited": 1596072520,
-              "name": "http://relaxdiego.com/2017/05/swampup-2017-slides.html",
-              "description": null,
-              "display_on_site": false,
-              "featured": false,
-              "order": 1,
-              "presentation_id": 24533,
-              "class_name": "PresentationLink",
-              "link": "http://relaxdiego.com/2017/05/swampup-2017-slides.html"
-            }
-          ],
-          "videos": [
-            {
-              "id": 55245,
-              "created": 1596072520,
-              "last_edited": 1596072520,
-              "name": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html",
-              "description": null,
-              "display_on_site": false,
-              "featured": false,
-              "order": 3,
-              "presentation_id": 24533,
-              "class_name": "PresentationVideo",
-              "youtube_id": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
-            }
-          ],
-          "logo": "/img/yoco-sponsor-ads-medium-treva.png",
-          "headerImage": "",
+          "marquee": "Huawei - Smart Technologies",
+          "logo": "/img/sponsors/headline/logo_huawei.png",
+          "headerImage": "/img/sponsors/headline/header_logo_headline.png",
           "headerVideo": ""
         }
       ],
@@ -71,63 +25,40 @@
     {
       "tier": {
         "id": "tier-DHcI3dWGk",
-        "name": "Silver"
+        "name": "Premier"
       },
       "sponsors": [
         {
           "id": 2,
-          "name": "Intel",
-          "tier": "silver",
-          "title": "We are Intel",
+          "name": "CISCO",
+          "title": "We are CISCO",
           "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, ac euismod augue velit at justo. Cras porta lacus est, nec rhoncus augue luctus quis. Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.",
-          "marquee": "Intel Shapes the Future of Technology",
-          "slides": [
-            {
-              "id": 55244,
-              "created": 1596072520,
-              "last_edited": 1596072520,
-              "name": "http://relaxdiego.com/2018/02/jenkins-on-jenkins-shared-libraries.html",
-              "description": null,
-              "display_on_site": false,
-              "featured": false,
-              "order": 2,
-              "presentation_id": 24533,
-              "class_name": "PresentationSlide",
-              "link": "http://relaxdiego.com/2018/02/jenkins-on-jenkins-shared-libraries.html"
-            }
-          ],
-          "links": [
-            {
-              "id": 55243,
-              "created": 1596072520,
-              "last_edited": 1596072520,
-              "name": "http://relaxdiego.com/2017/05/swampup-2017-slides.html",
-              "description": null,
-              "display_on_site": false,
-              "featured": false,
-              "order": 1,
-              "presentation_id": 24533,
-              "class_name": "PresentationLink",
-              "link": "http://relaxdiego.com/2017/05/swampup-2017-slides.html"
-            }
-          ],
-          "videos": [
-            {
-              "id": 55245,
-              "created": 1596072520,
-              "last_edited": 1596072520,
-              "name": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html",
-              "description": null,
-              "display_on_site": false,
-              "featured": false,
-              "order": 3,
-              "presentation_id": 24533,
-              "class_name": "PresentationVideo",
-              "youtube_id": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
-            }
-          ],          
-          "logo": "/img/logo-middle-tier-systemsquared.png",
-          "headerImage": "",
+          "marquee": "CISCO Shapes the Future of Technology",
+          "logo": "/img/sponsors/premier/logo_cisco.png",
+          "headerImage": "/img/sponsors/premier/header_logo_premier.png",
+          "headerVideo": ""
+        }
+      ],
+      "button": {
+        "text": "View all",
+        "link": "/virtual-booth/"
+      }
+    },
+    {
+      "tier": {
+        "id": "tier-U_wEwGX8a",
+        "name": "Exhibitor"
+      },
+      "sponsors": [
+        {
+          "id": 3,
+          "name": "ZTE",
+          "title": "We are ZTE",
+          "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, ac euismod augue velit at justo. Cras porta lacus est, nec rhoncus augue luctus quis. Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.",
+          "marquee": "ZTE Shapes the Future of Technology",
+          "logo": "/img/sponsors/exhibitor/logo_ZTE.png",
+          "pageImage": "/img/sponsors/exhibitor/immage.png",
+          "headerImage": "/img/sponsors/exhibitor/header_logo_exhibitor.png",
           "headerVideo": ""
         }
       ],
