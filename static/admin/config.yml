@@ -47,42 +47,27 @@ collections:
           - {label: "Tiers", name: "tiers", widget: list, fields: [
               {label: "Tier", name: "name", widget: string},
               {label: "ID", name: "id", widget: ncw-id, prefix: tier, hidden: true},
-              {label: "Lobby Template", name: "lobby-template", widget: select, required: false, options: [
-                { label: "Big Images", value: "big-images" },
-                { label: "Small Images", value: "small-images" },
-                { label: "Horizontal Images", value: "horizontal-images" },
+              {label: "Lobby", name: "lobby", widget: object, options: [
+                {label: "Button", name: button, widget: object, fields: [
+                  {label: "Text", name: "text", widget: string, required: false},
+                  {label: "Link", name: "link", widget: string, required: false}
+                ]},
+                {label: "Lobby Template", name: "lobby-template", widget: select, required: false, options: [
+                  { label: "Big Images", value: "big-images" },
+                  { label: "Small Images", value: "small-images" },
+                  { label: "Horizontal Images", value: "horizontal-images" },
+                ]},
               ]},
-              {label: "Page Template", name: "page-template", widget: select, options: [
+              {label: "Sponsor Page Template", name: "page-template", widget: select, options: [
                 { label: "Big Header", value: "big-header" },
                 { label: "Small Header", value: "small-header" },
               ]},
-              {label: "Event Template", name: "event-template", widget: select, required: false, options: [
+              {label: "In Event Template", name: "event-template", widget: select, required: false, options: [
                 { label: "Big Images", value: "big-images" },
                 { label: "Small Images", value: "small-images" },
                 { label: "Horizontal Images", value: "horizontal-images" },
               ]},
-            ]}
-      - file: "src/content/sponsor.json"
-        label: "Sponsors"
-        name: "sponsor"
-        fields:
-          - {label: "Sponsors", name: "sponsors", widget: list, fields: [
-              {label: "Tier", name: "tier", widget: ncw-file-relation, collection: configurations, file: sponsorsTiers, target_field: tiers, id_field: id, display_fields: name },
-              {label: "Sponsors", name: "sponsors", widget: list, fields: [
-                {label: "Name", name: "name", widget: string },
-                {label: "Title", name: "title", widget: string },
-                {label: "Intro", name: "intro", widget: string },
-                {label: "Marquee", name: "marquee", widget: string },
-                {label: "Logo", name: "logo", widget: image },
-                {label: "Header Image", name: "headerImage", widget: image },
-                {label: "Page Image", name: "pageImage", widget: image, required: false },
-                {label: "Video Header", name: "headerVideo", widget: file, required: false },
-              ]},
-              {label: "Button", name: button, widget: object, fields: [
-                {label: "Text", name: "text", widget: string, required: false},
-                {label: "Link", name: "link", widget: string, required: false}
-              ]}
-            ]}
+            ]}      
       - file: "src/content/navbar.json"
         label: "Navbar"
         name: "navbar"
@@ -216,3 +201,25 @@ collections:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "custom-page"}
       - {label: Title, name: title, widget: string}
       - {label: "Body", name: body, widget: markdown}
+  - name: "sponsorData"
+    label: "Sponsor Data"
+    editor:
+      preview: false
+    files:
+      - file: "src/content/sponsor.json"
+        label: "Sponsors"
+        name: "sponsor"
+        fields:
+          - {label: "Sponsors", name: "sponsors", widget: list, summary: "{{tier[0].label}}", fields: [
+              {label: "Tier", name: "tierSponsor", widget: ncw-file-relation, collection: configurations, file: sponsorsTiers, target_field: tiers, id_field: id, display_fields: name},
+              {label: "Sponsors", name: "sponsors", widget: list, fields: [
+                {label: "Name", name: "name", widget: string },
+                {label: "Title", name: "title", widget: string },
+                {label: "Intro", name: "intro", widget: string },
+                {label: "Marquee", name: "marquee", widget: string },
+                {label: "Logo", name: "logo", widget: image },
+                {label: "Header Image", name: "headerImage", widget: image },
+                {label: "Page Image", name: "pageImage", widget: image, required: false },
+                {label: "Video Header", name: "headerVideo", widget: file, required: false },
+              ]}              
+            ]}

@@ -13,15 +13,16 @@ const SponsorComponent = () => {
 
     Data.sponsors.map(s => {
       const sponsors = s.sponsors;
-      const button = s.button;
-      const template = Tiers.tiers.find(t => t.id === s.tier.id)["lobby-template"];
+      const tier = Tiers.tiers.find(t => t.id === s.tierSponsor[0].value);
+      const template = tier.lobby.lobbyTemplate;
+      const button = tier.lobby.button;
 
       if (sponsors.length > 0) {
         switch (template) {
           case 'big-images':
             return (
               <div className={styles.goldContainer}>
-                <span><b>{s.tier.name} Sponsors</b></span>
+                <span><b>{tier.name} Sponsors</b></span>
                 {sponsors.map((sponsor, index) => {
                   return (
                     <Link to={`/a/sponsor/${sponsor.id}`} key={index}>
@@ -41,7 +42,7 @@ const SponsorComponent = () => {
           case 'small-images':
             return (
               <div className={styles.silverContainer}>
-                <span><b>{s.tier.name} Sponsors</b></span>
+                <span><b>{tier.name} Sponsors</b></span>
                 {sponsors.map((sponsor, index) => {
                   return (
                     <div className={styles.imageBox} key={index}>
@@ -80,8 +81,6 @@ const SponsorComponent = () => {
       }
     })
   )
-
-  // const selectedTier = Data.sponsors.find(s => s.tier === tier);
 }
 
 export default SponsorComponent;

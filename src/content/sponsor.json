@@ -1,7 +1,7 @@
 {
   "sponsors": [
     {
-      "tier": [
+      "tierSponsor": [
         {
           "value": "tier-cYGYq5-ae",
           "label": "Headline"
@@ -18,14 +18,10 @@
           "headerImage": "/img/sponsors/headline/header_logo_headline.png",
           "headerVideo": ""
         }
-      ],
-      "button": {
-        "text": "View all",
-        "link": "/virtual-booth/"
-      }
+      ]      
     },
     {
-      "tier": [
+      "tierSponsor": [
         {
           "value": "tier-DHcI3dWGk",
           "label": "Premier"
@@ -42,14 +38,10 @@
           "headerImage": "/img/sponsors/premier/header_logo_premier.png",
           "headerVideo": ""
         }
-      ],
-      "button": {
-        "text": "View all",
-        "link": "/virtual-booth/"
-      }
+      ]      
     },
     {
-      "tier": [
+      "tierSponsor": [
         {
           "value": "tier-U_wEwGX8a",
           "label": "Exhibitor"
@@ -67,11 +59,7 @@
           "title": "We are ZTE",
           "id": 3
         }
-      ],
-      "button": {
-        "text": "View all",
-        "link": "/virtual-booth/"
-      }
+      ]      
     }
   ]
 }
