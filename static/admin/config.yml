@@ -49,7 +49,7 @@ collections:
               {label: "ID", name: "id", widget: ncw-id, prefix: tier, hidden: true},
               {label: "Badge", name: "badge", widget: image, required: false},
               {label: "Lobby", name: "lobby", widget: object, fields: [
-                {label: "Lobby Template", name: "lobby-template", widget: select, required: false, options: [
+                {label: "Lobby Template", name: "lobbyTemplate", widget: select, required: false, options: [
                   { label: "Big Images", value: "big-images" },
                   { label: "Small Images", value: "small-images" },
                   { label: "Horizontal Images", value: "horizontal-images" },
@@ -59,11 +59,11 @@ collections:
                   {label: "Link", name: "link", widget: string, required: false}
                 ]},
               ]},
-              {label: "Sponsor Page Template", name: "page-template", widget: select, options: [
+              {label: "Sponsor Page Template", name: "sponsorTemplate", widget: select, options: [
                 { label: "Big Header", value: "big-header" },
                 { label: "Small Header", value: "small-header" },
               ]},
-              {label: "In Event Template", name: "event-template", widget: select, required: false, options: [
+              {label: "In Event Template", name: "eventTemplate", widget: select, required: false, options: [
                 { label: "Big Images", value: "big-images" },
                 { label: "Small Images", value: "small-images" },
                 { label: "Horizontal Images", value: "horizontal-images" },
