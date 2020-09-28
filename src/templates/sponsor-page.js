@@ -106,9 +106,9 @@ export const SponsorPageTemplate = class extends React.Component {
       return (
         <>
           <SponsorHeader sponsor={sponsor} tier={tier} />
-          <section className={`section px-0 ${tier.pageTemplate === 'big-header' ? 'pt-5' : 'pt-0'} pb-0`}>
+          <section className={`section px-0 ${tier.sponsorTemplate === 'big-header' ? 'pt-5' : 'pt-0'} pb-0`}>
             <div className="columns mx-0 my-0 is-multiline">
-              {tier.pageTemplate === 'big-header' ?
+              {tier.sponsorTemplate === 'big-header' ?
                 <React.Fragment>
                   <div className="column is-three-quarters px-5 py-0">
                     <h1>{sponsor.title}</h1>

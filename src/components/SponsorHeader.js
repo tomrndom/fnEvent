@@ -9,7 +9,7 @@ import styles from '../styles/sponsor-page.module.scss'
 const SponsorHeader = ({ sponsor, tier }) => (
   <section className={styles.hero}>
     <div className={`${styles.heroSponsor}`} style={{backgroundImage: `url(${sponsor.headerImage})`}}>
-      <div className={`${styles.heroBody}`} style={{height: `${tier.pageTemplate !== 'big-header' ? '250px' : ''}`}}>
+      <div className={`${styles.heroBody}`} style={{height: `${tier.sponsorTemplate !== 'big-header' ? '250px' : ''}`}}>
         <div className={`${styles.heroSponsorContainer}`}>
           {footerContent.social.display &&
             <div className={styles.leftContainer}>

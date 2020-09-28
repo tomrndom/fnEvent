@@ -11,7 +11,7 @@
           "link": "/virtual-booth/"
         }
       },
-      "pageTemplate": "big-header",
+      "sponsorTemplate": "big-header",
       "eventTemplate": ""
     },
     {
@@ -25,7 +25,7 @@
           "link": "/virtual-booth/"
         }
       },
-      "pageTemplate": "big-header",
+      "sponsorTemplate": "big-header",
       "eventTemplate": ""
     },
     {
@@ -39,7 +39,7 @@
           "link": "/virtual-booth/"
         }
       },
-      "pageTemplate": "small-header",
+      "sponsorTemplate": "small-header",
       "eventTemplate": ""
     }
   ]
