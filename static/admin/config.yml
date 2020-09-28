@@ -202,8 +202,8 @@ collections:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "custom-page"}
       - {label: Title, name: title, widget: string}
       - {label: "Body", name: body, widget: markdown}
-  - name: "sponsorsData"
-    label: "Sponsors Data"
+  - name: "sponsors"
+    label: "Sponsors"
     editor:
       preview: false
     files:
