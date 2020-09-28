@@ -4,7 +4,7 @@
       "tier": [
         {
           "value": "tier-cYGYq5-ae",
-          "label": "Headline"
+          "label": "Gold"
         }
       ],
       "sponsors": [
@@ -18,13 +18,13 @@
           "headerImage": "/img/sponsors/headline/header_logo_headline.png",
           "headerVideo": ""
         }
-      ]      
+      ]
     },
     {
       "tier": [
         {
           "value": "tier-DHcI3dWGk",
-          "label": "Premier"
+          "label": "Silver"
         }
       ],
       "sponsors": [
@@ -38,13 +38,13 @@
           "headerImage": "/img/sponsors/premier/header_logo_premier.png",
           "headerVideo": ""
         }
-      ]      
+      ]
     },
     {
       "tier": [
         {
           "value": "tier-U_wEwGX8a",
-          "label": "Exhibitor"
+          "label": "Bronze"
         }
       ],
       "sponsors": [
@@ -59,7 +59,7 @@
           "title": "We are ZTE",
           "id": 3
         }
-      ]      
+      ]
     }
   ]
 }
