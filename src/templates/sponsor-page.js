@@ -13,7 +13,7 @@ import SponsorBanner from '../components/SponsorBanner'
 import HeroComponent from '../components/HeroComponent'
 
 import SummitObject from '../content/summit.json'
-import Sponsors from '../content/sponsor.json'
+import Sponsors from '../content/sponsors.json'
 import SponsorsTiers from '../content/sponsors-tiers.json'
 
 import Layout from '../components/Layout'

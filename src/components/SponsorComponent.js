@@ -4,7 +4,7 @@ import Link from '../components/Link'
 
 import styles from '../styles/sponsor.module.scss'
 
-import Data from '../content/sponsor.json'
+import Data from '../content/sponsors.json'
 import Tiers from '../content/sponsors-tiers.json'
 
 const SponsorComponent = () => {
