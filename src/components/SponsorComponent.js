@@ -21,7 +21,7 @@ const SponsorComponent = ({page}) => {
         switch (template) {
           case 'big-images':
             return (
-              <div className={styles.goldContainer}>
+              <div className={styles.bigImageContainer}>
                 <span><b>{tier.name} Sponsors</b></span>
                 {sponsors.map((sponsor, index) => {
                   return (
@@ -41,7 +41,7 @@ const SponsorComponent = ({page}) => {
             )
           case 'small-images':
             return (
-              <div className={styles.silverContainer}>
+              <div className={styles.smallImageContainer}>
                 <span><b>{tier.name} Sponsors</b></span>
                 {sponsors.map((sponsor, index) => {
                   return (
