@@ -79,16 +79,20 @@ export const HomePageTemplate = class extends React.Component {
                 eventCount={HomeSettings.centerColumn.schedule.showAllEvents ? 100 : 4}
                 className={HomeSettings.centerColumn.schedule.showAllEvents ? "schedule-container-home" : ""}
               />
-              <SpeakersWidgetComponent
-                accessToken={loggedUser.accessToken}
-                title="Today's Speakers"
-                bigPics={true}
-              />
-              <SpeakersWidgetComponent
-                accessToken={loggedUser.accessToken}
-                title="Featured Speakers"
-                bigPics={false}
-              />
+              {HomeSettings.centerColumn.speakers.showTodaySpeakers &&
+                <SpeakersWidgetComponent
+                  accessToken={loggedUser.accessToken}
+                  title="Today's Speakers"
+                  bigPics={true}
+                />
+              }
+              {HomeSettings.centerColumn.speakers.showFeatureSpeakers &&
+                <SpeakersWidgetComponent
+                  accessToken={loggedUser.accessToken}
+                  title="Featured Speakers"
+                  bigPics={false}
+                />
+              }
               <AdvertiseComponent section='lobby' column="center" />
             </div>
             <div className="column is-one-quarter pb-6">
