@@ -22,13 +22,7 @@ collections:
         label: "General Settings"
         name: "generalSettings"
         fields:
-          - {label: "Favicon", name: favicon, widget: image}
-          - {label: "Home Hero", name: homeHero, widget: object, fields: [
-              {label: "Title", name: title, widget: string},
-              {label: "Sub Title", name: subTitle, widget: string, required: false},
-              {label: "Image", name: image, widget: image, required: false},
-              {label: "Copy", name: copy, widget: text, required: false}
-            ]}
+          - {label: "Icons", name: icons, widget: image}
       - file: "src/content/ads.json"
         label: "Advertisement"
         name: "ads"
@@ -135,6 +129,12 @@ collections:
                 {label: "Show Today Speakers", name: "showTodaySpeakers", widget: boolean, required: false},
                 {label: "Show Feature Speakers", name: "showFeatureSpeakers", widget: boolean, required: false}
               ]}
+            ]}
+          - {label: "Home Hero", name: homeHero, widget: object, fields: [
+              {label: "Title", name: title, widget: string},
+              {label: "Sub Title", name: subTitle, widget: string, required: false},
+              {label: "Image", name: image, widget: image, required: false},
+              {label: "Copy", name: copy, widget: text, required: false}
             ]}
   - name: "marketing"
     label: "Marketing Site"
