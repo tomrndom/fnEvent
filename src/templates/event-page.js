@@ -66,12 +66,13 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.loading !== nextProps.loading) return true;
-    if (this.props.eventId !== nextProps.eventId) return true;
-    if (this.props.event?.id !== nextProps.event?.id) return true;
-    const currentPhase = this.props.eventsPhases.find(e => e.id === this.props.eventId).phase;
-    const nextCurrentPhase = nextProps.eventsPhases.find(e => e.id === this.props.eventId).phase;
-    if (currentPhase !== nextCurrentPhase && (currentPhase === PHASES.BEFORE|| currentPhase === null)) return true;
+    const { loading, eventId, event, eventsPhases } = this.props;
+    if (loading !== nextProps.loading) return true;
+    if (eventId !== nextProps.eventId) return true;
+    if (event?.id !== nextProps.event?.id) return true;
+    const currentPhase = eventsPhases.find(e => e.id == eventId)?.phase;
+    const nextCurrentPhase = nextProps.eventsPhases.find(e => e.id == eventId)?.phase;
+    if (currentPhase !== nextCurrentPhase && (currentPhase === undefined || currentPhase === -1)) return true;
     return false
   }
 
@@ -79,7 +80,7 @@ export const EventPageTemplate = class extends React.Component {
     const { loggedUser, event, eventId, eventsPhases, user, loading } = this.props;
     const { firstRender } = this.state;
     let { summit } = SummitObject;
-    let currentEvent = eventsPhases.find(e => e.id === eventId);
+    let currentEvent = eventsPhases.find(e => e.id == eventId);
     let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;
 
     if (!firstRender && !loading && !event) {
