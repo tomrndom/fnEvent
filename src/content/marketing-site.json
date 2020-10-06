@@ -92,5 +92,6 @@
         }
       ]
     }
-  ]
+  ],
+  "favicon": "/img/chat.svg"
 }
