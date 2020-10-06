@@ -22,7 +22,7 @@ collections:
         label: "General Settings"
         name: "generalSettings"
         fields:
-          - {label: "Icons", name: icons, widget: image}
+          - {label: "Favicon", name: favicon, widget: image}
       - file: "src/content/ads.json"
         label: "Advertisement"
         name: "ads"
