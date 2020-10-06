@@ -69,19 +69,21 @@ export const EventPageTemplate = class extends React.Component {
     if (this.props.loading !== nextProps.loading) return true;
     if (this.props.eventId !== nextProps.eventId) return true;
     if (this.props.event?.id !== nextProps.event?.id) return true;
-    if (this.props.eventsPhases !== nextProps.eventsPhases) return true;
+    const currentPhase = this.props.eventsPhases.find(e => e.id === this.props.eventId).phase;
+    const nextCurrentPhase = nextProps.eventsPhases.find(e => e.id === this.props.eventId).phase;
+    if (currentPhase !== nextCurrentPhase && currentPhase === -1) return true;
     return false
   }
 
   render() {
     const { loggedUser, event, eventsPhases, user, loading } = this.props;
-    const { firstRender } = this.state; 
+    const { firstRender } = this.state;
     let { summit } = SummitObject;
     let currentEvent = eventsPhases.find(e => e.id === event?.id);
-    let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;    
+    let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;
 
-    if(!firstRender && !loading && !event) {
-      return <HeroComponent title="Event not found" redirectTo="/a/schedule"/>
+    if (!firstRender && !loading && !event) {
+      return <HeroComponent title="Event not found" redirectTo="/a/schedule" />
     }
 
     if (loading || eventStarted === null) {
@@ -181,13 +183,13 @@ const EventPage = (
   return (
     <Layout>
       {event && event.id &&
-      <AttendanceTracker
+        <AttendanceTracker
           key={`att-tracker-${event.id}`}
           eventId={event.id}
           summitId={SummitObject.summit.id}
           apiBaseUrl={envVariables.SUMMIT_API_BASE_URL}
           accessToken={loggedUser.accessToken}
-      />
+        />
       }
       <EventPageTemplate
         loggedUser={loggedUser}
