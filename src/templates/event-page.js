@@ -76,10 +76,10 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   render() {
-    const { loggedUser, event, eventsPhases, user, loading } = this.props;
+    const { loggedUser, event, eventId, eventsPhases, user, loading } = this.props;
     const { firstRender } = this.state;
     let { summit } = SummitObject;
-    let currentEvent = eventsPhases.find(e => e.id === event?.id);
+    let currentEvent = eventsPhases.find(e => e.id === eventId);
     let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;
 
     if (!firstRender && !loading && !event) {
