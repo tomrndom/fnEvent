@@ -97,7 +97,7 @@ export const EventPageTemplate = class extends React.Component {
               <div className="columns is-gapless">
                 {eventStarted >= PHASES.DURING && event.streaming_url ?
                   <div className="column is-three-quarters px-0 py-0">
-                    <VideoComponent url={event.streaming_url} />
+                    <VideoComponent url={event.streaming_url} title={event.title} namespace={summit.name} />
                     {event.meeting_url &&
                       <div className="join-zoom-container">
                         <span>
