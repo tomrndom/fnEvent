@@ -21,7 +21,7 @@
         "image": "/img/flavor_wheel.jpg"
       }
     ]
-  },
+  },  
   "leftColumn": {
     "schedule": {
       "display": true,
@@ -92,6 +92,5 @@
         }
       ]
     }
-  ],
-  "favicon": "/img/chat.svg"
+  ]
 }

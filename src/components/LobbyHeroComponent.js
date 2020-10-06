@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LobbyHero from '../content/hero-banner.json'
+import GeneralSettings from '../content/settings.json'
 import styles from '../styles/lobby-hero.module.scss'
 
 const LobbyHeroComponent = () => (
@@ -10,16 +10,16 @@ const LobbyHeroComponent = () => (
         <div className={`${styles.heroContainer} hero-body`}>
           <div className="container">
             <h1 className="title">
-              {LobbyHero.hero_title ? LobbyHero.hero_title : LobbyHero.title}
+              {GeneralSettings.homeHero.title}
             </h1>
             <h2 className="subtitle">
-              {LobbyHero.hero_subtitle ? LobbyHero.hero_subtitle : LobbyHero.subTitle}
+              {GeneralSettings.homeHero.subTitle}
             </h2>
           </div>
         </div>
       </div>
       <div className={`${styles.midColumn} column is-1 is-info`}></div>
-      <div className={`${styles.rightColumn} column is-6 is-danger`} style={{ backgroundImage: `url(${LobbyHero.hero_image ? LobbyHero.hero_image : LobbyHero.image})` }}></div>
+      <div className={`${styles.rightColumn} column is-6 is-danger`} style={{ backgroundImage: `url(${GeneralSettings.homeHero.image})` }}></div>
     </div>
   </section>
 

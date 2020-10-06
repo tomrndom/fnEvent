@@ -18,6 +18,17 @@ collections:
     editor:
       preview: false
     files:
+      - file: "src/content/settings.json"
+        label: "General Settings"
+        name: "generalSettings"
+        fields:
+          - {label: "Favicon", name: favicon, widget: image}
+          - {label: "Home Hero", name: homeHero, widget: object, fields: [
+              {label: "Title", name: title, widget: string},
+              {label: "Sub Title", name: subTitle, widget: string, required: false},
+              {label: "Image", name: image, widget: image, required: false},
+              {label: "Copy", name: copy, widget: text, required: false}
+            ]}
       - file: "src/content/ads.json"
         label: "Advertisement"
         name: "ads"
