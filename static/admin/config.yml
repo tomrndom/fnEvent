@@ -61,10 +61,16 @@ collections:
                 ]},
                 {label: "Display", name: display, widget: boolean, required: false}
               ]},
-              {label: "Sponsor Page Template", name: "sponsorTemplate", widget: select, options: [
-                { label: "Big Header", value: "big-header" },
-                { label: "Small Header", value: "small-header" },
-              ]},
+              {label: "Sponsor Page", name: "sponsorPage", widget: object, fields: [
+                {label: "Sponsor Page Template", name: "sponsorTemplate", widget: select, options: [
+                  { label: "Big Header", value: "big-header" },
+                  { label: "Small Header", value: "small-header" },
+                ]},
+                {label: "Disqus", name: disqus, widget: boolean, required: false},
+                {label: "Live Event", name: liveEvent, widget: boolean, required: false},
+                {label: "Schedule", name: schedule, widget: boolean, required: false},
+                {label: "Banner", name: banner, widget: boolean, required: false}
+              ]},              
               {label: "In Event Template", name: "eventTemplate", widget: select, required: false, options: [
                 { label: "Big Images", value: "big-images" },
                 { label: "Small Images", value: "small-images" },
@@ -234,14 +240,26 @@ collections:
               {label: "Tier", name: "tier", widget: ncw-file-relation, collection: configurations, file: sponsorsTiers, target_field: tiers, id_field: id, display_fields: name},
               {label: "Sponsors", name: "sponsors", widget: list, fields: [
                 {label: "Name", name: "name", widget: string },
+                {label: "External ID", name: "id", widget: number },
                 {label: "Title", name: "title", widget: string, required: false },
                 {label: "Intro", name: "intro", widget: string, required: false },
+                {label: "Contact Email", name: "email", widget: string, required: false },
                 {label: "Marquee", name: "marquee", widget: string, required: false },
                 {label: "Logo", name: "logo", widget: image },
                 {label: "External Link", name: "externalLink", widget: string, required: false },
+                {label: "Social Networks", name: "socialNetworks", widget: list, fields: [
+                  {label: "Icon", name: "icon", widget: string},
+                  {label: "Link", name: "link", widget: string},
+                  {label: "Display", name: "display", widget: boolean, required: false},
+                ]},
+                {label: "Ads", name: "columnAds", widget: list, required: false, fields: [
+                  {label: "Image", name: "image", widget: image},
+                  {label: "Text", name: "text", widget: string, required: false},
+                  {label: "Link", name: "link", widget: string, required: false}                  
+                ]}
                 {label: "Uses Sponsor Page?", name: "usesSponsorPage", widget: boolean, required: false },
                 {label: "Header Image", name: "headerImage", widget: image, required: false },
-                {label: "Page Image", name: "pageImage", widget: image, required: false },
+                {label: "Side Image", name: "pageImage", widget: image, required: false },
                 {label: "Video Header", name: "headerVideo", widget: file, required: false },
               ]}              
             ]}

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import SponsorHeader from '../components/SponsorHeader'
 import LiveEventWidgetComponent from '../components/LiveEventWidgetComponent'
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
-import AdvertiseComponent from '../components/AdvertiseComponent'
+import AdvertiseSponsorsComponent from '../components/AdvertiseSponsorsComponent'
 import DocumentsComponent from '../components/DocumentsComponent'
 import DisqusComponent from '../components/DisqusComponent'
 import SponsorBanner from '../components/SponsorBanner'
@@ -50,7 +50,8 @@ export const SponsorPageTemplate = class extends React.Component {
     const { loggedUser, user } = this.props;
     const { sponsor, tier } = this.state;
     let { summit } = SummitObject;
-    
+    const { disqus, liveEvent, schedule, banner } = tier.sponsorPage.widgets;
+
     const mocketDocuments = {
       slides: [
         {
@@ -105,58 +106,58 @@ export const SponsorPageTemplate = class extends React.Component {
       return (
         <>
           <SponsorHeader sponsor={sponsor} tier={tier} />
-          <section className={`section px-0 ${tier.sponsorTemplate === 'big-header' ? 'pt-5' : 'pt-0'} pb-0`}>
-            <div className="columns mx-0 my-0 is-multiline">
-              {tier.sponsorTemplate === 'big-header' ?
-                <React.Fragment>
-                  <div className="column is-three-quarters px-5 py-0">
-                    <h1>{sponsor.title}</h1>
-                    <span>
-                      {sponsor.intro}
-                    </span>
-                  </div>
-                  <div className="column is-one-quarter px-5 py-0">
-                    <DisqusComponent disqusSSO={user.disqusSSO} className={styles.disqusContainerSponsor} summit={summit} title="" />
-                  </div>
-                </React.Fragment>
-                :
-                <React.Fragment>
-                  <div className={`column is-half px-5 py-0 ${styles.introHalf}`}>
-                    <h1>{sponsor.title}</h1>
-                    <span>
-                      {sponsor.intro}
-                    </span>
-                  </div>
-                  <div className="column is-half px-0 py-0">
-                    <img src={sponsor.pageImage} />
-                  </div>
-                </React.Fragment>
-              }
+          <section className={`section px-0 ${tier.sponsorPage.sponsorTemplate === 'big-header' ? 'pt-5' : 'pt-0'} pb-0`}>
+            {sponsor.sideImage ?
+              <div className="columns mx-0 mt-0 mb-6">
+                <div className={`column is-half px-5 py-0 ${styles.introHalf}`}>
+                  <h1>{sponsor.title}</h1>
+                  <span>
+                    {sponsor.intro}
+                  </span>
+                </div>
+                <div className="column is-half px-0 py-0">
+                  <img src={sponsor.sideImage} className={styles.sideImage} />
+                </div>
+              </div>
+              :
+              <div className="columns mx-0 mt-0 mb-6">
+                <div className="column is-full px-5 py-0">
+                  <h1>{sponsor.title}</h1>
+                  <span>
+                    {sponsor.intro}
+                  </span>
+                </div>
+              </div>
+            }
+            <div className="columns mx-0 my-0">
               <div className="column is-three-quarters px-5 py-0">
-                <LiveEventWidgetComponent
-                  onEventClick={(ev) => this.onEventChange(ev)}
-                />
+                {liveEvent &&
+                  <LiveEventWidgetComponent
+                    onEventClick={(ev) => this.onEventChange(ev)}
+                    // sponsorId={sponsor.id}
+                  />
+                }
+                {schedule &&
+                  <ScheduleLiteComponent
+                    // sponsorId={sponsor.id}
+                    accessToken={loggedUser.accessToken}
+                    onEventClick={(ev) => this.onEventChange(ev)}
+                    onViewAllEventsClick={() => this.onViewAllEventsClick()}
+                    landscape={false}
+                    yourSchedule={false}
+                    showNav={false}
+                    showAllEvents={false}
+                    eventCount={3}
+                  />
+                }
+                {banner && <SponsorBanner />}
               </div>
               <div className="column is-one-quarter px-5 py-0">
+                {disqus &&
+                  <DisqusComponent disqusSSO={user.disqusSSO} className={styles.disqusContainerSponsor} summit={summit} title="" />
+                }
                 <DocumentsComponent event={mocketDocuments} sponsor={true} />
-              </div>
-              <div className="column is-three-quarters px-5 py-0">
-                <ScheduleLiteComponent
-                  accessToken={loggedUser.accessToken}
-                  onEventClick={(ev) => this.onEventChange(ev)}
-                  onViewAllEventsClick={() => this.onViewAllEventsClick()}
-                  landscape={false}
-                  yourSchedule={false}
-                  showNav={false}
-                  showAllEvents={false}
-                  eventCount={3}
-                />
-              </div>
-              <div className="column is-one-quarter px-5 py-0">
-                <AdvertiseComponent section='lobby' column="left" style={{ marginTop: '2em' }} />
-              </div>
-              <div className="column is-three-quarters px-5 py-0">
-                <SponsorBanner />
+                <AdvertiseSponsorsComponent ads={sponsor.columnAds} style={{ marginTop: '2em' }} />
               </div>
             </div>
           </section>
