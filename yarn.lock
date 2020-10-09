@@ -10351,9 +10351,9 @@ linkifyjs@^2.1.9:
   integrity sha512-74ivurkK6WHvHFozVaGtQWV38FzBwSTGNmJolEgFp7QgR2bl6ArUWlvT4GcHKbPe1z3nWYi+VUdDZk16zDOVug==
 
 live-event-widget@^1.0.34:
-  version "1.0.34"
-  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-1.0.34.tgz#e118fc44fa1fa6df44a55eab85e7dd03839e8251"
-  integrity sha512-o2J76WHxAUlqvEP4lbvcV+CueBuATeVzTDNoh/9oxXyaPAFH1YnpgvpQJKVhvpAh7agKfyVqvxpfFXxka0KJSg==
+  version "1.0.35"
+  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-1.0.35.tgz#a0a3e8130ff41736dea4e08700e11d0648131f2d"
+  integrity sha512-OBo7//ReiZ7WwJeqSzqluCverhIIlermxXJMniYDdWoA2+v6H0sD5Ld9yfZW9Bmvo960xt+0Qf3J0/XRUjf4cg==
   dependencies:
     svg-url-loader "^6.0.0"
 
@@ -13684,9 +13684,9 @@ punycode@^2.1.0, punycode@^2.1.1:
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
 pure-react-carousel@^1.27.4:
-  version "1.27.4"
-  resolved "https://registry.yarnpkg.com/pure-react-carousel/-/pure-react-carousel-1.27.4.tgz#870ae5c6f8325b7fb8cc2c8b322c08a98fb3cbb9"
-  integrity sha512-o4msT2SULQHbGd8xDDpkKPK91cQwdRGcIEe7Y3vtLusbB2sve1yvq8l57Q+oTyMgZnjQu9vUNayOFjJI89BdBA==
+  version "1.27.5"
+  resolved "https://registry.yarnpkg.com/pure-react-carousel/-/pure-react-carousel-1.27.5.tgz#59f14c487b5106e3faf5e01cb5ff7fa0593fb3ad"
+  integrity sha512-JsWL2JmDcT4LY0V91wD1csbCiKMggOeUKx7wthiA8bIn4ZNfH5F3GAaPFzYW8ecbLyxH8UzhdaMGNu2zYSb/XQ==
   dependencies:
     "@babel/runtime" "^7.5.5"
     deep-freeze "0.0.1"
@@ -15479,9 +15479,9 @@ saxes@^5.0.0:
     xmlchars "^2.2.0"
 
 schedule-lite@^1.0.59:
-  version "1.0.59"
-  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.59.tgz#bd5f5f96866d22284ed3b8e43a6174732436f244"
-  integrity sha512-1XoaVhu63/vP5R5YVtoC7T2rvWTpRfWzT17jUFSFMHqtFPZDzTT2k3t5HJJ+uUupY8MtH6yMekQIydF710T26A==
+  version "1.0.61"
+  resolved "https://registry.yarnpkg.com/schedule-lite/-/schedule-lite-1.0.61.tgz#d68d68f57638c82647ff54be500a54be8518e318"
+  integrity sha512-Q1xJos+SskVw/IuK5iat/4yX2yv78CXCIFhN3nBKWf+N5gr9NDXFCvciRElE3USEoIAmVUveIUulXpFa5tbM1w==
   dependencies:
     pure-react-carousel "^1.27.4"
 
