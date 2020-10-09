@@ -86,7 +86,7 @@ export const SponsorPageTemplate = class extends React.Component {
                 {liveEvent &&
                   <LiveEventWidgetComponent
                     onEventClick={(ev) => this.onEventChange(ev)}
-                    sponsorId={sponsor.id}
+                    // sponsorId={sponsor.id}
                   />
                 }
                 {schedule &&
@@ -99,7 +99,7 @@ export const SponsorPageTemplate = class extends React.Component {
                     showNav={false}
                     showAllEvents={false}
                     eventCount={3}
-                    sponsorId={sponsor.id}
+                    // sponsorId={sponsor.id}
                   />
                 }
                 {banner && <SponsorBanner />}
