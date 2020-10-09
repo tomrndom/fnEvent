@@ -27,13 +27,13 @@ const SponsorHeader = ({ sponsor, tier }) => (
               <Link className={styles.link}>
                 <button className={`${styles.button} button is-large`}>
                   <i className={`fa fa-2x fa-qrcode icon is-large`}></i>
-                  <b>Call to Action</b>
+                  <b>Scan your badge</b>
                 </button>
               </Link>
               <Link className={styles.link} to={`mailto:${sponsor.email}`}>
                 <button className={`${styles.button} button is-large`}>
-                  <i className={`fa fa-2x fa-calendar icon is-large`}></i>
-                  <b>Schedule Call</b>
+                  <i className={`fa fa-2x fa-envelope icon is-large`}></i>
+                  <b>Contact Us!</b>
                 </button>
               </Link>
             </div>
