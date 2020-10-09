@@ -28,21 +28,19 @@ collections:
         name: "ads"
         fields:
           - {label: "Ads", name: "ads", widget: list, fields: [
-              {label: "Page", name: "section", widget: string},
-              {label: "Columns", name: "columns", widget: list, fields: [
+              {label: "Page", name: "section", widget: string},                          
+              {label: "Ads", name: "columnAds", widget: list, required: false, fields: [
+                {label: "Image", name: "image", widget: image},
+                {label: "Button", name: button, widget: object, required: false, fields: [
+                  {label: "Text", name: "text", widget: string, required: false},
+                  {label: "Link", name: "link", widget: string, required: false}
+                ]},
                 {label: "Column", name: "column", widget: select, options: [
                   { label: "Left", value: "left" },
                   { label: "Center", value: "center" },
                   { label: "Right", value: "right" },
                 ]},
-                {label: "Ads", name: "columnAds", widget: list, required: false, fields: [
-                  {label: "Image", name: "image", widget: image},
-                  {label: "Button", name: button, widget: object, required: false, fields: [
-                    {label: "Text", name: "text", widget: string, required: false},
-                    {label: "Link", name: "link", widget: string, required: false}
-                  ]},
-                  {label: "Specific Event?", name: "id", widget: string, required: false}
-                ]}
+                {label: "Specific Event?", name: "id", widget: string, required: false}              
               ]},
             ]}
       - file: "src/content/sponsors-tiers.json"
