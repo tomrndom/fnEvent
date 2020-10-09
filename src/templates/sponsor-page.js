@@ -86,12 +86,11 @@ export const SponsorPageTemplate = class extends React.Component {
                 {liveEvent &&
                   <LiveEventWidgetComponent
                     onEventClick={(ev) => this.onEventChange(ev)}
-                  // sponsorId={sponsor.id}
+                    sponsorId={sponsor.id}
                   />
                 }
                 {schedule &&
                   <ScheduleLiteComponent
-                    // sponsorId={sponsor.id}
                     accessToken={loggedUser.accessToken}
                     onEventClick={(ev) => this.onEventChange(ev)}
                     onViewAllEventsClick={() => this.onViewAllEventsClick()}
@@ -100,6 +99,7 @@ export const SponsorPageTemplate = class extends React.Component {
                     showNav={false}
                     showAllEvents={false}
                     eventCount={3}
+                    sponsorId={sponsor.id}
                   />
                 }
                 {banner && <SponsorBanner />}
@@ -107,7 +107,7 @@ export const SponsorPageTemplate = class extends React.Component {
               <div className="column is-one-quarter px-5 py-0">
                 {!sponsor.chatLink &&
                   <div className={styles.videoChatButton}>
-                    <Link className={styles.link} to={`mailto:${sponsor.email}`}>
+                    <Link className={styles.link} to={sponsor.chatLink}>
                       <button className={`${styles.button} button is-large`}>                        
                         <b>LIVE VIDEO CHAT!</b>
                       </button>
