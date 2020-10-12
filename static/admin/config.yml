@@ -248,7 +248,8 @@ collections:
                 {label: "Intro", name: "intro", widget: string, required: false },
                 {label: "Contact Email", name: "email", widget: string, required: false },
                 {label: "Live Video Chat Link", name: "chatLink", widget: string, required: false },
-                {label: "Marquee", name: "marquee", widget: string, required: false },
+                {label: "Marquee Text", name: "marquee", widget: string, required: false },
+                {label: "Marquee Color", name: "marqueeColor", widget: string, required: false },
                 {label: "Logo", name: "logo", widget: image },
                 {label: "External Link", name: "externalLink", widget: string, required: false },
                 {label: "Social Networks", name: "socialNetworks", widget: list, fields: [
