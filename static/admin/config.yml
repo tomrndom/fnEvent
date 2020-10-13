@@ -71,6 +71,7 @@ collections:
               ]},
               {label: "Sponsor Hall Size", name: "expoHallSize", widget: select, required: true, options: [
                 { label: "Large Images", value: "large" },
+                { label: "Medium Images", value: "medium" },
                 { label: "Small Images", value: "small" },
               ]},
               {label: "In Event Template", name: "eventTemplate", widget: select, required: false, options: [

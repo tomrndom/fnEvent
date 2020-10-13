@@ -89,10 +89,18 @@
 
     &.large {
       flex: 0 1 23%;
+      height: 300px;      
+    }
+
+    &.medium {
+      flex: 0 1 15%;
+      padding: 25px;
+      height: 200px;
     }
 
     &.small {      
       padding: 25px;
+      height: 150px;
       background-color: transparent;
       border: 1px solid #d3d3d3;
       flex: 0 1 11%;
