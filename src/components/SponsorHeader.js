@@ -26,14 +26,14 @@ const SponsorHeader = ({ sponsor, tier }) => (
             </div>
             <div className={styles.buttons}>
               <Link className={styles.link}>
-                <button className={`${styles.button} button is-large`}>
+                <button className={`${styles.button} button is-large`} style={{backgroundColor: `${sponsor.sponsorColor}`}}>
                   <i className={`fa fa-2x fa-qrcode icon is-large`}></i>
                   <b>Scan your badge</b>
                 </button>
               </Link>
               {sponsor.email &&
                 <Link className={styles.link} to={`mailto:${sponsor.email}`}>
-                  <button className={`${styles.button} button is-large`}>
+                  <button className={`${styles.button} button is-large`} style={{backgroundColor: `${sponsor.sponsorColor}`}}>
                     <i className={`fa fa-2x fa-envelope icon is-large`}></i>
                     <b>Contact Us!</b>
                   </button>
