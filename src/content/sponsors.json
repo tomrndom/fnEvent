@@ -10,7 +10,7 @@
       "sponsors": [
         {
           "marquee": "Huawei - Smart Technologies",
-          "marqueeColor": "",
+          "sponsorColor": "",
           "sideImage": "",
           "externalLink": "",
           "logo": "/img/sponsors/headline/logo_huawei.png",
@@ -59,7 +59,7 @@
                 "name": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html",
                 "order": 3,
                 "class_name": "PresentationVideo",
-                "youtube_id": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
+                "link": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
               }
             ]
           },
@@ -86,7 +86,7 @@
       "sponsors": [
         {
           "marquee": "CISCO Shapes the Future of Technology",
-          "marqueeColor": "",
+          "sponsorColor": "",
           "sideImage": "",
           "externalLink": "",
           "logo": "/img/sponsors/premier/logo_cisco.png",
@@ -135,7 +135,7 @@
                 "name": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html",
                 "order": 3,
                 "class_name": "PresentationVideo",
-                "youtube_id": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
+                "link": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
               }
             ]
           },
@@ -162,7 +162,7 @@
       "sponsors": [
         {
           "marquee": "ZTE Shapes the Future of Technology",
-          "marqueeColor": "",
+          "sponsorColor": "",
           "sideImage": "/img/sponsors/exhibitor/immage.png",
           "externalLink": "",
           "logo": "/img/sponsors/exhibitor/logo_ZTE.png",
@@ -211,7 +211,7 @@
                 "name": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html",
                 "order": 3,
                 "class_name": "PresentationVideo",
-                "youtube_id": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
+                "link": "http://relaxdiego.com/2018/08/keeping-continuous-integration-continuous.html"
               }
             ]
           },
