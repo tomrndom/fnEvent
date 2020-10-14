@@ -1,6 +1,6 @@
 backend:
   name: github
-  branch: main
+  branch: prod-tier_1_default
   repo: fntechgit/virtualevent-poc
   commit_messages:
     create: 'Create {{collection}} “{{slug}}”'
