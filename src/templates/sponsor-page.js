@@ -51,7 +51,7 @@ export const SponsorPageTemplate = class extends React.Component {
     const { loggedUser, user } = this.props;
     const { sponsor, tier } = this.state;
     let { summit } = SummitObject;
-    const { disqus, liveEvent, schedule, banner } = tier.sponsorPage.widgets;    
+    const { disqus, liveEvent, schedule, banner } = tier.sponsorPage.widgets;
 
     if (!sponsor) {
       return <HeroComponent title="Sponsor not found" redirectTo="/a/" />
@@ -106,9 +106,9 @@ export const SponsorPageTemplate = class extends React.Component {
               </div>
               <div className="column is-one-quarter px-5 py-0">
                 {sponsor.chatLink &&
-                  <div className={styles.videoChatButton}>
+                  <div className={styles.videoChatButton} style={{ backgroundColor: `${sponsor.sponsorColor}` }}>
                     <Link className={styles.link} to={sponsor.chatLink}>
-                      <button className={`${styles.button} button is-large`}>                        
+                      <button className={`${styles.button} button is-large`}>
                         <b>LIVE VIDEO CHAT!</b>
                       </button>
                     </Link>
