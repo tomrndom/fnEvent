@@ -98,7 +98,7 @@ export const SponsorPageTemplate = class extends React.Component {
                     yourSchedule={false}
                     showNav={false}
                     showAllEvents={false}
-                    eventCount={3}
+                    eventCount={100}
                     sponsorId={sponsor.id}
                   />
                 }
