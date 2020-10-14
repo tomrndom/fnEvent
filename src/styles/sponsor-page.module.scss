@@ -170,8 +170,9 @@
         background-color: transparent;
         border: none;
         cursor: pointer;
-        align-self: flex-end;        
+        align-self: flex-end;
         margin-right: 10px;
+        text-shadow: 0 0 2px #000;
 
         &:hover,
         &:active,
@@ -181,6 +182,7 @@
         }
       }
     }
+
     &-mobile {
       @extend .hero-sponsor;
     }
@@ -276,6 +278,7 @@
       transform: translateX(-50%);
     }
   }
+
   &--small {
     @extend .bottom-bar;
     font-size: 18px;
@@ -534,8 +537,9 @@
           }
         }
       }
+
       &-mobile {
-        height: 250px;        
+        height: 250px;
       }
     }
   }

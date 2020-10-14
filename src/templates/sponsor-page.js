@@ -107,7 +107,7 @@ export const SponsorPageTemplate = class extends React.Component {
                     sponsorId={sponsor.id}
                   />
                 }
-                {banner && <SponsorBanner bgColor={sponsor.sponsorColor} />}
+                {banner && <SponsorBanner sponsor={sponsor} bgColor={sponsor.sponsorColor} />}
               </div>
               <div className="column is-one-quarter px-5 py-0">
                 {sponsor.chatLink &&
