@@ -28,7 +28,7 @@ const SponsorHeader = ({ sponsor, tier }) => {
 
   return (
     <section className={styles.hero}>
-      <div className={`${styles.heroSponsor}`}
+      <div className={`${isMobile ? styles.heroSponsorMobile : styles.heroSponsor}`}
         style={{
           backgroundImage: `url(${isMobile ? sponsor.headerImageMobile : sponsor.headerImage})`,
           paddingBottom: `${tier.sponsorPage.sponsorTemplate === 'big-header' ? '27.77%' : '13.88%'}`,
