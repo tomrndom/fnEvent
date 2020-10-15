@@ -37,9 +37,7 @@
             }
           ],
           "chatLink": "",
-          "sponsorId": 8,
           "title": "We are Huawei",
-          "companyId": 9,
           "documents": {
             "slides": [
               {
@@ -75,8 +73,9 @@
           ],
           "id": 1,
           "email": "huawei@huawei.com",
-          "company_id": 9,
-          "usesSponsorPage": true
+          "usesSponsorPage": true,
+          "sponsorId": 8,
+          "companyId": 9
         }
       ]
     },
@@ -117,9 +116,7 @@
             }
           ],
           "chatLink": "",
-          "sponsorId": 8,
           "title": "We are CISCO",
-          "companyId": 9,
           "documents": {
             "slides": [
               {
@@ -155,8 +152,9 @@
           ],
           "id": 2,
           "email": "huawei@huawei.com",
-          "company_id": 9,
-          "usesSponsorPage": true
+          "usesSponsorPage": true,
+          "sponsorId": 8,
+          "companyId": 9
         }
       ]
     },
@@ -197,9 +195,7 @@
             }
           ],
           "chatLink": "",
-          "sponsorId": 8,
           "title": "We are ZTE",
-          "companyId": 9,
           "documents": {
             "slides": [
               {
@@ -235,8 +231,9 @@
           ],
           "id": 3,
           "email": "huawei@huawei.com",
-          "company_id": 9,
-          "usesSponsorPage": true
+          "usesSponsorPage": true,
+          "sponsorId": 8,
+          "companyId": 9
         }
       ]
     }
