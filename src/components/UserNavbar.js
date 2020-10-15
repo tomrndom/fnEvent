@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 
 import styles from '../styles/navbar.module.scss';
 import LogoutButton from './LogoutButton';
+import ProfilePopupComponent from './ProfilePopupComponent';
 
 import envVariables from '../utils/envVariables'
 
@@ -11,6 +12,7 @@ const UserNavbar = class extends React.Component {
     super(props)
     this.state = {
       active: false,
+      showProfile: false,
       navBarActiveClass: '',
     }
   }
@@ -38,6 +40,7 @@ const UserNavbar = class extends React.Component {
   render() {
 
     let { isLoggedUser } = this.props;
+    let { showProfile } = this.state;
 
     let defaultPath = envVariables.AUTHORIZED_DEFAULT_PATH ? envVariables.AUTHORIZED_DEFAULT_PATH : '/a/';
 
@@ -63,10 +66,12 @@ const UserNavbar = class extends React.Component {
           </div>
           <div className={styles.navbarEnd}>
             <div className={styles.navbarItem}>
+              <span onClick={() => this.setState({ showProfile: !showProfile })}>Profile TEST</span>
               <LogoutButton styles={styles} isLoggedUser={isLoggedUser} />
             </div>
-          </div>
+          </div>          
         </div>
+        <ProfilePopupComponent className={showProfile ? 'is-active' : ''}/>
       </nav>
     )
   }
