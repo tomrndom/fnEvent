@@ -37,7 +37,9 @@
             }
           ],
           "chatLink": "",
+          "sponsorId": 8,
           "title": "We are Huawei",
+          "companyId": 9,
           "documents": {
             "slides": [
               {
@@ -115,7 +117,9 @@
             }
           ],
           "chatLink": "",
+          "sponsorId": 8,
           "title": "We are CISCO",
+          "companyId": 9,
           "documents": {
             "slides": [
               {
@@ -193,7 +197,9 @@
             }
           ],
           "chatLink": "",
+          "sponsorId": 8,
           "title": "We are ZTE",
+          "companyId": 9,
           "documents": {
             "slides": [
               {
