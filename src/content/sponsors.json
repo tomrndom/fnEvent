@@ -16,7 +16,7 @@
           "sponsorColor": "",
           "logo": "/img/sponsors/headline/logo_huawei.png",
           "name": "Huawei",
-          "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, ac euismod augue velit at justo. Cras porta lacus est, nec rhoncus augue luctus quis. Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.",
+          "intro": "**Lorem ipsum dolor sit amet**, consectetur adipiscing elit. Phasellus eget ipsum tempor lorem interdum volutpat eu et elit. Sed eleifend justo et semper ultrices. Fusce porta ut sapien at posuere. Donec placerat, lacus eget imperdiet maximus, nunc lectus viverra ligula, in sodales tortor justo vel sem. Vestibulum eleifend, nibh a dapibus rhoncus, tortor dui venenatis enim, ac euismod augue velit at justo. *Cras porta lacus est, nec rhoncus augue luctus quis. Pellentesque justo risus, scelerisque laoreet tortor quis, vehicula volutpat ipsum.*",
           "headerVideo": "/img/world.mp4",
           "headerImage": "/img/sponsors/headline/header_logo_headline.png",
           "socialNetworks": [
@@ -37,7 +37,9 @@
             }
           ],
           "chatLink": "",
+          "sponsorId": 8,
           "title": "We are Huawei",
+          "companyId": 9,
           "documents": {
             "slides": [
               {
@@ -73,9 +75,7 @@
           ],
           "id": 1,
           "email": "huawei@huawei.com",
-          "usesSponsorPage": true,
-          "sponsorId": 8,
-          "companyId": 9
+          "usesSponsorPage": true
         }
       ]
     },
@@ -116,7 +116,9 @@
             }
           ],
           "chatLink": "",
+          "sponsorId": 8,
           "title": "We are CISCO",
+          "companyId": 9,
           "documents": {
             "slides": [
               {
@@ -152,9 +154,7 @@
           ],
           "id": 2,
           "email": "huawei@huawei.com",
-          "usesSponsorPage": true,
-          "sponsorId": 8,
-          "companyId": 9
+          "usesSponsorPage": true
         }
       ]
     },
@@ -195,7 +195,9 @@
             }
           ],
           "chatLink": "",
+          "sponsorId": 8,
           "title": "We are ZTE",
+          "companyId": 9,
           "documents": {
             "slides": [
               {
@@ -231,9 +233,7 @@
           ],
           "id": 3,
           "email": "huawei@huawei.com",
-          "usesSponsorPage": true,
-          "sponsorId": 8,
-          "companyId": 9
+          "usesSponsorPage": true
         }
       ]
     }
