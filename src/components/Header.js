@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { StaticQuery, graphql } from "gatsby"
 import Navbar from './Navbar'
 
-const Header = ({ isLoggedUser, summit}) => (
+const Header = ({ isLoggedUser, userProfile, summit}) => (
 
   <StaticQuery
     query={graphql`
@@ -15,7 +15,7 @@ const Header = ({ isLoggedUser, summit}) => (
       `}
     render={data => (
       <header>
-        <Navbar isLoggedUser={isLoggedUser}
+        <Navbar isLoggedUser={isLoggedUser} userProfile={userProfile}
           logo={
             summit && summit.logo ?
               summit.logo
@@ -30,8 +30,9 @@ const Header = ({ isLoggedUser, summit}) => (
   />
 )
 
-const mapStateToProps = ({ loggedUserState, summitState }) => ({
+const mapStateToProps = ({ loggedUserState, summitState, userState }) => ({
   isLoggedUser: loggedUserState.isLoggedUser,
+  userProfile: userState.userProfile,
   summit: summitState.summit
 })
 

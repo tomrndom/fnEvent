@@ -43,7 +43,7 @@ const Navbar = class extends React.Component {
 
   render() {
 
-    let { isLoggedUser, logo } = this.props;
+    let { isLoggedUser, userProfile, logo } = this.props;
 
     let { summit } = SummitObject
     let defaultPath = envVariables.AUTHORIZED_DEFAULT_PATH ? envVariables.AUTHORIZED_DEFAULT_PATH : '/a/';
@@ -92,7 +92,7 @@ const Navbar = class extends React.Component {
             </div>
           </div>
         </nav>
-        {isLoggedUser && <UserNavbar isLoggedUser={isLoggedUser} />}
+        {isLoggedUser && <UserNavbar userProfile={userProfile} isLoggedUser={isLoggedUser} />}
       </React.Fragment>
     )
   }

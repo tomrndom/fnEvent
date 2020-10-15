@@ -39,7 +39,7 @@ const UserNavbar = class extends React.Component {
 
   render() {
 
-    let { isLoggedUser } = this.props;
+    let { isLoggedUser, userProfile } = this.props;
     let { showProfile } = this.state;
 
     let defaultPath = envVariables.AUTHORIZED_DEFAULT_PATH ? envVariables.AUTHORIZED_DEFAULT_PATH : '/a/';
@@ -66,12 +66,14 @@ const UserNavbar = class extends React.Component {
           </div>
           <div className={styles.navbarEnd}>
             <div className={styles.navbarItem}>
-              <span onClick={() => this.setState({ showProfile: !showProfile })}>Profile TEST</span>
+              <img onClick={() => this.setState({ showProfile: !showProfile })} className={styles.profilePic} src={userProfile.pic} />
+              <ProfilePopupComponent userProfile={userProfile} showProfile={showProfile} closePopup={() => this.setState({ showProfile: !showProfile })} />
+            </div>
+            <div className={styles.navbarItem}>
               <LogoutButton styles={styles} isLoggedUser={isLoggedUser} />
             </div>
-          </div>          
-        </div>
-        <ProfilePopupComponent className={showProfile ? 'is-active' : ''}/>
+          </div>
+        </div>        
       </nav>
     )
   }

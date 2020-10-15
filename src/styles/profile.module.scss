@@ -1,0 +1,28 @@
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/elements/button.sass";
+@import "bulma/sass/components/modal.sass";
+@import "bulma/sass/form/_all.sass";
+
+@import './colors.scss';
+
+.modal-card {
+  .modal-card-head {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+
+    .modal-card-title {
+      font-weight: bold;
+    }
+
+    .close-icon {
+      color: $color_text_dark;
+      font-size: 2.5rem;
+      cursor: pointer;
+    }
+  }
+
+  .modal-card-foot {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}

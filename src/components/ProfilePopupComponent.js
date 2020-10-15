@@ -2,15 +2,18 @@ import React from 'react'
 
 import styles from '../styles/profile.module.scss'
 
-const ProfilePopupComponent = ({ className }) => (
-  <div class={`modal ${className}`}>
-    <div class="modal-background"></div>
-    <div class={`modal-card ${styles.profilePopup}`}>
-      <header class="modal-card-head">
-        <p class="modal-card-title">Edit profile</p>
-        <button class="delete" aria-label="close"></button>
+const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => (
+
+
+
+  <div className={`${styles.modal} ${showProfile ? styles.isActive : ''}`}>
+    <div className={`${styles.modalBackground}`}></div>
+    <div className={`${styles.modalCard} ${styles.profilePopup}`}>
+      <header className={`${styles.modalCardHead}`}>
+        <p className={`${styles.modalCardTitle}`}>Edit profile</p>        
+        <i onClick={() => closePopup()} className={`${styles.closeIcon} fa fa-times icon is-large`}></i>
       </header>
-      <section class="modal-card-body">
+      <section className={`${styles.modalCardBody}`}>
         <div>
           <span>Profile picture</span>
           <div>
@@ -18,24 +21,36 @@ const ProfilePopupComponent = ({ className }) => (
           </div>
         </div>
         <div>
-          <span>Profile Ino</span>
+          <span>Profile Info</span>
           <div>
-            First Name
-            <input></input>
+            <label>First Name</label>
+            <div className={`${styles.field}`}>
+              <div className={`${styles.control}`}>
+                <input className={`${styles.input} ${styles.isPrimary}`} type="text" placeholder="First Name" />
+              </div>
+            </div>
           </div>
           <div>
-            Last Name
-        <input></input>
+            <label>Last Name</label>
+            <div className={`${styles.field}`}>
+              <div className={`${styles.control}`}>
+                <input className={`${styles.input} ${styles.isPrimary}`} type="text" placeholder="Last Name" />
+              </div>
+            </div>
           </div>
           <div>
-            Company Name
-        <input></input>
+            <label>Company</label>
+            <div className={`${styles.field}`}>
+              <div className={`${styles.control}`}>
+                <input className={`${styles.input} ${styles.isPrimary}`} type="text" placeholder="Company" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      <footer class="modal-card-foot">
-        <button class="button">Discard</button>
-        <button class="button is-success">Update</button>
+      <footer className={`${styles.modalCardFoot}`}>
+        <button className="button">Discard</button>
+        <button className="button is-success">Update</button>
       </footer>
     </div>
   </div>

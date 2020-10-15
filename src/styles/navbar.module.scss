@@ -29,6 +29,12 @@
 
   .navbar-item {
     color: $color_text_light;
+    img.profile-pic {
+      height: 4rem;      
+      max-height: 4rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   }
 
   .navbar-menu {
