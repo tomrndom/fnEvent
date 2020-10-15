@@ -66,7 +66,7 @@ const UserNavbar = class extends React.Component {
           </div>
           <div className={styles.navbarEnd}>
             <div className={styles.navbarItem}>
-              <img onClick={() => this.setState({ showProfile: !showProfile })} className={styles.profilePic} src={userProfile.pic} />
+              <img onClick={() => this.setState({ showProfile: !showProfile })} className={styles.profilePic} src={userProfile?.pic} />
               <ProfilePopupComponent userProfile={userProfile} showProfile={showProfile} closePopup={() => this.setState({ showProfile: !showProfile })} />
             </div>
             <div className={styles.navbarItem}>

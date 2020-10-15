@@ -21,7 +21,15 @@
     }
   }
 
-  .modal-card-foot {
+  .modal-card-form {
+    .input-row {
+      display: flex;
+    }
+  }
+
+  .modal-card-foot {    
+    display: flex;
+    justify-content: space-evenly;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
   }

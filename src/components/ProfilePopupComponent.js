@@ -10,19 +10,19 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => (
     <div className={`${styles.modalBackground}`}></div>
     <div className={`${styles.modalCard} ${styles.profilePopup}`}>
       <header className={`${styles.modalCardHead}`}>
-        <p className={`${styles.modalCardTitle}`}>Edit profile</p>        
+        <p className={`${styles.modalCardTitle}`}>Edit profile</p>
         <i onClick={() => closePopup()} className={`${styles.closeIcon} fa fa-times icon is-large`}></i>
       </header>
       <section className={`${styles.modalCardBody}`}>
-        <div>
+        <div className={styles.modalCardPicture}>
           <span>Profile picture</span>
           <div>
             Foto y controles
           </div>
         </div>
-        <div>
+        <div className={styles.modalCardForm}>
           <span>Profile Info</span>
-          <div>
+          <div className={styles.inputRow}>
             <label>First Name</label>
             <div className={`${styles.field}`}>
               <div className={`${styles.control}`}>
@@ -30,7 +30,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => (
               </div>
             </div>
           </div>
-          <div>
+          <div className={styles.inputRow}>
             <label>Last Name</label>
             <div className={`${styles.field}`}>
               <div className={`${styles.control}`}>
@@ -38,7 +38,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => (
               </div>
             </div>
           </div>
-          <div>
+          <div className={styles.inputRow}>
             <label>Company</label>
             <div className={`${styles.field}`}>
               <div className={`${styles.control}`}>
@@ -49,8 +49,8 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => (
         </div>
       </section>
       <footer className={`${styles.modalCardFoot}`}>
-        <button className="button">Discard</button>
-        <button className="button is-success">Update</button>
+        <button onClick={() => closePopup()} className="button is-large">Discard</button>
+        <button className="button is-large is-success">Update</button>
       </footer>
     </div>
   </div>
