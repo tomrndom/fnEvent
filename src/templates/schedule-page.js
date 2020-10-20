@@ -9,7 +9,7 @@ import { PHASES } from '../utils/phasesUtils'
 
 import SummitObject from '../content/summit.json'
 
-const SchedulePage = ({summit_phase, isLoggedUser, loggedUser, mySchedule}) => {
+const SchedulePage = ({summit_phase, isLoggedUser, loggedUser, mySchedule, location}) => {
 
   let { summit } = SummitObject;
 
@@ -23,7 +23,7 @@ const SchedulePage = ({summit_phase, isLoggedUser, loggedUser, mySchedule}) => {
   }
 
   return (
-    <Layout>
+    <Layout location={location}>
       <div className="container">
         <h1>{ title }</h1>
         <hr/>

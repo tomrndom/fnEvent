@@ -61,7 +61,6 @@
     "react-dnd": "^2.6.0",
     "react-dnd-html5-backend": "^2.6.0",
     "react-dom": "^16.8.4",
-    "react-dropzone": "^4.3.0",
     "react-google-maps": "^9.4.5",
     "react-helmet": "^6.0.0",
     "react-iframe-comm": "^1.2.2",

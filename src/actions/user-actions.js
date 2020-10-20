@@ -1,18 +1,22 @@
 import {
   getRequest,
+  deleteRequest,
+  putRequest,
   createAction,
   stopLoading,
-  startLoading,  
+  startLoading,
 } from 'openstack-uicore-foundation/lib/methods';
 
 import { customErrorHandler } from '../utils/customErrorHandler';
 
-export const GET_DISQUS_SSO         = 'GET_DISQUS_SSO';
-export const GET_ROCKETCHAT_SSO     = 'GET_ROCKETCHAT_SSO';
-export const GET_USER_PROFILE       = 'GET_USER_PROFILE';
-export const REQUEST_USER_PROFILE   = 'REQUEST_USER_PROFILE';
-export const START_LOADING_PROFILE  = 'START_LOADING_PROFILE';
-export const STOP_LOADING_PROFILE   = 'STOP_LOADING_PROFILE';
+export const GET_DISQUS_SSO = 'GET_DISQUS_SSO';
+export const GET_ROCKETCHAT_SSO = 'GET_ROCKETCHAT_SSO';
+export const GET_USER_PROFILE = 'GET_USER_PROFILE';
+export const REQUEST_USER_PROFILE = 'REQUEST_USER_PROFILE';
+export const START_LOADING_PROFILE = 'START_LOADING_PROFILE';
+export const STOP_LOADING_PROFILE = 'STOP_LOADING_PROFILE';
+export const REMOVE_PROFILE_PIC = 'REMOVE_PROFILE_PIC';
+export const UPLOAD_PROFILE_PIC = 'UPLOAD_PROFILE_PIC';
 
 export const getDisqusSSO = () => (dispatch, getState) => {
 
@@ -58,7 +62,7 @@ export const getUserProfile = () => (dispatch, getState) => {
   if (!accessToken) return Promise.resolve();
 
   let params = {
-      access_token : accessToken,      
+      access_token: accessToken,
       expand: 'groups,summit_tickets,summit_tickets.badge,summit_tickets.badge.features,summit_tickets.badge.type'
   };
 
@@ -69,3 +73,50 @@ export const getUserProfile = () => (dispatch, getState) => {
       customErrorHandler
   )(params)(dispatch).then(() => dispatch(dispatch(createAction(STOP_LOADING_PROFILE))));
 };
+
+export const updateProfilePicture = (picture) => (dispatch, getState) => {
+
+  dispatch(startLoading());
+
+  let { loggedUserState: { accessToken } } = getState();
+
+  if (!accessToken) return Promise.resolve();
+
+  let params = {
+      // access_token: accessToken,
+  };  
+
+  return deleteRequest(
+    null,
+    createAction(REMOVE_PROFILE_PIC),
+    `${window.SUMMIT_API_BASE_URL}/api/v1/users/me/pic`,
+    {},
+    customErrorHandler,
+  )(params)(dispatch).then((payload) => { 
+    console.log(payload)
+    dispatch(uploadProfilePicture(picture)); 
+  });
+
+}
+
+const uploadProfilePicture = () => (dispatch, getState) => {
+  let { loggedUserState: { accessToken } } = getState();
+
+  if (!accessToken) return Promise.resolve();
+
+  let params = {
+    access_token: accessToken,
+  };
+
+  putRequest(
+    null,
+    createAction(UPLOAD_PROFILE_PIC),
+    `${window.API_BASE_URL}/api/v1/users/me/`,
+    {},
+    customErrorHandler
+  )(params)(dispatch)
+    .then((payload) => {
+      console.log(payload)
+      dispatch(stopLoading());
+  });
+}

@@ -3,39 +3,32 @@ import AvatarEditor from 'react-avatar-editor'
 
 import styles from '../styles/profile.module.scss'
 
-const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
+const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePicture }) => {
 
   const editorRef = useRef(null);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [company, setCompany] = useState("");
+  const [company, setCompany] = useState("");  
 
   const [image, setImage] = useState(null);
-  const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
+  const [position, setPosition] = useState({ x: 0.5, y: 0.5 });  
   const [scale, setScale] = useState(1.2);
   const [rotate, setRotate] = useState(0);
   const [width, setWidth] = useState(200);
   const [height, setHeight] = useState(200);
 
-  useEffect(() => {
-    console.log(userProfile);
+  useEffect(() => {    
     setFirstName(userProfile.first_name);
-    setLastName(userProfile.last_name);    
+    setLastName(userProfile.last_name);
+    setImage(userProfile.pic)
+    return () => {
+      setFirstName('');
+      setLastName('');  
+      setCompany('');
+    };
   }, []) 
 
-  // state = {
-  //   image: 'avatar.jpg',
-  //   allowZoomOut: false,
-  //   position: { x: 0.5, y: 0.5 },
-  //   scale: 1,
-  //   rotate: 0,
-  //   borderRadius: 0,
-  //   preview: null,
-  //   width: 200,
-  //   height: 200,
-  //   disableCanvasRotation: false,
-  // }
 
   const handleScale = (e) => {
     const scale = parseFloat(e.target.value);
@@ -43,7 +36,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
   }
 
   const handlePositionChange = (position) => {
-    setPosition({ position });
+    setPosition(position);
   }
 
   const rotateLeft = (e) => {
@@ -53,12 +46,19 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
   const rotateRight = (e) => {
     e.preventDefault();
     setRotate(rotate + 90);
+  }    
+
+  const onClickSave = () => {
+    if (editorRef.current) {      
+      const canvas = editorRef.current.getImage().toDataURL();            
+      changePicture(canvas);
+    }
   }
 
   return (
 
     < div className={`${styles.modal} ${showProfile ? styles.isActive : ''}`}>
-      <div className={`${styles.modalBackground}`}></div>
+      <div className={`${styles.modalBackground}`} onClick={() => closePopup()}></div>
       <div className={`${styles.modalCard} ${styles.profilePopup}`}>
         <header className={`${styles.modalCardHead}`}>
           <p className={`${styles.modalCardTitle}`}>Edit profile</p>
@@ -70,15 +70,16 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
             <div className={styles.picture}>
               <AvatarEditor
                 ref={editorRef}
-                image={userProfile.pic}
+                image={image}
                 width={width}
                 height={height}
                 border={50}
-                color={[255, 255, 255, 0.6]} // RGBA
+                color={[0, 0, 0, 0.6]} // RGBA
                 position={position}
                 onPositionChange={handlePositionChange}
                 scale={scale}
                 borderRadius={5}
+                crossOrigin={'anonymous'}
                 rotate={parseFloat(rotate)}
               />
               <div>
@@ -120,6 +121,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
                     className={`${styles.input} ${styles.isMedium}`} 
                     type="text" 
                     placeholder="First Name" 
+                    onChange={e => setFirstName(e.target.value)}
                     value={firstName}/>
                 </div>
               </div>
@@ -130,13 +132,20 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
                     className={`${styles.input} ${styles.isMedium}`} 
                     type="text" 
                     placeholder="Last Name" 
+                    onChange={e => setLastName(e.target.value)}
                     value={lastName}/>
                 </div>
               </div>
               <div className={`columns ${styles.inputRow}`}>
                 <div className='column is-one-quarter'>Company</div>
                 <div className='column is-two-thirds'>
-                  <input className={`${styles.input} ${styles.isMedium}`} type="text" placeholder="Company" />
+                  <input
+                   className={`${styles.input} ${styles.isMedium}`} 
+                   type="text" 
+                   placeholder="Company" 
+                   onChange={e => setCompany(e.target.value)}
+                   value={company}
+                   />
                 </div>
               </div>
             </div>
@@ -144,7 +153,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
         </section>
         <footer className={`${styles.modalCardFoot}`}>
           <button onClick={() => closePopup()} className="button is-large">Discard</button>
-          <button className="button is-large">Update</button>
+          <button onClick={() => onClickSave()} className="button is-large">Update</button>
         </footer>
       </div>
     </div >

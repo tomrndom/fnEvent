@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import URI from "urijs";
 import { doLogin } from "openstack-uicore-foundation/lib/methods";
+import Link from '../components/Link'
 
 import MarketingSite from '../content/marketing-site.json'
 import { PHASES } from '../utils/phasesUtils';
@@ -55,12 +56,12 @@ class MarketingHeroComponent extends React.Component {
                 <h4>{MarketingSite.heroBanner.time}</h4>
                 <div className={styles.heroButtons}>
                   {summit_phase >= PHASES.DURING && isLoggedUser ?
-                    <a className={styles.link} href={`${envVariables.AUTHORIZED_DEFAULT_PATH ? envVariables.AUTHORIZED_DEFAULT_PATH : '/a/'}`} target="_blank" rel="noreferrer">
+                    <Link className={styles.link} to={`${envVariables.AUTHORIZED_DEFAULT_PATH ? envVariables.AUTHORIZED_DEFAULT_PATH : '/a/'}`}>
                       <button className={`${styles.button} button is-large`}>
                         <i className={`fa fa-2x fa-sign-in icon is-large`}></i>
                         <b>Enter</b>
                       </button>
-                    </a>
+                    </Link>
                     :
                     <React.Fragment>
                       {MarketingSite.heroBanner.buttons.registerButton.display &&

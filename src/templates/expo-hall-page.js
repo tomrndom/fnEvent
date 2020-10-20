@@ -6,13 +6,13 @@ import SponsorComponent from '../components/SponsorComponent'
 
 import Tiers from '../content/sponsors-tiers.json'
 
-const ExpoHallPage = () => {
+const ExpoHallPage = ({ location }) => {
 
   return (
-    <Layout>
-      <section className="hero is-large sponsors-header" style={{backgroundImage: `url(${Tiers.imageHeader})`}}>
+    <Layout location={location}>
+      <section className="hero is-large sponsors-header" style={{ backgroundImage: `url(${Tiers.imageHeader})` }}>
         <div className="hero-body">
-          <div className="container">            
+          <div className="container">
           </div>
         </div>
       </section>

@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { connect } from 'react-redux'
 
 import styles from '../styles/navbar.module.scss';
 import LogoutButton from './LogoutButton';
 import ProfilePopupComponent from './ProfilePopupComponent';
+
+import { updateProfilePicture } from '../actions/user-actions'
 
 import envVariables from '../utils/envVariables'
 
@@ -15,6 +18,10 @@ const UserNavbar = class extends React.Component {
       showProfile: false,
       navBarActiveClass: '',
     }
+  }
+
+  handlePictureUpdate = (picture) => {    
+    this.props.updateProfilePicture(picture);
   }
 
   toggleHamburger = () => {
@@ -67,16 +74,23 @@ const UserNavbar = class extends React.Component {
           <div className={styles.navbarEnd}>
             <div className={styles.navbarItem}>
               <img onClick={() => this.setState({ showProfile: !showProfile })} className={styles.profilePic} src={userProfile?.pic} />
-              <ProfilePopupComponent userProfile={userProfile} showProfile={showProfile} closePopup={() => this.setState({ showProfile: !showProfile })} />
+              {showProfile &&
+                <ProfilePopupComponent 
+                  userProfile={userProfile}
+                  showProfile={showProfile} 
+                  changePicture={(pic) => this.handlePictureUpdate(pic)} 
+                  closePopup={() => this.setState({ showProfile: !showProfile })} 
+                />
+              }
             </div>
             <div className={styles.navbarItem}>
               <LogoutButton styles={styles} isLoggedUser={isLoggedUser} />
             </div>
           </div>
-        </div>        
+        </div>
       </nav>
     )
   }
 }
 
-export default UserNavbar
+export default connect(null, { updateProfilePicture })(UserNavbar)
