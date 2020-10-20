@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import AvatarEditor from 'react-avatar-editor'
 
 import styles from '../styles/profile.module.scss'
@@ -7,6 +7,10 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
 
   const editorRef = useRef(null);
 
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [company, setCompany] = useState("");
+
   const [image, setImage] = useState(null);
   const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
   const [scale, setScale] = useState(1.2);
@@ -14,6 +18,11 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
   const [width, setWidth] = useState(200);
   const [height, setHeight] = useState(200);
 
+  useEffect(() => {
+    console.log(userProfile);
+    setFirstName(userProfile.first_name);
+    setLastName(userProfile.last_name);    
+  }, []) 
 
   // state = {
   //   image: 'avatar.jpg',
@@ -107,13 +116,21 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile }) => {
               <div className={`columns ${styles.inputRow}`}>
                 <div className='column is-one-quarter'>First Name</div>
                 <div className='column is-two-thirds'>
-                  <input className={`${styles.input} ${styles.isMedium}`} type="text" placeholder="First Name" />
+                  <input 
+                    className={`${styles.input} ${styles.isMedium}`} 
+                    type="text" 
+                    placeholder="First Name" 
+                    value={firstName}/>
                 </div>
               </div>
               <div className={`columns ${styles.inputRow}`}>
                 <div className='column is-one-quarter'>Last Name</div>
                 <div className='column is-two-thirds'>
-                  <input className={`${styles.input} ${styles.isMedium}`} type="text" placeholder="Last Name" />
+                  <input 
+                    className={`${styles.input} ${styles.isMedium}`} 
+                    type="text" 
+                    placeholder="Last Name" 
+                    value={lastName}/>
                 </div>
               </div>
               <div className={`columns ${styles.inputRow}`}>
