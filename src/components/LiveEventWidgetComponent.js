@@ -7,8 +7,6 @@ import envVariables from '../utils/envVariables';
 import LiveEventWidget from 'live-event-widget/dist';
 import 'live-event-widget/dist/index.css';
 
-import HomeSettings from '../content/home-settings.json'
-
 const LiveEventWidgetComponent = class extends React.Component {
 
   render() {
@@ -17,7 +15,7 @@ const LiveEventWidgetComponent = class extends React.Component {
       apiBaseUrl: envVariables.SUMMIT_API_BASE_URL,
       marketingApiBaseUrl: envVariables.MARKETING_API_BASE_URL,
       summitId: parseInt(envVariables.SUMMIT_ID),
-      title: ""
+      title: "",
     };
 
     return (

@@ -23,7 +23,8 @@ const ScheduleComponent = class extends React.Component {
       roomBaseUrl: "/a/rooms",
       summitId: parseInt(envVariables.SUMMIT_ID),
       onAuthError: (err, res) => expiredToken(err),
-      onRef: ref => this.child = ref
+      onRef: ref => this.child = ref,
+      defaultImage: HomeSettings.schedule_default_image
     };
 
     const { className } = this.props;
