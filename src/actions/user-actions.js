@@ -89,7 +89,7 @@ export const updateProfilePicture = (picture) => (dispatch, getState) => {
   return deleteRequest(
     null,
     createAction(REMOVE_PROFILE_PIC),
-    `${window.SUMMIT_API_BASE_URL}/api/v1/users/me/pic`,
+    `${window.IDP_BASE_URL}/api/users/me/pic`,
     {},
     customErrorHandler,
   )(params)(dispatch).then((payload) => { 
@@ -111,7 +111,7 @@ const uploadProfilePicture = () => (dispatch, getState) => {
   putRequest(
     null,
     createAction(UPLOAD_PROFILE_PIC),
-    `${window.API_BASE_URL}/api/v1/users/me/`,
+    `${window.IDP_BASE_URL}/api/users/me/`,
     {},
     customErrorHandler
   )(params)(dispatch)

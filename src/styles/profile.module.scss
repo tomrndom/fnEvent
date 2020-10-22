@@ -6,14 +6,14 @@
 @import './colors.scss';
 
 .modal-card {
-  color: #363636;  
+  color: #363636;
   margin: 0 5rem 0 auto;
 
-  .modal-card-head {    
+  .modal-card-head {
     padding: 10px 20px;
     background-color: #ffffff;
     border-top-left-radius: 0px;
-    border-top-right-radius: 0px;    
+    border-top-right-radius: 0px;
     display: flex;
     align-items: center;
 
@@ -45,15 +45,33 @@
         text-align: center;
         padding: 0px 20px 20px;
 
+        .image-upload {
+          >input {
+            display: none;
+          }
+
+          .picture-icon {
+            color: #ffffff;
+            z-index: 100;
+            cursor: pointer;
+            position: absolute;
+            position: absolute;
+            left: 48%;
+            top: 45%;
+          }
+        }
+
         .input-row {
           align-items: center;
 
           div:last-child {
             display: flex;
             justify-content: space-evenly;
+
             input[type=range] {
               display: inline-flex;
-            }            
+            }
+
             .button {
               align-items: baseline;
 
@@ -75,13 +93,14 @@
         font-weight: bold;
         border-bottom: 1px solid #dbdbdb;
       }
+
       .form {
         background-color: #f7f7f7;
         text-align: center;
         padding: 20px;
 
         .input-row {
-          align-items: center;          
+          align-items: center;
         }
       }
     }
@@ -94,9 +113,10 @@
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 
-    button{
+    button {
       width: 20rem;
       height: 4.5rem;
+
       &:last-of-type {
         color: #ffffff;
         border-color: #ffffff;

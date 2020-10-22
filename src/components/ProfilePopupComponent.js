@@ -9,26 +9,29 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [company, setCompany] = useState("");  
+  const [company, setCompany] = useState("");
 
   const [image, setImage] = useState(null);
-  const [position, setPosition] = useState({ x: 0.5, y: 0.5 });  
+  const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
   const [scale, setScale] = useState(1.2);
   const [rotate, setRotate] = useState(0);
   const [width, setWidth] = useState(200);
   const [height, setHeight] = useState(200);
 
-  useEffect(() => {    
+  useEffect(() => {
     setFirstName(userProfile.first_name);
     setLastName(userProfile.last_name);
     setImage(userProfile.pic)
     return () => {
       setFirstName('');
-      setLastName('');  
+      setLastName('');
       setCompany('');
     };
-  }, []) 
+  }, [])
 
+  const handleNewImage = (e) => {
+    setImage(e.target.files[0]);
+  }
 
   const handleScale = (e) => {
     const scale = parseFloat(e.target.value);
@@ -46,11 +49,11 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
   const rotateRight = (e) => {
     e.preventDefault();
     setRotate(rotate + 90);
-  }    
+  }
 
   const onClickSave = () => {
-    if (editorRef.current) {      
-      const canvas = editorRef.current.getImage().toDataURL();            
+    if (editorRef.current) {
+      const canvas = editorRef.current.getImage().toDataURL();
       changePicture(canvas);
     }
   }
@@ -74,7 +77,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
                 width={width}
                 height={height}
                 border={50}
-                color={[0, 0, 0, 0.6]} // RGBA
+                color={[0, 0, 0, 0.8]} // RGBA
                 position={position}
                 onPositionChange={handlePositionChange}
                 scale={scale}
@@ -82,6 +85,12 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
                 crossOrigin={'anonymous'}
                 rotate={parseFloat(rotate)}
               />
+              <div className={styles.imageUpload}>
+                <label for="file-input">
+                  <i className={`${styles.pictureIcon} fa fa-2x fa-camera icon is-large`}></i>
+                </label>
+                <input name="newImage" id="file-input" type="file" onChange={handleNewImage} />
+              </div>
               <div>
                 <div className={`columns ${styles.inputRow}`}>
                   <div className='column is-one-quarter'>Zoom:</div>
@@ -117,35 +126,35 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
               <div className={`columns ${styles.inputRow}`}>
                 <div className='column is-one-quarter'>First Name</div>
                 <div className='column is-two-thirds'>
-                  <input 
-                    className={`${styles.input} ${styles.isMedium}`} 
-                    type="text" 
-                    placeholder="First Name" 
+                  <input
+                    className={`${styles.input} ${styles.isMedium}`}
+                    type="text"
+                    placeholder="First Name"
                     onChange={e => setFirstName(e.target.value)}
-                    value={firstName}/>
+                    value={firstName} />
                 </div>
               </div>
               <div className={`columns ${styles.inputRow}`}>
                 <div className='column is-one-quarter'>Last Name</div>
                 <div className='column is-two-thirds'>
-                  <input 
-                    className={`${styles.input} ${styles.isMedium}`} 
-                    type="text" 
-                    placeholder="Last Name" 
+                  <input
+                    className={`${styles.input} ${styles.isMedium}`}
+                    type="text"
+                    placeholder="Last Name"
                     onChange={e => setLastName(e.target.value)}
-                    value={lastName}/>
+                    value={lastName} />
                 </div>
               </div>
               <div className={`columns ${styles.inputRow}`}>
                 <div className='column is-one-quarter'>Company</div>
                 <div className='column is-two-thirds'>
                   <input
-                   className={`${styles.input} ${styles.isMedium}`} 
-                   type="text" 
-                   placeholder="Company" 
-                   onChange={e => setCompany(e.target.value)}
-                   value={company}
-                   />
+                    className={`${styles.input} ${styles.isMedium}`}
+                    type="text"
+                    placeholder="Company"
+                    onChange={e => setCompany(e.target.value)}
+                    value={company}
+                  />
                 </div>
               </div>
             </div>
