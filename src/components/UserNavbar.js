@@ -20,7 +20,7 @@ const UserNavbar = class extends React.Component {
     }
   }
 
-  handlePictureUpdate = (picture) => {    
+  handlePictureUpdate = (picture) => {
     this.props.updateProfilePicture(picture);
   }
 
@@ -53,7 +53,30 @@ const UserNavbar = class extends React.Component {
 
     return (
       <nav className={`${styles.navbar} ${styles.userNavbar}`} role="navigation" aria-label="main navigation">
-        <div className={styles.navbarBrand}>
+        <div className={styles.navbarMobile}>
+          <div className={styles.navbarBrand}>
+            <div className={styles.navbarItem}>
+              <Link className={`${styles.button} ${styles.isLarge} ${styles.lobbyButton}`} to={defaultPath}>
+                <strong>Lobby</strong>
+              </Link>
+            </div>
+          </div>
+          <div className={styles.navbarEnd}>
+            <div className={styles.navbarItem}>
+              <img onClick={() => this.setState({ showProfile: !showProfile })} className={styles.profilePic} src={userProfile?.pic} />
+              {showProfile &&
+                <ProfilePopupComponent
+                  userProfile={userProfile}
+                  showProfile={showProfile}
+                  changePicture={(pic) => this.handlePictureUpdate(pic)}
+                  closePopup={() => this.setState({ showProfile: !showProfile })}
+                />
+              }
+            </div>
+            <div className={styles.navbarItem}>
+              <LogoutButton styles={styles} isLoggedUser={isLoggedUser} />
+            </div>
+          </div>
         </div>
 
         <div id="navbarBasicExample" className={`${styles.navbarMenu} ${this.state.navBarActiveClass}`}>
@@ -75,11 +98,11 @@ const UserNavbar = class extends React.Component {
             <div className={styles.navbarItem}>
               <img onClick={() => this.setState({ showProfile: !showProfile })} className={styles.profilePic} src={userProfile?.pic} />
               {showProfile &&
-                <ProfilePopupComponent 
+                <ProfilePopupComponent
                   userProfile={userProfile}
-                  showProfile={showProfile} 
-                  changePicture={(pic) => this.handlePictureUpdate(pic)} 
-                  closePopup={() => this.setState({ showProfile: !showProfile })} 
+                  showProfile={showProfile}
+                  changePicture={(pic) => this.handlePictureUpdate(pic)}
+                  closePopup={() => this.setState({ showProfile: !showProfile })}
                 />
               }
             </div>
