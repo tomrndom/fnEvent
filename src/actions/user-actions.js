@@ -15,8 +15,8 @@ export const GET_USER_PROFILE = 'GET_USER_PROFILE';
 export const REQUEST_USER_PROFILE = 'REQUEST_USER_PROFILE';
 export const START_LOADING_PROFILE = 'START_LOADING_PROFILE';
 export const STOP_LOADING_PROFILE = 'STOP_LOADING_PROFILE';
-export const REMOVE_PROFILE_PIC = 'REMOVE_PROFILE_PIC';
-export const UPLOAD_PROFILE_PIC = 'UPLOAD_PROFILE_PIC';
+export const UPDATE_PROFILE_PIC = 'UPDATE_PROFILE_PIC';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 export const getDisqusSSO = () => (dispatch, getState) => {
 
@@ -74,32 +74,7 @@ export const getUserProfile = () => (dispatch, getState) => {
   )(params)(dispatch).then(() => dispatch(dispatch(createAction(STOP_LOADING_PROFILE))));
 };
 
-export const updateProfilePicture = (picture) => (dispatch, getState) => {
-
-  dispatch(startLoading());
-
-  let { loggedUserState: { accessToken } } = getState();
-
-  if (!accessToken) return Promise.resolve();
-
-  let params = {
-      // access_token: accessToken,
-  };  
-
-  return deleteRequest(
-    null,
-    createAction(REMOVE_PROFILE_PIC),
-    `${window.IDP_BASE_URL}/api/users/me/pic`,
-    {},
-    customErrorHandler,
-  )(params)(dispatch).then((payload) => { 
-    console.log(payload)
-    dispatch(uploadProfilePicture(picture)); 
-  });
-
-}
-
-const uploadProfilePicture = () => (dispatch, getState) => {
+export const updateProfilePicture = (pic) => (dispatch, getState) => {
   let { loggedUserState: { accessToken } } = getState();
 
   if (!accessToken) return Promise.resolve();
@@ -110,9 +85,31 @@ const uploadProfilePicture = () => (dispatch, getState) => {
 
   putRequest(
     null,
-    createAction(UPLOAD_PROFILE_PIC),
-    `${window.IDP_BASE_URL}/api/users/me/`,
-    {},
+    createAction(UPDATE_PROFILE_PIC),
+    `${window.IDP_BASE_URL}/api/v1/users/me/pic`,
+    pic,
+    customErrorHandler
+  )(params)(dispatch)
+    .then((payload) => {
+      console.log(payload)
+      dispatch(stopLoading());
+  });
+}
+
+export const updateProfile = (profile) => (dispatch, getState) => {
+  let { loggedUserState: { accessToken } } = getState();
+
+  if (!accessToken) return Promise.resolve();
+
+  let params = {
+    access_token: accessToken,
+  };
+
+  putRequest(
+    null,
+    createAction(UPDATE_PROFILE),
+    `${window.IDP_BASE_URL}/api/v1/users/me`,
+    profile,
     customErrorHandler
   )(params)(dispatch)
     .then((payload) => {

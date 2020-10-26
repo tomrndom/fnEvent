@@ -6,7 +6,7 @@ import styles from '../styles/navbar.module.scss';
 import LogoutButton from './LogoutButton';
 import ProfilePopupComponent from './ProfilePopupComponent';
 
-import { updateProfilePicture } from '../actions/user-actions'
+import { updateProfilePicture, updateProfile } from '../actions/user-actions'
 
 import envVariables from '../utils/envVariables'
 
@@ -22,6 +22,10 @@ const UserNavbar = class extends React.Component {
 
   handlePictureUpdate = (picture) => {
     this.props.updateProfilePicture(picture);
+  }
+
+  handleProfileUpdate = (profile) => {
+    this.props.updateProfile(profile)
   }
 
   toggleHamburger = () => {
@@ -69,6 +73,7 @@ const UserNavbar = class extends React.Component {
                   userProfile={userProfile}
                   showProfile={showProfile}
                   changePicture={(pic) => this.handlePictureUpdate(pic)}
+                  changeProfile={(profile) => this.handleProfileUpdate(profile)}
                   closePopup={() => this.setState({ showProfile: !showProfile })}
                 />
               }
@@ -102,6 +107,7 @@ const UserNavbar = class extends React.Component {
                   userProfile={userProfile}
                   showProfile={showProfile}
                   changePicture={(pic) => this.handlePictureUpdate(pic)}
+                  changeProfile={(profile) => this.handleProfileUpdate(profile)}
                   closePopup={() => this.setState({ showProfile: !showProfile })}
                 />
               }
@@ -116,4 +122,4 @@ const UserNavbar = class extends React.Component {
   }
 }
 
-export default connect(null, { updateProfilePicture })(UserNavbar)
+export default connect(null, { updateProfilePicture, updateProfile })(UserNavbar)

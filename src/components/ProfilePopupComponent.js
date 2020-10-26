@@ -3,7 +3,7 @@ import AvatarEditor from 'react-avatar-editor'
 
 import styles from '../styles/profile.module.scss'
 
-const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePicture }) => {
+const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePicture, changeProfile }) => {
 
   const editorRef = useRef(null);
 
@@ -21,6 +21,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
   useEffect(() => {
     setFirstName(userProfile.first_name);
     setLastName(userProfile.last_name);
+    setCompany(userProfile.company);
     setImage(userProfile.pic)
     return () => {
       setFirstName('');
@@ -56,6 +57,16 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
       const canvas = editorRef.current.getImage().toDataURL();
       changePicture(canvas);
     }
+    if (userProfile.first_name !== firstName ||
+      userProfile.last_name !== lastName ||
+      userProfile.company !== company) {
+        const newProfile = {
+          first_name: firstName,
+          last_name: lastName,
+          company: company
+        }
+        changeProfile(newProfile)
+    }
   }
 
   return (
@@ -89,7 +100,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
                 <label for="file-input">
                   <i className={`${styles.pictureIcon} fa fa-2x fa-camera icon is-large`}></i>
                 </label>
-                <input name="newImage" id="file-input" type="file" onChange={handleNewImage} />
+                <input name="newImage" id="file-input" type="file" accept=".jpg,.jpeg,.png" onChange={handleNewImage} />
               </div>
               <div>
                 <div className={`columns ${styles.inputRow}`}>
