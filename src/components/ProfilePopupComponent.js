@@ -13,7 +13,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
 
   const [image, setImage] = useState(null);
   const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
-  const [scale, setScale] = useState(1.2);
+  const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
   const [width, setWidth] = useState(200);
   const [height, setHeight] = useState(200);
