@@ -44,8 +44,13 @@
         background-color: #f7f7f7;
         text-align: center;
         padding: 0px 20px 20px;
+        position: relative;
 
         .image-upload {
+          position: absolute;
+          top: 65%;
+          left: 48%;
+
           >input {
             display: none;
           }
@@ -54,10 +59,6 @@
             color: #ffffff;
             z-index: 100;
             cursor: pointer;
-            position: absolute;
-            position: absolute;
-            left: 48%;
-            top: 45%;
           }
         }
 
@@ -127,27 +128,35 @@
 }
 
 @media (max-width: 768px) {
-  .modal {    
+  .modal {
     top: 14.5rem;
+
     .modal-background {
-      background-color: transparent;      
+      background-color: transparent;
     }
 
     .modal-card {
       overflow: auto;
-      
+
       .modal-card-body {
         overflow: none;
+        .modal-card-picture {
+          .picture {
+            .image-upload {
+              top: 56%;
+            }
+          }
+        }
       }
 
-      .modal-card-foot {        
+      .modal-card-foot {
         display: flex;
-        flex-direction: column;                
-    
+        flex-direction: column;
+
         button {
           width: 100%;
           height: 5.5rem;
-    
+
           &:last-of-type {
             color: #ffffff;
             border-color: #ffffff;

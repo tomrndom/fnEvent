@@ -134,7 +134,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
           <div className={styles.modalCardForm}>
             <div className={styles.title}>Profile Info</div>
             <div className={styles.form}>
-              <div className={`columns ${styles.inputRow}`}>
+              <div className={`columns is-mobile ${styles.inputRow}`}>
                 <div className='column is-one-quarter'>First Name</div>
                 <div className='column is-two-thirds'>
                   <input
@@ -145,7 +145,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
                     value={firstName} />
                 </div>
               </div>
-              <div className={`columns ${styles.inputRow}`}>
+              <div className={`columns is-mobile ${styles.inputRow}`}>
                 <div className='column is-one-quarter'>Last Name</div>
                 <div className='column is-two-thirds'>
                   <input
@@ -156,7 +156,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
                     value={lastName} />
                 </div>
               </div>
-              <div className={`columns ${styles.inputRow}`}>
+              <div className={`columns is-mobile ${styles.inputRow}`}>
                 <div className='column is-one-quarter'>Company</div>
                 <div className='column is-two-thirds'>
                   <input
