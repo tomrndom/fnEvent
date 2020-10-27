@@ -70,8 +70,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
   }
 
   return (
-
-    < div className={`${styles.modal} ${showProfile ? styles.isActive : ''}`}>
+    <div className={`${styles.modal} ${showProfile ? styles.isActive : ''}`}>
       <div className={`${styles.modalBackground}`} onClick={() => closePopup()}></div>
       <div className={`${styles.modalCard} ${styles.profilePopup}`}>
         <header className={`${styles.modalCardHead}`}>
@@ -176,7 +175,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
           <button onClick={() => onClickSave()} className="button is-large">Update</button>
         </footer>
       </div>
-    </div >
+    </div>
   )
 }
 
