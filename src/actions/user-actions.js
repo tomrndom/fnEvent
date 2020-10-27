@@ -2,6 +2,7 @@ import {
   getRequest,
   deleteRequest,
   putRequest,
+  putFile,
   createAction,
   stopLoading,
   startLoading,
@@ -83,7 +84,7 @@ export const updateProfilePicture = (pic) => (dispatch, getState) => {
     access_token: accessToken,
   };
 
-  putRequest(
+  putFile(
     null,
     createAction(UPDATE_PROFILE_PIC),
     `${window.IDP_BASE_URL}/api/v1/users/me/pic`,
