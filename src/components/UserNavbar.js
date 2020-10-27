@@ -28,6 +28,15 @@ const UserNavbar = class extends React.Component {
     this.props.updateProfile(profile)
   }
 
+  handleTogglePopup = (profile) => {
+    if (profile) {
+      document.body.classList.add('is-clipped');
+    } else {
+      document.body.classList.remove('is-clipped');
+    }
+    this.setState({showProfile: profile})
+  }
+
   toggleHamburger = () => {
     // toggle the active boolean in the state
     this.setState(
@@ -67,14 +76,14 @@ const UserNavbar = class extends React.Component {
           </div>
           <div className={styles.navbarEnd}>
             <div className={styles.navbarItem}>
-              <img onClick={() => this.setState({ showProfile: !showProfile })} className={styles.profilePic} src={userProfile?.pic} />
+              <img onClick={() => this.handleTogglePopup(!showProfile)} className={styles.profilePic} src={userProfile?.pic} />
               {showProfile &&
                 <ProfilePopupComponent
                   userProfile={userProfile}
                   showProfile={showProfile}
                   changePicture={(pic) => this.handlePictureUpdate(pic)}
                   changeProfile={(profile) => this.handleProfileUpdate(profile)}
-                  closePopup={() => this.setState({ showProfile: !showProfile })}
+                  closePopup={() => this.handleTogglePopup(!showProfile)}
                 />
               }
             </div>
@@ -101,14 +110,14 @@ const UserNavbar = class extends React.Component {
           </div>
           <div className={styles.navbarEnd}>
             <div className={styles.navbarItem}>
-              <img onClick={() => this.setState({ showProfile: !showProfile })} className={styles.profilePic} src={userProfile?.pic} />
+              <img onClick={() => this.handleTogglePopup(!showProfile)} className={styles.profilePic} src={userProfile?.pic} />
               {showProfile &&
                 <ProfilePopupComponent
                   userProfile={userProfile}
                   showProfile={showProfile}
                   changePicture={(pic) => this.handlePictureUpdate(pic)}
                   changeProfile={(profile) => this.handleProfileUpdate(profile)}
-                  closePopup={() => this.setState({ showProfile: !showProfile })}
+                  closePopup={() => this.handleTogglePopup(!showProfile)}
                 />
               }
             </div>
