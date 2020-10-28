@@ -83,13 +83,14 @@ export const updateProfilePicture = (pic) => (dispatch, getState) => {
   let params = {
     access_token: accessToken,
   };
-
+  
   putFile(
     null,
     createAction(UPDATE_PROFILE_PIC),
     `${window.IDP_BASE_URL}/api/v1/users/me/pic`,
     pic,
-    customErrorHandler
+    {},
+    customErrorHandler,
   )(params)(dispatch)
     .then((payload) => {
       console.log(payload)

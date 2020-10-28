@@ -34,6 +34,14 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
     setImage(e.target.files[0]);
   }
 
+  const urltoFile = (url, filename, mimeType) => {
+    mimeType = mimeType || (url.match(/^data:([^;]+);/) || '')[1];
+    return (fetch(url)
+      .then(function (res) { return res.arrayBuffer(); })
+      .then(function (buf) { return new File([buf], filename, { type: mimeType }); })
+    );
+  }  
+
   const handleScale = (e) => {
     const scale = parseFloat(e.target.value);
     setScale(scale);
@@ -47,6 +55,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
     e.preventDefault();
     setRotate(rotate - 90);
   }
+
   const rotateRight = (e) => {
     e.preventDefault();
     setRotate(rotate + 90);
@@ -54,18 +63,19 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
 
   const onClickSave = () => {
     if (editorRef.current) {
-      const canvas = editorRef.current.getImage().toDataURL();
-      changePicture(canvas);
+      const canvas = editorRef.current.getImage().toDataURL();            
+      urltoFile(canvas, image.name)
+        .then(file => changePicture(file))      
     }
     if (userProfile.first_name !== firstName ||
       userProfile.last_name !== lastName ||
       userProfile.company !== company) {
-        const newProfile = {
-          first_name: firstName,
-          last_name: lastName,
-          company: company
-        }
-        changeProfile(newProfile)
+      const newProfile = {
+        first_name: firstName,
+        last_name: lastName,
+        company: company
+      }
+      changeProfile(newProfile)
     }
   }
 
