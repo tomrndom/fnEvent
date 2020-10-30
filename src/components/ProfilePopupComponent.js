@@ -12,6 +12,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
   const [company, setCompany] = useState("");
 
   const [image, setImage] = useState(null);
+  const [newImage, setNewImage] = useState(false);
   const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
@@ -19,10 +20,10 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
   const [height, setHeight] = useState(200);
 
   useEffect(() => {
-    setFirstName(userProfile.first_name);
-    setLastName(userProfile.last_name);
+    setFirstName(userProfile.given_name);
+    setLastName(userProfile.family_name);
     setCompany(userProfile.company);
-    setImage(userProfile.pic)
+    setImage(userProfile.picture)
     return () => {
       setFirstName('');
       setLastName('');
@@ -32,6 +33,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
 
   const handleNewImage = (e) => {
     setImage(e.target.files[0]);
+    setNewImage(true);
   }
 
   const urltoFile = (url, filename, mimeType) => {
@@ -40,32 +42,36 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
       .then(function (res) { return res.arrayBuffer(); })
       .then(function (buf) { return new File([buf], filename, { type: mimeType }); })
     );
-  }  
+  }
 
   const handleScale = (e) => {
     const scale = parseFloat(e.target.value);
     setScale(scale);
+    setNewImage(true);
   }
 
   const handlePositionChange = (position) => {
     setPosition(position);
+    setNewImage(true);
   }
 
   const rotateLeft = (e) => {
     e.preventDefault();
     setRotate(rotate - 90);
+    setNewImage(true);
   }
 
   const rotateRight = (e) => {
     e.preventDefault();
     setRotate(rotate + 90);
+    setNewImage(true);
   }
 
   const onClickSave = () => {
-    if (editorRef.current) {
+    if (editorRef.current && newImage) {
       const canvas = editorRef.current.getImage().toDataURL();            
       urltoFile(canvas, image.name)
-        .then(file => changePicture(file))      
+        .then(file => changePicture(file));
     }
     if (userProfile.first_name !== firstName ||
       userProfile.last_name !== lastName ||
@@ -75,8 +81,9 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
         last_name: lastName,
         company: company
       }
-      changeProfile(newProfile)
+      changeProfile(newProfile);
     }
+    closePopup();
   }
 
   return (
@@ -101,8 +108,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
                 position={position}
                 onPositionChange={handlePositionChange}
                 scale={scale}
-                borderRadius={5}
-                crossOrigin={'anonymous'}
+                borderRadius={5}                
                 rotate={parseFloat(rotate)}
               />
               <div className={styles.imageUpload}>

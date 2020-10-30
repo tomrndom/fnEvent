@@ -7,12 +7,12 @@ import { isAuthorizedUser, isAuthorizedBadge } from '../utils/authorizedGroups';
 
 import { PHASES } from '../utils/phasesUtils'
 
-import { getUserProfile } from "../actions/user-actions";
+import { getIDPProfile, getUserProfile } from "../actions/user-actions";
 
 import HeroComponent from '../components/HeroComponent'
 import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
 
-const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, user: { loading, userProfile }, summit_phase, getUserProfile, ...rest }) => {
+const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, user: { loading, userProfile, idpProfile }, summit_phase, getUserProfile, getIDPProfile, ...rest }) => {
 
   const [hasTicket, setHasTicket] = useState(null);
   const [isAuthorized, setIsAuthorized] = useState(null);
@@ -27,6 +27,10 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
       return;
     } else if (updatingUserProfile) {
       setUpdatingUserProfile(false);
+    }
+
+    if (idpProfile === null) {
+      getIDPProfile();
     }
 
     if (hasTicket === null || isAuthorized === null || updatingUserProfile === true) {
@@ -77,7 +81,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
     )
   }
 
-  if (eventId && userProfile && !isAuthorizedBadge(eventId, userProfile.summit_tickets)) {    
+  if (eventId && userProfile && !isAuthorizedBadge(eventId, userProfile.summit_tickets)) {
     setTimeout(() => {
       navigate(location.state?.previousUrl ? location.state.previousUrl : '/')
     }, 3000);
@@ -96,4 +100,4 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
   );
 }
 
-export default connect(null, { getUserProfile })(PrivateRoute)
+export default connect(null, { getUserProfile, getIDPProfile })(PrivateRoute)
