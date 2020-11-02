@@ -75,8 +75,8 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
       urltoFile(canvas, image.name)
         .then(file => changePicture(file));
     }
-    if (userProfile.first_name !== firstName ||
-      userProfile.last_name !== lastName ||
+    if (userProfile.given_name !== firstName ||
+      userProfile.family_name !== lastName ||
       userProfile.company !== company) {
       const newProfile = {
         first_name: firstName,
