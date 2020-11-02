@@ -102,7 +102,7 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
             <div className={styles.picture}>
               <AvatarEditor
                 ref={editorRef}
-                image="https://fntech.sfo2.cdn.digitaloceanspaces.com/temp/Web-J.P._Maxwell-9176-Edit.jpg"
+                image={image}
                 width={width}
                 height={height}
                 border={50}
