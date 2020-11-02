@@ -100,7 +100,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
             <div className={styles.picture}>
               <AvatarEditor
                 ref={editorRef}
-                image={image}
+                image="https://fntech.sfo2.cdn.digitaloceanspaces.com/temp/Web-J.P._Maxwell-9176-Edit.jpg"
                 width={width}
                 height={height}
                 border={50}
@@ -110,6 +110,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
                 scale={scale}
                 borderRadius={5}                
                 rotate={parseFloat(rotate)}
+                crossOrigin="anonymous"
               />
               <div className={styles.imageUpload}>
                 <label for="file-input">
