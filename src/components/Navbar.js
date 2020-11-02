@@ -7,7 +7,7 @@ import LogoutButton from './LogoutButton';
 import Link from './Link'
 import ProfilePopupComponent from './ProfilePopupComponent';
 
-import { updateProfilePicture, updateProfile, getIDPProfile } from '../actions/user-actions'
+import { updateProfilePicture, updateProfile } from '../actions/user-actions'
 
 import Content from '../content/navbar.json'
 import SummitObject from '../content/summit.json'
@@ -56,7 +56,6 @@ const Navbar = class extends React.Component {
     if (profile) {
       document.body.classList.add('is-clipped');
     } else {
-      this.props.getIDPProfile();
       document.body.classList.remove('is-clipped');
     }
     this.setState({ showProfile: profile })
@@ -134,4 +133,4 @@ const Navbar = class extends React.Component {
   }
 }
 
-export default connect(null, { updateProfilePicture, updateProfile, getIDPProfile })(Navbar)
+export default connect(null, { updateProfilePicture, updateProfile })(Navbar)
