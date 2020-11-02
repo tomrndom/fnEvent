@@ -33,13 +33,6 @@
 
   .navbar-item {
     color: $color_text_light;
-
-    img.profile-pic {
-      height: 4rem;
-      max-height: 4rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
   }
 
   .navbar-menu {
@@ -62,7 +55,16 @@
         &:visited {
           color: $color_text_light;
         }
-      }
+      }      
+
+      img.profile-pic {
+        height: 4rem;
+        width: 4rem;
+        max-height: 4rem;
+        border-radius: 5px;
+        object-fit: cover;
+        cursor: pointer;
+      } 
     }
   }
 }

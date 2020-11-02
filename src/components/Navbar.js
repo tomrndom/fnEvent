@@ -64,7 +64,7 @@ const Navbar = class extends React.Component {
 
   render() {
 
-    let { isLoggedUser, idpProfile, logo, location } = this.props;
+    let { isLoggedUser, idpProfile, logo, idpLoading, location } = this.props;
     let { showProfile } = this.state;
 
     let { summit } = SummitObject
@@ -117,6 +117,7 @@ const Navbar = class extends React.Component {
                     <ProfilePopupComponent
                       userProfile={idpProfile}
                       showProfile={showProfile}
+                      idpLoading={idpLoading}
                       changePicture={(pic) => this.handlePictureUpdate(pic)}
                       changeProfile={(profile) => this.handleProfileUpdate(profile)}
                       closePopup={() => this.handleTogglePopup(!showProfile)}

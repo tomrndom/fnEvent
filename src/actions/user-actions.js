@@ -18,6 +18,7 @@ export const START_LOADING_PROFILE = 'START_LOADING_PROFILE';
 export const STOP_LOADING_PROFILE = 'STOP_LOADING_PROFILE';
 export const UPDATE_PROFILE_PIC = 'UPDATE_PROFILE_PIC';
 export const START_LOADING_IDP_PROFILE = 'START_LOADING_IDP_PROFILE';
+export const STOP_LOADING_IDP_PROFILE = 'STOP_LOADING_IDP_PROFILE';
 export const GET_IDP_PROFILE = 'GET_IDP_PROFILE';
 export const UPDATE_IDP_PROFILE = 'UPDATE_IDP_PROFILE';
 
@@ -92,7 +93,7 @@ export const getIDPProfile = () => (dispatch, getState) => {
     `${window.IDP_BASE_URL}/api/v1/users/me`,
     customErrorHandler
   )(params)(dispatch)
-    .then(() => dispatch(stopLoading()));
+    .then(() => dispatch(dispatch(createAction(STOP_LOADING_IDP_PROFILE))));
 }
 
 export const updateProfilePicture = (pic) => (dispatch, getState) => {
@@ -105,7 +106,7 @@ export const updateProfilePicture = (pic) => (dispatch, getState) => {
   };
 
   putFile(
-    null,
+    createAction(START_LOADING_IDP_PROFILE),
     createAction(UPDATE_PROFILE_PIC),
     `${window.IDP_BASE_URL}/api/v1/users/me/pic`,
     pic,
@@ -114,7 +115,7 @@ export const updateProfilePicture = (pic) => (dispatch, getState) => {
   )(params)(dispatch)
     .then((payload) => {
       console.log(payload)
-      dispatch(stopLoading());
+      dispatch(getIDPProfile());
     });
 }
 
@@ -128,11 +129,11 @@ export const updateProfile = (profile) => (dispatch, getState) => {
   };
 
   putRequest(
-    null,
+    createAction(START_LOADING_IDP_PROFILE),
     createAction(UPDATE_IDP_PROFILE),
     `${window.IDP_BASE_URL}/api/v1/users/me`,
     profile,
     customErrorHandler
   )(params)(dispatch)
-    .then(() => dispatch(stopLoading()));
+    .then(() => dispatch(getIDPProfile()));
 }

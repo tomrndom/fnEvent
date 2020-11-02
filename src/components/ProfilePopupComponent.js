@@ -3,7 +3,9 @@ import AvatarEditor from 'react-avatar-editor'
 
 import styles from '../styles/profile.module.scss'
 
-const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePicture, changeProfile }) => {
+import { AjaxLoader } from "openstack-uicore-foundation/lib/components";
+
+const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfile, changePicture, changeProfile }) => {
 
   const editorRef = useRef(null);
 
@@ -69,7 +71,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
 
   const onClickSave = () => {
     if (editorRef.current && newImage) {
-      const canvas = editorRef.current.getImage().toDataURL();            
+      const canvas = editorRef.current.getImage().toDataURL();
       urltoFile(canvas, image.name)
         .then(file => changePicture(file));
     }
@@ -83,13 +85,13 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
       }
       changeProfile(newProfile);
     }
-    closePopup();
   }
 
   return (
     <div className={`${styles.modal} ${showProfile ? styles.isActive : ''}`}>
       <div className={`${styles.modalBackground}`} onClick={() => closePopup()}></div>
       <div className={`${styles.modalCard} ${styles.profilePopup}`}>
+        <AjaxLoader relative={true} color={'#ffffff'} show={ idpLoading } size={ 120 }/>
         <header className={`${styles.modalCardHead}`}>
           <p className={`${styles.modalCardTitle}`}>Edit profile</p>
           <i onClick={() => closePopup()} className={`${styles.closeIcon} fa fa-times icon is-large`}></i>
@@ -108,7 +110,7 @@ const ProfilePopupComponent = ({ userProfile, closePopup, showProfile, changePic
                 position={position}
                 onPositionChange={handlePositionChange}
                 scale={scale}
-                borderRadius={5}                
+                borderRadius={5}
                 rotate={parseFloat(rotate)}
                 crossOrigin="anonymous"
               />
