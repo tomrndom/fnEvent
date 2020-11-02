@@ -7,12 +7,12 @@ import { isAuthorizedUser, isAuthorizedBadge } from '../utils/authorizedGroups';
 
 import { PHASES } from '../utils/phasesUtils'
 
-import { getIDPProfile, getUserProfile } from "../actions/user-actions";
+import { getUserProfile } from "../actions/user-actions";
 
 import HeroComponent from '../components/HeroComponent'
 import { OPSessionChecker } from "openstack-uicore-foundation/lib/components";
 
-const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, user: { loading, userProfile, idpProfile }, summit_phase, getUserProfile, getIDPProfile, ...rest }) => {
+const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, user: { loading, userProfile }, summit_phase, getUserProfile, ...rest }) => {
 
   const [hasTicket, setHasTicket] = useState(null);
   const [isAuthorized, setIsAuthorized] = useState(null);
@@ -27,10 +27,6 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
       return;
     } else if (updatingUserProfile) {
       setUpdatingUserProfile(false);
-    }
-
-    if (idpProfile === null) {
-      getIDPProfile();
     }
 
     if (hasTicket === null || isAuthorized === null || updatingUserProfile === true) {
@@ -100,4 +96,4 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
   );
 }
 
-export default connect(null, { getUserProfile, getIDPProfile })(PrivateRoute)
+export default connect(null, { getUserProfile })(PrivateRoute)
