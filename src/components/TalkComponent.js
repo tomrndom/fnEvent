@@ -68,7 +68,7 @@ const TalkComponent = class extends React.Component {
                           {`${s.first_name} ${s.last_name}`}
                           <br />
                           {s.title && <b dangerouslySetInnerHTML={{ __html: s.title }} />}
-                          {s.company && <b> - {s.company}</b>}
+                          {s.company && <><b> - </b><b dangerouslySetInnerHTML={{ __html: s.company }} /></>}
                         </div>
                       </div>
                     )
