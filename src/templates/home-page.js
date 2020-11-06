@@ -94,6 +94,7 @@ export const HomePageTemplate = class extends React.Component {
                   accessToken={loggedUser.accessToken}
                   title="Featured Speakers"
                   bigPics={false}
+                  featured={true}
                   date={null}
                 />
               }
