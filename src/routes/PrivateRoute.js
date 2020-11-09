@@ -14,7 +14,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
   const [updatingUserProfile, setUpdatingUserProfile] = useState(null);
 
   useEffect(() => {
-
+   
     if (!isLoggedIn) return;
 
     if (userProfile === null) {
@@ -46,7 +46,8 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
     return null
   }
 
-  if (loading || userProfile === null || hasTicket === null || isAuthorized === null || (hasTicket === false && isAuthorized === false && updatingUserProfile !== false)) {
+  if (loading || userProfile === null || hasTicket === null || isAuthorized === null || 
+    (hasTicket === false && isAuthorized === false && updatingUserProfile !== false)) {
     return (
       <HeroComponent
         title="Checking credentials..."
