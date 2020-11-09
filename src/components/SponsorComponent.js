@@ -20,7 +20,7 @@ const SponsorComponent = ({ page }) => {
         const tier = Tiers.tiers.find(t => t.id === s.tier[0].value);
         const template = page === 'lobby' ? tier.lobby.lobbyTemplate : page === 'event' ? tier.eventTemplate : 'expo-hall';
 
-        if (sponsors.length > 0) {
+        if (sponsors?.length > 0) {
           renderButton = true;
           switch (template) {
             case 'big-images': {
@@ -29,7 +29,7 @@ const SponsorComponent = ({ page }) => {
               } else {
                 return (
                   <div className={styles.bigImageContainer} key={tierIndex}>
-                    <span><b>{tier.name} Sponsors</b></span>
+                    <span><b>{tier.widgetTitle}</b></span>
                     {sponsors.map((sponsor, index) => {
                       return (
                         sponsor.externalLink ?
@@ -55,7 +55,7 @@ const SponsorComponent = ({ page }) => {
               } else {
                 return (
                   <div className={styles.smallImageContainer} key={tierIndex}>
-                    <span><b>{tier.name} Sponsors</b></span>
+                    <span><b>{tier.widgetTitle}</b></span>
                     {sponsors.map((sponsor, index) => {
                       return (
                         sponsor.externalLink ?
@@ -149,9 +149,9 @@ const SponsorComponent = ({ page }) => {
                 return null
               } else {
                 const sliderSettings = {
-                  autoplay: false,
+                  autoplay: true,
                   autoplaySpeed: 5000,
-                  infinite: true,                  
+                  infinite: true,
                   className: 'sponsor-carousel',
                   dots: false,
                   slidesToShow: 1,
@@ -159,7 +159,7 @@ const SponsorComponent = ({ page }) => {
                 };
                 return (
                   <div className={styles.carouselContainer} key={tierIndex}>
-                    <span><b>{tier.name} Sponsors</b></span>
+                    <span style={{ marginBottom: '0' }}><b>{tier.widgetTitle}</b></span>
                     <Slider {...sliderSettings}>
                       {sponsors.map((sponsor, index) => {
                         return (
