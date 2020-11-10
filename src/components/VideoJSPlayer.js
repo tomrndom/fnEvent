@@ -41,15 +41,20 @@ class VideoJSPlayer extends React.Component {
 
     const onPlayerReady = () => {
       console.log('onPlayerReady', this.player);
+      const src = this.player.src();      
+      
+      let reloadPlayer;
+      let modal;      
+
       this.player.on('error', () => {
-//        if (firstHalf !== null) {
-          this.player.errorDisplay.close();
-          let modal = this.player.createModal();
-          modal.closeable(false);
-          let newElement = document.createElement('div');
-          newElement.classList.add('video-error');          
-          let message = firstHalf ? 'Video stream will begin momentarily' : 'VOD will be available soon';
-          newElement.innerHTML = `
+        //        if (firstHalf !== null) {
+        this.player.errorDisplay.close();
+        modal = this.player.createModal();
+        modal.closeable(false);
+        let newElement = document.createElement('div');
+        newElement.classList.add('video-error');
+        let message = firstHalf ? 'Video stream will begin momentarily' : 'VOD will be available soon';
+        newElement.innerHTML = `
           <section class="hero">
             <div class="hero-body">
               <div class='has-text-centered'}>
@@ -58,16 +63,45 @@ class VideoJSPlayer extends React.Component {
             </div>
           </section>
           `
-          modal.content(newElement);
-          modal.fill();          
-          modal.on('modalclose', () => {
-            this.player.play();
-          });
+        modal.content(newElement);
+        modal.fill();        
+        reloadPlayer = setInterval(() => {
+          console.log('reload player...')
+          if (this.player.error().code === 4) {            
+            this.player.reset();
+            this.player.src(src);            
+          }
+        }, 30000);
         //}
       });
 
       this.player.on('playing', () => {
         console.log('playing')
+        clearInterval(reloadPlayer);
+        modal.dispose();
+      });
+
+      this.player.on('ended', () => {
+        console.log('stream finished')
+        const isLive = this.player.liveTracker.isLive();
+        if (isLive) {
+          modal = this.player.createModal();
+          modal.closeable(false);
+          let newElement = document.createElement('div');
+          newElement.classList.add('video-error');
+          let message = 'VOD will be available soon';
+          newElement.innerHTML = `
+            <section class="hero">
+              <div class="hero-body">
+                <div class='has-text-centered'}>
+                  <h1 class="title">${message}</h1>               
+                </div>
+              </div>
+            </section>
+            `
+          modal.content(newElement);
+          modal.fill();
+        }
       });
     }
 
