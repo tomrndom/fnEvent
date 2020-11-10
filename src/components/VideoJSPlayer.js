@@ -41,10 +41,10 @@ class VideoJSPlayer extends React.Component {
 
     const onPlayerReady = () => {
       console.log('onPlayerReady', this.player);
-      const src = this.player.src();      
-      
-      let reloadPlayer;
-      let modal;      
+      const src = this.player.src();
+
+      let reloadPlayer = null;
+      let modal = null;
 
       this.player.on('error', () => {
         //        if (firstHalf !== null) {
@@ -64,12 +64,12 @@ class VideoJSPlayer extends React.Component {
           </section>
           `
         modal.content(newElement);
-        modal.fill();        
+        modal.fill();
         reloadPlayer = setInterval(() => {
           console.log('reload player...')
-          if (this.player.error().code === 4) {            
+          if (this.player.error().code === 4) {
             this.player.reset();
-            this.player.src(src);            
+            this.player.src(src);
           }
         }, 30000);
         //}
@@ -77,8 +77,8 @@ class VideoJSPlayer extends React.Component {
 
       this.player.on('playing', () => {
         console.log('playing')
-        clearInterval(reloadPlayer);
-        modal.dispose();
+        if (reloadPlayer) clearInterval(reloadPlayer);
+        if (modal) modal.dispose();
       });
 
       this.player.on('ended', () => {
