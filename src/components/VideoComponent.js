@@ -25,6 +25,7 @@ const VideoComponent = class extends React.Component {
           controls: true,
           fluid: true,
           sources: [{
+            //https://stream.mux.com/hGLEdKvhOGXkQY8k66epKfgn301pGX2pxh7nTVWsHIxA.m3u8
             src: 'https://stream.mux.com/jMXSdkQaDVOWa6r1zYYDr6YyckfbDxIKzbKLsTnqexw.m3u8',
             type: 'application/x-mpegURL'
           }],

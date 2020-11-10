@@ -42,20 +42,18 @@ class VideoJSPlayer extends React.Component {
     const onPlayerReady = () => {
       console.log('onPlayerReady', this.player);
       this.player.on('error', () => {
-        if (firstHalf !== null) {
+//        if (firstHalf !== null) {
           this.player.errorDisplay.close();
           let modal = this.player.createModal();
           modal.closeable(false);
           let newElement = document.createElement('div');
-          newElement.style.display = 'flex';
-          newElement.style.height = '100%';
-          newElement.style.width = '100%';
+          newElement.classList.add('video-error');          
           let message = firstHalf ? 'Video stream will begin momentarily' : 'VOD will be available soon';
           newElement.innerHTML = `
-          <section class="hero" style="background-color: #8CC639; align-self: center; width: 100%; height: 100%">
+          <section class="hero">
             <div class="hero-body">
               <div class='has-text-centered'}>
-                <h1 style='color: white' class="title">${message}</h1>               
+                <h1 class="title">${message}</h1>               
               </div>
             </div>
           </section>
@@ -65,10 +63,10 @@ class VideoJSPlayer extends React.Component {
           modal.on('modalclose', () => {
             this.player.play();
           });
-        }
+        //}
       });
 
-      this.player.on('playing', function() {
+      this.player.on('playing', () => {
         console.log('playing')
       });
     }
