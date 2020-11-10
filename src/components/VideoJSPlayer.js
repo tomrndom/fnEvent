@@ -46,12 +46,13 @@ class VideoJSPlayer extends React.Component {
           this.player.errorDisplay.close();
           let modal = this.player.createModal();
           modal.closeable(false);
-          let newElement = document.createElement('div');          
+          let newElement = document.createElement('div');
           newElement.style.display = 'flex';
           newElement.style.height = '100%';
+          newElement.style.width = '100%';
           let message = firstHalf ? 'Video stream will begin momentarily' : 'VOD will be available soon';
           newElement.innerHTML = `
-          <section class="hero" style="background-color: #8CC639; align-self: center; width: 100%">
+          <section class="hero" style="background-color: #8CC639; align-self: center; width: 100%; height: 100%">
             <div class="hero-body">
               <div class='has-text-centered'}>
                 <h1 style='color: white' class="title">${message}</h1>               
@@ -65,6 +66,10 @@ class VideoJSPlayer extends React.Component {
             this.player.play();
           });
         }
+      });
+
+      this.player.on('playing', function() {
+        console.log('playing')
       });
     }
 
