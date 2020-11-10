@@ -49,6 +49,7 @@ class VideoJSPlayer extends React.Component {
       this.player.on('error', () => {
         //        if (firstHalf !== null) {
         this.player.errorDisplay.close();
+        const videoError = this.player.error();
         modal = this.player.createModal();
         modal.closeable(false);
         let newElement = document.createElement('div');
@@ -67,11 +68,11 @@ class VideoJSPlayer extends React.Component {
         modal.fill();
         reloadPlayer = setInterval(() => {
           console.log('reload player...')
-          if (this.player.error().code === 4) {
+          if (videoError.code === 4) {
             this.player.reset();
             this.player.src(src);
           }
-        }, 30000);
+        }, 60000);
         //}
       });
 
