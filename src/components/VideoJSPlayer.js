@@ -39,27 +39,23 @@ class VideoJSPlayer extends React.Component {
       ...this.props,
     };
 
-    const onPlayerReady = () => {
-      console.log('onPlayerReady', this.player);
+    const onPlayerReady = () => {          
       const src = this.player.src();
-      console.log('¡src', src);
-
       let reloadPlayer = null;
       let modal = null;
       let isLive = null;
 
       this.player.on('error', () => {
-        const videoError = this.player.error();
-        console.log('video error', videoError);
-        //        if (firstHalf !== null && videoError.code === 2) {
-        if (reloadPlayer === null) {
-          this.player.errorDisplay.close();
-          modal = this.player.createModal();
-          modal.closeable(false);
-          let newElement = document.createElement('div');
-          newElement.classList.add('video-error');
-          let message = firstHalf ? 'Video stream will begin momentarily' : 'VOD will be available soon';
-          newElement.innerHTML = `
+        const videoError = this.player.error();        
+        if (firstHalf !== null && videoError.code === 2 || videoError.code === 4) {
+          if (reloadPlayer === null) {
+            this.player.errorDisplay.close();
+            modal = this.player.createModal();
+            modal.closeable(false);
+            let newElement = document.createElement('div');
+            newElement.classList.add('video-error');
+            let message = firstHalf ? 'Video stream will begin momentarily' : 'VOD will be available soon';
+            newElement.innerHTML = `
           <section class="hero">
             <div class="hero-body">
               <div class='has-text-centered'}>
@@ -68,36 +64,29 @@ class VideoJSPlayer extends React.Component {
             </div>
           </section>
           `
-          modal.content(newElement);
-          modal.fill();
-          // if (firstHalf) {
-            reloadPlayer = setInterval(() => {
-              console.log('reload player...')
-              this.player.load();
-              this.player.src(src);
-              this.player.reset();
-            }, 60000);
-          // }
+            modal.content(newElement);
+            modal.fill();
+            if (firstHalf) {
+              reloadPlayer = setInterval(() => {
+                console.log('reload player...')
+                this.player.load();
+                this.player.src(src);
+                this.player.reset();
+              }, 60000);
+            }
+          }
         }
-        //}
       });
 
-      this.player.on('playing', () => {
-        console.log('playing')
+      this.player.on('playing', () => {        
         if (reloadPlayer) clearInterval(reloadPlayer);
-        if (modal) modal.dispose();
-        console.log(this.player.duration());
-        console.log(this.player.liveTracker);
-        console.log(this.player.liveTracker.isTracking());
-        console.log(this.player.liveTracker.isLive());        
+        if (modal) modal.dispose();                
         if (this.player.duration() === Infinity) {
           isLive = true;
         };
       });
 
-      this.player.on('ended', () => {
-        console.log('stream finished');        
-        console.log(isLive);
+      this.player.on('ended', () => {        
         if (isLive) {
           this.player.pause();
           modal = this.player.createModal();
