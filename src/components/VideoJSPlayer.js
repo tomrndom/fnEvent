@@ -42,37 +42,43 @@ class VideoJSPlayer extends React.Component {
     const onPlayerReady = () => {
       console.log('onPlayerReady', this.player);
       const src = this.player.src();
+      console.log('¡src', src);
 
       let reloadPlayer = null;
       let modal = null;
+      let isLive = null;
 
       this.player.on('error', () => {
-        //        if (firstHalf !== null) {
-        this.player.errorDisplay.close();
         const videoError = this.player.error();
-        modal = this.player.createModal();
-        modal.closeable(false);
-        let newElement = document.createElement('div');
-        newElement.classList.add('video-error');
-        let message = firstHalf ? 'Video stream will begin momentarily' : 'VOD will be available soon';
-        newElement.innerHTML = `
+        console.log('video error', videoError);
+        //        if (firstHalf !== null && videoError.code === 2) {
+        if (reloadPlayer === null) {
+          this.player.errorDisplay.close();
+          modal = this.player.createModal();
+          modal.closeable(false);
+          let newElement = document.createElement('div');
+          newElement.classList.add('video-error');
+          let message = firstHalf ? 'Video stream will begin momentarily' : 'VOD will be available soon';
+          newElement.innerHTML = `
           <section class="hero">
             <div class="hero-body">
               <div class='has-text-centered'}>
-                <h1 class="title">${message}</h1>               
+                <h1 class="title">${message}</h1> 
               </div>
             </div>
           </section>
           `
-        modal.content(newElement);
-        modal.fill();
-        reloadPlayer = setInterval(() => {
-          console.log('reload player...')
-          if (videoError.code === 4) {
-            this.player.reset();
-            this.player.src(src);
-          }
-        }, 60000);
+          modal.content(newElement);
+          modal.fill();
+          // if (firstHalf) {
+            reloadPlayer = setInterval(() => {
+              console.log('reload player...')
+              this.player.load();
+              this.player.src(src);
+              this.player.reset();
+            }, 60000);
+          // }
+        }
         //}
       });
 
@@ -80,12 +86,20 @@ class VideoJSPlayer extends React.Component {
         console.log('playing')
         if (reloadPlayer) clearInterval(reloadPlayer);
         if (modal) modal.dispose();
+        console.log(this.player.duration());
+        console.log(this.player.liveTracker);
+        console.log(this.player.liveTracker.isTracking());
+        console.log(this.player.liveTracker.isLive());        
+        if (this.player.duration() === Infinity) {
+          isLive = true;
+        };
       });
 
       this.player.on('ended', () => {
-        console.log('stream finished')
-        const isLive = this.player.liveTracker.isLive();
+        console.log('stream finished');        
+        console.log(isLive);
         if (isLive) {
+          this.player.pause();
           modal = this.player.createModal();
           modal.closeable(false);
           let newElement = document.createElement('div');
