@@ -56,14 +56,14 @@ class VideoJSPlayer extends React.Component {
             newElement.classList.add('video-error');
             let message = firstHalf ? 'Video stream will begin momentarily' : 'VOD will be available soon';
             newElement.innerHTML = `
-          <section class="hero">
-            <div class="hero-body">
-              <div class='has-text-centered'}>
-                <h1 class="title">${message}</h1> 
-              </div>
-            </div>
-          </section>
-          `
+              <section class="hero">
+                <div class="hero-body">
+                  <div class='has-text-centered'}>
+                    <h1 class="title">${message}</h1> 
+                  </div>
+                </div>
+              </section>
+              `
             modal.content(newElement);
             modal.fill();
             if (firstHalf) {
