@@ -78,6 +78,7 @@
     "redux-thunk": "^2.3.0",
     "schedule-lite": "^1.0.79",
     "simple-chat-widget": "^1.0.27",
+    "simple-oauth2": "^4.1.0",
     "slick-carousel": "^1.8.1",
     "speakers-widget": "^1.0.14",
     "stream-chat": "^2.7.2",
