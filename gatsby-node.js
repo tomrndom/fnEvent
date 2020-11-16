@@ -103,14 +103,45 @@ exports.onPreBootstrap = async () => {
     };
 
     try {
-      const accessToken = await client.getToken(tokenParams);      
+      const accessToken = await client.getToken(tokenParams);
       return accessToken;
     } catch (error) {
       console.log('Access Token error', error.message);
     }
   }
 
-  const accessToken = await getAccessToken().then((token) => token);
+  const accessToken = await getAccessToken().then((token) => token.token.access_token);
+
+  const allEvents = await axios.get(
+    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published`,
+    {
+      params: { 
+        access_token: accessToken,
+        per_page: 100,
+        expand: 'type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance',
+      }
+    }).then((response) => response.data)
+    .catch(e => console.log('ERROR: ', e));
+
+  fs.writeFileSync('src/content/events.json', JSON.stringify(allEvents), 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+
+  const allSpeakers = await axios.get(
+    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/speakers/on-schedule`,
+    {
+      params: { 
+        access_token: accessToken,
+        per_page: 100,        
+      }
+    }).then((response) => response.data)
+    .catch(e => console.log('ERROR: ', e));
+
+  fs.writeFileSync('src/content/speakers.json', JSON.stringify(allSpeakers), 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
 
 }
 
