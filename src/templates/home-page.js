@@ -6,6 +6,9 @@ import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import withOrchestra from "../utils/widgetOrchestra";
 
+import SummitObject from '../content/summit.json'
+import HomeSettings from '../content/home-settings.json'
+
 import LobbyHeroComponent from '../components/LobbyHeroComponent'
 import AdvertiseComponent from '../components/AdvertiseComponent'
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
@@ -15,9 +18,10 @@ import SpeakersWidgetComponent from '../components/SpeakersWidgetComponent'
 import SponsorComponent from '../components/SponsorComponent'
 import SimpleChatWidgetComponent from '../components/SimpleChatWidgetComponent'
 
-import { getSummitData } from '../actions/summit-actions'
 import { getScheduleEvents } from '../actions/schedule-actions'
 import { getDisqusSSO, getUserProfile } from '../actions/user-actions'
+import envVariables from "../utils/envVariables";
+import {AttendanceTracker} from "openstack-uicore-foundation/lib/components";
 
 import { sortEvents } from '../utils/schedule'
 
@@ -29,7 +33,6 @@ export const HomePageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getSummitData();
     this.props.getScheduleEvents();
   }
 
@@ -38,14 +41,18 @@ export const HomePageTemplate = class extends React.Component {
   }
 
   onEventChange(ev) {
-    navigate(`/a/event/${ev}`);
+    navigate(`/a/event/${ev.id}`);
   }
 
-  render() {
+  onViewAllEventsClick() {
+    navigate('/a/schedule')
+  }
 
-    const { loggedUser, user, schedule, summit, addWidgetRef, updateWidgets } = this.props;
-
-    // console.log(schedule, sortEvents(schedule));
+  
+  // console.log(schedule, sortEvents(schedule));
+  render() {    
+    const { loggedUser, user, schedule, addWidgetRef, updateWidgets } = this.props;
+    let { summit } = SummitObject;
 
     return (
       <React.Fragment>
@@ -54,51 +61,74 @@ export const HomePageTemplate = class extends React.Component {
           <div className="columns">
             <div className="column is-one-quarter">
               <h2><b>Community</b></h2>
-              <AdvertiseComponent section='lobby' column="left" />
-              <SponsorComponent tier='silver' />
+              <SponsorComponent page='lobby'/>
+              <AdvertiseComponent section='lobby' column="left" style={{ marginTop: '2em' }} />
             </div>
             <div className="column is-half">
-              <LiveEventWidgetComponent />
-              <DisqusComponent page="lobby" disqusSSO={user.disqusSSO} summit={summit} title="Conversations" style={{ position: 'static' }} />
+              <h2><b>Today's Sessions</b></h2>
+              <LiveEventWidgetComponent
+                onEventClick={(ev) => this.onEventChange(ev)}
+                style={{marginBottom: '15px'}}
+              />
+              <DisqusComponent
+                page="lobby"
+                disqusSSO={user.disqusSSO}
+                summit={summit}
+                className="disqus-container-home"
+                title="Public conversation"
+              />
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
-                landscape={false}
+                onViewAllEventsClick={() => this.onViewAllEventsClick()}
+                landscape={HomeSettings.centerColumn.schedule.showAllEvents}
                 yourSchedule={false}
                 showNav={false}
+                showAllEvents={true}
                 onRef={addWidgetRef}
                 updateCallback={updateWidgets}
+                title={HomeSettings.centerColumn.schedule.showAllEvents ? "Full Schedule" : "Up Next"}
+                eventCount={HomeSettings.centerColumn.schedule.showAllEvents ? 100 : 4}
+                className={HomeSettings.centerColumn.schedule.showAllEvents ? "schedule-container-home" : ""}
               />
-              <SpeakersWidgetComponent
-                accessToken={loggedUser.accessToken}
-                title="Today's Speakers"
-                bigPics={true}
-              />
-              <SpeakersWidgetComponent
-                accessToken={loggedUser.accessToken}
-                title="Featured Speakers"
-                bigPics={false}
-              />
+              {HomeSettings.centerColumn.speakers.showTodaySpeakers &&
+                <SpeakersWidgetComponent
+                  accessToken={loggedUser.accessToken}
+                  title="Today's Speakers"
+                  bigPics={true}
+                />
+              }
+              {HomeSettings.centerColumn.speakers.showFeatureSpeakers &&
+                <SpeakersWidgetComponent
+                  accessToken={loggedUser.accessToken}
+                  title="Featured Speakers"
+                  bigPics={false}
+                  featured={true}
+                  date={null}
+                />
+              }
               <AdvertiseComponent section='lobby' column="center" />
             </div>
             <div className="column is-one-quarter pb-6">
-              <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} />
-              <h2><b>My Schedule</b></h2>
+              <h2><b>My Info</b></h2>
+              <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} title="Private Chat" />
               <ScheduleLiteComponent
                 accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
+                onViewAllEventsClick={() => this.onViewAllEventsClick()}
+                title='My Schedule'
                 landscape={true}
                 yourSchedule={true}
                 showNav={true}
+                eventCount={10}
+                slotCount={1}
                 onRef={addWidgetRef}
                 updateCallback={updateWidgets}
               />
               <AdvertiseComponent section='lobby' column="right" />
-              <SponsorComponent tier='gold' />
             </div>
           </div>
         </div>
-        {/* <ClockComponent summit={summit} now={now} /> */}
       </React.Fragment>
     )
   }
@@ -108,25 +138,27 @@ const OrchestedTemplate = withOrchestra(HomePageTemplate);
 
 const HomePage = (
   {
+    location,
     loggedUser,
-    summit,
     user,
     schedule,
-    getSummitData,
     getUserProfile,
     getScheduleEvents,
     getDisqusSSO
   }
-) => {
-
+) => {  
   return (
-    <Layout>
+    <Layout location={location}>
+      <AttendanceTracker
+          sourceName="LOBBY"
+          summitId={SummitObject.summit.id}
+          apiBaseUrl={envVariables.SUMMIT_API_BASE_URL}
+          accessToken={loggedUser.accessToken}
+      />
       <OrchestedTemplate
         loggedUser={loggedUser}
-        summit={summit}
         user={user}
-        schedule={schedule}
-        getSummitData={getSummitData}
+        schedule={schedule}        
         getUserProfile={getUserProfile}
         getScheduleEvents={getScheduleEvents}
         getDisqusSSO={getDisqusSSO}
@@ -136,11 +168,9 @@ const HomePage = (
 }
 
 HomePage.propTypes = {
-  summit: PropTypes.object,
   loggedUser: PropTypes.object,
   user: PropTypes.object,
-  schedule: PropTypes.object,
-  getSummitData: PropTypes.func,
+  schedule: PropTypes.object,  
   getUserProfile: PropTypes.func,
   getDisqusSSO: PropTypes.func,
   getScheduleEvents: PropTypes.func,
@@ -148,25 +178,21 @@ HomePage.propTypes = {
 
 HomePageTemplate.propTypes = {
   loggedUser: PropTypes.object,
-  summit: PropTypes.object,
   user: PropTypes.object,
-  schedule: PropTypes.object,
-  getSummitData: PropTypes.func,
+  schedule: PropTypes.object,  
   getUserProfile: PropTypes.func,
   getDisqusSSO: PropTypes.func,
   getScheduleEvents: PropTypes.func,
 }
 
-const mapStateToProps = ({ loggedUserState, scheduleState, userState, summitState }) => ({
+const mapStateToProps = ({ loggedUserState, scheduleState, userState }) => ({
   loggedUser: loggedUserState,
-  summit: summitState.summit,
   user: userState,
   schedule: scheduleState.schedule
 })
 
 export default connect(mapStateToProps,
   {
-    getSummitData,
     getDisqusSSO,
     getUserProfile,
     getScheduleEvents

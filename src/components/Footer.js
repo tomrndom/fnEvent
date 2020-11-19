@@ -46,9 +46,9 @@ const Footer = ({ summit, marketing }) => {
                           <div className={styles.socialContainer}>
                             {footerContent.social.networks.map((net, index) => (
                               net.display &&
-                              <a href={net.link} key={index}>
+                              <Link to={net.link} key={index}>
                                 <i className={`fa icon is-large ${net.icon}`}></i>
-                              </a>
+                              </Link>
                             ))}
                           </div>
                         </div>
@@ -81,7 +81,7 @@ const Footer = ({ summit, marketing }) => {
                       {footerContent.columns.map((col, index) => {
                         return (
                           col.display &&
-                          <div className={`column is-3 ${index > 0 && index % 3 !== 0 ? 'is-offset-1' : ''}`} key={index}>
+                          <div className={`column is-3 ${index > 0 && index % 3 !== 0 && index !== 0 ? 'is-offset-1' : ''}`} key={index}>
                             <h4>
                               {col.title}
                             </h4>
@@ -102,9 +102,9 @@ const Footer = ({ summit, marketing }) => {
                       <div className={styles.socialContainer}>
                         {footerContent.social.networks.map((net, index) => (
                           net.display &&
-                          <a href={net.link} className={styles.link} key={index}>
+                          <Link to={net.link} className={styles.link} key={index}>
                             <i className={`fa icon is-large ${net.icon}`}></i>
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>

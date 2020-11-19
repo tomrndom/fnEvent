@@ -4,20 +4,27 @@ import { navigate } from 'gatsby'
 import { connect } from 'react-redux'
 
 import envVariables from '../utils/envVariables';
+import SummitObject from '../content/summit.json'
 
 import Layout from '../components/Layout'
 
 import DisqusComponent from '../components/DisqusComponent'
+import AdvertiseComponent from '../components/AdvertiseComponent'
 import Etherpad from '../components/Etherpad'
-import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
-// import RocketChatComponent from '../components/RocketChat'
+import SimpleChatWidgetComponent from '../components/SimpleChatWidgetComponent'
 import VideoComponent from '../components/VideoComponent'
 import TalkComponent from '../components/TalkComponent'
 import DocumentsComponent from '../components/DocumentsComponent'
-import AdvertiseComponent from '../components/AdvertiseComponent'
+import VideoBanner from '../components/VideoBanner'
+import SponsorComponent from '../components/SponsorComponent'
+import NoTalkComponent from '../components/NoTalkComponent'
+import HeroComponent from '../components/HeroComponent'
+import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
 
-import { getEventBySlug } from '../actions/event-actions'
-import { getDisqusSSO, getRocketChatSSO } from '../actions/user-actions'
+import { getEventById } from '../actions/event-actions'
+import { getDisqusSSO } from '../actions/user-actions'
+
+import { PHASES } from '../utils/phasesUtils';
 
 import { AttendanceTracker } from "openstack-uicore-foundation/lib/components";
 
@@ -25,122 +32,134 @@ export const EventPageTemplate = class extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      firstRender: true
+    }
+
     this.onEventChange = this.onEventChange.bind(this);
-    this.getMaterials = this.getMaterials.bind(this);
+    this.onViewAllEventsClick = this.onViewAllEventsClick.bind(this);
   }
 
   componentWillMount() {
-    const { eventId } = this.props;
-    this.props.getEventBySlug(eventId);
+    this.props.getDisqusSSO();
+    this.props.getEventById(this.props.eventId);
   }
 
   componentDidMount() {
-    this.props.getDisqusSSO();
-    this.props.getRocketChatSSO();
+    this.setState({ firstRender: false })
   }
 
-  onEventChange(ev) {    
-    navigate(`/a/event/${ev}`);
-    this.props.getEventBySlug(ev);
+  onEventChange(ev) {
+    const { eventId } = this.props;
+    if (eventId !== `${ev.id}`) {
+      navigate(`/a/event/${ev.id}`);
+    }
   }
 
-  getMaterials(event) {
-    let materials = [];
-    if (event.links?.length > 0) materials = [...materials, ...event.links]
-    if (event.videos?.length > 0) materials = [...materials, ...event.videos]
-    if (event.slides?.length > 0) materials = [...materials, ...event.slides]
-    return materials;
+  onViewAllEventsClick() {
+    navigate('/a/schedule')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { eventId } = this.props;
+    if (eventId !== nextProps.eventId) {
+      this.props.getEventById(nextProps.eventId);
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { loading, eventId, event, eventsPhases } = this.props;
+    if (loading !== nextProps.loading) return true;
+    if (eventId !== nextProps.eventId) return true;
+    if (event?.id !== nextProps.event?.id) return true;
+    const currentPhase = eventsPhases.find(e => e.id == eventId)?.phase;
+    const nextCurrentPhase = nextProps.eventsPhases.find(e => e.id == eventId)?.phase;
+    if (currentPhase !== nextCurrentPhase && !(currentPhase === 0 && nextCurrentPhase === 1)) return true;
+    return false
   }
 
   render() {
+    const { loggedUser, event, eventId, eventsPhases, user, loading } = this.props;
+    const { firstRender } = this.state;
+    let { summit } = SummitObject;
+    let currentEvent = eventsPhases.find(e => e.id == eventId);
+    let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;
 
-    const { loggedUser, summit, event, user } = this.props;
+    if (!firstRender && !loading && !event) {
+      return <HeroComponent title="Event not found" redirectTo="/a/schedule" />
+    }
 
-    if (event) {
-      return (
-        <>
-          {event.id &&
-            <AttendanceTracker
-              key={event.id}
-              eventId={event.id}
-              summitId={summit.id}
-              apiBaseUrl={envVariables.SUMMIT_API_BASE_URL}
-              accessToken={loggedUser.accessToken}
-            />
-          }
-          <section className="section px-0 py-0">
-            <div className="columns is-gapless">
-              {event.streaming_url ?
-                <div className="column is-three-quarters px-0 py-0">
-                  <VideoComponent url={event.streaming_url} />
-                </div>
-                :
-                <div className="column is-three-quarters px-0 py-0 is-hidden-mobile">
-                  <TalkComponent event={event} summit={summit} noStream={true} />
-                </div>
-              }
-              <div className="column is-hidden-tablet">
-                <TalkComponent event={event} summit={summit} noStream={true} />
-              </div>
-              <div className="column" style={{ position: 'relative', borderBottom: '1px solid #d3d3d3' }}>
-                <DisqusComponent disqusSSO={user.disqusSSO} event={event} summit={summit} title="Join the conversation" />
-              </div>
-            </div>
-          </section>
-          {event.streaming_url &&
-            <section className="section px-0 py-0">
-              <div className="columns mx-0 my-0">
-                <div className="column px-0 py-0 is-three-quarters is-hidden-mobile">
-                  <TalkComponent event={event} summit={summit} noStream={true} />
-                </div>
-              </div>
-            </section>
-          }
-          {event.etherpad_link &&
-            <section className="section px-4 py-6">
-              <div className="columns">
-                <div className="column is-three-quarters">
-                  <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} userName={user.userProfile.first_name} />
-                </div>
-                <div className="column is-one-quarter">
-                </div>
-              </div>
-            </section>
-          }
-          <section className="section px-4 py-6">
-            <div className="columns">
-              <div className="column is-one-quarter pb-6">
-                <AdvertiseComponent section='event' column="left" />
-              </div>
-              <div className="column is-two-quarters pb-6">
-                {/* <div className="rocket-container"> */}
-                <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} onEventClick={(ev) => this.onEventChange(ev)} />
-                {/* <RocketChatComponent rocketChatSSO={user.rocketChatSSO} embedded={false} /> */}
-                {/* </div> */}
-              </div>
-              <DocumentsComponent materials={this.getMaterials(event)} />
-            </div>
-          </section >
-        </>
-      )
+    if (loading || eventStarted === null) {
+      return <HeroComponent title="Loading event" />
     } else {
-      return (
-        <section className="section px-4 py-6">
-          <div className="columns">
-            <div className="column is-three-quarters pb-6">
-              {/* <div className="rocket-container"> */}
-              <span>Event not found</span>
-              <br />
-              <ScheduleLiteComponent accessToken={loggedUser.accessToken} landscape={true} onEventClick={(ev) => this.onEventChange(ev)} />
-              {/*   <RocketChatComponent accessToken={loggedUser.accessToken} embedded={false} /> */}
-              {/* </div> */}
-            </div>
-            <div className="column is-one-quarter has-text-centered pb-6">
-              <AdvertiseComponent section='event' id={event.id} />
-            </div>
-          </div>
-        </section >
-      )
+      if (event) {
+        return (
+          <>
+            {/* <EventHeroComponent /> */}
+            <section className="section px-0 py-0" style={{ marginBottom: event.class_name !== 'Presentation' || eventStarted < PHASES.DURING || !event.streaming_url ? '-3rem' : '' }}>
+              <div className="columns is-gapless">
+                {eventStarted >= PHASES.DURING && event.streaming_url ?
+                  <div className="column is-three-quarters px-0 py-0">
+                    <VideoComponent url={event.streaming_url} title={event.title} namespace={summit.name} />
+                    {event.meeting_url &&
+                      <VideoBanner event={event} />
+                    }
+                  </div>
+                  :
+                  <div className="column is-three-quarters px-0 py-0 is-full-mobile">
+                    <NoTalkComponent eventStarted={eventStarted} event={event} summit={summit} />
+                  </div>
+                }
+                <div className="column is-hidden-mobile" style={{ position: 'relative', borderBottom: '1px solid #d3d3d3' }}>
+                  <DisqusComponent hideMobile={true} disqusSSO={user.disqusSSO} event={event} summit={summit} title="Public Conversation" />
+                </div>
+              </div>
+            </section>
+            {eventStarted >= PHASES.DURING && event.streaming_url &&
+              <section className="section px-0 pt-5 pb-0">
+                <div className="columns mx-0 my-0">
+                  <div className="column is-three-quarters is-full-mobile">
+                    <div className="px-5 py-5">
+                      <TalkComponent eventStarted={eventStarted} event={event} summit={summit} />
+                    </div>
+                    <div className="px-5 py-0">
+                      <SponsorComponent page='event'/>
+                    </div>
+                    <div className="is-hidden-tablet">
+                      <DisqusComponent hideMobile={false} disqusSSO={user.disqusSSO} event={event} summit={summit} title="Public Conversation" />∆
+                    </div>
+                    {event.etherpad_link &&
+                      <div className="column is-three-quarters">
+                        <Etherpad className="talk__etherpad" etherpad_link={event.etherpad_link} userName={user.userProfile.first_name} />
+                      </div>
+                    }
+                    <ScheduleLiteComponent
+                      accessToken={loggedUser.accessToken}
+                      onEventClick={(ev) => this.onEventChange(ev)}
+                      onViewAllEventsClick={() => this.onViewAllEventsClick()}
+                      landscape={true}
+                      yourSchedule={false}
+                      showFilters={false}
+                      showNav={false}
+                      trackId={event.track ? event.track.id : null}
+                      eventCount={3}
+                      title={event.track ? `Up Next on ${event.track.name}` : 'Up Next'}
+                    />
+                  </div>
+                  <div className="column px-0 py-0 is-one-quarter is-full-mobile">
+                    <DocumentsComponent event={event} />
+                    <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} />
+                    <AdvertiseComponent section='event' column="right" />
+                  </div>
+                </div>
+              </section>
+            }
+          </>
+        )
+      } else {
+        return <HeroComponent title="Loading event" />
+      }
     }
   }
 }
@@ -148,27 +167,38 @@ export const EventPageTemplate = class extends React.Component {
 const EventPage = (
   {
     loggedUser,
-    summit,
+    location,
+    loading,
     event,
     eventId,
     user,
-    getEventBySlug,
-    getDisqusSSO,
-    getRocketChatSSO
+    eventsPhases,
+    getEventById,
+    getDisqusSSO
   }
 ) => {
 
   return (
-    <Layout>
+    <Layout location={location}>
+      {event && event.id &&
+        <AttendanceTracker
+          key={`att-tracker-${event.id}`}
+          sourceId={event.id}
+          sourceName="EVENT"
+          summitId={SummitObject.summit.id}
+          apiBaseUrl={envVariables.SUMMIT_API_BASE_URL}
+          accessToken={loggedUser.accessToken}
+        />
+      }
       <EventPageTemplate
         loggedUser={loggedUser}
-        summit={summit}
         event={event}
+        loading={loading}
         eventId={eventId}
         user={user}
-        getEventBySlug={getEventBySlug}
+        eventsPhases={eventsPhases}
+        getEventById={getEventById}
         getDisqusSSO={getDisqusSSO}
-        getRocketChatSSO={getRocketChatSSO}
       />
     </Layout>
   )
@@ -176,46 +206,46 @@ const EventPage = (
 
 EventPage.propTypes = {
   loggedUser: PropTypes.object,
-  summit: PropTypes.object,
+  loading: PropTypes.bool,
   event: PropTypes.object,
   eventId: PropTypes.string,
   user: PropTypes.object,
-  getEventBySlug: PropTypes.func,
+  eventsPhases: PropTypes.array,
+  getEventById: PropTypes.func,
   getDisqusSSO: PropTypes.func,
-  getRocketChatSSO: PropTypes.func
 }
 
 EventPageTemplate.propTypes = {
   loggedUser: PropTypes.object,
-  summit: PropTypes.object,
   event: PropTypes.object,
+  loading: PropTypes.bool,
   eventId: PropTypes.string,
   user: PropTypes.object,
-  getEventBySlug: PropTypes.func,
+  eventsPhases: PropTypes.array,
+  getEventById: PropTypes.func,
   getDisqusSSO: PropTypes.func,
-  getRocketChatSSO: PropTypes.func
 }
 
 const mapStateToProps = (
   {
     loggedUserState,
-    summitState,
     eventState,
-    userState
+    userState,
+    clockState,
   }
 ) => ({
 
   loggedUser: loggedUserState,
-  summit: summitState.summit,
+  loading: eventState.loading,
   event: eventState.event,
+  eventsPhases: clockState.events_phases,
   user: userState,
 })
 
 export default connect(
   mapStateToProps,
   {
-    getEventBySlug,
-    getDisqusSSO,
-    getRocketChatSSO
+    getEventById,
+    getDisqusSSO
   }
 )(EventPage);

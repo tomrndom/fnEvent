@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: 'Virtual Event POC',
-    description: 'POC for virtual events',
+    title: 'Virtual Event',
+    description: 'Virtual event',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -29,12 +29,18 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-fonts`,
+      resolve: 'gatsby-plugin-webfonts',
       options: {
-        fonts: [          
-          `nunito sans\:300,700` // you can also specify font weights and styles
-        ],
-        display: 'swap'
+        fonts: {
+          google: [
+            {
+              family: 'Nunito',
+              variants: ['300', '700'],
+              fontDisplay: 'swap',
+              strategy: 'selfHosted'
+            },
+          ],
+        },
       }
     },
     'gatsby-plugin-sharp',

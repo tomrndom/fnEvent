@@ -1,11 +1,32 @@
 import React from 'react'
 import videojs from 'video.js';
 import Youtube from 'videojs-youtube';
+import 'videojs-mux';
 
 import 'video.js/dist/video-js.css';
 
+import envVariables from '../utils/envVariables'
+
 class VideoJSPlayer extends React.Component {
   componentDidMount() {
+    const { title, namespace } = this.props;
+
+    let plugins = {}
+
+    if (envVariables.MUX_ENV_KEY) {
+      plugins = { ...plugins,
+        mux: {
+          debug: false,
+          data: {
+            env_key: envVariables.MUX_ENV_KEY,
+            video_title: title,
+            sub_property_id: namespace,
+            /* Metadata
+            player_init_time: playerInitTime*/
+          }
+        }
+      }
+    }
 
     const options = {
       html5: {
@@ -13,6 +34,7 @@ class VideoJSPlayer extends React.Component {
           overrideNative: !videojs.browser.IS_SAFARI,
         },
       },
+      plugins: plugins,
       ...this.props,
     };
     this.player = videojs(this.videoNode, options, function onPlayerReady() {

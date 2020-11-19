@@ -4,6 +4,7 @@ const path = require('path')
 const fs = require("fs")
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
+const { ClientCredentials } = require('simple-oauth2');
 
 const myEnv = require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -13,8 +14,12 @@ exports.onPreBootstrap = async () => {
 
   let marketingData;
 
+  let params = {
+    per_page: 100,
+  };
+
   const colours = await axios.get(
-    `${process.env.GATSBY_MARKETING_API_BASE_URL}/api/public/v1/config-values/all/shows/${process.env.GATSBY_SUMMIT_ID}`
+    `${process.env.GATSBY_MARKETING_API_BASE_URL}/api/public/v1/config-values/all/shows/${process.env.GATSBY_SUMMIT_ID}`, { params }
   ).then((response) => {
     marketingData = response.data.data;
     let colorObject = { colors: {} }
@@ -37,17 +42,6 @@ exports.onPreBootstrap = async () => {
     console.log('Saved!');
   });
 
-  let heroBanner = JSON.parse(fs.readFileSync('src/content/hero-banner.json'));
-
-  marketingData.map((item) => {
-    if (item.key.startsWith('hero_')) heroBanner[item.key] = item.value;
-  });
-
-  fs.writeFileSync('src/content/hero-banner.json', JSON.stringify(heroBanner), 'utf8', function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-  });
-
   let disqusSettings = JSON.parse(fs.readFileSync('src/content/disqus-settings.json'));
 
   marketingData.map((item) => {
@@ -58,6 +52,97 @@ exports.onPreBootstrap = async () => {
     if (err) throw err;
     console.log('Saved!');
   });
+
+  let marketingSite = JSON.parse(fs.readFileSync('src/content/marketing-site.json'));
+
+  marketingData.map((item) => {
+    if (item.key.startsWith('summit_')) {
+      marketingSite[item.key] = item.value;
+    }
+  });
+
+  fs.writeFileSync('src/content/marketing-site.json', JSON.stringify(marketingSite), 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+
+  let homeSettings = JSON.parse(fs.readFileSync('src/content/home-settings.json'));
+
+  marketingData.map((item) => {
+    if (item.key.startsWith('schedule_default_image')) {
+      homeSettings[item.key] = item.value;
+    }
+  });
+
+  fs.writeFileSync('src/content/home-settings.json', JSON.stringify(homeSettings), 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+
+  // Private API endpoints
+
+  const config = {
+    client: {
+      id: process.env.GATSBY_OAUTH2_CLIENT_ID_BUILD,
+      secret: process.env.GATSBY_OAUTH2_CLIENT_SECRET_BUILD
+    },
+    auth: {
+      tokenHost: process.env.GATSBY_IDP_BASE_URL,
+      tokenPath: process.env.GATSBY_OAUTH_TOKEN_PATH
+    },
+    options: {
+      authorizationMethod: 'header'
+    }
+  };
+
+  const getAccessToken = async () => {
+    const client = new ClientCredentials(config);
+
+    const tokenParams = {
+      scope: 'https://api.dev.fnopen.com/summits/read'
+    };
+
+    try {
+      const accessToken = await client.getToken(tokenParams);
+      return accessToken;
+    } catch (error) {
+      console.log('Access Token error', error.message);
+    }
+  }
+
+  const accessToken = await getAccessToken().then((token) => token.token.access_token);
+
+  const allEvents = await axios.get(
+    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published`,
+    {
+      params: { 
+        access_token: accessToken,
+        per_page: 100,
+        expand: 'type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance',
+      }
+    }).then((response) => response.data)
+    .catch(e => console.log('ERROR: ', e));
+
+  fs.writeFileSync('src/content/events.json', JSON.stringify(allEvents), 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+
+  const allSpeakers = await axios.get(
+    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/speakers/on-schedule`,
+    {
+      params: { 
+        access_token: accessToken,
+        per_page: 100,        
+      }
+    }).then((response) => response.data)
+    .catch(e => console.log('ERROR: ', e));
+
+  fs.writeFileSync('src/content/speakers.json', JSON.stringify(allSpeakers), 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
+
 }
 
 // makes Summit logo optional for graphql queries
@@ -97,10 +182,12 @@ exports.sourceNodes = async ({
   ).then((response) => response.data)
     .catch(e => console.log('ERROR: ', e));
 
-  const events = await axios.get(
-    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/public/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published?expand=rsvp_template%2C+type%2C+track%2C+location%2C+location.venue%2C+location.floor%2C+speakers%2C+moderator%2C+sponsors%2C+groups&page=1&per_page=100&order=%2Bstart_date`
-  ).then((response) => response.data.data)
-    .catch(e => console.log('ERROR: ', e));
+  const summitObject = { summit }
+
+  fs.writeFileSync('src/content/summit.json', JSON.stringify(summitObject), 'utf8', function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
 
   const nodeContent = JSON.stringify(summit)
 
@@ -120,28 +207,6 @@ exports.sourceNodes = async ({
 
   const node = Object.assign({}, summit, nodeMeta)
   createNode(node)
-
-  for (const event of events) {
-    const nodeContent = JSON.stringify(event)
-
-    const nodeMeta = {
-      ...event,
-      timezone: summit.time_zone_id,
-      id: createNodeId(`event-${event.id}`),
-      event_id: event.id,
-      parent: null,
-      children: [],
-      internal: {
-        type: `Event`,
-        mediaType: `application/json`,
-        content: nodeContent,
-        contentDigest: createContentDigest(event)
-      }
-    }
-
-    const node = Object.assign({}, event, nodeMeta)
-    createNode(node)
-  }
 }
 
 exports.createPages = ({ actions, graphql }) => {

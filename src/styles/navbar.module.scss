@@ -12,8 +12,14 @@
     padding-left: 1rem;
 
     img {
+      height: 3.75rem;
+      width: auto;
       max-height: 4rem;
     }
+  }
+
+  .navbar-mobile {
+    display: none;
   }
 
   .navbar-end {
@@ -25,9 +31,12 @@
     padding-left: 10px;
   }
 
+  .navbar-item {
+    color: $color_text_light;
+  }
+
   .navbar-menu {
     .navbar-item {
-      color: $color_text_light;
       font-weight: 300;
 
       .link {
@@ -46,7 +55,16 @@
         &:visited {
           color: $color_text_light;
         }
-      }
+      }      
+
+      img.profile-pic {
+        height: 4rem;
+        width: 4rem;
+        max-height: 4rem;
+        border-radius: 5px;
+        object-fit: cover;
+        cursor: pointer;
+      } 
     }
   }
 }
@@ -92,6 +110,18 @@
 
 @media (max-width: 1023px) {
   .navbar {
+
+    .navbar-mobile {
+      display: flex;
+      justify-content: space-between;
+
+      .navbar-end {
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+      }
+    }
+
     .navbar-burger {
       color: $color_text_light;
     }
@@ -123,6 +153,16 @@
       .user-icon {
         color: $color_primary;
         padding-bottom: 5px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    .navbar-brand {
+      img {
+        height: 1.75rem;
       }
     }
   }

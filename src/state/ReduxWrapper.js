@@ -6,6 +6,7 @@ import eventReducer from '../reducers/event-reducer'
 import summitReducer from '../reducers/summit-reducer'
 import userReducer from '../reducers/user-reducer'
 import scheduleReducer from '../reducers/schedule-reducer'
+import clockReducer from '../reducers/clock-reducer'
 
 import thunk from 'redux-thunk';
 import { persistStore, persistCombineReducers } from 'redux-persist'
@@ -29,6 +30,7 @@ const persistedReducers = persistCombineReducers(config, {
   summitState: summitReducer,
   userState: userReducer,
   scheduleState: scheduleReducer,
+  clockState: clockReducer
 });
 
 const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;

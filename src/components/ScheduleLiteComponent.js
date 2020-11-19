@@ -8,6 +8,8 @@ import expiredToken from '../utils/expiredToken';
 import ScheduleLite from 'schedule-lite/dist';
 import 'schedule-lite/dist/index.css';
 
+import HomeSettings from '../content/home-settings.json'
+
 const ScheduleComponent = class extends React.Component {
 
   render() {
@@ -20,18 +22,19 @@ const ScheduleComponent = class extends React.Component {
       speakerBaseUrl: "/a/speakers",
       roomBaseUrl: "/a/rooms",
       summitId: parseInt(envVariables.SUMMIT_ID),
-      updateCallback: ev => console.log('event updated', ev),
-      onEventClick: ev => this.props.onEventClick(ev),
       onAuthError: (err, res) => expiredToken(err),
       onRef: ref => this.child = ref,
+      defaultImage: HomeSettings.schedule_default_image
     };
+
+    const { className } = this.props;
 
     return (
       <React.Fragment>
         <Helmet>
           <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css" />
         </Helmet>
-        <div>
+        <div className={className ? className : this.props.page === 'marketing-site' ? 'schedule-container-marketing' : 'schedule-container'}>
           <ScheduleLite {...scheduleProps} {...this.props} />
         </div>
       </React.Fragment>

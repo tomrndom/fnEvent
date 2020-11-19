@@ -6,18 +6,27 @@ import LoginPage from "../templates/login-page"
 import HomePage from "../templates/home-page"
 import EventPage from "../templates/event-page"
 import SchedulePage from "../templates/schedule-page";
+import SponsorPage from "../templates/sponsor-page"
+import ExpoHallPage from "../templates/expo-hall-page"
 
-import ShowTimeRoute from '../routes/ShowTimeRoute'
+// import SummitObject from '../content/summit.json'
+
+import PrivateRoute from '../routes/PrivateRoute'
 import PublicRoute from "../routes/PublicRoute"
 
-const App = ({ isLoggedUser, user, startDate, marketingNow }) => {
+import withSessionChecker from "../utils/withSessionChecker"
+
+const App = ({ isLoggedUser, user, summit_phase }) => {  
   return (
     <Location>
       {({ location }) => (
         <Router basepath="/a" >
-          <ShowTimeRoute path="/" startDate={startDate} marketingNow={marketingNow} component={HomePage} isLoggedIn={isLoggedUser} user={user} location={location} />
-          <ShowTimeRoute path="/event/:eventId" startDate={startDate} marketingNow={marketingNow} component={EventPage} isLoggedIn={isLoggedUser} user={user} location={location} />
+          <PrivateRoute path="/" summit_phase={summit_phase} component={HomePage} isLoggedIn={isLoggedUser} user={user} location={location} />
+          <PrivateRoute path="/event/:eventId" summit_phase={summit_phase} component={EventPage} isLoggedIn={isLoggedUser} user={user} location={location} />
+          <PrivateRoute path="/sponsor/:sponsorId" summit_phase={summit_phase} component={SponsorPage} isLoggedIn={isLoggedUser} user={user} location={location} />
+          <PrivateRoute path="/sponsors/" summit_phase={summit_phase} component={ExpoHallPage} isLoggedIn={isLoggedUser} user={user} location={location} />
           <PublicRoute path="/schedule" component={SchedulePage} location={location} />
+          <PublicRoute path="/my-schedule" component={SchedulePage} mySchedule={true} location={location} />
           <LoginPage path="/login" location={location} />
         </Router>
       )}
@@ -25,11 +34,10 @@ const App = ({ isLoggedUser, user, startDate, marketingNow }) => {
   )
 }
 
-const mapStateToProps = ({ loggedUserState, userState, summitState }) => ({
+const mapStateToProps = ({ loggedUserState, userState, clockState }) => ({
   isLoggedUser: loggedUserState.isLoggedUser,
-  startDate: summitState.summit.start_date,
-  marketingNow: summitState.marketingNow,
-  user: userState.userProfile
+  summit_phase: clockState.summit_phase,
+  user: userState
 })
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(withSessionChecker(App))
