@@ -95,6 +95,8 @@ exports.onPreBootstrap = async () => {
     }
   };
 
+  console.log('header', config)
+
   const getAccessToken = async () => {
     const client = new ClientCredentials(config);
 
@@ -110,12 +112,33 @@ exports.onPreBootstrap = async () => {
     }
   }
 
-  const accessToken = await getAccessToken().then((token) => token.token.access_token);
+  const accessToken = await getAccessToken().then((token) => {
+    console.log(token)
+    return token.token.access_token
+  });
+
+  console.log('access token', accessToken);
+
+  const test = await axios.get(
+    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}`,
+    {
+      params: {
+        access_token: accessToken,
+        per_page: 100,
+        expand: 'schedule',
+      }
+    }).then((response) => {
+      console.log(response)
+      return response.data
+    })
+    .catch(e => console.log('ERROR: ', e));
+
+  console.log('lle', test);
 
   const allEvents = await axios.get(
     `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published`,
     {
-      params: { 
+      params: {
         access_token: accessToken,
         per_page: 100,
         expand: 'type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance',
@@ -131,9 +154,9 @@ exports.onPreBootstrap = async () => {
   const allSpeakers = await axios.get(
     `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/speakers/on-schedule`,
     {
-      params: { 
+      params: {
         access_token: accessToken,
-        per_page: 100,        
+        per_page: 100,
       }
     }).then((response) => response.data)
     .catch(e => console.log('ERROR: ', e));
