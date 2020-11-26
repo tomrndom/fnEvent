@@ -34,7 +34,7 @@
 
     .image-upload {
         position: absolute;
-        top: 22%;
+        top: 14.5%;
         left: 13%;
 
         >input {
@@ -83,6 +83,9 @@
 
                     .select {
                         display: flex;
+                        select {
+                            width: 100%;
+                        }
                     }                    
                 }
             }
