@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { navigate } from 'gatsby'
 import styles from '../styles/navbar.module.scss';
 
 import LogoutButton from './LogoutButton';
@@ -61,6 +61,10 @@ const Navbar = class extends React.Component {
     this.setState({ showProfile: profile })
   }
 
+  goToProfile = () => {
+    navigate('/a/profile');
+  }
+
   render() {
 
     let { isLoggedUser, idpProfile, logo, idpLoading, location } = this.props;
@@ -111,17 +115,7 @@ const Navbar = class extends React.Component {
               })}
               {isLoggedUser &&
                 <div className={styles.navbarItem}>
-                  <img onClick={() => this.handleTogglePopup(!showProfile)} className={styles.profilePic} src={idpProfile?.picture} />
-                  {showProfile &&
-                    <ProfilePopupComponent
-                      userProfile={idpProfile}
-                      showProfile={showProfile}
-                      idpLoading={idpLoading}
-                      changePicture={(pic) => this.handlePictureUpdate(pic)}
-                      changeProfile={(profile) => this.handleProfileUpdate(profile)}
-                      closePopup={() => this.handleTogglePopup(!showProfile)}
-                    />
-                  }
+                  <img onClick={() => this.handleTogglePopup(!showProfile)} className={styles.profilePic} src={idpProfile?.picture} />                  
                 </div>
               }
               <LogoutButton styles={styles} isLoggedUser={isLoggedUser} />

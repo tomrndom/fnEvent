@@ -14,16 +14,17 @@ import SummitObject from '../content/summit.json'
 
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
 
-import { getIDPProfile, updateProfile } from '../actions/user-actions'
+import { updateProfilePicture, updateProfile, getIDPProfile, updateProfile } from '../actions/user-actions'
 
 import styles from '../styles/full-profile.module.scss'
 
 import { create_UUID } from '../utils/uuidGenerator'
 
-export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updateProfile, addWidgetRef, updateWidgets }) => {
+export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updateProfile, updateProfilePicture, addWidgetRef, updateWidgets }) => {
 
     const editorRef = useRef(null);
 
+    const [showProfile, setShowProfile] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [company, setCompany] = useState("");
@@ -83,13 +84,30 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
         setState(user.idpProfile.region);
         setZipCode(user.idpProfile.postal_code);
         setCountry(user.idpProfile.country);
-        setPhone(user.idpProfile.phone_number);        
+        setPhone(user.idpProfile.phone_number);
         return () => {
             setFirstName('');
             setLastName('');
             setCompany('');
         };
     }, []);
+
+    const handlePictureUpdate = (picture) => {
+        updateProfilePicture(picture);
+    }
+
+    const handleProfileUpdate = (profile) => {
+        updateProfile(profile);
+    }
+
+    const handleTogglePopup = (profile) => {
+        if (profile) {
+            document.body.classList.add('is-clipped');
+        } else {
+            document.body.classList.remove('is-clipped');
+        }
+        setShowProfile(profile)        
+    }
 
     const onEventChange = (ev) => {
         navigate(`/a/event/${ev.id}`);
@@ -119,7 +137,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
     }
 
     const profileUpdate = () => {
-        
+
     }
 
     // onClickSave = () => {
@@ -149,7 +167,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
             <div className="px-6 py-6 mb-6">
                 <div className={`columns is-3 ${styles.fullProfile}`} >
                     <div className="column is-3">
-                        <div className={styles.profilePicture}>
+                        <div className={styles.profilePicture} onClick={() => this.handleTogglePopup(!showProfile)}>
                             <AvatarEditor
                                 ref={editorRef}
                                 image={image}
@@ -465,6 +483,16 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                     </div>
                 </div>
             </div>
+            {showProfile &&
+                <ProfilePopupComponent
+                    userProfile={user.idpProfile}
+                    showProfile={showProfile}
+                    idpLoading={user.loadingIDP}
+                    changePicture={(pic) => handlePictureUpdate(pic)}
+                    changeProfile={(profile) => handleProfileUpdate(profile)}
+                    closePopup={() => handleTogglePopup(!showProfile)}
+                />
+            }
         </React.Fragment >
     )
 };
@@ -478,6 +506,7 @@ const FullProfilePage = (
         user,
         getIDPProfile,
         updateProfile,
+        updateProfilePicture,
     }
 ) => {
     return (
@@ -486,7 +515,8 @@ const FullProfilePage = (
                 loggedUser={loggedUser}
                 user={user}
                 getIDPProfile={getIDPProfile}
-                updateProfile={updateProfile} />
+                updateProfile={updateProfile}
+                updateProfilePicture={updateProfilePicture} />
         </Layout>
     )
 }
@@ -496,6 +526,7 @@ FullProfilePage.propTypes = {
     user: PropTypes.object,
     getIDPProfile: PropTypes.func,
     updateProfile: PropTypes.func,
+    updateProfilePicture: PropTypes.func,
 }
 
 FullProfilePageTemplate.propTypes = {
@@ -503,6 +534,7 @@ FullProfilePageTemplate.propTypes = {
     user: PropTypes.object,
     getIDPProfile: PropTypes.func,
     updateProfile: PropTypes.func,
+    updateProfilePicture: PropTypes.func,
 }
 
 const mapStateToProps = ({ loggedUserState, userState }) => ({
@@ -513,6 +545,7 @@ const mapStateToProps = ({ loggedUserState, userState }) => ({
 export default connect(mapStateToProps,
     {
         getIDPProfile,
-        updateProfile
+        updateProfile,
+        updateProfilePicture
     }
 )(FullProfilePage);
