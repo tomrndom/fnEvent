@@ -11,6 +11,7 @@ import { updateProfilePicture, updateProfile } from '../actions/user-actions'
 
 import Content from '../content/navbar.json'
 import SummitObject from '../content/summit.json'
+import GeneralSettings from '../content/settings.json'
 
 import envVariables from '../utils/envVariables'
 
@@ -52,7 +53,7 @@ const Navbar = class extends React.Component {
     this.props.updateProfile(profile)
   }
 
-  handleTogglePopup = (profile) => {
+  handleTogglePopup = (profile) => {    
     if (profile) {
       document.body.classList.add('is-clipped');
     } else {
@@ -69,6 +70,7 @@ const Navbar = class extends React.Component {
 
     let { isLoggedUser, idpProfile, logo, idpLoading, location } = this.props;
     let { showProfile } = this.state;
+    let { fullProfile } = GeneralSettings;
 
     let { summit } = SummitObject
     let defaultPath = envVariables.AUTHORIZED_DEFAULT_PATH ? envVariables.AUTHORIZED_DEFAULT_PATH : '/a/';
@@ -115,7 +117,17 @@ const Navbar = class extends React.Component {
               })}
               {isLoggedUser &&
                 <div className={styles.navbarItem}>
-                  <img onClick={() => this.handleTogglePopup(!showProfile)} className={styles.profilePic} src={idpProfile?.picture} />                  
+                  <img onClick={() => fullProfile ? this.goToProfile() : this.handleTogglePopup(!showProfile)} className={styles.profilePic} src={idpProfile?.picture} />
+                  {!fullProfile && showProfile &&
+                    <ProfilePopupComponent
+                      userProfile={idpProfile}
+                      showProfile={showProfile}
+                      idpLoading={idpLoading}
+                      changePicture={(pic) => this.handlePictureUpdate(pic)}
+                      changeProfile={(profile) => this.handleProfileUpdate(profile)}
+                      closePopup={() => this.handleTogglePopup(!showProfile)}
+                    />
+                  }
                 </div>
               }
               <LogoutButton styles={styles} isLoggedUser={isLoggedUser} />

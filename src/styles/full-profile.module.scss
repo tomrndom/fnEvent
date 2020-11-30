@@ -25,16 +25,19 @@
     .profile-picture {
         display: flex;
         justify-content: center;
-        margin-top: 28px;
+        margin-top: 28px;        
 
-        canvas {
+        img {
+            cursor: pointer;
+            height: 200px;
+            width: 200px;
             border-radius: 10px;
         }
     }
 
     .image-upload {
         position: absolute;
-        top: 14.5%;
+        top: 14.2%;
         left: 13%;
 
         >input {

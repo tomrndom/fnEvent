@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { connect } from 'react-redux'
 import AvatarEditor from 'react-avatar-editor'
-import { CountryInput, DateTimePicker } from 'openstack-uicore-foundation/lib/components'
+import { CountryInput, LanguageInput, DateTimePicker } from 'openstack-uicore-foundation/lib/components'
 import { epochToMomentTimeZone } from 'openstack-uicore-foundation/lib/methods'
 import moment from "moment-timezone";
 
@@ -13,16 +13,13 @@ import withOrchestra from "../utils/widgetOrchestra";
 import SummitObject from '../content/summit.json'
 
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
+import ProfilePopupComponent from '../components/ProfilePopupComponent'
 
-import { updateProfilePicture, updateProfile, getIDPProfile, updateProfile } from '../actions/user-actions'
+import { updateProfilePicture, updateProfile, getIDPProfile } from '../actions/user-actions'
 
 import styles from '../styles/full-profile.module.scss'
 
-import { create_UUID } from '../utils/uuidGenerator'
-
 export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updateProfile, updateProfilePicture, addWidgetRef, updateWidgets }) => {
-
-    const editorRef = useRef(null);
 
     const [showProfile, setShowProfile] = useState(false);
     const [firstName, setFirstName] = useState("");
@@ -37,9 +34,9 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
     const [linkedin, setLinkedin] = useState("")
     const [identifier, setIdentifier] = useState("")
     const [language, setLanguage] = useState("")
-    const [showFullName, setShowFullName] = useState(null)
-    const [showPicture, setShowPicture] = useState(null)
-    const [showEmail, setShowEmail] = useState(null)
+    const [showFullName, setShowFullName] = useState(undefined)
+    const [showPicture, setShowPicture] = useState(undefined)
+    const [showEmail, setShowEmail] = useState(undefined)
     const [bio, setBio] = useState("")
     const [street, setStreet] = useState("")
     const [floor, setFloor] = useState("")
@@ -50,12 +47,6 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
     const [phone, setPhone] = useState("")
 
     const [image, setImage] = useState(null);
-    const [newImage, setNewImage] = useState(false);
-    const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
-    const [scale, setScale] = useState(1);
-    const [rotate, setRotate] = useState(0);
-    const [width, setWidth] = useState(200);
-    const [height, setHeight] = useState(200);
 
     useEffect(() => {
         getIDPProfile();
@@ -71,12 +62,12 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
         setTwitter(user.idpProfile.twitter_user);
         setLinkedin(user.idpProfile.linked_in_profile);
         setIdentifier(user.idpProfile.nickname);
-        // {"_method":"PUT","_token":"BvKJHyTBgrWG8qnRihkZL1yjfERyBQsiDLJqMwgz","first_name":"Tomás","last_name":"Castillo","email":"tomas@tipit.net","identifier":"tomas.castillo","second_email":"","third_email":"","gender":"Prefer not to say","gender_specify":"","bio":"","statement_of_interest":"","irc":"","github_user":"","twitter_name":"","wechat_user":"","linked_in_profile":"","address1":"San Martin 24","address2":"","city":"Mendoza","state":"Mendoza","post_code":"5500","country_iso_code":"AR","company":"Tipit LLC","job_title":"Frontend Developer","phone_number":"","language":"en","password":"","password_confirmation":"","id":"2","undefined":true,"public_profile_show_fullname":false,"public_profile_show_photo":false,"public_profile_show_email":false,"birthday":630727200}
+        // { "_method": "PUT", "_token": "BvKJHyTBgrWG8qnRihkZL1yjfERyBQsiDLJqMwgz", "first_name": "Tomás", "last_name": "Castillo", "email": "tomas@tipit.net", "identifier": "tomas.castillo", "second_email": "", "third_email": "", "gender": "Prefer not to say", "gender_specify": "", "bio": "", "statement_of_interest": "", "irc": "", "github_user": "", "twitter_name": "", "wechat_user": "", "linked_in_profile": "", "address1": "San Martin 24", "address2": "", "city": "Mendoza", "state": "Mendoza", "post_code": "5500", "country_iso_code": "AR", "company": "Tipit LLC", "job_title": "Frontend Developer", "phone_number": "", "language": "en", "password": "", "password_confirmation": "", "id": "2", "undefined": true, "public_profile_show_fullname": false, "public_profile_show_photo": false, "public_profile_show_email": false, "birthday": 630727200 }
 
         setLanguage(user.idpProfile.locale);
-        //setShowFullName(user.idpProfile.email);
-        //setShowPicture(user.idpProfile.email);
-        //setShowEmail(user.idpProfile.email);
+        setShowFullName(null);
+        setShowPicture(null);
+        setShowEmail(null);
         setBio(user.idpProfile.bio);
         setStreet(user.idpProfile.address);
         setFloor(user.idpProfile.email);
@@ -96,8 +87,33 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
         updateProfilePicture(picture);
     }
 
-    const handleProfileUpdate = (profile) => {
-        updateProfile(profile);
+    const handleProfileUpdate = () => {
+        const newProfile = {
+            first_name: firstName,
+            last_name: lastName,
+            company: company,
+            email: email,
+            birthday: birthday,
+            gender: gender,
+            irc: irc,
+            github_user: github,
+            twitter_user: twitter,
+            linked_in_profile: linkedin,
+            identifier: identifier,
+            language: language,
+            public_profile_show_fullname: showFullName,
+            public_profile_show_photo: showPicture,
+            public_profile_show_email: showEmail,
+            bio: bio,
+            street: street,
+            floor: floor,
+            city: city,
+            state: state,
+            post_code: zipCode,
+            country_iso_code: country,
+            phone_number: phone,
+        }
+        updateProfile(newProfile);
     }
 
     const handleTogglePopup = (profile) => {
@@ -106,7 +122,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
         } else {
             document.body.classList.remove('is-clipped');
         }
-        setShowProfile(profile)        
+        setShowProfile(profile)
     }
 
     const onEventChange = (ev) => {
@@ -117,27 +133,9 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
         navigate('/a/schedule')
     }
 
-    const handleNewImage = (e) => {
-        setImage(e.target.files[0]);
-        setNewImage(true);
-    }
-
-    const urltoFile = (url, filename, mimeType) => {
-        mimeType = mimeType || (url.match(/^data:([^;]+);/) || '')[1];
-        filename = filename || create_UUID();
-        return (fetch(url)
-            .then(function (res) { return res.arrayBuffer(); })
-            .then(function (buf) { return new File([buf], filename, { type: mimeType }); })
-        );
-    }
-
-    const handlePositionChange = (position) => {
-        setPosition(position);
-        setNewImage(true);
-    }
 
     const profileUpdate = () => {
-
+        // changeProfile(newProfile);
     }
 
     // onClickSave = () => {
@@ -167,26 +165,13 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
             <div className="px-6 py-6 mb-6">
                 <div className={`columns is-3 ${styles.fullProfile}`} >
                     <div className="column is-3">
-                        <div className={styles.profilePicture} onClick={() => this.handleTogglePopup(!showProfile)}>
-                            <AvatarEditor
-                                ref={editorRef}
-                                image={image}
-                                width={width}
-                                height={height}
-                                border={0}
-                                color={[0, 0, 0, 0]} // RGBA
-                                position={position}
-                                onPositionChange={handlePositionChange}
-                                scale={scale}
-                                borderRadius={10}
-                                rotate={parseFloat(rotate)}
-                            />
-                        </div>
-                        <div className={styles.imageUpload}>
-                            <label for="file-input">
-                                <i className={`${styles.pictureIcon} fa fa-2x fa-camera icon is-large`}></i>
-                            </label>
-                            <input name="newImage" id="file-input" type="file" accept=".jpg,.jpeg,.png" onChange={handleNewImage} />
+                        <div className={styles.profilePicture} onClick={() => handleTogglePopup(!showProfile)}>
+                            <img src={image} />
+                            <div className={styles.imageUpload}>
+                                <label htmlFor="file-input">
+                                    <i className={`${styles.pictureIcon} fa fa-2x fa-camera icon is-large`}></i>
+                                </label>
+                            </div>
                         </div>
                         <h3>
                             Hello, <br />
@@ -329,10 +314,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
                                         <b>Language</b>
-                                        <input
-                                            className={`${styles.input} ${styles.isLarge}`}
-                                            type="text"
-                                            placeholder="Language"
+                                        <LanguageInput
                                             onChange={e => setLanguage(e.target.value)}
                                             value={language}
                                         />
@@ -364,7 +346,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-full ${styles.inputField}`}>
                                         <textarea
-                                            class="textarea"
+                                            className="textarea"
                                             placeholder=""
                                             rows="10"
                                             onChange={e => setBio(e.target.value)}
@@ -440,7 +422,6 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                     <div className={`column is-half ${styles.inputField}`}>
                                         <b>Country</b>
                                         <CountryInput
-                                            id="country"
                                             onChange={e => setCountry(e.target.value)}
                                             value={country}
                                         />
