@@ -23,10 +23,10 @@ jobs:
           github_token: ${{ github.token }}
 
       - name: Merge dev-${{github.event.inputs.branch}} -> prod-${{github.event.inputs.branch}}
-          uses: devmasx/merge-branch@v1.3.1
-          if: github.event.inputs.branch != ''
-          with:
-            type: now
-            from_branch: dev-${{github.event.inputs.branch}}
-            target_branch: prod-${{github.event.inputs.branch}}
-            github_token: ${{ github.token }}
+        uses: devmasx/merge-branch@v1.3.1
+        if: github.event.inputs.branch != ''
+        with:
+          type: now
+          from_branch: dev-${{github.event.inputs.branch}}
+          target_branch: prod-${{github.event.inputs.branch}}
+          github_token: ${{ github.token }}
