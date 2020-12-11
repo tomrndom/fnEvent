@@ -18,6 +18,7 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-x: hidden;
 }
 
 header div.current-user {
@@ -83,7 +84,7 @@ h2 {
 
 #marketing-slider {
   .slick-track {
-    height: 350px;
+    height: 424px;
   }
 }
 

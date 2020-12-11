@@ -42,7 +42,11 @@
     "immutability-helper": "2.9.1",
     "immutable": "^3.7.6",
     "jsdom": "^16.2.2",
+<<<<<<< HEAD
     "live-event-widget": "^1.0.55",
+=======
+    "live-event-widget": "^1.0.52",
+>>>>>>> c23d65087ba2d69ba5e2a65b91f20acd7db417bc
     "lodash": "^4.17.19",
     "markdown-it": "^12.0.0",
     "moment": "^2.27.0",
