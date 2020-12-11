@@ -7,8 +7,6 @@ import { AjaxLoader } from "openstack-uicore-foundation/lib/components";
 
 import { create_UUID } from '../utils/uuidGenerator'
 
-import GeneralSettings from '../content/settings.json'
-
 const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfile, changePicture, changeProfile }) => {
 
   const editorRef = useRef(null);
@@ -154,47 +152,45 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
 
             </div>
           </div>
-          {!GeneralSettings.fullProfile &&
-            <div className={styles.modalCardForm}>
-              <div className={styles.title}>Profile Info</div>
-              <div className={styles.form}>
-                <div className={`columns is-mobile ${styles.inputRow}`}>
-                  <div className='column is-one-quarter'>First Name</div>
-                  <div className='column is-two-thirds'>
-                    <input
-                      className={`${styles.input} ${styles.isMedium}`}
-                      type="text"
-                      placeholder="First Name"
-                      onChange={e => setFirstName(e.target.value)}
-                      value={firstName} />
-                  </div>
+          <div className={styles.modalCardForm}>
+            <div className={styles.title}>Profile Info</div>
+            <div className={styles.form}>
+              <div className={`columns is-mobile ${styles.inputRow}`}>
+                <div className='column is-one-quarter'>First Name</div>
+                <div className='column is-two-thirds'>
+                  <input
+                    className={`${styles.input} ${styles.isMedium}`}
+                    type="text"
+                    placeholder="First Name"
+                    onChange={e => setFirstName(e.target.value)}
+                    value={firstName} />
                 </div>
-                <div className={`columns is-mobile ${styles.inputRow}`}>
-                  <div className='column is-one-quarter'>Last Name</div>
-                  <div className='column is-two-thirds'>
-                    <input
-                      className={`${styles.input} ${styles.isMedium}`}
-                      type="text"
-                      placeholder="Last Name"
-                      onChange={e => setLastName(e.target.value)}
-                      value={lastName} />
-                  </div>
+              </div>
+              <div className={`columns is-mobile ${styles.inputRow}`}>
+                <div className='column is-one-quarter'>Last Name</div>
+                <div className='column is-two-thirds'>
+                  <input
+                    className={`${styles.input} ${styles.isMedium}`}
+                    type="text"
+                    placeholder="Last Name"
+                    onChange={e => setLastName(e.target.value)}
+                    value={lastName} />
                 </div>
-                <div className={`columns is-mobile ${styles.inputRow}`}>
-                  <div className='column is-one-quarter'>Company</div>
-                  <div className='column is-two-thirds'>
-                    <input
-                      className={`${styles.input} ${styles.isMedium}`}
-                      type="text"
-                      placeholder="Company"
-                      onChange={e => setCompany(e.target.value)}
-                      value={company}
-                    />
-                  </div>
+              </div>
+              <div className={`columns is-mobile ${styles.inputRow}`}>
+                <div className='column is-one-quarter'>Company</div>
+                <div className='column is-two-thirds'>
+                  <input
+                    className={`${styles.input} ${styles.isMedium}`}
+                    type="text"
+                    placeholder="Company"
+                    onChange={e => setCompany(e.target.value)}
+                    value={company}
+                  />
                 </div>
               </div>
             </div>
-          }
+          </div>
         </section>
         <footer className={`${styles.modalCardFoot}`}>
           <button onClick={() => closePopup()} className="button is-large">Discard</button>
