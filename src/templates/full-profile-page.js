@@ -168,12 +168,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                     <div className={`columns is-3 ${styles.fullProfile}`} >
                         <div className="column is-3">
                             <div className={styles.profilePicture} onClick={() => handleTogglePopup(!showProfile)}>
-                                <img src={image} />
-                                <div className={styles.imageUpload}>
-                                    <label htmlFor="file-input">
-                                        <i className={`${styles.pictureIcon} fa fa-2x fa-camera icon is-large`}></i>
-                                    </label>
-                                </div>
+                                <img src={image} />                                
                             </div>
                             <h3>
                                 Hello, <br />
