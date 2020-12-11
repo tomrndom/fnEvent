@@ -22,29 +22,29 @@ import styles from '../styles/full-profile.module.scss'
 export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updateProfile, updateProfilePicture, addWidgetRef, updateWidgets }) => {
 
     const [showProfile, setShowProfile] = useState(false);
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [company, setCompany] = useState("");
-    const [email, setEmail] = useState("")
-    const [birthday, setBirthday] = useState("")
-    const [gender, setGender] = useState("")
-    const [irc, setIrc] = useState("")
-    const [github, setGithub] = useState("")
-    const [twitter, setTwitter] = useState("")
-    const [linkedin, setLinkedin] = useState("")
-    const [identifier, setIdentifier] = useState("")
-    const [language, setLanguage] = useState("")
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [company, setCompany] = useState('');
+    const [email, setEmail] = useState('')
+    const [birthday, setBirthday] = useState('')
+    const [gender, setGender] = useState('')
+    const [irc, setIrc] = useState('')
+    const [github, setGithub] = useState('')
+    const [twitter, setTwitter] = useState('')
+    const [linkedin, setLinkedin] = useState('')
+    const [identifier, setIdentifier] = useState('')
+    const [language, setLanguage] = useState('')
     const [showFullName, setShowFullName] = useState(undefined)
     const [showPicture, setShowPicture] = useState(undefined)
     const [showEmail, setShowEmail] = useState(undefined)
-    const [bio, setBio] = useState("")
-    const [street, setStreet] = useState("")
-    const [floor, setFloor] = useState("")
-    const [city, setCity] = useState("")
-    const [state, setState] = useState("")
-    const [zipCode, setZipCode] = useState("")
-    const [country, setCountry] = useState("")
-    const [phone, setPhone] = useState("")
+    const [bio, setBio] = useState('')
+    const [street, setStreet] = useState('')
+    const [floor, setFloor] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [zipCode, setZipCode] = useState('')
+    const [country, setCountry] = useState('')
+    const [phone, setPhone] = useState('')
 
     const [image, setImage] = useState(null);
 
@@ -53,29 +53,29 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
         setImage(user.idpProfile.picture)
         setFirstName(user.idpProfile.given_name);
         setLastName(user.idpProfile.family_name);
-        setCompany(user.idpProfile.company);
-        setEmail(user.idpProfile.email);
-        setBirthday(user.idpProfile.birthdate.date ? moment(user.idpProfile.birthdate.date).valueOf() : null);
-        setGender(user.idpProfile.gender);
-        setIrc(user.idpProfile.irc);
-        setGithub(user.idpProfile.github_user);
-        setTwitter(user.idpProfile.twitter_user);
-        setLinkedin(user.idpProfile.linked_in_profile);
-        setIdentifier(user.idpProfile.nickname);
-        // { "_method": "PUT", "_token": "BvKJHyTBgrWG8qnRihkZL1yjfERyBQsiDLJqMwgz", "first_name": "Tomás", "last_name": "Castillo", "email": "tomas@tipit.net", "identifier": "tomas.castillo", "second_email": "", "third_email": "", "gender": "Prefer not to say", "gender_specify": "", "bio": "", "statement_of_interest": "", "irc": "", "github_user": "", "twitter_name": "", "wechat_user": "", "linked_in_profile": "", "address1": "San Martin 24", "address2": "", "city": "Mendoza", "state": "Mendoza", "post_code": "5500", "country_iso_code": "AR", "company": "Tipit LLC", "job_title": "Frontend Developer", "phone_number": "", "language": "en", "password": "", "password_confirmation": "", "id": "2", "undefined": true, "public_profile_show_fullname": false, "public_profile_show_photo": false, "public_profile_show_email": false, "birthday": 630727200 }
+        setCompany(user.idpProfile.company || '');
+        setEmail(user.idpProfile.email || '');
+        setBirthday(user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf() : null);
+        setGender(user.idpProfile.gender || '');
+        setIrc(user.idpProfile.irc || '');
+        setGithub(user.idpProfile.github_user || '');
+        setTwitter(user.idpProfile.twitter_user || '');
+        setLinkedin(user.idpProfile.linked_in_profile || '');
+        setIdentifier(user.idpProfile.nickname || '');
+        // { "_method": "PUT", "_token": "BvKJHyTBgrWG8qnRihkZL1yjfERyBQsiDLJqMwgz", "first_name": "Tomás", "last_name": "Castillo", "email": "tomas@tipit.net", "identifier": "tomas.castillo", "second_email": '', "third_email": '', "gender": "Prefer not to say", "gender_specify": '', "bio": '', "statement_of_interest": '', "irc": '', "github_user": '', "twitter_name": '', "wechat_user": '', "linked_in_profile": '', "address1": "San Martin 24", "address2": '', "city": "Mendoza", "state": "Mendoza", "post_code": "5500", "country_iso_code": "AR", "company": "Tipit LLC", "job_title": "Frontend Developer", "phone_number": '', "language": "en", "password": '', "password_confirmation": '', "id": "2", "undefined": true, "public_profile_show_fullname": false, "public_profile_show_photo": false, "public_profile_show_email": false, "birthday": 630727200 }
 
-        setLanguage(user.idpProfile.locale);
-        setShowFullName(null);
-        setShowPicture(null);
-        setShowEmail(null);
-        setBio(user.idpProfile.bio);
-        setStreet(user.idpProfile.address);
-        setFloor(user.idpProfile.email);
-        setCity(user.idpProfile.locality);
-        setState(user.idpProfile.region);
-        setZipCode(user.idpProfile.postal_code);
-        setCountry(user.idpProfile.country);
-        setPhone(user.idpProfile.phone_number);
+        setLanguage(user.idpProfile.locale || '');
+        setShowFullName(undefined);
+        setShowPicture(undefined);
+        setShowEmail(undefined);
+        setBio(user.idpProfile.bio || '');
+        setStreet(user.idpProfile.address || '');
+        setFloor(user.idpProfile.email || '');
+        setCity(user.idpProfile.locality || '');
+        setState(user.idpProfile.region || '');
+        setZipCode(user.idpProfile.postal_code || '');
+        setCountry(user.idpProfile.country || '');
+        setPhone(user.idpProfile.phone_number || '');
         return () => {
             setFirstName('');
             setLastName('');
@@ -177,6 +177,9 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                             Hello, <br />
                             {firstName} {lastName}
                         </h3>
+                        <h4>
+                            @{identifier}
+                        </h4>
                     </div>
                     <div className="column">
                         <div className={styles.formContainer}>
@@ -347,7 +350,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                     <div className={`column is-full ${styles.inputField}`}>
                                         <textarea
                                             className="textarea"
-                                            placeholder=""
+                                            placeholder=''
                                             rows="10"
                                             onChange={e => setBio(e.target.value)}
                                             value={bio}
