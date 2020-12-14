@@ -97,7 +97,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                 gender: gender,
                 irc: irc,
                 github_user: github,
-                twitter_user: twitter,
+                twitter_name: twitter,
                 linked_in_profile: linkedin,
                 identifier: identifier,
                 language: language,
