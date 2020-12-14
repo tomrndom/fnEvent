@@ -6,7 +6,7 @@ import { CountryInput, LanguageInput, DateTimePicker } from 'openstack-uicore-fo
 import { epochToMomentTimeZone } from 'openstack-uicore-foundation/lib/methods'
 import moment from "moment-timezone";
 
-import Layout from '../components/Layout'
+import Layour from '../components/Layour'
 import withOrchestra from "../utils/widgetOrchestra";
 
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
@@ -370,7 +370,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             <input
                                                 className={`${styles.input} ${styles.isLarge}`}
                                                 type="text"
-                                                placeholder="Complete yout address"
+                                                placeholder="Complete your address"
                                                 onChange={e => setStreet(e.target.value)}
                                                 value={street}
                                             />
@@ -380,7 +380,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             <input
                                                 className={`${styles.input} ${styles.isLarge}`}
                                                 type="text"
-                                                placeholder="Complete yout address"
+                                                placeholder="Complete your address"
                                                 onChange={e => setFloor(e.target.value)}
                                                 value={floor}
                                             />
@@ -392,7 +392,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             <input
                                                 className={`${styles.input} ${styles.isLarge}`}
                                                 type="text"
-                                                placeholder="Complete yout address"
+                                                placeholder="Complete your city"
                                                 onChange={e => setCity(e.target.value)}
                                                 value={city}
                                             />
@@ -402,7 +402,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             <input
                                                 className={`${styles.input} ${styles.isLarge}`}
                                                 type="text"
-                                                placeholder="Complete yout address"
+                                                placeholder="Complete your state"
                                                 onChange={e => setState(e.target.value)}
                                                 value={state}
                                             />
@@ -414,7 +414,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             <input
                                                 className={`${styles.input} ${styles.isLarge}`}
                                                 type="text"
-                                                placeholder="Complete yout address"
+                                                placeholder="Complete your zip code"
                                                 onChange={e => setZipCode(e.target.value)}
                                                 value={zipCode}
                                             />
@@ -433,7 +433,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             <input
                                                 className={`${styles.input} ${styles.isLarge}`}
                                                 type="text"
-                                                placeholder="Complete yout address"
+                                                placeholder="Complete your phone"
                                                 onChange={e => setPhone(e.target.value)}
                                                 value={phone}
                                             />
@@ -492,14 +492,14 @@ const FullProfilePage = (
     }
 ) => {
     return (
-        <Layout location={location}>
+        <Layour location={location}>
             <OrchestedTemplate
                 loggedUser={loggedUser}
                 user={user}
                 getIDPProfile={getIDPProfile}
                 updateProfile={updateProfile}
                 updateProfilePicture={updateProfilePicture} />
-        </Layout>
+        </Layour>
     )
 }
 
