@@ -6,7 +6,7 @@ import { CountryInput, LanguageInput, DateTimePicker } from 'openstack-uicore-fo
 import { epochToMomentTimeZone } from 'openstack-uicore-foundation/lib/methods'
 import moment from "moment-timezone";
 
-import Layour from '../components/Layour'
+import Layout from '../components/Layout'
 import withOrchestra from "../utils/widgetOrchestra";
 
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
@@ -492,14 +492,14 @@ const FullProfilePage = (
     }
 ) => {
     return (
-        <Layour location={location}>
+        <Layout location={location}>
             <OrchestedTemplate
                 loggedUser={loggedUser}
                 user={user}
                 getIDPProfile={getIDPProfile}
                 updateProfile={updateProfile}
                 updateProfilePicture={updateProfilePicture} />
-        </Layour>
+        </Layout>
     )
 }
 
