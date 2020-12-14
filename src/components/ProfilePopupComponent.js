@@ -118,7 +118,7 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
                 crossOrigin="anonymous"
               />
               <div className={styles.imageUpload}>
-                <label for="file-input">
+                <label htmlFor="file-input">
                   <i className={`${styles.pictureIcon} fa fa-2x fa-camera icon is-large`}></i>
                 </label>
                 <input name="newImage" id="file-input" type="file" accept=".jpg,.jpeg,.png" onChange={handleNewImage} />

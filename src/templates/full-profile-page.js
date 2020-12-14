@@ -157,8 +157,6 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
     //     }
     // }
 
-    console.log('render=?Asdasd', language, country)
-
     if (user.loadingIDP) {
         return null
     } else {
@@ -337,7 +335,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                             </label>
                                 <div className={styles.buttons}>
                                     <button className="button is-large">Discard</button>
-                                    <button className="button is-large">Update</button>
+                                    <button className="button is-large" onClick={() => handleProfileUpdate()}>Update</button>
                                 </div>
                             </div>
                             <div className={styles.formContainer}>
@@ -358,7 +356,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                 </div>
                                 <div className={styles.buttons}>
                                     <button className="button is-large">Discard</button>
-                                    <button className="button is-large">Update</button>
+                                    <button className="button is-large" onClick={() => handleProfileUpdate()}>Update</button>
                                 </div>
                             </div>
                             <div className={styles.formContainer}>
@@ -442,7 +440,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                 </div>
                                 <div className={styles.buttons}>
                                     <button className="button is-large">Discard</button>
-                                    <button className="button is-large">Update</button>
+                                    <button className="button is-large" onClick={() => handleProfileUpdate()}>Update</button>
                                 </div>
                             </div>
                         </div>
