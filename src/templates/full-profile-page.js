@@ -66,8 +66,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
         setShowPicture(undefined);
         setShowEmail(undefined);
         setBio(user.idpProfile.bio || '');
-        setStreet(user.idpProfile.address || '');
-        setFloor(user.idpProfile.email || '');
+        setStreet(user.idpProfile.street_address || '');
+        setFloor(user.idpProfile.street_address2 || '');
         setCity(user.idpProfile.locality || '');
         setState(user.idpProfile.region || '');
         setZipCode(user.idpProfile.postal_code || '');
@@ -105,8 +105,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                 public_profile_show_photo: showPicture,
                 public_profile_show_email: showEmail,
                 bio: bio,
-                street: street,
-                floor: floor,
+                street_address: street,
+                street_address2: floor,
                 city: city,
                 state: state,
                 post_code: zipCode,
