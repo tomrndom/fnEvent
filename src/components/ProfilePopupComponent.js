@@ -7,7 +7,7 @@ import { AjaxLoader } from "openstack-uicore-foundation/lib/components";
 
 import { create_UUID } from '../utils/uuidGenerator'
 
-const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfile, changePicture, changeProfile }) => {
+const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfile, changePicture, changeProfile, fromFullProfile }) => {
 
   const editorRef = useRef(null);
 
@@ -152,6 +152,7 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
 
             </div>
           </div>
+          {!fromFullProfile &&
           <div className={styles.modalCardForm}>
             <div className={styles.title}>Profile Info</div>
             <div className={styles.form}>
@@ -191,6 +192,7 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
               </div>
             </div>
           </div>
+          }
         </section>
         <footer className={`${styles.modalCardFoot}`}>
           <button onClick={() => closePopup()} className="button is-large">Discard</button>
