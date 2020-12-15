@@ -27,6 +27,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
     const [email, setEmail] = useState('')
     const [birthday, setBirthday] = useState('')
     const [gender, setGender] = useState('')
+    const [specifyGender, setSpecifyGender] = useState('')
     const [irc, setIrc] = useState('')
     const [github, setGithub] = useState('')
     const [twitter, setTwitter] = useState('')
@@ -54,7 +55,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
         setLastName(user.idpProfile.family_name);
         setCompany(user.idpProfile.company || '');
         setEmail(user.idpProfile.email || '');
-        setBirthday(user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf()/1000 : null);
+        setBirthday(user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf() / 1000 : null);
         setGender(user.idpProfile.gender || '');
         setIrc(user.idpProfile.irc || '');
         setGithub(user.idpProfile.github_user || '');
@@ -97,6 +98,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                 email: email,
                 birthday: birthday,
                 gender: gender,
+                gender_specify: gender === 'Specify' ? specifyGender : null,
                 irc: irc,
                 github_user: github,
                 twitter_name: twitter,
@@ -275,12 +277,26 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                                     <option value="Male">Male</option>
                                                     <option value="Female">Female</option>
                                                     <option value="Prefer not to say">Prefer not to say</option>
-                                                    <option value="Let me specify">Let me specify</option>
+                                                    <option value="Specify">Let me specify</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {gender === 'Specify' &&
+                                    <div className={`columns is-mobile ${styles.inputRow}`}>
+                                        <div className={`column is-half ${styles.inputField}`}>
+                                            <b>Specify gender</b>
+                                            <input
+                                                className={`${styles.input} ${styles.isLarge}`}
+                                                type="text"
+                                                placeholder="Specify your gender"
+                                                onChange={e => setSpecifyGender(e.target.value)}
+                                                value={specifyGender}
+                                            />
+                                        </div>
+                                    </div>
+                                }
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
                                         <b>IRC</b>
