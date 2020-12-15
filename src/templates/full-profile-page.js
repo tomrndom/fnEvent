@@ -21,65 +21,76 @@ import styles from '../styles/full-profile.module.scss'
 export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updateProfile, updateProfilePicture, addWidgetRef, updateWidgets }) => {
 
     const [showProfile, setShowProfile] = useState(false);
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [company, setCompany] = useState('');
-    const [email, setEmail] = useState('')
-    const [birthday, setBirthday] = useState('')
-    const [gender, setGender] = useState('')
-    const [specifyGender, setSpecifyGender] = useState('')
-    const [irc, setIrc] = useState('')
-    const [github, setGithub] = useState('')
-    const [twitter, setTwitter] = useState('')
-    const [linkedin, setLinkedin] = useState('')
-    const [identifier, setIdentifier] = useState('')
-    const [language, setLanguage] = useState('')
+    const [personalProfile, setPersonalProfile] = useState({
+        firstName: '',
+        lastName: '',
+        company: '',
+        email: '',
+        birthday: '',
+        gender: '',
+        specifyGender: '',
+        irc: '',
+        github: '',
+        twitter: '',
+        linkedin: '',
+        identifier: '',
+        language: ''
+    })
+
     // const [showFullName, setShowFullName] = useState(undefined)
     // const [showPicture, setShowPicture] = useState(undefined)
     // const [showEmail, setShowEmail] = useState(undefined)
     const [bio, setBio] = useState('')
-    const [street, setStreet] = useState('')
-    const [floor, setFloor] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [zipCode, setZipCode] = useState('')
-    const [country, setCountry] = useState('')
-    const [phone, setPhone] = useState('')
+
+    const [address, setAddress] = useState({
+        street: '',
+        floor: '',
+        city: '',
+        state: '',
+        zipCode: '',
+        country: '',
+        phone: ''
+    })
 
     const [image, setImage] = useState(null);
 
     useEffect(() => {
         getIDPProfile();
         setImage(user.idpProfile.picture)
-        setFirstName(user.idpProfile.given_name);
-        setLastName(user.idpProfile.family_name);
-        setCompany(user.idpProfile.company || '');
-        setEmail(user.idpProfile.email || '');
-        setBirthday(user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf() / 1000 : null);
-        setGender(user.idpProfile.gender || '');
-        setIrc(user.idpProfile.irc || '');
-        setGithub(user.idpProfile.github_user || '');
-        setTwitter(user.idpProfile.twitter_user || '');
-        setLinkedin(user.idpProfile.linked_in_profile || '');
-        setIdentifier(user.idpProfile.nickname || '');
-        // { "_method": "PUT", "_token": "BvKJHyTBgrWG8qnRihkZL1yjfERyBQsiDLJqMwgz", "first_name": "Tomás", "last_name": "Castillo", "email": "tomas@tipit.net", "identifier": "tomas.castillo", "second_email": '', "third_email": '', "gender": "Prefer not to say", "gender_specify": '', "bio": '', "statement_of_interest": '', "irc": '', "github_user": '', "twitter_name": '', "wechat_user": '', "linked_in_profile": '', "address1": "San Martin 24", "address2": '', "city": "Mendoza", "state": "Mendoza", "post_code": "5500", "country_iso_code": "AR", "company": "Tipit LLC", "job_title": "Frontend Developer", "phone_number": '', "language": "en", "password": '', "password_confirmation": '', "id": "2", "undefined": true, "public_profile_show_fullname": false, "public_profile_show_photo": false, "public_profile_show_email": false, "birthday": 630727200 }
-
-        setLanguage(user.idpProfile.locale || '');
+        setPersonalProfile({
+            firstName: user.idpProfile.given_name,
+            lastName: user.idpProfile.family_name,
+            company: user.idpProfile.company || '',
+            email: user.idpProfile.email || '',
+            birthday: user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf() / 1000 : null,
+            gender: user.idpProfile.gender || '',
+            specifyGender: '',
+            irc: user.idpProfile.irc || '',
+            github: user.idpProfile.github_user || '',
+            twitter: user.idpProfile.twitter_user || '',
+            linkedin: user.idpProfile.linked_in_profile || '',
+            identifier: user.idpProfile.nickname || '',
+            language: user.idpProfile.locale || ''
+        });
         // setShowFullName(undefined);
         // setShowPicture(undefined);
         // setShowEmail(undefined);
         setBio(user.idpProfile.bio || '');
-        setStreet(user.idpProfile.street_address || '');
-        setFloor(user.idpProfile.street_address2 || '');
-        setCity(user.idpProfile.locality || '');
-        setState(user.idpProfile.region || '');
-        setZipCode(user.idpProfile.postal_code || '');
-        setCountry(user.idpProfile.country || '');
-        setPhone(user.idpProfile.phone_number || '');
+        setAddress({
+            street: user.idpProfile.street_address || '',
+            floor: user.idpProfile.street_address2 || '',
+            city: user.idpProfile.locality || '',
+            state: user.idpProfile.region || '',
+            zipCode: user.idpProfile.postal_code || '',
+            country: user.idpProfile.country || '',
+            phone: user.idpProfile.phone_number || ''
+        });
         return () => {
-            setFirstName('');
-            setLastName('');
-            setCompany('');
+            setPersonalProfile({
+                firstName: '',
+                lastName: '',
+                company: ''
+            });
         };
     }, []);
 
@@ -92,30 +103,30 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
             updateProfile(profile)
         } else {
             const newProfile = {
-                first_name: firstName,
-                last_name: lastName,
-                company: company,
-                email: email,
-                birthday: birthday,
-                gender: gender,
-                gender_specify: gender === 'Specify' ? specifyGender : null,
-                irc: irc,
-                github_user: github,
-                twitter_name: twitter,
-                linked_in_profile: linkedin,
-                identifier: identifier,
-                language: language,
+                first_name: personalProfile.firstName,
+                last_name: personalProfile.lastName,
+                company: personalProfile.company,
+                email: personalProfile.email,
+                birthday: personalProfile.birthday,
+                gender: personalProfile.gender,
+                gender_specify: personalProfile.gender === 'Specify' ? personalProfile.specifyGender : null,
+                irc: personalProfile.irc,
+                github_user: personalProfile.github,
+                twitter_name: personalProfile.twitter,
+                linked_in_profile: personalProfile.linkedin,
+                identifier: personalProfile.identifier,
+                language: personalProfile.language,
                 // public_profile_show_fullname: showFullName,
                 // public_profile_show_photo: showPicture,
                 // public_profile_show_email: showEmail,
                 bio: bio,
-                address1: street,
-                address2: floor,
-                city: city,
-                state: state,
-                post_code: zipCode,
-                country_iso_code: country,
-                phone_number: phone,
+                address1: address.street,
+                address2: address.floor,
+                city: address.city,
+                state: address.state,
+                post_code: address.zipCode,
+                country_iso_code: address.country,
+                phone_number: address.phone,
             }
             updateProfile(newProfile);
         }
@@ -138,54 +149,47 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
         navigate('/a/schedule')
     }
 
-    const discardChanges = () => {
-        setFirstName(user.idpProfile.given_name);
-        setLastName(user.idpProfile.family_name);
-        setCompany(user.idpProfile.company || '');
-        setEmail(user.idpProfile.email || '');
-        setBirthday(user.idpProfile.birthdate?.date ? user.idpProfile.birthdate.date.valueOf() : null);
-        setGender(user.idpProfile.gender || '');
-        setIrc(user.idpProfile.irc || '');
-        setGithub(user.idpProfile.github_user || '');
-        setTwitter(user.idpProfile.twitter_user || '');
-        setLinkedin(user.idpProfile.linked_in_profile || '');
-        setIdentifier(user.idpProfile.nickname || '');
-        setLanguage(user.idpProfile.locale || '');
-        // setShowFullName(undefined);
-        // setShowPicture(undefined);
-        // setShowEmail(undefined);
-        setBio(user.idpProfile.bio || '');
-        setStreet(user.idpProfile.street_address || '');
-        setFloor(user.idpProfile.street_address2 || '');
-        setCity(user.idpProfile.locality || '');
-        setState(user.idpProfile.region || '');
-        setZipCode(user.idpProfile.postal_code || '');
-        setCountry(user.idpProfile.country || '');
-        setPhone(user.idpProfile.phone_number || '');
+    const discardChanges = (state) => {
+        console.log('state', state);
+        switch (state) {
+            case 'profile':
+                setPersonalProfile({
+                    firstName: user.idpProfile.given_name,
+                    lastName: user.idpProfile.family_name,
+                    company: user.idpProfile.company || '',
+                    email: user.idpProfile.email || '',
+                    birthday: user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf() / 1000 : null,
+                    gender: user.idpProfile.gender || '',
+                    specifyGender: '',
+                    irc: user.idpProfile.irc || '',
+                    github: user.idpProfile.github_user || '',
+                    twitter: user.idpProfile.twitter_user || '',
+                    linkedin: user.idpProfile.linked_in_profile || '',
+                    identifier: user.idpProfile.nickname || '',
+                    language: user.idpProfile.locale || ''
+                });
+                // setShowFullName(undefined);
+                // setShowPicture(undefined);
+                // setShowEmail(undefined);   
+                break;
+            case 'bio':
+                setBio(user.idpProfile.bio || '');
+                break;
+            case 'address':
+                setAddress({
+                    street: user.idpProfile.street_address || '',
+                    floor: user.idpProfile.street_address2 || '',
+                    city: user.idpProfile.locality || '',
+                    state: user.idpProfile.region || '',
+                    zipCode: user.idpProfile.postal_code || '',
+                    country: user.idpProfile.country || '',
+                    phone: user.idpProfile.phone_number || ''
+                });
+                break;
+            default:
+                return;
+        }
     }
-
-
-    const profileUpdate = () => {
-        // changeProfile(newProfile);
-    }
-
-    // onClickSave = () => {
-    //     if (editorRef.current && newImage) {
-    //         const canvas = editorRef.current.getImage().toDataURL();
-    //         urltoFile(canvas, image.name)
-    //             .then(file => changePicture(file));
-    //     }
-    //     if (userProfile.given_name !== firstName ||
-    //         userProfile.family_name !== lastName ||
-    //         userProfile.company !== company) {
-    //         const newProfile = {
-    //             first_name: firstName,
-    //             last_name: lastName,
-    //             company: company
-    //         }
-    //         changeProfile(newProfile);
-    //     }
-    // }
 
     return (
         <React.Fragment>
@@ -198,7 +202,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                         </div>
                         <h3>
                             Hello, <br />
-                            {firstName} {lastName}
+                            {personalProfile.firstName} {personalProfile.lastName}
                         </h3>
                         <h4>
                             @{user.idpProfile.nickname}
@@ -215,8 +219,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="First Name"
-                                            onChange={e => setFirstName(e.target.value)}
-                                            value={firstName}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, firstName: e.target.value })}
+                                            value={personalProfile.firstName}
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
@@ -225,8 +229,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Last Name"
-                                            onChange={e => setLastName(e.target.value)}
-                                            value={lastName}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, lastName: e.target.value })}
+                                            value={personalProfile.lastName}
                                         />
                                     </div>
                                 </div>
@@ -237,8 +241,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Company"
-                                            onChange={e => setCompany(e.target.value)}
-                                            value={company}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, company: e.target.value })}
+                                            value={personalProfile.company}
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
@@ -247,8 +251,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Email"
-                                            onChange={e => setEmail(e.target.value)}
-                                            value={email}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, email: e.target.value })}
+                                            value={personalProfile.email}
                                         />
                                     </div>
                                 </div>
@@ -258,9 +262,9 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                         <div className="columns field">
                                             <div className={`column ${styles.control}`}>
                                                 <DateTimePicker
-                                                    onChange={e => setBirthday((e.target.value.valueOf() / 1000))}
+                                                    onChange={e => setPersonalProfile({ ...personalProfile, birthday: (e.target.value.valueOf() / 1000) })}
                                                     format={{ date: 'MM/DD/YYYY', time: '' }}
-                                                    value={epochToMomentTimeZone(moment(birthday), SummitObject.summit.time_zone_id)}
+                                                    value={epochToMomentTimeZone(moment(personalProfile.birthday), SummitObject.summit.time_zone_id)}
                                                 />
                                             </div>
                                         </div>
@@ -270,8 +274,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                         <div className={styles.control}>
                                             <div className={`${styles.select} ${styles.isLarge}`}>
                                                 <select
-                                                    onChange={e => setGender(e.target.value)}
-                                                    value={gender}
+                                                    onChange={e => setPersonalProfile({ ...personalProfile, gender: e.target.value })}
+                                                    value={personalProfile.gender}
                                                 >
                                                     <option>Gender</option>
                                                     <option value="Male">Male</option>
@@ -283,7 +287,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                         </div>
                                     </div>
                                 </div>
-                                {gender === 'Specify' &&
+                                {personalProfile.gender === 'Specify' &&
                                     <div className={`columns is-mobile ${styles.inputRow}`}>
                                         <div className={`column is-half ${styles.inputField}`}>
                                             <b>Specify gender</b>
@@ -291,8 +295,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                                 className={`${styles.input} ${styles.isLarge}`}
                                                 type="text"
                                                 placeholder="Specify your gender"
-                                                onChange={e => setSpecifyGender(e.target.value)}
-                                                value={specifyGender}
+                                                onChange={e => setPersonalProfile({ ...personalProfile, specifyGender: e.target.value })}
+                                                value={personalProfile.specifyGender}
                                             />
                                         </div>
                                     </div>
@@ -304,8 +308,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="IRC"
-                                            onChange={e => setIrc(e.target.value)}
-                                            value={irc}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, irc: e.target.value })}
+                                            value={personalProfile.irc}
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
@@ -314,8 +318,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Github"
-                                            onChange={e => setGithub(e.target.value)}
-                                            value={github}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, github: e.target.value })}
+                                            value={personalProfile.github}
                                         />
                                     </div>
                                 </div>
@@ -326,8 +330,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Twitter"
-                                            onChange={e => setTwitter(e.target.value)}
-                                            value={twitter}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, twitter: e.target.value })}
+                                            value={personalProfile.twitter}
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
@@ -336,8 +340,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Linkedin"
-                                            onChange={e => setLinkedin(e.target.value)}
-                                            value={linkedin}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, linkedin: e.target.value })}
+                                            value={personalProfile.linkedin}
                                         />
                                     </div>
                                 </div>
@@ -348,15 +352,15 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Identifier"
-                                            onChange={e => setIdentifier(e.target.value)}
-                                            value={identifier}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, identifier: e.target.value })}
+                                            value={personalProfile.identifier}
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
                                         <b>Language</b>
                                         <LanguageInput
-                                            onChange={e => setLanguage(e.target.value)}
-                                            value={language}
+                                            onChange={e => setPersonalProfile({ ...personalProfile, language: e.target.value })}
+                                            value={personalProfile.language}
                                         />
                                     </div>
                                 </div>
@@ -376,7 +380,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                 Show email on public profile
                                 </label> */}
                             <div className={styles.buttons}>
-                                <button className="button is-large" onClick={() => discardChanges()}>Discard</button>
+                                <button className="button is-large" onClick={() => discardChanges('profile')}>Discard</button>
                                 <button className="button is-large" onClick={() => handleProfileUpdate()}>Update</button>
                             </div>
                         </div>
@@ -397,7 +401,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                 </div>
                             </div>
                             <div className={styles.buttons}>
-                                <button className="button is-large" onClick={() => discardChanges()}>Discard</button>
+                                <button className="button is-large" onClick={() => discardChanges('bio')}>Discard</button>
                                 <button className="button is-large" onClick={() => handleProfileUpdate()}>Update</button>
                             </div>
                         </div>
@@ -411,8 +415,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Complete your address"
-                                            onChange={e => setStreet(e.target.value)}
-                                            value={street}
+                                            onChange={e => setAddress({ ...address, street: e.target.value })}
+                                            value={address.street}
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
@@ -421,8 +425,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Complete your address"
-                                            onChange={e => setFloor(e.target.value)}
-                                            value={floor}
+                                            onChange={e => setAddress({ ...address, floor: e.target.value })}
+                                            value={address.floor}
                                         />
                                     </div>
                                 </div>
@@ -433,8 +437,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Complete your city"
-                                            onChange={e => setCity(e.target.value)}
-                                            value={city}
+                                            onChange={e => setAddress({ ...address, city: e.target.value })}
+                                            value={address.city}
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
@@ -443,8 +447,8 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Complete your state"
-                                            onChange={e => setState(e.target.value)}
-                                            value={state}
+                                            onChange={e => setAddress({ ...address, state: e.target.value })}
+                                            value={address.state}
                                         />
                                     </div>
                                 </div>
@@ -455,15 +459,15 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Complete your zip code"
-                                            onChange={e => setZipCode(e.target.value)}
-                                            value={zipCode}
+                                            onChange={e => setAddress({ ...address, zipCode: e.target.value })}
+                                            value={address.zipCode}
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
                                         <b>Country</b>
                                         <CountryInput
-                                            onChange={e => setCountry(e.target.value)}
-                                            value={country}
+                                            onChange={e => setAddress({ ...address, country: e.target.value })}
+                                            value={address.country}
                                         />
                                     </div>
                                 </div>
@@ -474,14 +478,14 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
                                             placeholder="Complete your phone"
-                                            onChange={e => setPhone(e.target.value)}
-                                            value={phone}
+                                            onChange={e => setAddress({ ...address, phone: e.target.value })}
+                                            value={address.phone}
                                         />
                                     </div>
                                 </div>
                             </div>
                             <div className={styles.buttons}>
-                                <button className="button is-large" onClick={() => discardChanges()}>Discard</button>
+                                <button className="button is-large" onClick={() => discardChanges('address')}>Discard</button>
                                 <button className="button is-large" onClick={() => handleProfileUpdate()}>Update</button>
                             </div>
                         </div>
