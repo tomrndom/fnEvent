@@ -201,6 +201,11 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                     <div className="column is-3">
                         <div className={styles.profilePicture} onClick={() => handleTogglePopup(!showProfile)}>
                             <img src={image} />
+                            <div className={styles.imageUpload}>
+                                <label for="file-input">
+                                    <i className={`${styles.pictureIcon} fa fa-2x fa-pencil icon is-large`}></i>
+                                </label>
+                            </div>
                         </div>
                         <h3>
                             Hello, <br />
@@ -292,7 +297,7 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                 {personalProfile.gender === 'Specify' &&
                                     <>
                                         <div className={`columns is-mobile ${styles.inputRow}`}>
-                                            <div className={`column is-half ${styles.inputField}`}></div>                                        
+                                            <div className={`column is-half ${styles.inputField}`}></div>
                                             <div className={`column is-half ${styles.inputField}`}>
                                                 <b>Specify gender</b>
                                                 <input
@@ -384,9 +389,13 @@ export const FullProfilePageTemplate = ({ loggedUser, user, getIDPProfile, updat
                                     <input type="checkbox" value={showEmail} onChange={e => setShowEmail(e.target.value)} />
                                 Show email on public profile
                                 </label> */}
-                            <div className={styles.buttons}>
-                                <button className="button is-large" onClick={() => discardChanges('profile')}>Discard</button>
-                                <button className="button is-large" onClick={() => handleProfileUpdate()}>Update</button>
+                            <div className={`columns is-mobile ${styles.inputRow}`}>
+                                <div className={`column is-half ${styles.inputField}`}>
+                                    <button className={`button is-large ${styles.profileButton}`} onClick={() => discardChanges('profile')}>Discard</button>
+                                </div>
+                                <div className={`column is-half ${styles.inputField}`}>
+                                    <button className="button is-large" onClick={() => handleProfileUpdate()}>Update</button>
+                                </div>
                             </div>
                         </div>
                         <div className={styles.formContainer}>
