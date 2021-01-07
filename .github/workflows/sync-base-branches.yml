@@ -14,7 +14,7 @@ jobs:
         with:
           type: now
           from_branch: master
-          target_branch: dev-yocod
+          target_branch: dev-yoco
           github_token: ${{ github.token }}
 
       - name: Merge dev-yoco -> prod-yoco
