@@ -37,7 +37,7 @@
 
     .image-upload {
         position: absolute;
-        top: 14.2%;
+        top: 13.2%;
         left: 13%;
 
         >input {
@@ -95,17 +95,6 @@
                             width: 100%;
                         }
                     }
-
-                    .profile-button {
-                        width: 100%;
-                        height: 5.5rem;
-
-                        &:last-of-type {
-                            color: #ffffff;
-                            border-color: #ffffff;
-                            background-color: $color_primary;
-                        }
-                    }
                 }
             }
         }
@@ -114,6 +103,25 @@
             input[type=checkbox] {
                 margin: -3px 8px 0px;
                 vertical-align: middle;
+            }
+        }
+
+        .buttons {
+            margin: 15px 0;
+
+            div {
+                button {
+                    width: 100%;
+                    height: 5.5rem;
+                }
+
+                &:last-of-type {
+                    button {
+                        color: #ffffff;
+                        border-color: #ffffff;
+                        background-color: $color_primary;
+                    }
+                }
             }
         }
     }
