@@ -95,8 +95,6 @@ exports.onPreBootstrap = async () => {
     }
   };
 
-  console.log('header', config)
-
   const getAccessToken = async () => {
     const client = new ClientCredentials(config);
 
@@ -113,38 +111,44 @@ exports.onPreBootstrap = async () => {
   }
 
   const accessToken = await getAccessToken().then((token) => {
-    console.log(token)
     return token.token.access_token
   });
 
-  console.log('access token', accessToken);
+  let events_page = 1;
+  let events_last_page = 0;
 
-  const test = await axios.get(
-    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}`,
-    {
-      params: {
-        access_token: accessToken,
-        per_page: 100,
-        expand: 'schedule',
-      }
-    }).then((response) => {
-      console.log(response)
-      return response.data
-    })
-    .catch(e => console.log('ERROR: ', e));
-
-  console.log('lle', test);
-
-  const allEvents = await axios.get(
+  let allEvents = await axios.get(
     `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published`,
     {
       params: {
         access_token: accessToken,
-        per_page: 100,
+        per_page: 5,
+        page: events_page,
         expand: 'type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance',
       }
-    }).then((response) => response.data)
+    }).then((response) => {
+      events_last_page = response.data.last_page;
+      return response.data.data;
+    })
     .catch(e => console.log('ERROR: ', e));
+
+  while (events_last_page > 1 && events_page <= events_last_page) {    
+    events_page++;
+    newEvents = await axios.get(
+      `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published`,
+      {
+        params: {
+          access_token: accessToken,
+          per_page: 50,
+          page: events_page,
+          expand: 'type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance',
+        }
+      }).then((response) => {
+        allEvents = [...allEvents, ...response.data.data];
+        return response.data;
+      })
+      .catch(e => console.log('ERROR: ', e));
+  }
 
   fs.writeFileSync('src/content/events.json', JSON.stringify(allEvents), 'utf8', function (err) {
     if (err) throw err;
