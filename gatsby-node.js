@@ -122,7 +122,7 @@ exports.onPreBootstrap = async () => {
     {
       params: {
         access_token: accessToken,
-        per_page: 5,
+        per_page: 50,
         page: events_page,
         expand: 'type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance',
       }
