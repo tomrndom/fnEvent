@@ -38,7 +38,7 @@ const SponsorHeader = ({ sponsor, tier, scanBadge }) => {
         {sponsor.headerVideo &&
           <div className={styles.heroSponsorImageBg} style={{
             backgroundImage: `url(${isMobile ? sponsor.headerImageMobile : sponsor.headerImage})`,
-            paddingBottom: `${tier.sponsorPage.sponsorTemplate === 'big-header' ? '27.77%' : '13.88%'}`,
+            paddingBottom: `${isMobile ? '82.77%' : tier.sponsorPage.sponsorTemplate === 'big-header' ? '27.77%' : '18.88%'}`,
             maxHeight: `${tier.sponsorPage.sponsorTemplate === 'big-header' ? '400px' : '200px'}`
           }}></div>
         }
