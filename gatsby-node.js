@@ -155,15 +155,43 @@ exports.onPreBootstrap = async () => {
     console.log('Saved!');
   });
 
-  const allSpeakers = await axios.get(
+
+  // Fetch Speakers
+
+  let speakers_page = 1;
+  let speakers_last_page = 0;
+
+  let allSpeakers = await axios.get(
     `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/speakers/on-schedule`,
     {
       params: {
         access_token: accessToken,
-        per_page: 100,
+        page: speakers_page,
+        per_page: 30,
       }
-    }).then((response) => response.data)
+    }).then((response) => {
+      speakers_last_page = response.data.last_page;
+      return response.data.data;
+    })
     .catch(e => console.log('ERROR: ', e));
+
+  while (speakers_last_page > 1 && speakers_page <= speakers_last_page) {
+    speakers_page++;
+    newSpeakers = await axios.get(
+      `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/speakers/on-schedule`,
+      {
+        params: {
+          access_token: accessToken,
+          page: speakers_page,
+          per_page: 30,
+        }
+      }).then((response) => {
+        allSpeakers = [...allSpeakers, ...response.data.data];
+        return response.data;
+      })
+      .catch(e => console.log('ERROR: ', e));
+  }
+
 
   fs.writeFileSync('src/content/speakers.json', JSON.stringify(allSpeakers), 'utf8', function (err) {
     if (err) throw err;
