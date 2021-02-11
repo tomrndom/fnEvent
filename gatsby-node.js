@@ -158,6 +158,46 @@ exports.onPreBootstrap = async () => {
 
   // Fetch Speakers
 
+  // Get Featured Speakers
+
+  let featured_speakers_page = 1;
+  let featured_speakers_last_page = 0;
+
+  let featuredSpeakers = await axios.get(
+    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/speakers/on-schedule`,
+    {
+      params: {
+        access_token: accessToken,
+        page: featured_speakers_page,
+        per_page: 30,
+        'filter[]': 'featured==true',
+      }
+    }).then((response) => {
+      featured_speakers_last_page = response.data.last_page;
+      return response.data.data;
+    })
+    .catch(e => console.log('ERROR: ', e));
+
+  while (featured_speakers_last_page > 1 && featured_speakers_page <= featured_speakers_last_page) {
+    featured_speakers_page++;
+    newSpeakers = await axios.get(
+      `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/speakers/on-schedule`,
+      {
+        params: {
+          access_token: accessToken,
+          page: featured_speakers_page,
+          per_page: 30,
+          'filter[]': 'featured==true',
+        }
+      }).then((response) => {
+        featuredSpeakers = [...featuredSpeakers, ...response.data.data];
+        return response.data;
+      })
+      .catch(e => console.log('ERROR: ', e));
+  }
+
+  featuredSpeakers = featuredSpeakers.map(speaker => ({ ...speaker, featured: true }));
+
   let speakers_page = 1;
   let speakers_last_page = 0;
 
@@ -192,6 +232,9 @@ exports.onPreBootstrap = async () => {
       .catch(e => console.log('ERROR: ', e));
   }
 
+  allSpeakers = allSpeakers.filter(speaker => featuredSpeakers.every(s => s.id !== speaker.id));
+
+  allSpeakers = [...allSpeakers, ...featuredSpeakers];
 
   fs.writeFileSync('src/content/speakers.json', JSON.stringify(allSpeakers), 'utf8', function (err) {
     if (err) throw err;
