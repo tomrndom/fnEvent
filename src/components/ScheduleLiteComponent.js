@@ -1,5 +1,6 @@
 import React from "react"
 import { Helmet } from 'react-helmet'
+import axios from 'axios'
 
 import envVariables from '../utils/envVariables';
 import expiredToken from '../utils/expiredToken';
@@ -9,6 +10,9 @@ import ScheduleLite from 'schedule-lite';
 import 'schedule-lite/index.css';
 
 import HomeSettings from '../content/home-settings.json'
+import EventsData from '../content/events.json'
+import SummitData from '../content/summit.json'
+import MarketingData from '../content/colors.json'
 
 const ScheduleComponent = class extends React.Component {
 
@@ -24,7 +28,30 @@ const ScheduleComponent = class extends React.Component {
       summitId: parseInt(envVariables.SUMMIT_ID),
       onAuthError: (err, res) => expiredToken(err),
       onRef: ref => this.child = ref,
-      defaultImage: HomeSettings.schedule_default_image
+      defaultImage: HomeSettings.schedule_default_image,
+      eventsData: EventsData,
+      summitData: SummitData.summit,
+      marketingData: MarketingData.colors,
+      eventCallback: (action, event) => {
+        console.log('here', action, event)
+
+        const url = `${process.env.GATSBY_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/members/me/schedule/${event.id}`;
+
+        switch (action) {
+          case 'ADDED_TO_SCHEDULE': {
+            const action = axios.post(
+              url
+            ).catch(e => console.log('ERROR: ', e));
+            return action
+          }
+          case 'REMOVED_FROM_SCHEDULE': {
+            const action = axios.delete(
+              url
+            ).catch(e => console.log('ERROR: ', e));
+            return action
+          }
+        }
+      }
     };
 
     const { className } = this.props;
