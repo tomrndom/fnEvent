@@ -189,9 +189,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 return;
         }
     }
-
-    console.log(personalProfile.birthday?.date)
-
+    
     return (
         <React.Fragment>
             <AjaxLoader relative={false} color={'#ffffff'} show={user.loadingIDP} size={120} />
