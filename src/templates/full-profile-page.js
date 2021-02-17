@@ -9,8 +9,6 @@ import moment from "moment-timezone";
 import Layout from '../components/Layout'
 import withOrchestra from "../utils/widgetOrchestra";
 
-import SummitObject from '../content/summit.json';
-
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
 import ProfilePopupComponent from '../components/ProfilePopupComponent'
 
@@ -26,7 +24,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
         lastName: '',
         company: '',
         email: '',
-        birthday: '',
+        birthday: null,
         gender: '',
         specifyGender: '',
         irc: '',
@@ -64,7 +62,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 lastName: user.idpProfile.family_name || '',
                 company: user.idpProfile.company || '',
                 email: user.idpProfile.email || '',
-                birthday: user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf() / 1000 : null,
+                birthday: user.idpProfile.birthdate || null,
                 gender: user.idpProfile.gender || '',
                 specifyGender: user.idpProfile.gender_specify,
                 irc: user.idpProfile.irc || '',
@@ -110,7 +108,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 last_name: personalProfile.lastName,
                 company: personalProfile.company,
                 email: personalProfile.email,
-                birthday: personalProfile.birthday,
+                birthday: personalProfile.birthday?.date,
                 gender: personalProfile.gender,
                 gender_specify: personalProfile.gender === 'Specify' ? personalProfile.specifyGender : null,
                 irc: personalProfile.irc,
@@ -160,7 +158,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                     lastName: user.idpProfile.family_name,
                     company: user.idpProfile.company || '',
                     email: user.idpProfile.email || '',
-                    birthday: user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf() / 1000 : null,
+                    birthday: user.idpProfile.birthdate || null,
                     gender: user.idpProfile.gender || '',
                     specifyGender: user.idpProfile.gender_specify,
                     irc: user.idpProfile.irc || '',
@@ -192,6 +190,8 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 return;
         }
     }
+
+    console.log(personalProfile.birthday?.date)
 
     return (
         <React.Fragment>
@@ -269,9 +269,9 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                         <div className="columns field">
                                             <div className={`column ${styles.control}`}>
                                                 <DateTimePicker
-                                                    onChange={e => setPersonalProfile({ ...personalProfile, birthday: (e.target.value.valueOf() / 1000) })}
+                                                    onChange={e => setPersonalProfile({ ...personalProfile, birthday: { ...personalProfile.birthday, date: e.target.value.unix() } })}
                                                     format={{ date: 'MM/DD/YYYY', time: '' }}
-                                                    value={epochToMomentTimeZone(moment(personalProfile.birthday), SummitObject.summit.time_zone_id)}
+                                                    value={moment.tz(personalProfile.birthday?.date, personalProfile.birthday?.timezone ?? 'UTC')}
                                                 />
                                             </div>
                                         </div>
