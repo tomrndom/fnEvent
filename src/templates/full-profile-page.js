@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { connect } from 'react-redux'
-import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 import { AjaxLoader, CountryInput, LanguageInput, DateTimePicker } from 'openstack-uicore-foundation/lib/components'
 import moment from "moment-timezone";
 
