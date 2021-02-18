@@ -1,5 +1,6 @@
 import React from "react"
 import { Helmet } from 'react-helmet'
+import { connect } from "react-redux";
 import axios from 'axios'
 
 import envVariables from '../utils/envVariables';
@@ -18,6 +19,8 @@ const ScheduleComponent = class extends React.Component {
 
   render() {
 
+    const { userProfile, accessToken } = this.props;
+
     const scheduleProps = {
       apiBaseUrl: envVariables.SUMMIT_API_BASE_URL,
       marketingApiBaseUrl: envVariables.MARKETING_API_BASE_URL,
@@ -32,21 +35,20 @@ const ScheduleComponent = class extends React.Component {
       eventsData: EventsData,
       summitData: SummitData.summit,
       marketingData: MarketingData.colors,
+      userProfile: userProfile,
       eventCallback: (action, event) => {
-        console.log('here', action, event)
-
-        const url = `${process.env.GATSBY_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/members/me/schedule/${event.id}`;
-
+        const url = `${envVariables.SUMMIT_API_BASE_URL}/api/v1/summits/${envVariables.SUMMIT_ID}/members/me/schedule/${event.id}`;
         switch (action) {
           case 'ADDED_TO_SCHEDULE': {
             const action = axios.post(
-              url
+              url, { access_token: accessToken }
             ).catch(e => console.log('ERROR: ', e));
             return action
           }
           case 'REMOVED_FROM_SCHEDULE': {
+            console.log('over here')
             const action = axios.delete(
-              url
+              url, { data: { access_token: accessToken } }
             ).catch(e => console.log('ERROR: ', e));
             return action
           }
@@ -69,4 +71,10 @@ const ScheduleComponent = class extends React.Component {
   }
 }
 
-export default ScheduleComponent
+const mapStateToProps = ({ userState, loggedUserState }) => ({
+  userProfile: userState.userProfile,
+  accessToken: loggedUserState.accessToken
+})
+
+
+export default connect(mapStateToProps, {})(ScheduleComponent)
