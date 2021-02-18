@@ -9,6 +9,9 @@ import expiredToken from '../utils/expiredToken';
 import SpeakersWidget from 'speakers-widget';
 import 'speakers-widget/index.css';
 
+import EventsData from '../content/events.json'
+import SpeakersData from '../content/speakers.json'
+
 const SpeakersWidgetComponent = class extends React.Component {
 
   render() {
@@ -23,6 +26,8 @@ const SpeakersWidgetComponent = class extends React.Component {
       // speakerIds: [1, 187, 190],
       onAuthError: (err, res) => expiredToken(err),
       // featured: true,
+      speakersData: SpeakersData,
+      eventsData: EventsData,
       ...props
     };
 
