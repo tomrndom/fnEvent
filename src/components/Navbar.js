@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { navigate } from 'gatsby'
 import styles from '../styles/navbar.module.scss';
 
 import LogoutButton from './LogoutButton';
@@ -52,13 +52,17 @@ const Navbar = class extends React.Component {
     this.props.updateProfile(profile)
   }
 
-  handleTogglePopup = (profile) => {
+  handleTogglePopup = (profile) => {    
     if (profile) {
       document.body.classList.add('is-clipped');
     } else {
       document.body.classList.remove('is-clipped');
     }
     this.setState({ showProfile: profile })
+  }
+
+  goToProfile = () => {
+    navigate('/a/profile');
   }
 
   render() {
@@ -95,8 +99,8 @@ const Navbar = class extends React.Component {
             </Link> */}
             </div>
             <div className={styles.navbarEnd}>
-              {Content.items.map((item, index) => {
-                if (!isLoggedUser && item.link.startsWith('/a/') && !item.link.startsWith('/a/schedule')) {
+              {Content.items.map((item, index) => {                
+                if (!isLoggedUser && item.requiresAuth || isLoggedUser && item.link.startsWith('/a/') && !item.link.startsWith('/a/schedule') && !item.requiresAuth) {
                   return null
                 } else {
                   return (

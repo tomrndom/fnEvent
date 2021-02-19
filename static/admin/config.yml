@@ -101,6 +101,7 @@ collections:
               {label: "Title", name: "title", widget: string},
               {label: "Link", name: "link", widget: string},
               {label: "Display", name: "display", widget: boolean, required: false},
+              {label: "Requires Auth?", name: "requiresAuth", widget: boolean, required: false, default: false},
             ]}
       - file: "src/content/footer.json"
         label: "Footer"
@@ -154,6 +155,7 @@ collections:
               {label: "Image", name: image, widget: image, required: false},
               {label: "Copy", name: copy, widget: text, required: false}
             ]}
+          - {label: "Featured Event - Live Event Widget", name: live_now_featured_event_id, widget: number, required: false, default: null}
   - name: "marketing"
     label: "Marketing Site"
     editor:
@@ -238,6 +240,7 @@ collections:
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "custom-page"}
       - {label: Title, name: title, widget: string}
+      - {label: "Requires Auth?", name: requiresAuth, widget: boolean, required: false, default: false}
       - {label: "Body", name: body, widget: markdown}
   - name: "sponsors"
     label: "Sponsors Data"

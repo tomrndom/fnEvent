@@ -3,23 +3,24 @@ import { Helmet } from 'react-helmet'
 import { connect } from "react-redux";
 import axios from 'axios'
 
-import envVariables from '../utils/envVariables';
-import expiredToken from '../utils/expiredToken';
-
 // these two libraries are client-side only
 import ScheduleLite from 'schedule-lite';
 import 'schedule-lite/index.css';
 
+import withAccessToken from "../utils/withAccessToken";
+
+import envVariables from '../utils/envVariables';
+import expiredToken from '../utils/expiredToken';
 import HomeSettings from '../content/home-settings.json'
 import EventsData from '../content/events.json'
 import SummitData from '../content/summit.json'
 import MarketingData from '../content/colors.json'
 
-const ScheduleComponent = class extends React.Component {
+const ScheduleLiteComponent = class extends React.Component {
 
   render() {
 
-    const { userProfile, accessToken } = this.props;
+    const { className, userProfile, accessToken } = this.props;    
 
     const scheduleProps = {
       eventBaseUrl: "/a/event",
@@ -54,8 +55,6 @@ const ScheduleComponent = class extends React.Component {
       }
     };
 
-    const { className } = this.props;
-
     return (
       <React.Fragment>
         <Helmet>
@@ -69,10 +68,8 @@ const ScheduleComponent = class extends React.Component {
   }
 }
 
-const mapStateToProps = ({ userState, loggedUserState }) => ({
-  userProfile: userState.userProfile,
-  accessToken: loggedUserState.accessToken
+const mapStateToProps = ({ userState }) => ({
+  userProfile: userState.userProfile
 })
 
-
-export default connect(mapStateToProps, {})(ScheduleComponent)
+export default connect(mapStateToProps, {})(withAccessToken(ScheduleLiteComponent))

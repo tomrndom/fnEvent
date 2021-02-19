@@ -1,4 +1,5 @@
 import {
+  getAccessToken,
   getRequest,
   createAction,
   stopLoading,
@@ -18,9 +19,10 @@ export const handleResetReducers = () => (dispatch, getState) => {
   dispatch(createAction(LOGOUT_USER)({}));
 }
 
-export const getEventById = (eventId) => (dispatch, getState) => {
+export const getEventById = (eventId) => async (dispatch, getState) => {
 
-  let { loggedUserState: { accessToken }, eventState: { allEvents } } = getState();
+  let { eventState: { allEvents } } = getState();
+  const accessToken = await getAccessToken();
 
   if (!accessToken) return Promise.resolve();  
 

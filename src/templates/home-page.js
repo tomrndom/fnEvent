@@ -17,11 +17,12 @@ import LiveEventWidgetComponent from '../components/LiveEventWidgetComponent'
 import SpeakersWidgetComponent from '../components/SpeakersWidgetComponent'
 import SponsorComponent from '../components/SponsorComponent'
 import SimpleChatWidgetComponent from '../components/SimpleChatWidgetComponent'
+import AttendanceTrackerComponent from '../components/AttendanceTrackerComponent'
 
 import { getScheduleEvents } from '../actions/schedule-actions'
 import { getDisqusSSO, getUserProfile } from '../actions/user-actions'
+
 import envVariables from "../utils/envVariables";
-import {AttendanceTracker} from "openstack-uicore-foundation/lib/components";
 
 import { sortEvents } from '../utils/schedule'
 
@@ -33,7 +34,7 @@ export const HomePageTemplate = class extends React.Component {
   }
 
   componentWillMount() {
-    this.props.getScheduleEvents();
+    // this.props.getScheduleEvents();
   }
 
   componentDidMount() {
@@ -48,10 +49,8 @@ export const HomePageTemplate = class extends React.Component {
     navigate('/a/schedule')
   }
 
-  
-  // console.log(schedule, sortEvents(schedule));
-  render() {    
-    const { loggedUser, user, schedule, addWidgetRef, updateWidgets } = this.props;
+  render() {
+    const { user, addWidgetRef, updateWidgets } = this.props;
     let { summit } = SummitObject;
 
     return (
@@ -62,11 +61,12 @@ export const HomePageTemplate = class extends React.Component {
             <div className="column is-one-quarter">
               <h2><b>Community</b></h2>
               <SponsorComponent page='lobby'/>
-              <AdvertiseComponent section='lobby' column="left" style={{ marginTop: '2em' }} />
+              <AdvertiseComponent section='lobby' column="left" />
             </div>
             <div className="column is-half">
               <h2><b>Today's Sessions</b></h2>
               <LiveEventWidgetComponent
+                featuredEventId={HomeSettings.live_now_featured_event_id}
                 onEventClick={(ev) => this.onEventChange(ev)}
                 style={{marginBottom: '15px'}}
               />
@@ -78,7 +78,6 @@ export const HomePageTemplate = class extends React.Component {
                 title="Public conversation"
               />
               <ScheduleLiteComponent
-                accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
                 onViewAllEventsClick={() => this.onViewAllEventsClick()}
                 landscape={HomeSettings.centerColumn.schedule.showAllEvents}
@@ -93,14 +92,12 @@ export const HomePageTemplate = class extends React.Component {
               />
               {HomeSettings.centerColumn.speakers.showTodaySpeakers &&
                 <SpeakersWidgetComponent
-                  accessToken={loggedUser.accessToken}
                   title="Today's Speakers"
                   bigPics={true}
                 />
               }
               {HomeSettings.centerColumn.speakers.showFeatureSpeakers &&
                 <SpeakersWidgetComponent
-                  accessToken={loggedUser.accessToken}
                   title="Featured Speakers"
                   bigPics={false}
                   featured={true}
@@ -111,9 +108,8 @@ export const HomePageTemplate = class extends React.Component {
             </div>
             <div className="column is-one-quarter pb-6">
               <h2><b>My Info</b></h2>
-              <SimpleChatWidgetComponent accessToken={loggedUser.accessToken} title="Private Chat" />
+              <SimpleChatWidgetComponent title="Private Chat" />
               <ScheduleLiteComponent
-                accessToken={loggedUser.accessToken}
                 onEventClick={(ev) => this.onEventChange(ev)}
                 onViewAllEventsClick={() => this.onViewAllEventsClick()}
                 title='My Schedule'
@@ -139,7 +135,6 @@ const OrchestedTemplate = withOrchestra(HomePageTemplate);
 const HomePage = (
   {
     location,
-    loggedUser,
     user,
     schedule,
     getUserProfile,
@@ -149,14 +144,8 @@ const HomePage = (
 ) => {  
   return (
     <Layout location={location}>
-      <AttendanceTracker
-          sourceName="LOBBY"
-          summitId={SummitObject.summit.id}
-          apiBaseUrl={envVariables.SUMMIT_API_BASE_URL}
-          accessToken={loggedUser.accessToken}
-      />
+      <AttendanceTrackerComponent sourceName="LOBBY" />
       <OrchestedTemplate
-        loggedUser={loggedUser}
         user={user}
         schedule={schedule}        
         getUserProfile={getUserProfile}
@@ -168,7 +157,6 @@ const HomePage = (
 }
 
 HomePage.propTypes = {
-  loggedUser: PropTypes.object,
   user: PropTypes.object,
   schedule: PropTypes.object,  
   getUserProfile: PropTypes.func,
@@ -177,7 +165,6 @@ HomePage.propTypes = {
 }
 
 HomePageTemplate.propTypes = {
-  loggedUser: PropTypes.object,
   user: PropTypes.object,
   schedule: PropTypes.object,  
   getUserProfile: PropTypes.func,
@@ -185,16 +172,9 @@ HomePageTemplate.propTypes = {
   getScheduleEvents: PropTypes.func,
 }
 
-const mapStateToProps = ({ loggedUserState, scheduleState, userState }) => ({
-  loggedUser: loggedUserState,
+const mapStateToProps = ({ userState, scheduleState }) => ({
   user: userState,
   schedule: scheduleState.schedule
 })
 
-export default connect(mapStateToProps,
-  {
-    getDisqusSSO,
-    getUserProfile,
-    getScheduleEvents
-  }
-)(HomePage);
+export default connect(mapStateToProps, { getDisqusSSO, getUserProfile } )(HomePage);
