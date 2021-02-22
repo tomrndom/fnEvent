@@ -36,7 +36,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
     })
 
     const [showFullName, setShowFullName] = useState(undefined)
-    const [showPicture, setShowPicture] = useState(undefined)
+    //const [showPicture, setShowPicture] = useState(undefined)
     const [showEmail, setShowEmail] = useState(undefined)
     const [bio, setBio] = useState('')
 
@@ -76,7 +76,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 language: user.idpProfile.locale || ''
             });
             setShowFullName(user.idpProfile.public_profile_show_fullname);
-            setShowPicture(user.idpProfile.public_profile_show_photo);
+            //setShowPicture(user.idpProfile.public_profile_show_photo);
             setShowEmail(user.idpProfile.public_profile_show_email);
             setBio(user.idpProfile.bio || '');
             setAddress({
@@ -122,7 +122,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 twitter_name: personalProfile.twitter,
                 language: personalProfile.language,
                 public_profile_show_fullname: showFullName,
-                public_profile_show_photo: showPicture,
+                //public_profile_show_photo: showPicture,
                 public_profile_show_email: showEmail,
                 bio: bio,
                 address1: address.street,
@@ -176,7 +176,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                     language: user.idpProfile.locale || ''
                 });
                 setShowFullName(user.idpProfile.public_profile_show_fullname);
-                setShowPicture(user.idpProfile.public_profile_show_photo);
+                //setShowPicture(user.idpProfile.public_profile_show_photo);
                 setShowEmail(user.idpProfile.public_profile_show_email);
                 break;
             case 'bio':
@@ -396,11 +396,13 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                 Show full name on public profile
                                 </label>
                             <br />
+                            {/*
                             <label className={styles.checkbox}>
                                 <input type="checkbox" value={showPicture} onChange={e => setShowPicture(e.target.value)} />
                                 Show picture on public profile
                                 </label>
                             <br />
+                            */}
                             <label className={styles.checkbox}>
                                 <input type="checkbox" value={showEmail} onChange={e => setShowEmail(e.target.value)} />
                                 Show email on public profile
