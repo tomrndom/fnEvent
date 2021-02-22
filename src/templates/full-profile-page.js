@@ -28,10 +28,10 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
         birthday: null,
         gender: '',
         specifyGender: '',
-        irc: '',
         github: '',
-        twitter: '',
+        irc: '',
         linkedin: '',
+        twitter: '',
         language: ''
     })
 
@@ -116,10 +116,10 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 birthday: personalProfile.birthday?.unix(),
                 gender: personalProfile.gender,
                 gender_specify: personalProfile.gender === 'Specify' ? personalProfile.specifyGender : null,
-                irc: personalProfile.irc,
                 github_user: personalProfile.github,
-                twitter_name: personalProfile.twitter,
+                irc: personalProfile.irc,
                 linked_in_profile: personalProfile.linkedin,
+                twitter_name: personalProfile.twitter,
                 language: personalProfile.language,
                 public_profile_show_fullname: showFullName,
                 public_profile_show_photo: showPicture,
@@ -169,10 +169,10 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                     birthday: birthdate,
                     gender: user.idpProfile.gender || '',
                     specifyGender: user.idpProfile.gender_specify,
-                    irc: user.idpProfile.irc || '',
                     github: user.idpProfile.github_user || '',
-                    twitter: user.idpProfile.twitter_user || '',
+                    irc: user.idpProfile.irc || '',
                     linkedin: user.idpProfile.linked_in_profile || '',
+                    twitter: user.idpProfile.twitter_user || '',
                     language: user.idpProfile.locale || ''
                 });
                 setShowFullName(user.idpProfile.public_profile_show_fullname);
@@ -339,16 +339,6 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                 }
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>IRC</b>
-                                        <input
-                                            className={`${styles.input} ${styles.isLarge}`}
-                                            type="text"
-                                            placeholder="IRC"
-                                            onChange={e => setPersonalProfile({ ...personalProfile, irc: e.target.value })}
-                                            value={personalProfile.irc}
-                                        />
-                                    </div>
-                                    <div className={`column is-half ${styles.inputField}`}>
                                         <b>Github</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
@@ -358,18 +348,18 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                             value={personalProfile.github}
                                         />
                                     </div>
-                                </div>
-                                <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Twitter</b>
+                                        <b>IRC</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
-                                            placeholder="Twitter"
-                                            onChange={e => setPersonalProfile({ ...personalProfile, twitter: e.target.value })}
-                                            value={personalProfile.twitter}
+                                            placeholder="IRC"
+                                            onChange={e => setPersonalProfile({ ...personalProfile, irc: e.target.value })}
+                                            value={personalProfile.irc}
                                         />
                                     </div>
+                                </div>
+                                <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
                                         <b>LinkedIn</b>
                                         <input
@@ -378,6 +368,16 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                             placeholder="LinkedIn"
                                             onChange={e => setPersonalProfile({ ...personalProfile, linkedin: e.target.value })}
                                             value={personalProfile.linkedin}
+                                        />
+                                    </div>
+                                    <div className={`column is-half ${styles.inputField}`}>
+                                        <b>Twitter</b>
+                                        <input
+                                            className={`${styles.input} ${styles.isLarge}`}
+                                            type="text"
+                                            placeholder="Twitter"
+                                            onChange={e => setPersonalProfile({ ...personalProfile, twitter: e.target.value })}
+                                            value={personalProfile.twitter}
                                         />
                                     </div>
                                 </div>
