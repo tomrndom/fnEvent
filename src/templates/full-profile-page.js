@@ -446,7 +446,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                             <div className={styles.form}>
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Address</b>
+                                        <b>Address 1</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
