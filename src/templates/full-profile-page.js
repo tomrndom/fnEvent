@@ -221,7 +221,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                             <div className={styles.form}>
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>First Name</b>
+                                        <b>First Name *</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
@@ -231,7 +231,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Last Name</b>
+                                        <b>Last Name *</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
@@ -253,7 +253,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Email</b>
+                                        <b>Email *</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
@@ -357,7 +357,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                 </div>
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Identifier</b>
+                                        <b>Identifier *</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
