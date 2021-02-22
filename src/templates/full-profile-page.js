@@ -56,12 +56,14 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
             getIDPProfile();
         } else {
             setImage(user.idpProfile.picture)
+            let birthdate = user.idpProfile.birthdate ?
+                moment.tz(user.idpProfile.birthdate.date, user.idpProfile.birthdate.timezone || 'UTC') : null
             setPersonalProfile({
                 firstName: user.idpProfile.given_name || '',
                 lastName: user.idpProfile.family_name || '',
                 company: user.idpProfile.company || '',
                 email: user.idpProfile.email || '',
-                birthday: user.idpProfile.birthdate || null,
+                birthday: birthdate,
                 gender: user.idpProfile.gender || '',
                 specifyGender: user.idpProfile.gender_specify,
                 irc: user.idpProfile.irc || '',
@@ -107,7 +109,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 last_name: personalProfile.lastName,
                 company: personalProfile.company,
                 email: personalProfile.email,
-                birthday: personalProfile.birthday?.date,
+                birthday: personalProfile.birthday?.unix(),
                 gender: personalProfile.gender,
                 gender_specify: personalProfile.gender === 'Specify' ? personalProfile.specifyGender : null,
                 irc: personalProfile.irc,
@@ -152,12 +154,14 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
     const discardChanges = (state) => {
         switch (state) {
             case 'profile':
+                let birthdate = user.idpProfile.birthdate ?
+                    moment.tz(user.idpProfile.birthdate.date, user.idpProfile.birthdate.timezone || 'UTC') : null
                 setPersonalProfile({
                     firstName: user.idpProfile.given_name,
                     lastName: user.idpProfile.family_name,
                     company: user.idpProfile.company || '',
                     email: user.idpProfile.email || '',
-                    birthday: user.idpProfile.birthdate || null,
+                    birthday: birthdate,
                     gender: user.idpProfile.gender || '',
                     specifyGender: user.idpProfile.gender_specify,
                     irc: user.idpProfile.irc || '',
@@ -189,7 +193,6 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 return;
         }
     }
-    
     return (
         <React.Fragment>
             <AjaxLoader relative={false} color={'#ffffff'} show={user.loadingIDP} size={120} />
@@ -266,9 +269,9 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                         <div className="columns field">
                                             <div className={`column ${styles.control}`}>
                                                 <DateTimePicker
-                                                    onChange={e => setPersonalProfile({ ...personalProfile, birthday: { ...personalProfile.birthday, date: e.target.value.unix() } })}
+                                                    onChange={e => setPersonalProfile({ ...personalProfile, birthday: e.target.value })}
                                                     format={{ date: 'MM/DD/YYYY', time: '' }}
-                                                    value={moment.tz(personalProfile.birthday?.date, personalProfile.birthday?.timezone ?? 'UTC')}
+                                                    value={personalProfile.birthday}
                                                 />
                                             </div>
                                         </div>
