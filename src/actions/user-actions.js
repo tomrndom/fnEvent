@@ -192,6 +192,9 @@ export const updatePassword = (password) => async (dispatch, getState) => {
     password,
     customErrorHandler
   )(params)(dispatch)
-    .then(() => dispatch(getIDPProfile()))
+    .then(() => {
+      let msg = 'Password Updated';
+      Swal.fire("Success", msg, "success");
+    })
     .catch(() => dispatch(dispatch(createAction(STOP_LOADING_IDP_PROFILE))));
 }
