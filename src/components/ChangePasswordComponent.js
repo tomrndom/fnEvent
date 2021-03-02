@@ -72,7 +72,7 @@ const ChangePasswordComponent = ({ updatePassword }) => {
                     </div>
                     <div className={`columns is-mobile ${styles.buttons}`}>
                         <div className={`column is-full`}>
-                            <button className="button is-large" onClick={() => updatePassword(currentPassword, newPassword, newPasswordConfirm)}>Update</button>
+                            <button disabled={!currentPassword || !newPassword || !newPasswordConfirm} className="button is-large" onClick={() => updatePassword(currentPassword, newPassword, newPasswordConfirm)}>Update</button>
                         </div>
                     </div>
                     {/* <div className={styles.recoverPassword}>
