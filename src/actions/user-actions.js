@@ -151,7 +151,7 @@ export const getIDPProfile = () => async (dispatch, getState) => {
     `${window.IDP_BASE_URL}/api/v1/users/me`,
     customErrorHandler
   )(params)(dispatch)
-    .then(() => dispatch(dispatch(createAction(STOP_LOADING_IDP_PROFILE))));
+    .then(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)));
 }
 
 export const updateProfilePicture = (pic) => async (dispatch, getState) => {
