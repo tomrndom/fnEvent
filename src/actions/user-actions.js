@@ -89,7 +89,7 @@ export const getUserProfile = () => async (dispatch, getState) => {
     dispatch(setAuthorization());
     dispatch(setUserTicket());
     dispatch(getIDPProfile());
-    return dispatch(dispatch(createAction(STOP_LOADING_PROFILE)))
+    return dispatch(createAction(STOP_LOADING_PROFILE)());
   });
 }
 
@@ -151,7 +151,8 @@ export const getIDPProfile = () => async (dispatch, getState) => {
     `${window.IDP_BASE_URL}/api/v1/users/me`,
     customErrorHandler
   )(params)(dispatch)
-    .then(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)));
+    .then(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()))
+    .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
 
 export const updateProfilePicture = (pic) => async (dispatch, getState) => {
@@ -172,7 +173,8 @@ export const updateProfilePicture = (pic) => async (dispatch, getState) => {
     {},
     customErrorHandler,
   )(params)(dispatch)
-    .then(() => dispatch(getIDPProfile()));
+    .then(() => dispatch(getIDPProfile()))
+    .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
 
 export const updateProfile = (profile) => async (dispatch, getState) => {
@@ -193,7 +195,7 @@ export const updateProfile = (profile) => async (dispatch, getState) => {
     customErrorHandler
   )(params)(dispatch)
     .then(() => dispatch(getIDPProfile()))
-    .catch(() => dispatch(dispatch(createAction(STOP_LOADING_IDP_PROFILE))));
+    .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
 
 export const updatePassword = (password) => async (dispatch) => {  
@@ -217,5 +219,5 @@ export const updatePassword = (password) => async (dispatch) => {
       let msg = 'Password Updated';
       Swal.fire("Success", msg, "success");
     })
-    .catch(() => dispatch(dispatch(createAction(STOP_LOADING_IDP_PROFILE))));
+    .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
