@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { connect } from 'react-redux'
-import { epochToMomentTimeZone } from "openstack-uicore-foundation/lib/methods";
 import { AjaxLoader, CountryInput, LanguageInput, DateTimePicker } from 'openstack-uicore-foundation/lib/components'
 import moment from "moment-timezone";
 
@@ -10,8 +9,6 @@ import Swal from 'sweetalert2';
 
 import Layout from '../components/Layout'
 import withOrchestra from "../utils/widgetOrchestra";
-
-import SummitObject from '../content/summit.json';
 
 import ScheduleLiteComponent from '../components/ScheduleLiteComponent'
 import ProfilePopupComponent from '../components/ProfilePopupComponent'
@@ -27,23 +24,25 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
     const [personalProfile, setPersonalProfile] = useState({
         firstName: '',
         lastName: '',
-        company: '',
+        identifier: '',
         email: '',
-        birthday: '',
+        company: '',
+        jobTitle: '',
+        birthday: null,
         gender: '',
         specifyGender: '',
-        irc: '',
         github: '',
-        twitter: '',
+        irc: '',
         linkedin: '',
-        identifier: '',
+        twitter: '',
         language: ''
     })
 
     const [showFullName, setShowFullName] = useState(undefined)
-    const [showPicture, setShowPicture] = useState(undefined)
+    //const [showPicture, setShowPicture] = useState(undefined)
     const [showEmail, setShowEmail] = useState(undefined)
     const [bio, setBio] = useState('')
+    const [statementOfInterest, setStatementOfInterest] = useState('')
 
     const [address, setAddress] = useState({
         street: '',
@@ -63,25 +62,29 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
             getIDPProfile();
         } else {
             setImage(user.idpProfile.picture)
+            let birthdate = user.idpProfile.birthdate ?
+                moment.tz(user.idpProfile.birthdate.date, user.idpProfile.birthdate.timezone || 'UTC') : null
             setPersonalProfile({
                 firstName: user.idpProfile.given_name || '',
                 lastName: user.idpProfile.family_name || '',
-                company: user.idpProfile.company || '',
+                identifier: user.idpProfile.nickname || '',
                 email: user.idpProfile.email || '',
-                birthday: user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf() / 1000 : null,
+                company: user.idpProfile.company || '',
+                jobTitle: user.idpProfile.job_title || '',
+                birthday: birthdate,
                 gender: user.idpProfile.gender || '',
                 specifyGender: user.idpProfile.gender_specify,
                 irc: user.idpProfile.irc || '',
                 github: user.idpProfile.github_user || '',
                 twitter: user.idpProfile.twitter_name || '',
                 linkedin: user.idpProfile.linked_in_profile || '',
-                identifier: user.idpProfile.nickname || '',
                 language: user.idpProfile.locale || ''
             });
             setShowFullName(user.idpProfile.public_profile_show_fullname);
-            setShowPicture(user.idpProfile.public_profile_show_photo);
+            //setShowPicture(user.idpProfile.public_profile_show_photo);
             setShowEmail(user.idpProfile.public_profile_show_email);
             setBio(user.idpProfile.bio || '');
+            setStatementOfInterest(user.idpProfile.statement_of_interest || '');
             setAddress({
                 street: user.idpProfile.address1 || '',
                 floor: user.idpProfile.address2 || '',
@@ -175,27 +178,33 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
     const discardChanges = (state) => {
         switch (state) {
             case 'profile':
+                let birthdate = user.idpProfile.birthdate ?
+                    moment.tz(user.idpProfile.birthdate.date, user.idpProfile.birthdate.timezone || 'UTC') : null
                 setPersonalProfile({
                     firstName: user.idpProfile.given_name,
                     lastName: user.idpProfile.family_name,
-                    company: user.idpProfile.company || '',
+                    identifier: user.idpProfile.nickname || '',
                     email: user.idpProfile.email || '',
-                    birthday: user.idpProfile.birthdate?.date ? moment(user.idpProfile.birthdate.date).valueOf() / 1000 : null,
+                    company: user.idpProfile.company || '',
+                    jobTitle: user.idpProfile.job_title || '',
+                    birthday: birthdate,
                     gender: user.idpProfile.gender || '',
                     specifyGender: user.idpProfile.gender_specify,
-                    irc: user.idpProfile.irc || '',
                     github: user.idpProfile.github_user || '',
-                    twitter: user.idpProfile.twitter_user || '',
+                    irc: user.idpProfile.irc || '',
                     linkedin: user.idpProfile.linked_in_profile || '',
-                    identifier: user.idpProfile.nickname || '',
+                    twitter: user.idpProfile.twitter_user || '',
                     language: user.idpProfile.locale || ''
                 });
                 setShowFullName(user.idpProfile.public_profile_show_fullname);
-                setShowPicture(user.idpProfile.public_profile_show_photo);
+                //setShowPicture(user.idpProfile.public_profile_show_photo);
                 setShowEmail(user.idpProfile.public_profile_show_email);
                 break;
             case 'bio':
                 setBio(user.idpProfile.bio || '');
+                break;
+            case 'statementOfInterest':
+                setStatementOfInterest(user.idpProfile.statement_of_interest || '');
                 break;
             case 'address':
                 setAddress({
@@ -212,7 +221,6 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 return;
         }
     }
-
     return (
         <React.Fragment>
             <AjaxLoader relative={false} color={'#ffffff'} show={user.loadingIDP} size={120} />
@@ -242,7 +250,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                             <div className={styles.form}>
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>First Name</b>
+                                        <b>First Name *</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge} ${!personalProfile.firstName ? styles.isDanger : ''}`}
                                             type="text"
@@ -252,7 +260,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Last Name</b>
+                                        <b>Last Name *</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge} ${!personalProfile.lastName ? styles.isDanger : ''}`}
                                             type="text"
@@ -296,13 +304,13 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                         />
                                     </div>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Email</b>
+                                        <b>Job Title</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"
-                                            placeholder="Email"
-                                            onChange={e => setPersonalProfile({ ...personalProfile, email: e.target.value })}
-                                            value={personalProfile.email}
+                                            placeholder="Job Title"
+                                            onChange={e => setPersonalProfile({ ...personalProfile, jobTitle: e.target.value })}
+                                            value={personalProfile.jobTitle}
                                         />
                                     </div>
                                 </div>
@@ -312,9 +320,9 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                         <div className="columns field">
                                             <div className={`column ${styles.control}`}>
                                                 <DateTimePicker
-                                                    onChange={e => setPersonalProfile({ ...personalProfile, birthday: (e.target.value.valueOf() / 1000) })}
+                                                    onChange={e => setPersonalProfile({ ...personalProfile, birthday: e.target.value })}
                                                     format={{ date: 'MM/DD/YYYY', time: '' }}
-                                                    value={epochToMomentTimeZone(moment(personalProfile.birthday), SummitObject.summit.time_zone_id)}
+                                                    value={personalProfile.birthday}
                                                 />
                                             </div>
                                         </div>
@@ -356,16 +364,6 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                 }
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>IRC</b>
-                                        <input
-                                            className={`${styles.input} ${styles.isLarge}`}
-                                            type="text"
-                                            placeholder="IRC"
-                                            onChange={e => setPersonalProfile({ ...personalProfile, irc: e.target.value })}
-                                            value={personalProfile.irc}
-                                        />
-                                    </div>
-                                    <div className={`column is-half ${styles.inputField}`}>
                                         <b>Github</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
@@ -375,8 +373,28 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                             value={personalProfile.github}
                                         />
                                     </div>
+                                    <div className={`column is-half ${styles.inputField}`}>
+                                        <b>IRC</b>
+                                        <input
+                                            className={`${styles.input} ${styles.isLarge}`}
+                                            type="text"
+                                            placeholder="IRC"
+                                            onChange={e => setPersonalProfile({ ...personalProfile, irc: e.target.value })}
+                                            value={personalProfile.irc}
+                                        />
+                                    </div>
                                 </div>
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
+                                    <div className={`column is-half ${styles.inputField}`}>
+                                        <b>LinkedIn</b>
+                                        <input
+                                            className={`${styles.input} ${styles.isLarge}`}
+                                            type="text"
+                                            placeholder="LinkedIn"
+                                            onChange={e => setPersonalProfile({ ...personalProfile, linkedin: e.target.value })}
+                                            value={personalProfile.linkedin}
+                                        />
+                                    </div>
                                     <div className={`column is-half ${styles.inputField}`}>
                                         <b>Twitter</b>
                                         <input
@@ -387,28 +405,8 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                             value={personalProfile.twitter}
                                         />
                                     </div>
-                                    <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Linkedin</b>
-                                        <input
-                                            className={`${styles.input} ${styles.isLarge}`}
-                                            type="text"
-                                            placeholder="Linkedin"
-                                            onChange={e => setPersonalProfile({ ...personalProfile, linkedin: e.target.value })}
-                                            value={personalProfile.linkedin}
-                                        />
-                                    </div>
                                 </div>
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
-                                    <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Identifier</b>
-                                        <input
-                                            className={`${styles.input} ${styles.isLarge}`}
-                                            type="text"
-                                            placeholder="Identifier"
-                                            onChange={e => setPersonalProfile({ ...personalProfile, identifier: e.target.value })}
-                                            value={personalProfile.identifier}
-                                        />
-                                    </div>
                                     <div className={`column is-half ${styles.inputField}`}>
                                         <b>Language</b>
                                         <LanguageInput
@@ -423,11 +421,13 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                 Show full name on public profile
                                 </label>
                             <br />
+                            {/*
                             <label className={styles.checkbox}>
                                 <input type="checkbox" value={showPicture} onChange={e => setShowPicture(e.target.value)} />
                                 Show picture on public profile
                                 </label>
                             <br />
+                            */}
                             <label className={styles.checkbox}>
                                 <input type="checkbox" value={showEmail} onChange={e => setShowEmail(e.target.value)} />
                                 Show email on public profile
@@ -446,12 +446,26 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                             <div className={styles.form}>
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-full ${styles.inputField}`}>
+                                        <b>Bio</b>
                                         <textarea
                                             className={`textarea ${styles.textarea}`}
                                             placeholder=''
                                             rows="6"
                                             onChange={e => setBio(e.target.value)}
                                             value={bio}
+                                        >
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div className={`columns is-mobile ${styles.inputRow}`}>
+                                    <div className={`column is-full ${styles.inputField}`}>
+                                        <b>Statement of Interest</b>
+                                        <textarea
+                                            className={`textarea ${styles.textarea}`}
+                                            placeholder=''
+                                            rows="6"
+                                            onChange={e => setStatementOfInterest(e.target.value)}
+                                            value={statementOfInterest}
                                         >
                                         </textarea>
                                     </div>
@@ -471,7 +485,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                             <div className={styles.form}>
                                 <div className={`columns is-mobile ${styles.inputRow}`}>
                                     <div className={`column is-half ${styles.inputField}`}>
-                                        <b>Address</b>
+                                        <b>Address 1</b>
                                         <input
                                             className={`${styles.input} ${styles.isLarge}`}
                                             type="text"

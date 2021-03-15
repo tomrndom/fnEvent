@@ -21,7 +21,7 @@ import AttendanceTrackerComponent from '../components/AttendanceTrackerComponent
 
 import { getDisqusSSO, getUserProfile } from '../actions/user-actions'
 
-import envVariables from "../utils/envVariables";
+import { envVariables } from "../utils/envVariables";
 
 export const HomePageTemplate = class extends React.Component {
 
