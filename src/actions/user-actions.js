@@ -215,7 +215,7 @@ export const updatePassword = (password) => async (dispatch) => {
     customErrorHandler
   )(params)(dispatch)
     .then(() => {
-      dispatch(createAction(STOP_LOADING_IDP_PROFILE))
+      dispatch(createAction(STOP_LOADING_IDP_PROFILE)());
       let msg = 'Password Updated';
       Swal.fire("Success", msg, "success");
     })
