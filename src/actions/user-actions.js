@@ -33,7 +33,7 @@ export const SCAN_BADGE                = 'SCAN_BADGE';
 export const SCAN_BADGE_SUCCESS        = 'SCAN_BADGE_SUCCESS';
 export const SCAN_BADGE_ERROR          = 'SCAN_BADGE_ERROR';
 
-export const getDisqusSSO = () => async (dispatch, getState) => {
+export const getDisqusSSO = () => async (dispatch) => {
 
   const accessToken = await getAccessToken();
 
@@ -49,7 +49,7 @@ export const getDisqusSSO = () => async (dispatch, getState) => {
   });
 }
 
-export const getRocketChatSSO = () => async (dispatch, getState) => {
+export const getRocketChatSSO = () => async (dispatch) => {
 
   const accessToken = await getAccessToken();
 
@@ -69,7 +69,7 @@ export const getRocketChatSSO = () => async (dispatch, getState) => {
   });
 }
 
-export const getUserProfile = () => async (dispatch, getState) => {
+export const getUserProfile = () => async (dispatch) => {
 
   const accessToken = await getAccessToken();
 
@@ -105,7 +105,7 @@ const setUserTicket = () => (dispatch, getState) => {
   return dispatch(createAction(SET_USER_TICKET)(hasTicket));
 }
 
-export const scanBadge = (sponsorId) => async (dispatch, getState) => {
+export const scanBadge = (sponsorId) => async (dispatch) => {
 
   const accessToken = await getAccessToken();
   
@@ -135,7 +135,7 @@ export const scanBadge = (sponsorId) => async (dispatch, getState) => {
     });
 }
 
-export const getIDPProfile = () => async (dispatch, getState) => {
+export const getIDPProfile = () => async (dispatch) => {
 
   const accessToken = await getAccessToken();
 
@@ -155,7 +155,7 @@ export const getIDPProfile = () => async (dispatch, getState) => {
     .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
 
-export const updateProfilePicture = (pic) => async (dispatch, getState) => {
+export const updateProfilePicture = (pic) => async (dispatch) => {
 
   const accessToken = await getAccessToken();
 
@@ -177,7 +177,7 @@ export const updateProfilePicture = (pic) => async (dispatch, getState) => {
     .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
 
-export const updateProfile = (profile) => async (dispatch, getState) => {
+export const updateProfile = (profile) => async (dispatch) => {
   
   const accessToken = await getAccessToken();
 
@@ -199,6 +199,7 @@ export const updateProfile = (profile) => async (dispatch, getState) => {
 }
 
 export const updatePassword = (password) => async (dispatch) => {  
+
   const accessToken = await getAccessToken();
 
   if (!accessToken) return Promise.resolve();

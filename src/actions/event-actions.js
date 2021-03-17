@@ -15,11 +15,11 @@ import { LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
 export const GET_EVENT_DATA         = 'GET_EVENT_DATA';
 export const GET_EVENT_DATA_ERROR   = 'GET_EVENT_DATA_ERROR';
 
-export const handleResetReducers = () => (dispatch, getState) => {
+export const handleResetReducers = () => (dispatch) => {
   dispatch(createAction(LOGOUT_USER)({}));
 }
 
-export const getEventById = (eventId) => async (dispatch, getState) => {
+export const getEventById = (eventId) => async (dispatch) => {
 
   const accessToken = await getAccessToken();
 
