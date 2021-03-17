@@ -56,7 +56,7 @@ export const getRocketChatSSO = () => async (dispatch) => {
   dispatch(startLoading());
 
   return getRequest(
-    dispatch(startLoading()),
+    null,
     createAction(GET_ROCKETCHAT_SSO),
     `${window.IDP_BASE_URL}/api/v1/sso/rocket-chat/fnvirtual-poc/profile?access_token=${accessToken}`,
     customErrorHandler
