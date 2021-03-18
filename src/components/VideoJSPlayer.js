@@ -68,7 +68,7 @@ class VideoJSPlayer extends React.Component {
             modal.fill();
             if (firstHalf) {
               reloadPlayer = setInterval(() => {
-                console.log('reload player...')
+                // reload player
                 this.player.load();
                 this.player.src(src);
                 this.player.reset();
