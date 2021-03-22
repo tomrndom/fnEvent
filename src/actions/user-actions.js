@@ -43,8 +43,7 @@ export const getDisqusSSO = () => async (dispatch) => {
     `${window.IDP_BASE_URL}/api/v1/sso/disqus/fnvirtual-poc/profile?access_token=${accessToken}`,
     customErrorHandler
   )({})(dispatch).then(() => {
-  }
-  ).catch(e => {
+  }).catch(e => {
     return (e);
   });
 }
@@ -53,18 +52,13 @@ export const getRocketChatSSO = () => async (dispatch) => {
 
   const accessToken = await getAccessToken();
 
-  dispatch(startLoading());
-
   return getRequest(
     null,
     createAction(GET_ROCKETCHAT_SSO),
     `${window.IDP_BASE_URL}/api/v1/sso/rocket-chat/fnvirtual-poc/profile?access_token=${accessToken}`,
     customErrorHandler
   )({})(dispatch).then(() => {
-    dispatch(stopLoading());
-  }
-  ).catch(e => {
-    dispatch(stopLoading());
+  }).catch(e => {
     return (e);
   });
 }
@@ -80,8 +74,10 @@ export const getUserProfile = () => async (dispatch) => {
     expand: 'groups,summit_tickets,summit_tickets.badge,summit_tickets.badge.features,summit_tickets.badge.type'
   };
 
+  dispatch(startLoading());
+
   return getRequest(
-    createAction(START_LOADING_PROFILE),
+    null,
     createAction(GET_USER_PROFILE),
     `${window.SUMMIT_API_BASE_URL}/api/v1/summits/${window.SUMMIT_ID}/members/me`,
     customErrorHandler
@@ -130,7 +126,6 @@ export const scanBadge = (sponsorId) => async (dispatch) => {
     })
     .catch(e => {
         dispatch(createAction(SCAN_BADGE_ERROR)(e));
-        dispatch(stopLoading());
         return (e);
     });
 }
@@ -145,8 +140,10 @@ export const getIDPProfile = () => async (dispatch) => {
     access_token: accessToken,
   };
 
+  dispatch(createAction(START_LOADING_IDP_PROFILE)());
+
   getRequest(
-    createAction(START_LOADING_IDP_PROFILE),
+    null,
     createAction(GET_IDP_PROFILE),
     `${window.IDP_BASE_URL}/api/v1/users/me`,
     customErrorHandler
@@ -165,8 +162,10 @@ export const updateProfilePicture = (pic) => async (dispatch) => {
     access_token: accessToken,
   };
 
+  dispatch(createAction(START_LOADING_IDP_PROFILE)());
+
   putFile(
-    createAction(START_LOADING_IDP_PROFILE),
+    null,
     createAction(UPDATE_PROFILE_PIC),
     `${window.IDP_BASE_URL}/api/v1/users/me/pic`,
     pic,
@@ -187,8 +186,10 @@ export const updateProfile = (profile) => async (dispatch) => {
     access_token: accessToken,
   };
 
+  dispatch(createAction(START_LOADING_IDP_PROFILE)());
+
   putRequest(
-    createAction(START_LOADING_IDP_PROFILE),
+    null,
     createAction(UPDATE_IDP_PROFILE),
     `${window.IDP_BASE_URL}/api/v1/users/me`,
     profile,
@@ -208,8 +209,10 @@ export const updatePassword = (password) => async (dispatch) => {
     access_token: accessToken,
   };
 
+  dispatch(createAction(START_LOADING_IDP_PROFILE)());
+
   putRequest(
-    createAction(START_LOADING_IDP_PROFILE),
+    null,
     createAction(UPDATE_PASSWORD),
     `${window.IDP_BASE_URL}/api/v1/users/me`,
     password,

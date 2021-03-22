@@ -41,7 +41,7 @@ export const getEventById = (eventId) => async (dispatch) => {
     dispatch(stopLoading());
   }).catch(e => {
     dispatch(stopLoading());
-    dispatch(createAction(GET_EVENT_DATA_ERROR)({}))
+    dispatch(createAction(GET_EVENT_DATA_ERROR)(e));
     return (e);
   });
 }

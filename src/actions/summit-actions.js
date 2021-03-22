@@ -28,8 +28,7 @@ export const getSummitData = () => (dispatch) => {
     customErrorHandler
   )({})(dispatch).then(() => {
     dispatch(stopLoading());
-  }
-  ).catch(e => {
+  }).catch(e => {
     dispatch(stopLoading());
     return (e);
   });
