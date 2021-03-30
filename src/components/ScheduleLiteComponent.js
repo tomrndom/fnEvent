@@ -73,4 +73,4 @@ const mapStateToProps = ({ userState }) => ({
   userProfile: userState.userProfile
 })
 
-export default connect(mapStateToProps, {})(withAccessToken(ScheduleLiteComponent))
+export default connect(mapStateToProps, null)(withAccessToken(ScheduleLiteComponent))
