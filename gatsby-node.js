@@ -106,7 +106,7 @@ exports.onPreBootstrap = async () => {
       const accessToken = await client.getToken(tokenParams);
       return accessToken;
     } catch (error) {
-      console.log('Access Token error', error.message);
+      console.log('Access Token error', error);
     }
   }
 
