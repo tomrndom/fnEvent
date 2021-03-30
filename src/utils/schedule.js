@@ -22,11 +22,3 @@ export const sortEvents = (events) => {
   sortedEvents = sortSchedule(sortedEvents);
   return sortedEvents;
 }
-
-export const getNextEvent = () => {
-
-}
-
-export const getNextEventByTrack = () => {
-  
-}
