@@ -38,3 +38,5 @@ const SpeakersWidgetComponent = class extends React.Component {
 const mapStateToProps = ({ clockState }) => ({
   now: clockState.nowUtc
 })
+
+export default connect(mapStateToProps, null)(SpeakersWidgetComponent)

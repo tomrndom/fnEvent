@@ -9,7 +9,8 @@ import 'schedule-lite/index.css';
 
 import withAccessToken from "../utils/withAccessToken";
 
-import envVariables from '../utils/envVariables';
+import { getEnvVariable, SUMMIT_API_BASE_URL, MARKETING_API_BASE_URL, SUMMIT_ID } from '../utils/envVariables';
+
 import expiredToken from '../utils/expiredToken';
 import HomeSettings from '../content/home-settings.json'
 import EventsData from '../content/events.json'
@@ -27,7 +28,7 @@ const ScheduleLiteComponent = class extends React.Component {
       trackBaseUrl: "/a/tracks",
       speakerBaseUrl: "/a/speakers",
       roomBaseUrl: "/a/rooms",
-      summitId: parseInt(envVariables.SUMMIT_ID),
+      summitId: parseInt(getEnvVariable(SUMMIT_ID)),
       onAuthError: (err, res) => expiredToken(err),
       onRef: ref => this.child = ref,
       defaultImage: HomeSettings.schedule_default_image,
@@ -36,7 +37,7 @@ const ScheduleLiteComponent = class extends React.Component {
       marketingData: MarketingData.colors,
       userProfile: userProfile,
       eventCallback: (action, event) => {
-        const url = `${envVariables.SUMMIT_API_BASE_URL}/api/v1/summits/${envVariables.SUMMIT_ID}/members/me/schedule/${event.id}`;
+        const url = `${getEnvVariable(SUMMIT_API_BASE_URL)}/api/v1/summits/${getEnvVariable(SUMMIT_ID)}/members/me/schedule/${event.id}`;
         switch (action) {
           case 'ADDED_TO_SCHEDULE': {
             const action = axios.post(
