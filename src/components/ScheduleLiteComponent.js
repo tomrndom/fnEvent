@@ -40,22 +40,28 @@ const ScheduleLiteComponent = class extends React.Component {
         const url = `${getEnvVariable(SUMMIT_API_BASE_URL)}/api/v1/summits/${getEnvVariable(SUMMIT_ID)}/members/me/schedule/${event.id}`;
         switch (action) {
           case 'ADDED_TO_SCHEDULE': {
-            const action = axios.post(
+            const request = axios.post(
               url, { access_token: accessToken }
             ).then(() => {
               this.props.addToSchedule(event);
               return event;
-            }).catch(e => console.log('ERROR: ', e));
-            return action
+            }).catch(e => {
+              console.log('ERROR: ', e)
+              return e;
+            });
+            return request;
           }
           case 'REMOVED_FROM_SCHEDULE': {
-            const action = axios.delete(
+            const request = axios.delete(
               url, { data: { access_token: accessToken } }
             ).then(() => {
               this.props.removeFromSchedule(event);
               return event;
-            }).catch(e => console.log('ERROR: ', e));
-            return action
+            }).catch(e => {
+              console.log('ERROR: ', e)
+              return e;
+            });
+            return request;
           }
         }
       }
