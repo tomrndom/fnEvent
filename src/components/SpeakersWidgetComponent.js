@@ -7,6 +7,7 @@ import 'speakers-widget/index.css';
 
 import EventsData from '../content/events.json'
 import SpeakersData from '../content/speakers.json'
+import MarketingData from '../content/colors.json'
 
 const SpeakersWidgetComponent = class extends React.Component {
 
@@ -19,6 +20,7 @@ const SpeakersWidgetComponent = class extends React.Component {
       // featured: true,
       speakersData: SpeakersData,
       eventsData: EventsData,
+      marketingData: MarketingData.colors,
       ...props
     };
 
