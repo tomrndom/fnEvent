@@ -124,7 +124,7 @@ exports.onPreBootstrap = async () => {
         access_token: accessToken,
         per_page: 50,
         page: events_page,
-        expand: 'slides, links, videos, media_uploads type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance',
+        expand: 'slides, links, videos, media_uploads type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance, groups, rsvp_template',
       }
     }).then((response) => {
       events_last_page = response.data.last_page;
@@ -141,7 +141,7 @@ exports.onPreBootstrap = async () => {
           access_token: accessToken,
           per_page: 50,
           page: events_page,
-          expand: 'slides, links, videos, media_uploads type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance',
+          expand: 'slides, links, videos, media_uploads type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance, groups, rsvp_template',
         }
       }).then((response) => {
         allEvents = [...allEvents, ...response.data.data];
