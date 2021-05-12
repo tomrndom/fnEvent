@@ -11,6 +11,7 @@ import {
 import { customErrorHandler } from '../utils/customErrorHandler';
 
 import { LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
+import axios from "axios";
 
 export const GET_EVENT_DATA         = 'GET_EVENT_DATA';
 export const GET_EVENT_DATA_ERROR   = 'GET_EVENT_DATA_ERROR';
@@ -53,4 +54,4 @@ export const getEventById = (eventId) => async (dispatch, getState) => {
       return (e);
     });
   }
-}
+};

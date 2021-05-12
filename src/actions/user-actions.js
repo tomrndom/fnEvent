@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 
 import { customErrorHandler, customBadgeHandler } from '../utils/customErrorHandler';
 import { isAuthorizedUser } from '../utils/authorizedGroups';
+import axios from "axios";
+import {getEnvVariable, SUMMIT_API_BASE_URL, SUMMIT_ID} from "../utils/envVariables";
 
 export const GET_DISQUS_SSO            = 'GET_DISQUS_SSO';
 export const GET_ROCKETCHAT_SSO        = 'GET_ROCKETCHAT_SSO';
@@ -154,13 +156,39 @@ export const getIDPProfile = () => async (dispatch) => {
     .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
 
-export const addToSchedule = (event) => (dispatch, getState) => {  
-  dispatch(createAction(ADD_TO_SCHEDULE)(event));
-}
+export const addToSchedule = (event) => async (dispatch, getState) => {
+  const accessToken = await getAccessToken();
+  if (!accessToken) return Promise.reject();
 
-export const removeFromSchedule = (event) => (dispatch, getState) => {    
-  dispatch(createAction(REMOVE_FROM_SCHEDULE)(event));
-}
+  const url = `${getEnvVariable(SUMMIT_API_BASE_URL)}/api/v1/summits/${getEnvVariable(SUMMIT_ID)}/members/me/schedule/${event.id}`;
+
+  return axios.post(
+      url, { access_token: accessToken }
+  ).then(() => {
+    dispatch(createAction(ADD_TO_SCHEDULE)(event));
+    return event;
+  }).catch(e => {
+    console.log('ERROR: ', e);
+    return e;
+  });
+};
+
+export const removeFromSchedule = (event) => async (dispatch, getState) => {
+  const accessToken = await getAccessToken();
+  if (!accessToken) return Promise.reject();
+
+  const url = `${getEnvVariable(SUMMIT_API_BASE_URL)}/api/v1/summits/${getEnvVariable(SUMMIT_ID)}/members/me/schedule/${event.id}`;
+
+  return axios.delete(
+      url, { data: { access_token: accessToken } }
+  ).then(() => {
+    dispatch(createAction(REMOVE_FROM_SCHEDULE)(event));
+    return event;
+  }).catch(e => {
+    console.log('ERROR: ', e);
+    return e;
+  });
+};
 
 export const updateProfilePicture = (pic) => async (dispatch) => {
 
