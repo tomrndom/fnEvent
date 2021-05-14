@@ -21,8 +21,16 @@ const eventReducer = (state = DEFAULT_STATE, action) => {
     case STOP_LOADING:
       return { ...state, loading: false };
     case GET_EVENT_DATA:
-      const event = payload.response || payload.event;      
-      return { ...state, loading: false, event: event };
+      const event = payload.response || payload.event;
+      const index = state.allEvents.findIndex((e) => e.id === event.id);
+      var allEvents = null;
+      if (index > 0) {
+        allEvents = [...state.allEvents];
+        allEvents[index] = event;
+      } else {
+        allEvents = [...state.allEvents, event];
+      }
+      return { ...state, loading: false, allEvents: allEvents, event: event };
     case GET_EVENT_DATA_ERROR: {
       return { ...state, loading: false, event: null }
     }
