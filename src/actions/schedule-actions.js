@@ -32,3 +32,7 @@ export const getScheduleEvents = () => (dispatch, getState) => {
   }
   );
 };
+
+export const updateFilter = () => (dispatch, getState) => {
+
+}

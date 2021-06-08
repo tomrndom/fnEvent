@@ -1,7 +1,7 @@
 import ReduxWrapper from "./src/state/ReduxWrapper"
-import Colors from './src/content/colors.json'
+import colors from './src/content/colors.json'
 
-export const wrapRootElement = ReduxWrapper
+export const wrapRootElement = ReduxWrapper;
 
 window.IDP_BASE_URL = process.env.GATSBY_IDP_BASE_URL;
 window.SUMMIT_API_BASE_URL = process.env.GATSBY_SUMMIT_API_BASE_URL;
@@ -22,8 +22,8 @@ window.MUX_ENV_KEY = process.env.GATSBY_MUX_ENV_KEY;
 export const onClientEntry = () => {
   // var set at document level
   // preventa widget color flashing from defaults to fetched by widget from marketing api
-  Object.entries(Colors.colors).map(color => {
+  Object.entries(colors).map(color => {
     document.documentElement.style.setProperty(`--${color[0]}`, color[1]);
     document.documentElement.style.setProperty(`--${color[0]}50`, `${color[1]}50`);
   });
-}
+};

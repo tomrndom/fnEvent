@@ -7,38 +7,32 @@ import 'speakers-widget/index.css';
 
 import EventsData from '../content/events.json'
 import SpeakersData from '../content/speakers.json'
-import MarketingData from '../content/colors.json'
 
-const SpeakersWidgetComponent = class extends React.Component {
-
-  render() {
-
-    const { now, ...props } = this.props;
-
+const SpeakersWidgetComponent = ({now, marketingSettings, ...props}) => {
     const widgetProps = {
-      date: now,
-      // featured: true,
-      speakersData: SpeakersData,
-      eventsData: EventsData,
-      marketingData: MarketingData.colors,
-      ...props
+        date: now,
+        // featured: true,
+        speakersData: SpeakersData,
+        eventsData: EventsData,
+        marketingData: marketingSettings.colors,
+        ...props
     };
 
     return (
-      <React.Fragment>
-        <Helmet>
-          <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css" />
-        </Helmet>
-        <div>
-          <SpeakersWidget {...widgetProps} />
-        </div>
-      </React.Fragment>
+        <>
+            <Helmet>
+                <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css" />
+            </Helmet>
+            <div>
+                <SpeakersWidget {...widgetProps} />
+            </div>
+        </>
     )
-  }
 }
 
-const mapStateToProps = ({ clockState }) => ({
-  now: clockState.nowUtc
-})
+const mapStateToProps = ({ clockState, summitState }) => ({
+    now: clockState.nowUtc,
+    marketingSettings: summitState.marketingSettings
+});
 
 export default connect(mapStateToProps, null)(SpeakersWidgetComponent)

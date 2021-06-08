@@ -4,43 +4,35 @@ import { navigate } from 'gatsby'
 import { connect } from 'react-redux'
 
 import Layout from '../components/Layout'
-import FullSchedule from '../components/FullSchedule'
-import ScheduleFilters from "../components/ScheduleFilters";
+import LiteScheduleComponent from '../components/LiteScheduleComponent'
 import AttendanceTrackerComponent from '../components/AttendanceTrackerComponent'
 
 import { PHASES } from '../utils/phasesUtils'
 
-const SchedulePage = ({ summitPhase, isLoggedUser, location }) => {
+const MySchedulePage = ({ summitPhase, isLoggedUser, location }) => {
 
-  let scheduleProps = {};
+  let scheduleProps = {showSearch: true, showAllEvents: true, yourSchedule: true, showDetails: true};
 
   if (isLoggedUser && summitPhase !== PHASES.BEFORE) {
     scheduleProps = {
       ...scheduleProps,
       onEventClick: (ev) => navigate(`/a/event/${ev.id}`),
-      onStartChat: console.log,
     }
   }
 
   return (
     <Layout location={location}>
       <div className="container">
-        <div className="columns">
-          <div className="column is-four-fifths px-6 pt-6 pb-0">
-            <FullSchedule {...scheduleProps} />
-          </div>
-          <div className="column is-one-fifths px-6 pt-6 pb-0">
-            <ScheduleFilters />
-          </div>
-        </div>
-
+        <h1>My Schedule</h1>
+        <hr />
+        <LiteScheduleComponent {...scheduleProps} />
       </div>
       <AttendanceTrackerComponent />
     </Layout>
   )
 };
 
-SchedulePage.propTypes = {
+MySchedulePage.propTypes = {
   summitPhase: PropTypes.number,
   isLoggedUser: PropTypes.bool,
 };
@@ -52,4 +44,4 @@ const mapStateToProps = ({ clockState, loggedUserState }) => ({
 
 export default connect(
   mapStateToProps, {}
-)(SchedulePage);
+)(MySchedulePage);

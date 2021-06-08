@@ -1,83 +1,62 @@
-const _ = require('lodash')
-const axios = require('axios')
-const path = require('path')
-const fs = require("fs")
-const { createFilePath } = require('gatsby-source-filesystem')
-const { fmImagesToRelative } = require('gatsby-remark-relative-images')
+const _ = require('lodash');
+const axios = require('axios');
+const path = require('path');
+const fs = require("fs");
+const { createFilePath } = require('gatsby-source-filesystem');
+const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 const { ClientCredentials } = require('simple-oauth2');
 
 const myEnv = require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-})
+});
 
-exports.onPreBootstrap = async () => {
-
-  let marketingData;
-
-  let params = {
+const SSR_getMarketingSettings = async (baseUrl, summitId) => {
+  const params = {
     per_page: 100,
   };
 
-  const colours = await axios.get(
-    `${process.env.GATSBY_MARKETING_API_BASE_URL}/api/public/v1/config-values/all/shows/${process.env.GATSBY_SUMMIT_ID}`, { params }
-  ).then((response) => {
-    marketingData = response.data.data;
-    let colorObject = { colors: {} }
-    response.data.data.map((color) => {
-      if (color.key.startsWith('color_')) colorObject.colors[color.key] = color.value;
-    })
-    return colorObject;
-  }).catch(e => console.log('ERROR: ', e));
+  return await axios.get(
+      `${baseUrl}/api/public/v1/config-values/all/shows/${summitId}`,
+      { params }
+  )
+      .then(response => response.data.data)
+      .catch(e => console.log('ERROR: ', e));
+};
 
-  fs.writeFileSync('src/content/colors.json', JSON.stringify(colours), 'utf8', function (err) {
-    if (err) throw err;
-    console.log('Saved!');
+exports.onPreBootstrap = async () => {
+  const marketingData = await SSR_getMarketingSettings(process.env.GATSBY_MARKETING_API_BASE_URL, process.env.GATSBY_SUMMIT_ID);
+  const colorSettings = JSON.parse(fs.readFileSync('src/content/colors.json'));
+  const disqusSettings = JSON.parse(fs.readFileSync('src/content/disqus.json'));
+  const marketingSite = JSON.parse(fs.readFileSync('src/content/marketing-site.json'));
+  const homeSettings = JSON.parse(fs.readFileSync('src/content/home-settings.json'));
+  const filterSettings = JSON.parse(fs.readFileSync('src/content/filters.json'));
+
+  marketingData.map(({key, value}) => {
+    if (key.startsWith('color_')) colorSettings[key] = value;
+    if (key.startsWith('disqus_')) disqusSettings[key] = value;
+    if (key.startsWith('summit_')) marketingSite[key] = value;
+    if (key.startsWith('SCHEDULE_FILTER_BY_')) {
+      const filterKey = key.substr(0, key.lastIndexOf('_')).substr(19).toLowerCase();
+      if (key.includes('_ENABLED')) filterSettings[filterKey].enabled = (value === '1');
+      if (key.includes('_LABEL')) filterSettings[filterKey].label = value;
+    }
+    if (key === 'SCHEDULE_EVENT_COLOR_ORIGIN') filterSettings.color_source = value;
+    if (key === 'schedule_default_image') homeSettings.schedule_default_image = value;
   });
+
+  fs.writeFileSync('src/content/colors.json', JSON.stringify(colorSettings), 'utf8');
+  fs.writeFileSync('src/content/disqus-settings.json', JSON.stringify(disqusSettings), 'utf8');
+  fs.writeFileSync('src/content/marketing-site.json', JSON.stringify(marketingSite), 'utf8');
+  fs.writeFileSync('src/content/home-settings.json', JSON.stringify(homeSettings), 'utf8');
+  fs.writeFileSync('src/content/filters.json', JSON.stringify(filterSettings), 'utf8');
+
 
   let sassColors = '';
-  Object.keys(colours.colors).forEach(e => sassColors += `$${e} : ${colours.colors[e]};\n`);
+  Object.entries(colorSettings).forEach(([key, value]) => sassColors += `$${key} : ${value};\n`);
 
-  fs.writeFileSync('src/styles/colors.scss', sassColors, 'utf8', function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-  });
+  fs.writeFileSync('src/styles/colors.scss', sassColors, 'utf8');
 
-  let disqusSettings = JSON.parse(fs.readFileSync('src/content/disqus-settings.json'));
 
-  marketingData.map((item) => {
-    if (item.key.startsWith('disqus_')) disqusSettings[item.key] = item.value;
-  });
-
-  fs.writeFileSync('src/content/disqus-settings.json', JSON.stringify(disqusSettings), 'utf8', function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-  });
-
-  let marketingSite = JSON.parse(fs.readFileSync('src/content/marketing-site.json'));
-
-  marketingData.map((item) => {
-    if (item.key.startsWith('summit_')) {
-      marketingSite[item.key] = item.value;
-    }
-  });
-
-  fs.writeFileSync('src/content/marketing-site.json', JSON.stringify(marketingSite), 'utf8', function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-  });
-
-  let homeSettings = JSON.parse(fs.readFileSync('src/content/home-settings.json'));
-
-  marketingData.map((item) => {
-    if (item.key.startsWith('schedule_default_image')) {
-      homeSettings[item.key] = item.value;
-    }
-  });
-
-  fs.writeFileSync('src/content/home-settings.json', JSON.stringify(homeSettings), 'utf8', function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-  });
 
   // Private API endpoints
 
@@ -103,12 +82,11 @@ exports.onPreBootstrap = async () => {
     };
 
     try {
-      const accessToken = await client.getToken(tokenParams);
-      return accessToken;
+      return await client.getToken(tokenParams);
     } catch (error) {
       console.log('Access Token error', error);
     }
-  }
+  };
 
   const accessToken = await getAccessToken().then((token) => {
     return token.token.access_token
@@ -132,9 +110,9 @@ exports.onPreBootstrap = async () => {
     })
     .catch(e => console.log('ERROR: ', e));
 
-  while (events_last_page > 1 && events_page <= events_last_page) {
+    while (events_last_page > 1 && events_page <= events_last_page) {
     events_page++;
-    newEvents = await axios.get(
+    await axios.get(
       `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published`,
       {
         params: {
@@ -150,10 +128,7 @@ exports.onPreBootstrap = async () => {
       .catch(e => console.log('ERROR: ', e));
   }
 
-  fs.writeFileSync('src/content/events.json', JSON.stringify(allEvents), 'utf8', function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-  });
+  fs.writeFileSync('src/content/events.json', JSON.stringify(allEvents), 'utf8');
 
 
   // Fetch Speakers
@@ -180,7 +155,7 @@ exports.onPreBootstrap = async () => {
 
   while (featured_speakers_last_page > 1 && featured_speakers_page <= featured_speakers_last_page) {
     featured_speakers_page++;
-    newSpeakers = await axios.get(
+    await axios.get(
       `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/speakers/on-schedule`,
       {
         params: {
@@ -217,7 +192,7 @@ exports.onPreBootstrap = async () => {
 
   while (speakers_last_page > 1 && speakers_page <= speakers_last_page) {
     speakers_page++;
-    newSpeakers = await axios.get(
+    await axios.get(
       `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/speakers/on-schedule`,
       {
         params: {
@@ -241,53 +216,53 @@ exports.onPreBootstrap = async () => {
     console.log('Saved!');
   });
 
-}
+};
 
 // makes Summit logo optional for graphql queries
 exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
+  const { createTypes } = actions;
   const typeDefs = `
     type Summit implements Node {
       logo: String
     }
-  `
+  `;
   createTypes(typeDefs)
-}
+};
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-  fmImagesToRelative(node) // convert image paths for gatsby images
+  const { createNodeField } = actions;
+  fmImagesToRelative(node); // convert image paths for gatsby images
 
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    const value = createFilePath({ node, getNode });
     createNodeField({
       name: `slug`,
       node,
       value,
     })
   }
-}
+};
 
 exports.sourceNodes = async ({
   actions,
   createNodeId,
   createContentDigest
 }) => {
-  const { createNode } = actions
+  const { createNode } = actions;
 
   const summit = await axios.get(
     `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/public/v1/summits/${process.env.GATSBY_SUMMIT_ID}?expand=event_types%2C+tracks%2C+track_groups%2C+presentation_levels%2C+locations.rooms%2C+locations.floors`
   ).then((response) => response.data)
     .catch(e => console.log('ERROR: ', e));
 
-  const summitObject = { summit }
+  const summitObject = { summit };
 
   fs.writeFileSync('src/content/summit.json', JSON.stringify(summitObject), 'utf8', function (err) {
     if (err) throw err;
     console.log('Saved!');
   });
 
-  const nodeContent = JSON.stringify(summit)
+  const nodeContent = JSON.stringify(summit);
 
   const nodeMeta = {
     ...summit,
@@ -301,14 +276,14 @@ exports.sourceNodes = async ({
       content: nodeContent,
       contentDigest: createContentDigest(summit)
     }
-  }
+  };
 
-  const node = Object.assign({}, summit, nodeMeta)
+  const node = Object.assign({}, summit, nodeMeta);
   createNode(node)
-}
+};
 
 exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
 
 
   return graphql(`
@@ -329,14 +304,14 @@ exports.createPages = ({ actions, graphql }) => {
     }
   `).then((result) => {
     if (result.errors) {
-      result.errors.forEach((e) => console.error(e.toString()))
+      result.errors.forEach((e) => console.error(e.toString()));
       return Promise.reject(result.errors)
     }
 
-    const posts = result.data.allMarkdownRemark.edges
+    const posts = result.data.allMarkdownRemark.edges;
 
     posts.forEach((edge) => {
-      const id = edge.node.id
+      const id = edge.node.id;
       if (edge.node.fields.slug.match(/custom-pages/)) {
         edge.node.fields.slug = edge.node.fields.slug.replace('/custom-pages/', '/');
       }
@@ -352,7 +327,7 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
   })
-}
+};
 
 exports.onCreateWebpackConfig = ({ actions, plugins, loaders }) => {
   actions.setWebpackConfig({
@@ -365,4 +340,4 @@ exports.onCreateWebpackConfig = ({ actions, plugins, loaders }) => {
       })
     ]
   })
-}
+};
