@@ -1,10 +1,15 @@
-const _ = require('lodash');
 const axios = require('axios');
 const path = require('path');
 const fs = require("fs");
 const { createFilePath } = require('gatsby-source-filesystem');
 const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 const { ClientCredentials } = require('simple-oauth2');
+
+const colorsFilepath = 'src/content/colors.json';
+const disqusFilepath = 'src/content/disqus-settings.json';
+const marketingFilepath = 'src/content/marketing-site.json';
+const homeFilepath = 'src/content/home-settings.json';
+const filtersFilepath = 'src/content/filters.json';
 
 const myEnv = require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -19,17 +24,17 @@ const SSR_getMarketingSettings = async (baseUrl, summitId) => {
       `${baseUrl}/api/public/v1/config-values/all/shows/${summitId}`,
       { params }
   )
-      .then(response => response.data.data)
+      .then(response => {return response.data.data})
       .catch(e => console.log('ERROR: ', e));
 };
 
 exports.onPreBootstrap = async () => {
   const marketingData = await SSR_getMarketingSettings(process.env.GATSBY_MARKETING_API_BASE_URL, process.env.GATSBY_SUMMIT_ID);
-  const colorSettings = JSON.parse(fs.readFileSync('src/content/colors.json'));
-  const disqusSettings = JSON.parse(fs.readFileSync('src/content/disqus.json'));
-  const marketingSite = JSON.parse(fs.readFileSync('src/content/marketing-site.json'));
-  const homeSettings = JSON.parse(fs.readFileSync('src/content/home-settings.json'));
-  const filterSettings = JSON.parse(fs.readFileSync('src/content/filters.json'));
+  const colorSettings = fs.existsSync(colorsFilepath) ? JSON.parse(fs.readFileSync(colorsFilepath)) : {};
+  const disqusSettings = fs.existsSync(disqusFilepath) ? JSON.parse(fs.readFileSync(disqusFilepath)) : {};
+  const marketingSite = fs.existsSync(marketingFilepath) ? JSON.parse(fs.readFileSync(marketingFilepath)) : {};
+  const homeSettings = fs.existsSync(homeFilepath) ? JSON.parse(fs.readFileSync(homeFilepath)) : {};
+  const filterSettings = fs.existsSync(filtersFilepath) ? JSON.parse(fs.readFileSync(filtersFilepath)) : {};
 
   marketingData.map(({key, value}) => {
     if (key.startsWith('color_')) colorSettings[key] = value;
@@ -39,16 +44,17 @@ exports.onPreBootstrap = async () => {
       const filterKey = key.substr(0, key.lastIndexOf('_')).substr(19).toLowerCase();
       if (key.includes('_ENABLED')) filterSettings[filterKey].enabled = (value === '1');
       if (key.includes('_LABEL')) filterSettings[filterKey].label = value;
+      filterSettings[filterKey].values = [];
     }
-    if (key === 'SCHEDULE_EVENT_COLOR_ORIGIN') filterSettings.color_source = value;
+    if (key === 'SCHEDULE_EVENT_COLOR_ORIGIN') filterSettings.color_source = value.toLowerCase();
     if (key === 'schedule_default_image') homeSettings.schedule_default_image = value;
   });
 
-  fs.writeFileSync('src/content/colors.json', JSON.stringify(colorSettings), 'utf8');
-  fs.writeFileSync('src/content/disqus-settings.json', JSON.stringify(disqusSettings), 'utf8');
-  fs.writeFileSync('src/content/marketing-site.json', JSON.stringify(marketingSite), 'utf8');
-  fs.writeFileSync('src/content/home-settings.json', JSON.stringify(homeSettings), 'utf8');
-  fs.writeFileSync('src/content/filters.json', JSON.stringify(filterSettings), 'utf8');
+  fs.writeFileSync(colorsFilepath, JSON.stringify(colorSettings), 'utf8');
+  fs.writeFileSync(disqusFilepath, JSON.stringify(disqusSettings), 'utf8');
+  fs.writeFileSync(marketingFilepath, JSON.stringify(marketingSite), 'utf8');
+  fs.writeFileSync(homeFilepath, JSON.stringify(homeSettings), 'utf8');
+  fs.writeFileSync(filtersFilepath, JSON.stringify(filterSettings), 'utf8');
 
 
   let sassColors = '';

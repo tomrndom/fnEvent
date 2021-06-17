@@ -14,6 +14,7 @@ import {
   ADD_TO_SCHEDULE,
   REMOVE_FROM_SCHEDULE
 } from '../actions/user-actions'
+import {RESET_STATE} from "../state/store";
 
 const DEFAULT_STATE = {
   loading: false,
@@ -30,6 +31,7 @@ const userReducer = (state = DEFAULT_STATE, action) => {
   const { type, payload } = action
 
   switch (type) {
+    case RESET_STATE:
     case LOGOUT_USER:
       return DEFAULT_STATE;
     case START_LOADING_PROFILE:

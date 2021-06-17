@@ -26,10 +26,10 @@ const SchedulePage = ({ summitPhase, isLoggedUser, location }) => {
     <Layout location={location}>
       <div className="container">
         <div className="columns">
-          <div className="column is-four-fifths px-6 pt-6 pb-0">
+          <div className="column is-three-quarters px-6 pt-6 pb-0">
             <FullSchedule {...scheduleProps} />
           </div>
-          <div className="column is-one-fifths px-6 pt-6 pb-0">
+          <div className="column is-one-quarter px-6 pt-6 pb-0">
             <ScheduleFilters />
           </div>
         </div>

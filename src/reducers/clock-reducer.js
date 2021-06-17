@@ -10,6 +10,7 @@ import {
   EVENT_PHASE_BEFORE,
   EVENT_PHASE_ADD
 } from '../actions/clock-actions'
+import {RESET_STATE} from "../state/store";
 
 const DEFAULT_STATE = {
   loading: false,
@@ -22,6 +23,7 @@ const clockReducer = (state = DEFAULT_STATE, action) => {
   const { type, payload } = action
 
   switch (type) {
+    case RESET_STATE:
     case LOGOUT_USER:
       return DEFAULT_STATE;
     case START_LOADING:

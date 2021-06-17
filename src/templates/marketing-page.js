@@ -15,17 +15,14 @@ import DisqusComponent from '../components/DisqusComponent'
 import Content, { HTMLContent } from '../components/Content'
 import Countdown from '../components/Countdown'
 import Link from '../components/Link'
-
-import '../styles/style.scss'
-
 import { PHASES } from '../utils/phasesUtils'
-
 import MarketingSite from '../content/marketing-site.json'
-import SummitObject from '../content/summit.json'
-
 import { getDisqusSSO } from '../actions/user-actions'
+import {handleResetReducers} from '../actions/event-actions';
 
 import styles from "../styles/marketing.module.scss"
+import '../styles/style.scss'
+
 
 export const MarketingPageTemplate = class extends React.Component {
 
@@ -36,9 +33,7 @@ export const MarketingPageTemplate = class extends React.Component {
   }
 
   render() {
-    let { content, contentComponent, summit_phase, user, isLoggedUser, location } = this.props;
-    let { summit } = SummitObject;
-
+    const { content, contentComponent, summit_phase, user, isLoggedUser, location, summit } = this.props;
     const PageContent = contentComponent || Content;
 
     let scheduleProps = {};
@@ -72,6 +67,8 @@ export const MarketingPageTemplate = class extends React.Component {
                   {...scheduleProps}
                   page="marketing-site"
                   showAllEvents={true}
+                  showSearch={false}
+                  showNav={true}
                 />
               </React.Fragment>
             }
@@ -144,8 +141,11 @@ MarketingPageTemplate.propTypes = {
   isLoggedUser: PropTypes.bool,
 }
 
-const MarketingPage = ({ location, data, summit_phase, user, isLoggedUser, getDisqusSSO }) => {
-  const { frontmatter, html } = data.markdownRemark
+const MarketingPage = ({ summit, location, data, summit_phase, user, isLoggedUser, getDisqusSSO, handleResetReducers }) => {
+  const { frontmatter, html } = data.markdownRemark;
+
+  // handleResetReducers();
+  // return null;
 
   return (
     <Layout marketing={true}>
@@ -154,6 +154,7 @@ const MarketingPage = ({ location, data, summit_phase, user, isLoggedUser, getDi
         content={html}
         location={location}
         summit_phase={summit_phase}
+        summit={summit}
         user={user}
         isLoggedUser={isLoggedUser}
         getDisqusSSO={getDisqusSSO}
@@ -175,14 +176,16 @@ MarketingPage.propTypes = {
   getDisqusSSO: PropTypes.func,
 }
 
-const mapStateToProps = ({ clockState, loggedUserState, userState }) => ({
+const mapStateToProps = ({ clockState, loggedUserState, userState, summitState }) => ({
   summit_phase: clockState.summit_phase,
   isLoggedUser: loggedUserState.isLoggedUser,
   user: userState,
+  summit: summitState.summit
 })
 
 export default connect(mapStateToProps, {
-  getDisqusSSO
+  getDisqusSSO,
+  handleResetReducers
 })(MarketingPage)
 
 export const marketingPageQuery = graphql`

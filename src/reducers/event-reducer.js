@@ -2,6 +2,7 @@ import EventObject from '../content/events.json';
 
 import { START_LOADING, STOP_LOADING, LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
 import { GET_EVENT_DATA, GET_EVENT_DATA_ERROR } from '../actions/event-actions'
+import {RESET_STATE} from "../state/store";
 
 const DEFAULT_STATE = {
   loading: false,
@@ -13,6 +14,7 @@ const eventReducer = (state = DEFAULT_STATE, action) => {
   const { type, payload } = action
 
   switch (type) {
+    case RESET_STATE:
     case LOGOUT_USER:
       return DEFAULT_STATE;
     case START_LOADING:

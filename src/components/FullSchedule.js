@@ -7,18 +7,18 @@ import Schedule from "full-schedule-widget/dist";
 import "full-schedule-widget/dist/index.css";
 
 import HomeSettings from "../content/home-settings.json";
-import EventsData from "../content/events.json";
-import SummitData from "../content/summit.json";
 
 import { addToSchedule, removeFromSchedule } from "../actions/user-actions";
 
-const FullSchedule = ({ className, userProfile, marketingSettings, addToSchedule, removeFromSchedule, ...rest }) => {
+const FullSchedule = ({ summit, events, className, userProfile, marketingSettings, addToSchedule, removeFromSchedule, ...rest }) => {
   const wrapperClass = "schedule-container";
 
+  if (!summit) return null;
+
   const componentProps = {
-    eventsData: EventsData,
-    summitData: SummitData.summit,
-    marketingData: marketingSettings.colors,
+    events: events,
+    summit: summit,
+    marketingSettings: marketingSettings.colors,
     userProfile: userProfile,
     triggerAction: (action, { event }) => {
       switch (action) {
@@ -33,7 +33,6 @@ const FullSchedule = ({ className, userProfile, marketingSettings, addToSchedule
     getShareLink: () => {},
     getSyncLink: () => {},
     title: "Schedule",
-    filters: {},
     colorSource: "track",
     withThumbs: false,
     defaultImage: HomeSettings.schedule_default_image,
@@ -47,9 +46,11 @@ const FullSchedule = ({ className, userProfile, marketingSettings, addToSchedule
   );
 };
 
-const mapStateToProps = ({ userState, summitState }) => ({
+const mapStateToProps = ({ userState, summitState, scheduleState }) => ({
   userProfile: userState.userProfile,
-  marketingSettings: summitState.marketingSettings
+  marketingSettings: summitState.marketingSettings,
+  summit: summitState.summit,
+  events: scheduleState.events
 });
 
 export default connect(mapStateToProps, { addToSchedule, removeFromSchedule })(
