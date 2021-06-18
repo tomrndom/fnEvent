@@ -31,9 +31,6 @@ const scheduleReducer = (state = DEFAULT_STATE, action) => {
       // update events
       const events = getFilteredEvents(state.allEvents, filters, summitTimezone);
 
-      console.log(events, 'FILTERED');
-      console.log(filters, 'FILTERS');
-
       return {...state, filters, events}
     }
     default:
@@ -66,6 +63,7 @@ const getFilteredEvents = (events, filters, summitTimezone) => {
 
     if (filters.speakers?.values.length > 0) {
       valid = ev.speakers.some(s => filters.speakers.values.includes(s.id)) || filters.speakers.values.includes(ev.moderator?.id);
+      console.log(filters);
       if (!valid) return false;
     }
 

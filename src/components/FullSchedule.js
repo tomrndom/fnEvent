@@ -16,6 +16,7 @@ const FullSchedule = ({ summit, events, className, userProfile, marketingSetting
   if (!summit) return null;
 
   const componentProps = {
+    title: "Schedule",
     events: events,
     summit: summit,
     marketingSettings: marketingSettings.colors,
@@ -30,12 +31,13 @@ const FullSchedule = ({ summit, events, className, userProfile, marketingSetting
         }
       }
     },
-    getShareLink: () => {},
-    getSyncLink: () => {},
-    title: "Schedule",
     colorSource: "track",
     withThumbs: false,
     defaultImage: HomeSettings.schedule_default_image,
+    getShareLink: () => {},
+    getSyncLink: () => {},
+    onStartChat: () => {},
+    onEventClick: () => {},
     ...rest
   };
 
