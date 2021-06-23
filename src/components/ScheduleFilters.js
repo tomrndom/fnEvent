@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
-import {pickBy} from 'lodash';
+import {pickBy, isEmpty} from 'lodash';
 import { Helmet } from "react-helmet";
-import { updateFilter } from "../actions/schedule-actions";
+import { updateFilter, updateFiltersFromHash } from "../actions/schedule-actions";
 
 // these two libraries are client-side only
 import Filters from "schedule-filter-widget/dist";
@@ -16,10 +16,14 @@ const ScheduleFilters = ({
   filters,
   marketingSettings,
   updateFilter,
+  updateFiltersFromHash,
   ...rest
 }) => {
-  const wrapperClass = "filter-container";
   const enabledFilters = pickBy(filters, value => value.enabled);
+
+  useEffect(() => {
+    updateFiltersFromHash();
+  });
 
   if (!summit) return null;
 
@@ -45,7 +49,7 @@ const ScheduleFilters = ({
           href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css"
         />
       </Helmet>
-      <div className={className || wrapperClass}>
+      <div className={className || "filter-container"}>
         <Filters {...componentProps} />
       </div>
     </>
@@ -60,4 +64,4 @@ const mapStateToProps = ({ summitState, scheduleState }) => ({
   marketingSettings: summitState.marketingSettings,
 });
 
-export default connect(mapStateToProps, { updateFilter })(ScheduleFilters);
+export default connect(mapStateToProps, { updateFilter, updateFiltersFromHash })(ScheduleFilters);

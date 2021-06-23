@@ -4,7 +4,7 @@ import events from '../content/events.json';
 import filtersData from '../content/filters.json';
 
 import { START_LOADING, STOP_LOADING, LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
-import { UPDATE_FILTER, UPDATE_EVENTS } from '../actions/schedule-actions'
+import { UPDATE_FILTER, UPDATE_EVENTS, UPDATE_FILTERS, CHANGE_VIEW } from '../actions/schedule-actions'
 import {RESET_STATE} from '../state/store';
 
 const {color_source, ...filters} = filtersData;
@@ -13,7 +13,8 @@ const DEFAULT_STATE = {
   filters: filters,
   colorSource: color_source,
   events: events,
-  allEvents: events
+  allEvents: events,
+  view: 'calendar'
 };
 
 const scheduleReducer = (state = DEFAULT_STATE, action) => {
@@ -25,13 +26,26 @@ const scheduleReducer = (state = DEFAULT_STATE, action) => {
       return DEFAULT_STATE;
     case UPDATE_FILTER: {
       const {type, values, summitTimezone} = payload;
-      const {filters} = state;
+      const {filters, allEvents} = state;
       filters[type].values = values;
 
       // update events
-      const events = getFilteredEvents(state.allEvents, filters, summitTimezone);
+      const events = getFilteredEvents(allEvents, filters, summitTimezone);
 
       return {...state, filters, events}
+    }
+    case UPDATE_FILTERS: {
+      const {filters, view, summitTimezone} = payload;
+      const {allEvents} = state;
+
+      // update events
+      const events = getFilteredEvents(allEvents, filters, summitTimezone);
+
+      return {...state, filters, events, view}
+    }
+    case CHANGE_VIEW: {
+      const {view} = payload;
+      return {...state, view}
     }
     default:
       return state;

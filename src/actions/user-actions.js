@@ -2,11 +2,9 @@ import {
   getAccessToken,
   getRequest,
   postRequest,
-  deleteRequest,
   putRequest,
   putFile,
   createAction,
-  stopLoading,
   startLoading,
 } from 'openstack-uicore-foundation/lib/methods';
 
@@ -17,25 +15,25 @@ import { isAuthorizedUser } from '../utils/authorizedGroups';
 import axios from "axios";
 import {getEnvVariable, SUMMIT_API_BASE_URL, SUMMIT_ID} from "../utils/envVariables";
 
-export const GET_DISQUS_SSO            = 'GET_DISQUS_SSO';
-export const GET_ROCKETCHAT_SSO        = 'GET_ROCKETCHAT_SSO';
-export const GET_USER_PROFILE          = 'GET_USER_PROFILE';
-export const REQUEST_USER_PROFILE      = 'REQUEST_USER_PROFILE';
-export const START_LOADING_PROFILE     = 'START_LOADING_PROFILE';
-export const STOP_LOADING_PROFILE      = 'STOP_LOADING_PROFILE';
-export const UPDATE_PASSWORD           = 'UPDATE_PASSWORD';
-export const SET_AUTHORIZED_USER       = 'SET_AUTHORIZED_USER';
-export const SET_USER_TICKET           = 'SET_USER_TICKET';
-export const UPDATE_PROFILE_PIC        = 'UPDATE_PROFILE_PIC';
-export const START_LOADING_IDP_PROFILE = 'START_LOADING_IDP_PROFILE';
-export const STOP_LOADING_IDP_PROFILE  = 'STOP_LOADING_IDP_PROFILE';
-export const GET_IDP_PROFILE           = 'GET_IDP_PROFILE';
-export const UPDATE_IDP_PROFILE        = 'UPDATE_IDP_PROFILE';
-export const SCAN_BADGE                = 'SCAN_BADGE';
-export const SCAN_BADGE_SUCCESS        = 'SCAN_BADGE_SUCCESS';
-export const SCAN_BADGE_ERROR          = 'SCAN_BADGE_ERROR';
-export const ADD_TO_SCHEDULE           = 'ADD_TO_SCHEDULE';
-export const REMOVE_FROM_SCHEDULE      = 'REMOVE_FROM_SCHEDULE';
+export const GET_DISQUS_SSO                   = 'GET_DISQUS_SSO';
+export const GET_ROCKETCHAT_SSO               = 'GET_ROCKETCHAT_SSO';
+export const GET_USER_PROFILE                 = 'GET_USER_PROFILE';
+export const START_LOADING_PROFILE            = 'START_LOADING_PROFILE';
+export const STOP_LOADING_PROFILE             = 'STOP_LOADING_PROFILE';
+export const UPDATE_PASSWORD                  = 'UPDATE_PASSWORD';
+export const SET_AUTHORIZED_USER              = 'SET_AUTHORIZED_USER';
+export const SET_USER_TICKET                  = 'SET_USER_TICKET';
+export const UPDATE_PROFILE_PIC               = 'UPDATE_PROFILE_PIC';
+export const START_LOADING_IDP_PROFILE        = 'START_LOADING_IDP_PROFILE';
+export const STOP_LOADING_IDP_PROFILE         = 'STOP_LOADING_IDP_PROFILE';
+export const GET_IDP_PROFILE                  = 'GET_IDP_PROFILE';
+export const UPDATE_IDP_PROFILE               = 'UPDATE_IDP_PROFILE';
+export const SCAN_BADGE                       = 'SCAN_BADGE';
+export const SCAN_BADGE_SUCCESS               = 'SCAN_BADGE_SUCCESS';
+export const SCAN_BADGE_ERROR                 = 'SCAN_BADGE_ERROR';
+export const ADD_TO_SCHEDULE                  = 'ADD_TO_SCHEDULE';
+export const REMOVE_FROM_SCHEDULE             = 'REMOVE_FROM_SCHEDULE';
+export const SCHEDULE_SYNC_LINK_RECEIVED      = 'SCHEDULE_SYNC_LINK_RECEIVED';
 
 export const getDisqusSSO = () => async (dispatch) => {
 
@@ -89,6 +87,7 @@ export const getUserProfile = () => async (dispatch) => {
     dispatch(setAuthorization());
     dispatch(setUserTicket());
     dispatch(getIDPProfile());
+    dispatch(getScheduleSyncLink());
     return dispatch(createAction(STOP_LOADING_PROFILE)());
   });
 }
@@ -158,6 +157,7 @@ export const getIDPProfile = () => async (dispatch) => {
 
 export const addToSchedule = (event) => async (dispatch, getState) => {
   const accessToken = await getAccessToken();
+
   if (!accessToken) return Promise.reject();
 
   const url = `${getEnvVariable(SUMMIT_API_BASE_URL)}/api/v1/summits/${getEnvVariable(SUMMIT_ID)}/members/me/schedule/${event.id}`;
@@ -175,6 +175,7 @@ export const addToSchedule = (event) => async (dispatch, getState) => {
 
 export const removeFromSchedule = (event) => async (dispatch, getState) => {
   const accessToken = await getAccessToken();
+
   if (!accessToken) return Promise.reject();
 
   const url = `${getEnvVariable(SUMMIT_API_BASE_URL)}/api/v1/summits/${getEnvVariable(SUMMIT_ID)}/members/me/schedule/${event.id}`;
@@ -263,3 +264,24 @@ export const updatePassword = (password) => async (dispatch) => {
     })
     .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
+
+export const getScheduleSyncLink = () => async (dispatch) => {
+  const accessToken = await getAccessToken();
+
+  if (!accessToken) return Promise.resolve();
+
+  let params = {
+    access_token: accessToken,
+  };
+
+  return postRequest(
+      null,
+      createAction(SCHEDULE_SYNC_LINK_RECEIVED),
+      `${window.SUMMIT_API_BASE_URL}/api/v1/summits/${window.SUMMIT_ID}/members/me/schedule/shareable-link`,
+      null,
+      customErrorHandler,
+  )(params)(dispatch)
+      .then((payload) => {
+        console.log(payload);
+      });
+};

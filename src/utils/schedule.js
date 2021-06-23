@@ -1,13 +1,14 @@
 import moment from 'moment-timezone'
+import Swal from "sweetalert2";
 
 const groupByDay = (events) => {
   let groupedEvents = [];
   events.map((e, index) => {
     let day = moment.unix(e.start_date).format('MM/DD/YYYY');
     groupedEvents[day] = groupedEvents[day] && groupedEvents[day].length > 0 ? [e, ...groupedEvents[day]] : [e];
-  })
+  });
   return groupedEvents;
-}
+};
 
 const sortSchedule = (events) => {
   console.log(events);
@@ -15,10 +16,18 @@ const sortSchedule = (events) => {
     console.log('day', day)
     // return day.sort((a, b) => a.id - b.id);
   })
-}
+};
 
 export const sortEvents = (events) => {
   let sortedEvents = groupByDay(events);
   sortedEvents = sortSchedule(sortedEvents);
   return sortedEvents;
-}
+};
+
+export const needsLogin = (msg = "Please login first") => {
+  Swal.fire(
+      'Login Required!',
+      msg,
+      'warning'
+  );
+};
