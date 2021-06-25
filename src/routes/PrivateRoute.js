@@ -29,7 +29,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
     } else {
       setUserRevalidation(false);
     }
-  }, [userProfile, hasTicket, isAuthorized]);
+  }, [userProfile, hasTicket, isAuthorized, getUserProfile, isLoggedIn, userRevalidation]);
 
   if (!isLoggedIn) {
     navigate('/', {

@@ -71,8 +71,8 @@ export const EventPageTemplate = class extends React.Component {
     if (loading !== nextProps.loading) return true;
     if (eventId !== nextProps.eventId) return true;
     if (event?.id !== nextProps.event?.id) return true;
-    const currentPhase = eventsPhases.find(e => e.id == eventId)?.phase;
-    const nextCurrentPhase = nextProps.eventsPhases.find(e => e.id == eventId)?.phase;
+    const currentPhase = eventsPhases.find(e => e.id === eventId)?.phase;
+    const nextCurrentPhase = nextProps.eventsPhases.find(e => e.id === eventId)?.phase;
     if (currentPhase !== nextCurrentPhase && !(currentPhase === 0 && nextCurrentPhase === 1)) return true;
     return false
   }
@@ -81,9 +81,9 @@ export const EventPageTemplate = class extends React.Component {
     const { event, eventId, eventsPhases, user, loading, nowUtc } = this.props;
     const { firstRender } = this.state;
     let { summit } = SummitObject;
-    let currentEvent = eventsPhases.find(e => e.id == eventId);
+    let currentEvent = eventsPhases.find(e => e.id === eventId);
     let eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;
-    let firstHalf = currentEvent?.phase === 0 ? nowUtc < ((event?.start_date + event?.end_date) / 2) ? true : false : null;
+    let firstHalf = currentEvent?.phase === 0 ? nowUtc < ((event?.start_date + event?.end_date) / 2) : null;
 
     if (!firstRender && !loading && !event) {
       return <HeroComponent title="Event not found" redirectTo="/a/schedule" />

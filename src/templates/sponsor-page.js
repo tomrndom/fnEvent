@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { connect } from 'react-redux'
 
-import { getAccessToken } from 'openstack-uicore-foundation/lib/methods';
-
 import SponsorHeader from '../components/SponsorHeader'
 import AttendanceTrackerComponent from '../components/AttendanceTrackerComponent'
 import LiveEventWidgetComponent from '../components/LiveEventWidgetComponent'
@@ -102,7 +100,7 @@ export const SponsorPageTemplate = class extends React.Component {
                   {sponsor.intro && <span dangerouslySetInnerHTML={{ __html: parsedIntro }} />}
                 </div>
                 <div className="column is-half px-0 py-0">
-                  <img src={sponsor.sideImage} className={styles.sideImage} />
+                  <img alt="" src={sponsor.sideImage} className={styles.sideImage} />
                 </div>
               </div>
             }

@@ -3,8 +3,8 @@ import {epochToMomentTimeZone} from 'openstack-uicore-foundation/lib/methods';
 import events from '../content/events.json';
 import filtersData from '../content/filters.json';
 
-import { START_LOADING, STOP_LOADING, LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
-import { UPDATE_FILTER, UPDATE_EVENTS, UPDATE_FILTERS, CHANGE_VIEW } from '../actions/schedule-actions'
+import { LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
+import { UPDATE_FILTER, UPDATE_FILTERS, CHANGE_VIEW } from '../actions/schedule-actions'
 import {RESET_STATE} from '../state/store';
 
 const {color_source, ...filters} = filtersData;

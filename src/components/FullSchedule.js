@@ -1,6 +1,5 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { connect } from "react-redux";
-import {createAction} from 'openstack-uicore-foundation/lib/methods';
 import { addToSchedule, removeFromSchedule } from "../actions/user-actions";
 import { getShareLink, callAction } from "../actions/schedule-actions";
 import {needsLogin} from "../utils/schedule";
@@ -38,11 +37,9 @@ const FullSchedule = ({
       switch (action) {
         case "ADDED_TO_SCHEDULE": {
           return addToSchedule(payload.event);
-          break;
         }
         case "REMOVED_FROM_SCHEDULE": {
           return removeFromSchedule(payload.event);
-          break;
         }
         default:
           return callAction(action, payload);

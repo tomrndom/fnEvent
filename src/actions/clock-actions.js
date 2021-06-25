@@ -1,25 +1,17 @@
-import {
-  getRequest,
-  createAction,
-  stopLoading,
-  startLoading,
-} from 'openstack-uicore-foundation/lib/methods';
+import { createAction } from 'openstack-uicore-foundation/lib/methods';
 
 import SummitObject from '../content/summit.json';
 
-import { customErrorHandler } from '../utils/customErrorHandler';
 import { PHASES, getSummitPhase, getEventPhase } from '../utils/phasesUtils';
 
-export const SUMMIT_PHASE_AFTER = 'SUMMIT_PHASE_AFTER'
-export const SUMMIT_PHASE_DURING = 'SUMMIT_PHASE_DURING'
-export const SUMMIT_PHASE_BEFORE = 'SUMMIT_PHASE_BEFORE'
-export const EVENT_PHASE_BEFORE = 'EVENT_PHASE_BEFORE'
-export const EVENT_PHASE_DURING = 'EVENT_PHASE_DURING'
-export const EVENT_PHASE_AFTER = 'EVENT_PHASE_AFTER'
-export const EVENT_PHASE_ADD = 'EVENT_PHASE_ADD'
+export const SUMMIT_PHASE_AFTER = 'SUMMIT_PHASE_AFTER';
+export const SUMMIT_PHASE_DURING = 'SUMMIT_PHASE_DURING';
+export const SUMMIT_PHASE_BEFORE = 'SUMMIT_PHASE_BEFORE';
+export const EVENT_PHASE_BEFORE = 'EVENT_PHASE_BEFORE';
+export const EVENT_PHASE_DURING = 'EVENT_PHASE_DURING';
+export const EVENT_PHASE_AFTER = 'EVENT_PHASE_AFTER';
+export const EVENT_PHASE_ADD = 'EVENT_PHASE_ADD';
 export const UPDATE_CLOCK = 'UPDATE_CLOCK';
-export const GET_TIME_NOW = 'GET_TIME_NOW';
-export const TIME_NOW = 'TIME_NOW';
 
 export const updateClock = (timestamp) => (dispatch) => {
 
@@ -37,20 +29,20 @@ export const updateSummitPhase = () => (dispatch, getState) => {
     if (summit_phase !== summitPhase) {
       switch (summitPhase) {
         case PHASES.BEFORE:
-          dispatch(createAction(SUMMIT_PHASE_BEFORE)(PHASES.BEFORE))
+          dispatch(createAction(SUMMIT_PHASE_BEFORE)(PHASES.BEFORE));
           break;
         case PHASES.DURING:
-          dispatch(createAction(SUMMIT_PHASE_DURING)(PHASES.DURING))
+          dispatch(createAction(SUMMIT_PHASE_DURING)(PHASES.DURING));
           break;
         case PHASES.AFTER:
-          dispatch(createAction(SUMMIT_PHASE_AFTER)(PHASES.AFTER))
+          dispatch(createAction(SUMMIT_PHASE_AFTER)(PHASES.AFTER));
           break;
         default:
           break;
       }
     }
   }
-}
+};
 
 export const updateEventsPhase = () => (dispatch, getState) => {
 
@@ -64,7 +56,7 @@ export const updateEventsPhase = () => (dispatch, getState) => {
     }
   }
 
-  events_phases.map(event => {
+  events_phases.forEach(event => {
     const eventPhase = getEventPhase(event, nowUtc);
     if (event.phase !== eventPhase) {
       switch (eventPhase) {
@@ -88,4 +80,4 @@ export const updateEventsPhase = () => (dispatch, getState) => {
       }
     }
   })
-}
+};

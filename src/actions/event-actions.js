@@ -6,19 +6,16 @@ import {
   startLoading,
 } from 'openstack-uicore-foundation/lib/methods';
 
-// import Swal from 'sweetalert2';
-
 import { customErrorHandler } from '../utils/customErrorHandler';
 
 import { LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
-import axios from "axios";
 
 export const GET_EVENT_DATA         = 'GET_EVENT_DATA';
 export const GET_EVENT_DATA_ERROR   = 'GET_EVENT_DATA_ERROR';
 
 export const handleResetReducers = () => (dispatch) => {
   dispatch(createAction(LOGOUT_USER)({}));
-}
+};
 
 export const getEventById = (eventId) => async (dispatch, getState) => {
 
@@ -50,7 +47,7 @@ export const getEventById = (eventId) => async (dispatch, getState) => {
       dispatch(stopLoading());
     }).catch(e => {
       dispatch(stopLoading());
-      dispatch(createAction(GET_EVENT_DATA_ERROR)(e))
+      dispatch(createAction(GET_EVENT_DATA_ERROR)(e));
       return (e);
     });
   }

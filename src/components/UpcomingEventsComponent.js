@@ -30,6 +30,8 @@ const UpcomingEventsComponent = ({className, userProfile, page, addToSchedule, r
                 case 'REMOVED_FROM_SCHEDULE': {
                     return removeFromSchedule(event);
                 }
+                default:
+                    return;
             }
         }
     };

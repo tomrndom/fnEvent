@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { connect } from 'react-redux'
@@ -36,13 +36,13 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
         linkedin: '',
         twitter: '',
         language: ''
-    })
+    });
 
-    const [showFullName, setShowFullName] = useState(undefined)
+    const [showFullName, setShowFullName] = useState(undefined);
     //const [showPicture, setShowPicture] = useState(undefined)
-    const [showEmail, setShowEmail] = useState(undefined)
-    const [bio, setBio] = useState('')
-    const [statementOfInterest, setStatementOfInterest] = useState('')
+    const [showEmail, setShowEmail] = useState(undefined);
+    const [bio, setBio] = useState('');
+    const [statementOfInterest, setStatementOfInterest] = useState('');
 
     const [address, setAddress] = useState({
         street: '',
@@ -52,7 +52,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
         zipCode: '',
         country: '',
         phone: ''
-    })
+    });
 
     const [image, setImage] = useState(null);
 
@@ -61,9 +61,9 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
         if (!user.idpProfile) {
             getIDPProfile();
         } else {
-            setImage(user.idpProfile.picture)
+            setImage(user.idpProfile.picture);
             let birthdate = user.idpProfile.birthdate ?
-                moment.tz(user.idpProfile.birthdate.date, user.idpProfile.birthdate.timezone || 'UTC') : null
+                moment.tz(user.idpProfile.birthdate.date, user.idpProfile.birthdate.timezone || 'UTC') : null;
             setPersonalProfile({
                 firstName: user.idpProfile.given_name || '',
                 lastName: user.idpProfile.family_name || '',
@@ -102,11 +102,11 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                 company: ''
             });
         };
-    }, [user.idpProfile]);
+    }, [user.idpProfile, getIDPProfile]);
 
     const handlePictureUpdate = (picture) => {
         updateProfilePicture(picture);
-    }
+    };
 
     const handleProfileUpdate = (fromPopup) => {
         if (fromPopup) {
@@ -143,20 +143,20 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                     post_code: address.zipCode,
                     country_iso_code: address.country,
                     phone_number: address.phone,
-                }
+                };
                 updateProfile(newProfile);
             }
         }
-    }
+    };
 
     const handlePasswordUpdate = (current_password, password, password_confirmation) => {
         const passwordObject = {
             current_password,
             password,
             password_confirmation
-        }
+        };
         updatePassword(passwordObject);
-    }
+    };
 
     const handleTogglePopup = (profile) => {
         if (profile) {
@@ -165,21 +165,21 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
             document.body.classList.remove('is-clipped');
         }
         setShowProfile(profile)
-    }
+    };
 
     const onEventChange = (ev) => {
         navigate(`/a/event/${ev.id}`);
-    }
+    };
 
     const onViewAllEventsClick = () => {
         navigate('/a/my-schedule')
-    }
+    };
 
     const discardChanges = (state) => {
         switch (state) {
             case 'profile':
                 let birthdate = user.idpProfile.birthdate ?
-                    moment.tz(user.idpProfile.birthdate.date, user.idpProfile.birthdate.timezone || 'UTC') : null
+                    moment.tz(user.idpProfile.birthdate.date, user.idpProfile.birthdate.timezone || 'UTC') : null;
                 setPersonalProfile({
                     firstName: user.idpProfile.given_name,
                     lastName: user.idpProfile.family_name,
@@ -220,18 +220,18 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
             default:
                 return;
         }
-    }
+    };
     return (
         <React.Fragment>
             <AjaxLoader relative={false} color={'#ffffff'} show={user.loadingIDP} size={120} />
             <div className="px-6 py-6 mb-6">
                 <div className={`columns is-3 ${styles.fullProfile}`} >
                     <div className="column is-3">
-                        <div className={styles.profilePicture} onClick={() => handleTogglePopup(!showProfile)}>
-                            <img src={image} />
+                        <div className={styles.profilePicture} onClick={() => handleTogglePopup(!showProfile)} role="button" tabIndex={0}>
+                            <img alt="" src={image} />
                             <div className={styles.imageUpload}>
                                 <label for="file-input">
-                                    <i className={`${styles.pictureIcon} fa fa-2x fa-pencil icon is-large`}></i>
+                                    <i className={`${styles.pictureIcon} fa fa-2x fa-pencil icon is-large`} />
                                 </label>
                             </div>
                         </div>
@@ -619,7 +619,7 @@ const FullProfilePage = (
                 updatePassword={updatePassword} />
         </Layout>
     )
-}
+};
 
 FullProfilePage.propTypes = {
     user: PropTypes.object,
@@ -627,7 +627,7 @@ FullProfilePage.propTypes = {
     updateProfile: PropTypes.func,
     updateProfilePicture: PropTypes.func,
     updatePassword: PropTypes.func
-}
+};
 
 FullProfilePageTemplate.propTypes = {
     user: PropTypes.object,
@@ -635,11 +635,11 @@ FullProfilePageTemplate.propTypes = {
     updateProfile: PropTypes.func,
     updateProfilePicture: PropTypes.func,
     updatePassword: PropTypes.func
-}
+};
 
 const mapStateToProps = ({ userState }) => ({
     user: userState,
-})
+});
 
 export default connect(mapStateToProps,
     {

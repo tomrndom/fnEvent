@@ -188,6 +188,8 @@ const SponsorComponent = ({ page }) => {
                 )
               }
             }
+            default:
+              return null;
           }
         } else {
           return null;
@@ -202,6 +204,6 @@ const SponsorComponent = ({ page }) => {
       }
     </React.Fragment>
   )
-}
+};
 
 export default SponsorComponent;

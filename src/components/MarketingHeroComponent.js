@@ -20,11 +20,11 @@ class MarketingHeroComponent extends React.Component {
     let defaultLocation = getEnvVariable(AUTHORIZED_DEFAULT_PATH) ? getEnvVariable(AUTHORIZED_DEFAULT_PATH) : '/a/';
     let backUrl = location.state?.backUrl ? location.state.backUrl : defaultLocation;    
     return URI.encode(backUrl);    
-  }
+  };
 
   onClickLogin = () => {
     doLogin(this.getBackURL());
-  }
+  };
 
   render() {
 
@@ -60,7 +60,7 @@ class MarketingHeroComponent extends React.Component {
                   {summit_phase >= PHASES.DURING && isLoggedUser ?
                     <Link className={styles.link} to={`${getEnvVariable(AUTHORIZED_DEFAULT_PATH) ? getEnvVariable(AUTHORIZED_DEFAULT_PATH) : '/a/'}`}>
                       <button className={`${styles.button} button is-large`}>
-                        <i className={`fa fa-2x fa-sign-in icon is-large`}></i>
+                        <i className={`fa fa-2x fa-sign-in icon is-large`} />
                         <b>Enter</b>
                       </button>
                     </Link>
@@ -69,15 +69,15 @@ class MarketingHeroComponent extends React.Component {
                       {MarketingSite.heroBanner.buttons.registerButton.display &&
                         <a className={styles.link} href={`${getEnvVariable(REGISTRATION_BASE_URL)}/a/${summit.slug}/`} target="_blank" rel="noreferrer">
                           <button className={`${styles.button} button is-large`}>
-                            <i className={`fa fa-2x fa-edit icon is-large`}></i>
+                            <i className={`fa fa-2x fa-edit icon is-large`} />
                             <b>{MarketingSite.heroBanner.buttons.registerButton.text}</b>
                           </button>
                         </a>
                       }
                       {MarketingSite.heroBanner.buttons.loginButton.display && !isLoggedUser &&
-                        <a className={styles.link}>
-                          <button className={`${styles.button} button is-large`} onClick={() => this.onClickLogin()}>
-                            <i className={`fa fa-2x fa-sign-in icon is-large`}></i>
+                        <a className={styles.link} href="">
+                          <button className={`${styles.button} ${styles.link} button is-large`} onClick={() => this.onClickLogin()}>
+                            <i className={`fa fa-2x fa-sign-in icon is-large`} />
                             <b>{MarketingSite.heroBanner.buttons.loginButton.text}</b>
                           </button>
                         </a>
@@ -109,6 +109,6 @@ class MarketingHeroComponent extends React.Component {
 
 const mapStateToProps = ({ clockState }) => ({
   summit_phase: clockState.summit_phase,
-})
+});
 
 export default connect(mapStateToProps, null)(MarketingHeroComponent);

@@ -21,25 +21,25 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
   const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
-  const [width, setWidth] = useState(200);
-  const [height, setHeight] = useState(200);
+  const width = 200;
+  const height = 200;
 
   useEffect(() => {
     setFirstName(userProfile.given_name);
     setLastName(userProfile.family_name);
     setCompany(userProfile.company);
-    setImage(userProfile.picture)
+    setImage(userProfile.picture);
     return () => {
       setFirstName('');
       setLastName('');
       setCompany('');
     };
-  }, [])
+  }, [userProfile.given_name, userProfile.family_name, userProfile.company, userProfile.picture]);
 
   const handleNewImage = (e) => {
     setImage(e.target.files[0]);
     setNewImage(true);
-  }
+  };
 
   const urltoFile = (url, filename, mimeType) => {
     mimeType = mimeType || (url.match(/^data:([^;]+);/) || '')[1];
@@ -48,30 +48,30 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
       .then(function (res) { return res.arrayBuffer(); })
       .then(function (buf) { return new File([buf], filename, { type: mimeType }); })
     );
-  }
+  };
 
   const handleScale = (e) => {
     const scale = parseFloat(e.target.value);
     setScale(scale);
     setNewImage(true);
-  }
+  };
 
   const handlePositionChange = (position) => {
     setPosition(position);
     setNewImage(true);
-  }
+  };
 
   const rotateLeft = (e) => {
     e.preventDefault();
     setRotate(rotate - 90);
     setNewImage(true);
-  }
+  };
 
   const rotateRight = (e) => {
     e.preventDefault();
     setRotate(rotate + 90);
     setNewImage(true);
-  }
+  };
 
   const onClickSave = () => {
     if (editorRef.current && newImage) {
@@ -86,19 +86,18 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
         first_name: firstName,
         last_name: lastName,
         company: company
-      }
+      };
       changeProfile(newProfile);
     }
-  }
+  };
 
   return (
     <div className={`${styles.modal} ${showProfile ? styles.isActive : ''}`}>
-      <div className={`${styles.modalBackground}`} onClick={() => closePopup()}></div>
       <div className={`${styles.modalCard} ${styles.profilePopup}`}>
         <AjaxLoader relative={true} color={'#ffffff'} show={idpLoading} size={120} />
         <header className={`${styles.modalCardHead}`}>
           <p className={`${styles.modalCardTitle}`}>Edit profile</p>
-          <i onClick={() => closePopup()} className={`${styles.closeIcon} fa fa-times icon is-large`}></i>
+          <i onClick={() => closePopup()} className={`${styles.closeIcon} fa fa-times icon is-large`} role="button" tabIndex={0} />
         </header>
         <section className={`${styles.modalCardBody}`}>
           <div className={styles.modalCardPicture}>
@@ -119,7 +118,7 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
               />
               <div className={styles.imageUpload}>
                 <label htmlFor="file-input">
-                  <i className={`${styles.pictureIcon} fa fa-2x fa-camera icon is-large`}></i>
+                  <i className={`${styles.pictureIcon} fa fa-2x fa-camera icon is-large`} />
                 </label>
                 <input name="newImage" id="file-input" type="file" accept=".jpg,.jpeg,.png" onChange={handleNewImage} />
               </div>
@@ -191,7 +190,7 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
                   </div>
                 </div>
               </div>
-              <a className={styles.linkProfile} onClick={() => navigate('/a/profile')}>Go to Full Profile</a>
+              <a href="" className={styles.linkProfile} onClick={() => navigate('/a/profile')}>Go to Full Profile</a>
             </div>
           }
         </section>
@@ -202,6 +201,6 @@ const ProfilePopupComponent = ({ userProfile, idpLoading, closePopup, showProfil
       </div>
     </div>
   )
-}
+};
 
 export default ProfilePopupComponent

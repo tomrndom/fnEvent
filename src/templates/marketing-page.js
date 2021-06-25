@@ -82,7 +82,7 @@ export const MarketingPageTemplate = class extends React.Component {
               <React.Fragment>
                 <h2><b>{MarketingSite.leftColumn.image.title}</b></h2>
                 <br />
-                <img src={MarketingSite.leftColumn.image.src} />
+                <img alt="" src={MarketingSite.leftColumn.image.src} />
               </React.Fragment>
             }
           </div>
@@ -97,10 +97,10 @@ export const MarketingPageTemplate = class extends React.Component {
                     <div className={'single'} key={index}>
                       {item.images[0].link ?
                         <Link to={item.images[0].link}>
-                          <img src={item.images[0].image} />
+                          <img alt="" src={item.images[0].image} />
                         </Link>
                         :
-                        <img src={item.images[0].image} />
+                        <img alt="" src={item.images[0].image} />
                       }
                     </div>
                   )
@@ -112,16 +112,18 @@ export const MarketingPageTemplate = class extends React.Component {
                           <div className={styles.imageSlider} key={indexSlide}>
                             {img.link ?
                               <Link to={img.link}>
-                                <img src={img.image} />
+                                <img alt="" src={img.image} />
                               </Link>
                               :
-                              <img src={img.image} />
+                              <img alt="" src={img.image} />
                             }
                           </div>
                         )
                       })}
                     </Slider>
                   )
+                } else {
+                  return null;
                 }
               })}
             </Masonry>
@@ -142,7 +144,7 @@ MarketingPageTemplate.propTypes = {
 }
 
 const MarketingPage = ({ summit, location, data, summit_phase, user, isLoggedUser, getDisqusSSO, handleResetReducers }) => {
-  const { frontmatter, html } = data.markdownRemark;
+  const { html } = data.markdownRemark;
 
   // handleResetReducers();
   // return null;

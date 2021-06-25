@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
-import {pickBy, isEmpty} from 'lodash';
+import {pickBy} from 'lodash';
 import { Helmet } from "react-helmet";
 import { updateFilter, updateFiltersFromHash } from "../actions/schedule-actions";
 
