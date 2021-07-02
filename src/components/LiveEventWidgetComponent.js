@@ -10,7 +10,7 @@ import HomeSettings from "../content/home-settings";
 import EventsData from '../content/events.json'
 import SummitData from '../content/summit.json'
 
-const LiveEventWidgetComponent = ({marketingSettings}) => {
+const LiveEventWidgetComponent = ({marketingSettings, ...rest}) => {
 
     const widgetProps = {
         title: "",
@@ -18,6 +18,7 @@ const LiveEventWidgetComponent = ({marketingSettings}) => {
         eventsData: EventsData,
         summitData: SummitData.summit,
         marketingData: marketingSettings.colors,
+        ...rest
     };
 
     return (
@@ -26,7 +27,7 @@ const LiveEventWidgetComponent = ({marketingSettings}) => {
                 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/awesome-bootstrap-checkbox/1.0.2/awesome-bootstrap-checkbox.min.css" />
             </Helmet>
             <div>
-                <LiveEventWidget {...widgetProps} {...this.props} />
+                <LiveEventWidget {...widgetProps} />
             </div>
         </>
     )
