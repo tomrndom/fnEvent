@@ -34,7 +34,7 @@ module.exports = {
         fonts: {
           google: [
             {
-              family: 'Nunito',
+              family: 'Nunito Sans',
               variants: ['300', '600', '700'],
               fontDisplay: 'swap',
               strategy: 'selfHosted'

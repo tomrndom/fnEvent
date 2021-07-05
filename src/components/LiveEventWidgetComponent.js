@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import { Helmet } from 'react-helmet'
 
 // these two libraries are client-side only
-import LiveEventWidget from 'live-event-widget';
-import 'live-event-widget/index.css';
+import LiveEventWidget from 'live-event-widget/dist/index.js';
+import 'live-event-widget/dist/index.css';
 
 import HomeSettings from "../content/home-settings";
 import EventsData from '../content/events.json'

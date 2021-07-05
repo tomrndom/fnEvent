@@ -7520,10 +7520,10 @@ fstream@^1.0.0, fstream@^1.0.12:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-full-schedule-widget@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/full-schedule-widget/-/full-schedule-widget-1.1.1.tgz#f46c672f8d4cb3486f5753b5914390e7978aa6ff"
-  integrity sha512-ayvfvpSQahmpzgZTygV2ggFsvKpLe0WWDDvXXCTmbz2KciYuhVh+C6jdM9cNMSs/HHa4Ib2IcJ/n5+piRjG0eQ==
+full-schedule-widget@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/full-schedule-widget/-/full-schedule-widget-1.1.2.tgz#9d922106585a8abefa92871daf55743ffda0eb70"
+  integrity sha512-yoyaV7TmXMx3CYL6G/5B+iwoj2JHOaYytspWG8MKaY9eg43s1j18/12vaMQzyFrfZVgvTJgg4xTVhRMctQypcA==
   dependencies:
     pure-react-carousel "^1.27.4"
 
@@ -10716,17 +10716,17 @@ linkifyjs@^2.1.9:
   resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-2.1.9.tgz#af06e45a2866ff06c4766582590d098a4d584702"
   integrity sha512-74ivurkK6WHvHFozVaGtQWV38FzBwSTGNmJolEgFp7QgR2bl6ArUWlvT4GcHKbPe1z3nWYi+VUdDZk16zDOVug==
 
-lite-schedule-widget@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.5.tgz#48c3bd6e947a20dbc759896f3827960c0fb2f81e"
-  integrity sha512-fciYFvwajSyTKZUjryOVGZeVCTOLtS3bkGp276TwefiUGq4sC3bgmZ9SwdkdM93sLLEAvOAKDCmJZ5dnMat28g==
+lite-schedule-widget@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.6.tgz#6b369c5f19e82f7f7039343a75b100484d2fdf33"
+  integrity sha512-OdeGaBN+J1zM+tFCtdwllU4WpuQwam78jrCZfMtiClLPsvlGWWXPVlJzM4TKCLZcN3iklH0bArQK5Judmech2w==
   dependencies:
     pure-react-carousel "^1.27.4"
 
-live-event-widget@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-2.0.2.tgz#309ed25d27a3f4e873c96b468c9168975e5449b9"
-  integrity sha512-hLMGVgCYh5VFX7K8Z8MhNgymELFQ8zAslVwxhKnJBUBpmS1XcARRpR8E2QlwEPdKilIpxZ4W9xxMWjCkSKeoZw==
+live-event-widget@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/live-event-widget/-/live-event-widget-2.0.4.tgz#150737f110261e7f69e81b6614b1e18ead693eb4"
+  integrity sha512-wsn5uHBHqRUn80OELunJSZ7x4wLg43uLHcjlXH78lrR2XpP2P2/uQ1M0IoChtlGDb9/f4JMKBTo4DLVZwNVEbA==
   dependencies:
     svg-url-loader "^6.0.0"
 
@@ -12778,10 +12778,10 @@ open@^7.0.3:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
 
-openstack-uicore-foundation@3.0.16:
-  version "3.0.16"
-  resolved "https://registry.yarnpkg.com/openstack-uicore-foundation/-/openstack-uicore-foundation-3.0.16.tgz#f2296501594c8eec615192bee766338f2fae5939"
-  integrity sha512-75+HiZiu8Psw31GUsnMrTpQN4PRUMP7tgCgQwVAQk3/semROkIgdR9IvFjgSF3QXRv53KXsRCGyUcsDPzH531w==
+openstack-uicore-foundation@3.0.25:
+  version "3.0.25"
+  resolved "https://registry.yarnpkg.com/openstack-uicore-foundation/-/openstack-uicore-foundation-3.0.25.tgz#3963d219c4d90e597207a4578405a43cb5aa3ecf"
+  integrity sha512-ZGuo6GjzBrivQnYONd3ALkxMNXY+n5cjKjcsKmQNTT4jtwDaoeHdff+1gQb7VkdET+C2TTSRG8va2xVUVee4zQ==
 
 opentracing@^0.14.4:
   version "0.14.5"
@@ -18289,10 +18289,10 @@ upath@^1.1.1:
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.2.0.tgz#8f66dbcd55a883acdae4408af8b035a5044c1894"
   integrity sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==
 
-upcoming-events-widget@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/upcoming-events-widget/-/upcoming-events-widget-1.0.1.tgz#a95a7418ebff546a29d28429976889fba0738aea"
-  integrity sha512-1sGrVyZih7dJPHAYn7evEHwqMbRTqdbwPZMmPT36O+XJSZNMV9Df+a7zHPf8IV2a7AtL2uEnB+ByeKKg1ck0yg==
+upcoming-events-widget@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/upcoming-events-widget/-/upcoming-events-widget-1.0.5.tgz#1ac862dd79ac0376d1b61a688c968e11d940cd98"
+  integrity sha512-5gfmOUtc6O2WbHlJbau0EcQ3zw0a0Zah+v5bVCr2Zf9bfDMPauY4+D32gqs7pi7rU3C5BfeWwMZeioDMnjxOrA==
   dependencies:
     pure-react-carousel "^1.27.4"
 
