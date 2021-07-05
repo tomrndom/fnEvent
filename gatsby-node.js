@@ -28,6 +28,19 @@ const SSR_getMarketingSettings = async (baseUrl, summitId) => {
       .catch(e => console.log('ERROR: ', e));
 };
 
+const SSR_getEvents = async (baseUrl, summitId, accessToken, page) => {
+  return await axios.get(
+      `${baseUrl}/api/v1/summits/${summitId}/events/published`,
+      {
+        params: {
+          access_token: accessToken,
+          per_page: 50,
+          page: page,
+          expand: 'slides, links, videos, media_uploads type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance, groups, rsvp_template, tags',
+        }
+      });
+};
+
 exports.onPreBootstrap = async () => {
   const marketingData = await SSR_getMarketingSettings(process.env.GATSBY_MARKETING_API_BASE_URL, process.env.GATSBY_SUMMIT_ID);
   const colorSettings = fs.existsSync(colorsFilepath) ? JSON.parse(fs.readFileSync(colorsFilepath)) : {};
@@ -101,37 +114,21 @@ exports.onPreBootstrap = async () => {
   let events_page = 1;
   let events_last_page = 0;
 
-  let allEvents = await axios.get(
-    `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published`,
-    {
-      params: {
-        access_token: accessToken,
-        per_page: 50,
-        page: events_page,
-        expand: 'slides, links, videos, media_uploads type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance, groups, rsvp_template',
-      }
-    }).then((response) => {
-      events_last_page = response.data.last_page;
-      return response.data.data;
-    })
-    .catch(e => console.log('ERROR: ', e));
-
-    while (events_last_page > 1 && events_page <= events_last_page) {
-    events_page++;
-    await axios.get(
-      `${process.env.GATSBY_SUMMIT_API_BASE_URL}/api/v1/summits/${process.env.GATSBY_SUMMIT_ID}/events/published`,
-      {
-        params: {
-          access_token: accessToken,
-          per_page: 50,
-          page: events_page,
-          expand: 'slides, links, videos, media_uploads type, track, location, location.venue, location.floor, speakers, moderator, sponsors, current_attendance, groups, rsvp_template',
-        }
-      }).then((response) => {
-        allEvents = [...allEvents, ...response.data.data];
-        return response.data;
+  let allEvents = await SSR_getEvents(process.env.GATSBY_SUMMIT_API_BASE_URL, process.env.GATSBY_SUMMIT_ID, accessToken, events_page)
+      .then((response) => {
+        events_last_page = response.data.last_page;
+        return response.data.data;
       })
       .catch(e => console.log('ERROR: ', e));
+
+  while (events_last_page > 1 && events_page <= events_last_page) {
+    events_page++;
+    await SSR_getEvents(process.env.GATSBY_SUMMIT_API_BASE_URL, process.env.GATSBY_SUMMIT_ID, accessToken, events_page)
+        .then((response) => {
+          allEvents = [...allEvents, ...response.data.data];
+          return response.data;
+        })
+        .catch(e => console.log('ERROR: ', e));
   }
 
   fs.writeFileSync('src/content/events.json', JSON.stringify(allEvents), 'utf8');
