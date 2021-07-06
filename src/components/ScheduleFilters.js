@@ -14,6 +14,7 @@ const ScheduleFilters = ({
   events,
   allEvents,
   filters,
+  colorSource,
   marketingSettings,
   updateFilter,
   updateFiltersFromHash,
@@ -37,6 +38,7 @@ const ScheduleFilters = ({
       updateFilter(payload);
     },
     marketingSettings: marketingSettings.colors,
+    colorSource: colorSource,
     ...rest,
   };
 
@@ -60,6 +62,7 @@ const mapStateToProps = ({ summitState, scheduleState }) => ({
   events: scheduleState.events,
   allEvents: scheduleState.allEvents,
   filters: scheduleState.filters,
+  colorSource: scheduleState.colorSource,
   summit: summitState.summit,
   marketingSettings: summitState.marketingSettings,
 });

@@ -82,7 +82,7 @@ const getFilteredEvents = (events, filters, summitTimezone) => {
     }
 
     if (filters.tags?.values.length > 0) {
-      valid = ev.tags.values.some(t => filters.tags.includes(t.tag));
+      valid = ev.tags.some(t => filters.tags.values.includes(t.id));
       if (!valid) return false;
     }
 
@@ -92,12 +92,12 @@ const getFilteredEvents = (events, filters, summitTimezone) => {
     }
 
     if (filters.track_groups?.values.length > 0) {
-      valid = filters.track_groups.values.includes(ev.level);
+      valid = ev.track.track_groups.some(tg => filters.track_groups.values.includes(tg));
       if (!valid) return false;
     }
 
     if (filters.event_types?.values.length > 0) {
-      valid = filters.event_types.values.includes(ev.level);
+      valid = filters.event_types.values.includes(ev.type.id);
       if (!valid) return false;
     }
 

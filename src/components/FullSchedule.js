@@ -15,6 +15,7 @@ const FullSchedule = ({
   events,
   filters,
   view,
+  colorSource,
   className,
   userProfile,
   marketingSettings,
@@ -45,7 +46,7 @@ const FullSchedule = ({
           return callAction(action, payload);
       }
     },
-    colorSource: "track",
+    colorSource: colorSource,
     withThumbs: false,
     defaultImage: HomeSettings.schedule_default_image,
     getShareLink: () => getShareLink(filters, view),
@@ -69,6 +70,7 @@ const mapStateToProps = ({ userState, summitState, scheduleState }) => ({
   events: scheduleState.events,
   filters: scheduleState.filters,
   view: scheduleState.view,
+  colorSource: scheduleState.colorSource,
 });
 
 export default connect(mapStateToProps, {
