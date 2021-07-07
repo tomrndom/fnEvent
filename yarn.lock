@@ -10716,12 +10716,13 @@ linkifyjs@^2.1.9:
   resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-2.1.9.tgz#af06e45a2866ff06c4766582590d098a4d584702"
   integrity sha512-74ivurkK6WHvHFozVaGtQWV38FzBwSTGNmJolEgFp7QgR2bl6ArUWlvT4GcHKbPe1z3nWYi+VUdDZk16zDOVug==
 
-lite-schedule-widget@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.6.tgz#6b369c5f19e82f7f7039343a75b100484d2fdf33"
-  integrity sha512-OdeGaBN+J1zM+tFCtdwllU4WpuQwam78jrCZfMtiClLPsvlGWWXPVlJzM4TKCLZcN3iklH0bArQK5Judmech2w==
+lite-schedule-widget@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.7.tgz#a0e8171851721f8f7254dc0656ea43e41ceaa88c"
+  integrity sha512-NK2LU5nnUhlch1TGQwt6aQIC5g+vY8wvCG4pyFNFUSmygcGRuW8By3rGSnwAuvTJywtpbUEntAeCzJBIut5gMw==
   dependencies:
     pure-react-carousel "^1.27.4"
+    use-fit-text "^2.4.0"
 
 live-event-widget@^2.0.4:
   version "2.0.4"
@@ -18408,6 +18409,13 @@ use-debounce@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/use-debounce/-/use-debounce-6.0.1.tgz#ed1eb2b30189408fb9792ea2887f4c6c3cb401a3"
   integrity sha512-kpvIxpa0vOLz/2I2sfNJ72mUeaT2CMNCu5BT1f2HkV9qZK27UVSOFf1sSSu+wjJE4TcR2VTXS2SM569+m3TN7Q==
+
+use-fit-text@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/use-fit-text/-/use-fit-text-2.4.0.tgz#d3d1cd72f6d29cfb2233ec0e0b38c6f25d319f67"
+  integrity sha512-Iy4LMrXcdxWlyZ5phntMpJMgyXGB1p3tV73y2r0QrZ6f/thPh+/QU3ie6RCXmjF8tHMs20FKMPskXeDYIla/Ww==
+  dependencies:
+    resize-observer-polyfill "^1.5.1"
 
 use-isomorphic-layout-effect@^1.0.0:
   version "1.1.1"
