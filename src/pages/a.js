@@ -9,12 +9,8 @@ import SchedulePage from "../templates/schedule-page";
 import SponsorPage from "../templates/sponsor-page"
 import ExpoHallPage from "../templates/expo-hall-page"
 import FullProfilePage from "../templates/full-profile-page"
-
-// import SummitObject from '../content/summit.json'
-
 import PrivateRoute from '../routes/PrivateRoute'
 import PublicRoute from "../routes/PublicRoute"
-
 import withSessionChecker from "../utils/withSessionChecker"
 
 const App = ({ isLoggedUser, user, summit_phase }) => {

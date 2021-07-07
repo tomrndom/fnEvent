@@ -7520,10 +7520,10 @@ fstream@^1.0.0, fstream@^1.0.12:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-full-schedule-widget@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/full-schedule-widget/-/full-schedule-widget-1.1.3.tgz#336d84e5c3d4f8df08b2278ad7cd5ed6ce2019bc"
-  integrity sha512-TVSi+VH5ZNfb6+o1w+eaYIrCd4FHnaN4G5v88Yh1Ptq/FSe4rEJexBgulEHTDSpKHPY4QTlGeY8Yf6CvHu4hIw==
+full-schedule-widget@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/full-schedule-widget/-/full-schedule-widget-1.1.4.tgz#8141b1439f75ef0585dd5104c7eb003e15ddfd0f"
+  integrity sha512-AzBf58accYJ0NmFB/7duTvelswizluhnYnLx4H15Ziilq4T4NLkDGzQQwDu0NIapM2+QWoANFQcszfpD6FOaYg==
   dependencies:
     pure-react-carousel "^1.27.4"
 
@@ -15962,10 +15962,10 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-schedule-filter-widget@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/schedule-filter-widget/-/schedule-filter-widget-1.0.7.tgz#900a4d2f15eaf59a918b29e56633d44e35f42c80"
-  integrity sha512-YRKwqTucsy7INMGsa0YCHIliGk7fBvOl8zA7Zc4oD/BNoeouu1jkAuG72dYRdTIwEF4L0n6a58gpOCcUVmWPbg==
+schedule-filter-widget@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/schedule-filter-widget/-/schedule-filter-widget-1.0.8.tgz#79d7b40bd456ab078eddfbbec5f646583747586f"
+  integrity sha512-N0i2fm8nubnC/wQfrB9KumdkxO726h5B+xA2wCmcEJ4zqBQlymSFbf4Bp3jKDpm48nyiw+3XyWdBIA2o7gm7QA==
   dependencies:
     dropzone "^5.9.2"
     react-spring "^9.1.2"
@@ -17337,10 +17337,10 @@ svgo@1.3.2, svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-sweetalert2@^8.19.0:
-  version "8.19.0"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-8.19.0.tgz#692269bc8ddc5760e2b5070da2cf5e9e278bac0b"
-  integrity sha512-nFL++N3bitkEkd487Tv4i5ZxusmnoAAXHjtk7lp603Opxb8wlvVnz3hqa7qiIw6QFL04JC810E6qVQNf8s0vYQ==
+sweetalert2@^9.17.0:
+  version "9.17.2"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-9.17.2.tgz#7f33ce157a64c303d2ca98863c9a3f437e5f1187"
+  integrity sha512-HkpPZVMYsnhFUBLdy/LvkU9snggKP3VAuSVnPhVXjxdg02lWbFx0W8H3m7A+WMWw2diXZS1wIa4m67XkNxdvew==
 
 symbol-observable@^1.0.2, symbol-observable@^1.0.3, symbol-observable@^1.0.4:
   version "1.2.0"

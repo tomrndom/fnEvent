@@ -1,5 +1,4 @@
 import moment from 'moment-timezone'
-import Swal from "sweetalert2";
 
 const groupByDay = (events) => {
   let groupedEvents = [];
@@ -20,12 +19,4 @@ export const sortEvents = (events) => {
   let sortedEvents = groupByDay(events);
   sortedEvents = sortSchedule(sortedEvents);
   return sortedEvents;
-};
-
-export const needsLogin = (msg = "Please login first") => {
-  Swal.fire(
-      'Login Required!',
-      msg,
-      'warning'
-  );
 };

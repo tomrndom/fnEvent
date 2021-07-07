@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { addToSchedule, removeFromSchedule } from "../actions/user-actions";
 import { getShareLink, callAction } from "../actions/schedule-actions";
-import {needsLogin} from "../utils/schedule";
+import {needsLogin} from "../utils/alerts";
 
 // these two libraries are client-side only
 import Schedule from "full-schedule-widget/dist";
