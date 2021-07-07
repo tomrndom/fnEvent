@@ -7520,10 +7520,10 @@ fstream@^1.0.0, fstream@^1.0.12:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-full-schedule-widget@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/full-schedule-widget/-/full-schedule-widget-1.1.4.tgz#8141b1439f75ef0585dd5104c7eb003e15ddfd0f"
-  integrity sha512-AzBf58accYJ0NmFB/7duTvelswizluhnYnLx4H15Ziilq4T4NLkDGzQQwDu0NIapM2+QWoANFQcszfpD6FOaYg==
+full-schedule-widget@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/full-schedule-widget/-/full-schedule-widget-1.1.5.tgz#f17b16c44bb9a9e41c887b1b34a2f2e0232e5238"
+  integrity sha512-rqjTAN/COmM2+OMniPVEtt831E2uJJYHnJlruecmXmmvLvg/a7MlR2MvapKhYl8Iz6ZfPjc9wi2GydPZm9+jRw==
   dependencies:
     pure-react-carousel "^1.27.4"
 
@@ -10716,10 +10716,10 @@ linkifyjs@^2.1.9:
   resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-2.1.9.tgz#af06e45a2866ff06c4766582590d098a4d584702"
   integrity sha512-74ivurkK6WHvHFozVaGtQWV38FzBwSTGNmJolEgFp7QgR2bl6ArUWlvT4GcHKbPe1z3nWYi+VUdDZk16zDOVug==
 
-lite-schedule-widget@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.7.tgz#a0e8171851721f8f7254dc0656ea43e41ceaa88c"
-  integrity sha512-NK2LU5nnUhlch1TGQwt6aQIC5g+vY8wvCG4pyFNFUSmygcGRuW8By3rGSnwAuvTJywtpbUEntAeCzJBIut5gMw==
+lite-schedule-widget@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.8.tgz#a63a9bdd0f11dfcb6f33ce4231c4f17b276cc699"
+  integrity sha512-F4N3mbu+I2xt3Y+E/Ww9ZZVPo3FcLYhCqRtevIGtvApsqycscQTAo8FGZLmZOEhd+/1LQvl08Dw4/AQKSwEqcg==
   dependencies:
     pure-react-carousel "^1.27.4"
     use-fit-text "^2.4.0"
