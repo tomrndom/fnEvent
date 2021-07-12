@@ -10,7 +10,7 @@ export const getUserBadges = (summit_tickets) => {
     let badges = [];
 
     if (summit_tickets) {
-        summit_tickets.forEach(t => {
+        summit_tickets.filter(t => t.badge).map(t => {
             t.badge.features.forEach(feature => {
                 if (!badges.some(e => e === feature.id)) {
                     badges.push(feature.id);
