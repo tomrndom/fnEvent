@@ -11,9 +11,7 @@ export const CHANGE_VIEW        = 'CHANGE_VIEW';
 const fragmentParser = new FragmentParser();
 
 export const updateFilter = (filter) => (dispatch, getState) => {
-    const {summit} = getState().summitState;
-
-    dispatch(createAction(UPDATE_FILTER)({...filter, summitTimezone: summit.time_zone_id}))
+    dispatch(createAction(UPDATE_FILTER)({...filter}))
 };
 
 export const updateFiltersFromHash = () => (dispatch, getState) => {
@@ -22,8 +20,7 @@ export const updateFiltersFromHash = () => (dispatch, getState) => {
     // escape if no hash
     if (isEmpty(qsFilters)) return null;
 
-    const {summitState, scheduleState} = getState();
-    const {summit} = summitState;
+    const {scheduleState} = getState();
     const {filters: storedFilters} = scheduleState;
     const filterKeys = Object.keys(storedFilters);
     const newFilters = {};
@@ -43,7 +40,7 @@ export const updateFiltersFromHash = () => (dispatch, getState) => {
 
     // only update if filters have changed
     if (!isEqual(newFilters, storedFilters)) {
-        dispatch(createAction(UPDATE_FILTERS)({filters: newFilters, view: qsFilters.view, summitTimezone: summit.time_zone_id}));
+        dispatch(createAction(UPDATE_FILTERS)({filters: newFilters, view: qsFilters.view}));
     }
 
     // clear hash

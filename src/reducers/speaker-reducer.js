@@ -1,18 +1,19 @@
-import summit from '../content/summit.json';
+import speakers from '../content/speakers.json';
 
 import { START_LOADING, STOP_LOADING, LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
-import {RESET_STATE} from "../actions/base-actions";
+import {RESET_STATE, SYNC_DATA} from "../actions/base-actions";
 
 const DEFAULT_STATE = {
   loading: false,
-  summit: summit.summit,
+  speakers: speakers,
 };
 
-const summitReducer = (state = DEFAULT_STATE, action) => {
+const speakerReducer = (state = DEFAULT_STATE, action) => {
   const { type } = action;
 
   switch (type) {
     case RESET_STATE:
+    case SYNC_DATA:
     case LOGOUT_USER:
       return DEFAULT_STATE;
     case START_LOADING:
@@ -24,4 +25,4 @@ const summitReducer = (state = DEFAULT_STATE, action) => {
   }
 };
 
-export default summitReducer
+export default speakerReducer

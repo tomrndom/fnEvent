@@ -13,6 +13,11 @@ label {
   font-weight: 300;
 }
 
+button.link {
+  border: none;
+  background: transparent;
+}
+
 .swal-wrapper {
   .swal-title {
     @extend %title-med;

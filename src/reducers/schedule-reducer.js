@@ -1,19 +1,20 @@
 import {epochToMomentTimeZone} from 'openstack-uicore-foundation/lib/methods';
 
-import events from '../content/events.json';
+import summitData from '../content/summit.json';
+import eventsData from '../content/events.json';
 import filtersData from '../content/filters.json';
 
 import { LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
 import { UPDATE_FILTER, UPDATE_FILTERS, CHANGE_VIEW } from '../actions/schedule-actions'
-import {RESET_STATE} from '../state/store';
+import { RESET_STATE, SYNC_DATA } from '../actions/base-actions';
 
 const {color_source, ...filters} = filtersData;
 
 const DEFAULT_STATE = {
   filters: filters,
   colorSource: color_source,
-  events: events,
-  allEvents: events,
+  events: eventsData,
+  allEvents: eventsData,
   view: 'calendar'
 };
 
@@ -24,22 +25,35 @@ const scheduleReducer = (state = DEFAULT_STATE, action) => {
     case RESET_STATE:
     case LOGOUT_USER:
       return DEFAULT_STATE;
+    case SYNC_DATA: {
+      const {filters: currentFilters} = state;
+      const newFilters = {...filters};
+
+      Object.entries(currentFilters).forEach(([key, value]) => {
+        value.enabled = newFilters[key].enabled;
+        value.label = newFilters[key].label;
+      });
+
+      const events = getFilteredEvents(eventsData, currentFilters, summitData.time_zone_id);
+
+      return {...state, allEvents: eventsData, filters: currentFilters, colorSource: color_source, events};
+    }
     case UPDATE_FILTER: {
-      const {type, values, summitTimezone} = payload;
+      const {type, values} = payload;
       const {filters, allEvents} = state;
       filters[type].values = values;
 
       // update events
-      const events = getFilteredEvents(allEvents, filters, summitTimezone);
+      const events = getFilteredEvents(allEvents, filters, summitData.time_zone_id);
 
       return {...state, filters, events}
     }
     case UPDATE_FILTERS: {
-      const {filters, view, summitTimezone} = payload;
+      const {filters, view} = payload;
       const {allEvents} = state;
 
       // update events
-      const events = getFilteredEvents(allEvents, filters, summitTimezone);
+      const events = getFilteredEvents(allEvents, filters, summitData.time_zone_id);
 
       return {...state, filters, events, view}
     }
@@ -77,7 +91,6 @@ const getFilteredEvents = (events, filters, summitTimezone) => {
 
     if (filters.speakers?.values.length > 0) {
       valid = ev.speakers.some(s => filters.speakers.values.includes(s.id)) || filters.speakers.values.includes(ev.moderator?.id);
-      console.log(filters);
       if (!valid) return false;
     }
 

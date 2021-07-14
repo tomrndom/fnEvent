@@ -21,7 +21,7 @@ export const getEventById = (eventId) => async (dispatch, getState) => {
 
   dispatch(startLoading());
 
-  let { eventState: { allEvents } } = getState();
+  let { scheduleState: { allEvents } } = getState();
   const event = allEvents.find(ev => ev.id === parseInt(eventId));
 
   if (event) {

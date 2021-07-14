@@ -1,17 +1,14 @@
 import React from 'react'
-
 import { connect } from "react-redux";
 import Slider from "react-slick";
 import URI from "urijs";
 import { doLogin } from "openstack-uicore-foundation/lib/methods";
-
-import MarketingSite from '../content/marketing-site.json'
 import { PHASES } from '../utils/phasesUtils';
+import { getEnvVariable, AUTHORIZED_DEFAULT_PATH, REGISTRATION_BASE_URL } from '../utils/envVariables'
+import Link from '../components/Link'
+
 import styles from '../styles/lobby-hero.module.scss'
 
-import { getEnvVariable, AUTHORIZED_DEFAULT_PATH, REGISTRATION_BASE_URL } from '../utils/envVariables'
-
-import Link from '../components/Link'
 
 class MarketingHeroComponent extends React.Component {
 
@@ -28,7 +25,7 @@ class MarketingHeroComponent extends React.Component {
 
   render() {
 
-    const { summit, summit_phase, isLoggedUser } = this.props;
+    const { summit, summit_phase, isLoggedUser, siteSettings } = this.props;
 
     const sliderSettings = {
       autoplay: true,
@@ -43,19 +40,19 @@ class MarketingHeroComponent extends React.Component {
       <section className={styles.heroMarketing}>
         <div className={`${styles.heroMarketingColumns} columns is-gapless`}>
           <div className={`${styles.leftColumn} column is-6 is-black`}
-            style={{ backgroundImage: MarketingSite.heroBanner.background ? `url(${MarketingSite.heroBanner.background})` : '' }}>
+            style={{ backgroundImage: siteSettings.heroBanner.background ? `url(${siteSettings.heroBanner.background})` : '' }}>
             <div className={`${styles.heroMarketingContainer} hero-body`}>
               <div className="container">
                 <h1 className="title">
-                  {MarketingSite.heroBanner.title}
+                  {siteSettings.heroBanner.title}
                 </h1>
                 <h2 className="subtitle">
-                  {MarketingSite.heroBanner.subTitle}
+                  {siteSettings.heroBanner.subTitle}
                 </h2>
-                <div className={styles.date} style={{ backgroundColor: MarketingSite.heroBanner.dateLayout ? 'var(--color_secondary)' : '' }}>
-                  <div>{MarketingSite.heroBanner.date}</div>
+                <div className={styles.date} style={{ backgroundColor: siteSettings.heroBanner.dateLayout ? 'var(--color_secondary)' : '' }}>
+                  <div>{siteSettings.heroBanner.date}</div>
                 </div>
-                <h4>{MarketingSite.heroBanner.time}</h4>
+                <h4>{siteSettings.heroBanner.time}</h4>
                 <div className={styles.heroButtons}>
                   {summit_phase >= PHASES.DURING && isLoggedUser ?
                     <Link className={styles.link} to={`${getEnvVariable(AUTHORIZED_DEFAULT_PATH) ? getEnvVariable(AUTHORIZED_DEFAULT_PATH) : '/a/'}`}>
@@ -66,19 +63,19 @@ class MarketingHeroComponent extends React.Component {
                     </Link>
                     :
                     <React.Fragment>
-                      {MarketingSite.heroBanner.buttons.registerButton.display &&
+                      {siteSettings.heroBanner.buttons.registerButton.display &&
                         <a className={styles.link} href={`${getEnvVariable(REGISTRATION_BASE_URL)}/a/${summit.slug}/`} target="_blank" rel="noreferrer">
                           <button className={`${styles.button} button is-large`}>
                             <i className={`fa fa-2x fa-edit icon is-large`} />
-                            <b>{MarketingSite.heroBanner.buttons.registerButton.text}</b>
+                            <b>{siteSettings.heroBanner.buttons.registerButton.text}</b>
                           </button>
                         </a>
                       }
-                      {MarketingSite.heroBanner.buttons.loginButton.display && !isLoggedUser &&
+                      {siteSettings.heroBanner.buttons.loginButton.display && !isLoggedUser &&
                         <a className={styles.link} href="#">
                           <button className={`${styles.button} ${styles.link} button is-large`} onClick={() => this.onClickLogin()}>
                             <i className={`fa fa-2x fa-sign-in icon is-large`} />
-                            <b>{MarketingSite.heroBanner.buttons.loginButton.text}</b>
+                            <b>{siteSettings.heroBanner.buttons.loginButton.text}</b>
                           </button>
                         </a>
                       }
@@ -90,7 +87,7 @@ class MarketingHeroComponent extends React.Component {
           </div>
           <div className={`${styles.rightColumn} column is-6 px-0`} id="marketing-slider">
             <Slider {...sliderSettings}>
-              {MarketingSite.heroBanner.images.map((img, index) => {
+              {siteSettings.heroBanner.images.map((img, index) => {
                 return (
                   <div key={index}>
                     <div className={styles.imageSlider} style={{ backgroundImage: `url(${img.image})` }}>
@@ -107,8 +104,9 @@ class MarketingHeroComponent extends React.Component {
   }
 }
 
-const mapStateToProps = ({ clockState }) => ({
+const mapStateToProps = ({ clockState, settingState }) => ({
   summit_phase: clockState.summit_phase,
+  siteSettings: settingState.siteSettings
 });
 
 export default connect(mapStateToProps, null)(MarketingHeroComponent);

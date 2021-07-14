@@ -15,7 +15,7 @@ import {
   REMOVE_FROM_SCHEDULE,
   SCHEDULE_SYNC_LINK_RECEIVED
 } from '../actions/user-actions'
-import {RESET_STATE} from "../state/store";
+import { RESET_STATE } from "../actions/base-actions";
 
 const DEFAULT_STATE = {
   loading: false,

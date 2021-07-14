@@ -10,6 +10,7 @@ const disqusFilepath = 'src/content/disqus-settings.json';
 const marketingFilepath = 'src/content/marketing-site.json';
 const homeFilepath = 'src/content/home-settings.json';
 const filtersFilepath = 'src/content/filters.json';
+const settingsFilepath = 'src/content/settings.json';
 
 const myEnv = require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -48,6 +49,7 @@ exports.onPreBootstrap = async () => {
   const marketingSite = fs.existsSync(marketingFilepath) ? JSON.parse(fs.readFileSync(marketingFilepath)) : {};
   const homeSettings = fs.existsSync(homeFilepath) ? JSON.parse(fs.readFileSync(homeFilepath)) : {};
   const filterSettings = fs.existsSync(filtersFilepath) ? JSON.parse(fs.readFileSync(filtersFilepath)) : {};
+  const globalSettings = fs.existsSync(settingsFilepath) ? JSON.parse(fs.readFileSync(settingsFilepath)) : {};
 
   marketingData.map(({key, value}) => {
     if (key.startsWith('color_')) colorSettings[key] = value;
@@ -63,11 +65,14 @@ exports.onPreBootstrap = async () => {
     if (key === 'schedule_default_image') homeSettings.schedule_default_image = value;
   });
 
+  globalSettings.lastBuild = Date.now();
+
   fs.writeFileSync(colorsFilepath, JSON.stringify(colorSettings), 'utf8');
   fs.writeFileSync(disqusFilepath, JSON.stringify(disqusSettings), 'utf8');
   fs.writeFileSync(marketingFilepath, JSON.stringify(marketingSite), 'utf8');
   fs.writeFileSync(homeFilepath, JSON.stringify(homeSettings), 'utf8');
   fs.writeFileSync(filtersFilepath, JSON.stringify(filterSettings), 'utf8');
+  fs.writeFileSync(settingsFilepath, JSON.stringify(globalSettings), 'utf8');
 
 
   let sassColors = '';

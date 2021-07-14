@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import {pickBy} from 'lodash';
 import { Helmet } from "react-helmet";
 import { updateFilter, updateFiltersFromHash } from "../actions/schedule-actions";
-
-// these two libraries are client-side only
 import Filters from "schedule-filter-widget/dist";
 import "schedule-filter-widget/dist/index.css";
 
@@ -15,7 +13,7 @@ const ScheduleFilters = ({
   allEvents,
   filters,
   colorSource,
-  marketingSettings,
+  colorSettings,
   updateFilter,
   updateFiltersFromHash,
   ...rest
@@ -37,7 +35,7 @@ const ScheduleFilters = ({
     triggerAction: (action, payload) => {
       updateFilter(payload);
     },
-    marketingSettings: marketingSettings.colors,
+    marketingSettings: colorSettings,
     colorSource: colorSource,
     ...rest,
   };
@@ -58,13 +56,13 @@ const ScheduleFilters = ({
   );
 };
 
-const mapStateToProps = ({ summitState, scheduleState }) => ({
+const mapStateToProps = ({ summitState, scheduleState, settingState }) => ({
   events: scheduleState.events,
   allEvents: scheduleState.allEvents,
   filters: scheduleState.filters,
   colorSource: scheduleState.colorSource,
   summit: summitState.summit,
-  marketingSettings: summitState.marketingSettings,
+  colorSettings: settingState.colorSettings,
 });
 
 export default connect(mapStateToProps, { updateFilter, updateFiltersFromHash })(ScheduleFilters);

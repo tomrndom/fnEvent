@@ -6,18 +6,14 @@ import { Helmet } from 'react-helmet'
 import LiveEventWidget from 'live-event-widget/dist/index.js';
 import 'live-event-widget/dist/index.css';
 
-import HomeSettings from "../content/home-settings";
-import EventsData from '../content/events.json'
-import SummitData from '../content/summit.json'
-
-const LiveEventWidgetComponent = ({marketingSettings, ...rest}) => {
+const LiveEventWidgetComponent = ({allEvents, summit, colorSettings, homeSettings, ...rest}) => {
 
     const widgetProps = {
         title: "",
-        defaultImage: HomeSettings.schedule_default_image,
-        eventsData: EventsData,
-        summitData: SummitData.summit,
-        marketingData: marketingSettings.colors,
+        defaultImage: homeSettings.schedule_default_image,
+        eventsData: allEvents,
+        summitData: summit,
+        marketingData: colorSettings,
         ...rest
     };
 
@@ -33,8 +29,11 @@ const LiveEventWidgetComponent = ({marketingSettings, ...rest}) => {
     )
 };
 
-const mapStateToProps = ({ summitState }) => ({
-    marketingSettings: summitState.marketingSettings
+const mapStateToProps = ({ summitState, scheduleState, settingsState }) => ({
+    summit: summitState.summit,
+    allEvents: scheduleState.allEvents,
+    colorSettings: settingsState.colorSettings,
+    homeSettings: settingsState.homeSettings
 });
 
 export default connect(mapStateToProps, { })(LiveEventWidgetComponent)

@@ -1,13 +1,10 @@
-import EventObject from '../content/events.json';
-
 import { START_LOADING, STOP_LOADING, LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
 import { GET_EVENT_DATA, GET_EVENT_DATA_ERROR } from '../actions/event-actions'
-import {RESET_STATE} from "../state/store";
+import { RESET_STATE } from "../actions/base-actions";
 
 const DEFAULT_STATE = {
   loading: false,
   event: null,
-  allEvents: EventObject
 };
 
 const eventReducer = (state = DEFAULT_STATE, action) => {

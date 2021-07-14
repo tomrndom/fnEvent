@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -6,16 +7,10 @@ import ClockComponent from '../components/ClockComponent'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
-import GeneralSettings from '../content/settings.json'
-import SummitObject from '../content/summit.json'
-
 import "../styles/bulma.scss"
 
-const TemplateWrapper = ({ children, location, marketing }) => {
-
+const TemplateWrapper = ({ children, location, marketing, summit, favicon }) => {
   const { title, description } = useSiteMetadata();
-  const { summit } = SummitObject;
-
   const [isFocus, setIsFocus] = useState(true);
 
   const onFocus = () => {
@@ -46,7 +41,7 @@ const TemplateWrapper = ({ children, location, marketing }) => {
         <link
           rel="icon"
           type="image/png"
-          href={`${withPrefix('/')}${GeneralSettings.favicon.substring(1)}`}
+          href={`${withPrefix('/')}${favicon.substring(1)}`}
           sizes="32x32"
         />
 
@@ -70,4 +65,9 @@ const TemplateWrapper = ({ children, location, marketing }) => {
   )
 };
 
-export default TemplateWrapper;
+const mapStateToProps = ({ summitState, settingsState }) => ({
+  summit: summitState.summit,
+  favicon: settingsState.favicon
+});
+
+export default connect(mapStateToProps, { } )(TemplateWrapper);

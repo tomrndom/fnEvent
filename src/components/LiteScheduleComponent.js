@@ -6,20 +6,27 @@ import {connect} from "react-redux";
 import LiteSchedule from 'lite-schedule-widget/dist';
 import 'lite-schedule-widget/dist/index.css';
 
-import HomeSettings from '../content/home-settings.json'
-import EventsData from '../content/events.json'
-import SummitData from '../content/summit.json'
-
 import {addToSchedule, removeFromSchedule} from '../actions/user-actions';
 
-const LiteScheduleComponent = ({className, userProfile, marketingSettings, page, addToSchedule, removeFromSchedule, ...rest}) => {
+const LiteScheduleComponent = ({
+    className,
+    userProfile,
+    colorSettings,
+    homeSettings,
+    page,
+    addToSchedule,
+    removeFromSchedule,
+    allEvents,
+    summit,
+    ...rest
+}) => {
     const wrapperClass = page === 'marketing-site' ? 'schedule-container-marketing' : 'schedule-container';
 
     const componentProps = {
-        defaultImage: HomeSettings.schedule_default_image,
-        eventsData: EventsData,
-        summitData: SummitData.summit,
-        marketingData: marketingSettings.colors,
+        defaultImage: homeSettings.schedule_default_image,
+        eventsData: allEvents,
+        summitData: summit,
+        marketingData: colorSettings,
         userProfile: userProfile,
         triggerAction: (action, {event}) => {
             switch (action) {
@@ -49,9 +56,12 @@ const LiteScheduleComponent = ({className, userProfile, marketingSettings, page,
     )
 };
 
-const mapStateToProps = ({userState, summitState}) => ({
+const mapStateToProps = ({userState, summitState, scheduleState, settingState}) => ({
     userProfile: userState.userProfile,
-    marketingSettings: summitState.marketingSettings
+    allEvents: scheduleState.allEvents,
+    summit: summitState.summit,
+    colorSettings: settingState.colorSettings,
+    homeSettings: settingState.homeSettings
 });
 
 export default connect(mapStateToProps, {addToSchedule, removeFromSchedule})(LiteScheduleComponent)

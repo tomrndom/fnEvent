@@ -6,9 +6,6 @@ import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import withOrchestra from "../utils/widgetOrchestra";
 
-import SummitObject from '../content/summit.json'
-import HomeSettings from '../content/home-settings.json'
-
 import LobbyHeroComponent from '../components/LobbyHeroComponent'
 import AdvertiseComponent from '../components/AdvertiseComponent'
 import LiteScheduleComponent from '../components/LiteScheduleComponent'
@@ -47,8 +44,7 @@ export const HomePageTemplate = class extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
-    let { summit } = SummitObject;
+    const { user, summit, homeSettings } = this.props;
 
     return (
       <React.Fragment>
@@ -63,7 +59,7 @@ export const HomePageTemplate = class extends React.Component {
             <div className="column is-half">
               <h2><b>Today</b></h2>
               <LiveEventWidgetComponent
-                featuredEventId={HomeSettings.live_now_featured_event_id}
+                featuredEventId={homeSettings.live_now_featured_event_id}
                 onEventClick={(ev) => this.onEventChange(ev)}
                 style={{marginBottom: '15px'}}
               />
@@ -81,13 +77,13 @@ export const HomePageTemplate = class extends React.Component {
                 title="Up Next"
                 eventCount={4}
                 />
-              {HomeSettings.centerColumn.speakers.showTodaySpeakers &&
+              {homeSettings.centerColumn.speakers.showTodaySpeakers &&
                 <SpeakersWidgetComponent
                   title="Today's Speakers"
                   bigPics={true}
                 />
               }
-              {HomeSettings.centerColumn.speakers.showFeatureSpeakers &&
+              {homeSettings.centerColumn.speakers.showFeatureSpeakers &&
                 <SpeakersWidgetComponent
                   title="Featured Speakers"
                   bigPics={false}
@@ -124,7 +120,9 @@ const HomePage = (
     location,
     user,
     getUserProfile,
-    getDisqusSSO
+    getDisqusSSO,
+    homeSettings,
+    summit
   }
 ) => {  
   return (
@@ -134,25 +132,29 @@ const HomePage = (
         user={user}
         getUserProfile={getUserProfile}
         getDisqusSSO={getDisqusSSO}
+        homeSettings={homeSettings}
+        summit={summit}
       />
     </Layout>
   )
-}
+};
 
 HomePage.propTypes = {
   user: PropTypes.object,
   getUserProfile: PropTypes.func,
   getDisqusSSO: PropTypes.func,
-}
+};
 
 HomePageTemplate.propTypes = {
   user: PropTypes.object,
   getUserProfile: PropTypes.func,
   getDisqusSSO: PropTypes.func,
-}
+};
 
-const mapStateToProps = ({ userState }) => ({
+const mapStateToProps = ({ userState, summitState, settingState }) => ({
   user: userState,
-})
+  summit: summitState.summit,
+  homeSettings: settingState.homeSettings
+});
 
 export default connect(mapStateToProps, { getDisqusSSO, getUserProfile } )(HomePage);

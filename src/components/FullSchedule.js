@@ -8,8 +8,6 @@ import {needsLogin} from "../utils/alerts";
 import Schedule from "full-schedule-widget/dist";
 import "full-schedule-widget/dist/index.css";
 
-import HomeSettings from "../content/home-settings.json";
-
 const FullSchedule = ({
   summit,
   events,
@@ -18,7 +16,8 @@ const FullSchedule = ({
   colorSource,
   className,
   userProfile,
-  marketingSettings,
+  colorSettings,
+  homeSettings,
   addToSchedule,
   removeFromSchedule,
   callAction,
@@ -32,7 +31,7 @@ const FullSchedule = ({
     events: events,
     summit: summit,
     view: view,
-    marketingSettings: marketingSettings.colors,
+    marketingSettings: colorSettings,
     userProfile: userProfile,
     triggerAction: (action, payload) => {
       switch (action) {
@@ -48,7 +47,7 @@ const FullSchedule = ({
     },
     colorSource: colorSource,
     withThumbs: false,
-    defaultImage: HomeSettings.schedule_default_image,
+    defaultImage: homeSettings.schedule_default_image,
     getShareLink: () => getShareLink(filters, view),
     onStartChat: () => {},
     onEventClick: () => {},
@@ -57,15 +56,16 @@ const FullSchedule = ({
   };
 
   return (
-    <div className={className || "schedule-container"}>
-      <Schedule {...componentProps} />
-    </div>
+      <div className={className || "schedule-container"}>
+        <Schedule {...componentProps} />
+      </div>
   );
 };
 
-const mapStateToProps = ({ userState, summitState, scheduleState }) => ({
+const mapStateToProps = ({ userState, summitState, scheduleState, settingState }) => ({
   userProfile: userState.userProfile,
-  marketingSettings: summitState.marketingSettings,
+  colorSettings: settingState.colorSettings,
+  homeSettings: settingState.homeSettings,
   summit: summitState.summit,
   events: scheduleState.events,
   filters: scheduleState.filters,

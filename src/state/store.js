@@ -6,10 +6,11 @@ import summitReducer from "../reducers/summit-reducer";
 import userReducer from "../reducers/user-reducer";
 import scheduleReducer from "../reducers/schedule-reducer";
 import clockReducer from "../reducers/clock-reducer";
+import speakerReducer from "../reducers/speaker-reducer";
+import settingReducer from "../reducers/setting-reducer";
+import sponsorReducer from "../reducers/sponsor-reducer";
 import {applyMiddleware, compose, createStore} from "redux";
 import thunk from "redux-thunk";
-
-export const RESET_STATE = 'RESET_STATE';
 
 const clientId = typeof window === 'object' ? window.OAUTH2_CLIENT_ID : process.env.OAUTH2_CLIENT_ID;
 
@@ -24,7 +25,10 @@ const persistedReducers = persistCombineReducers(config, {
     summitState: summitReducer,
     userState: userReducer,
     scheduleState: scheduleReducer,
-    clockState: clockReducer
+    speakerState: speakerReducer,
+    clockState: clockReducer,
+    settingState: settingReducer,
+    sponsorState: sponsorReducer
 });
 
 const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;

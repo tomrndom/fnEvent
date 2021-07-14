@@ -11,14 +11,15 @@ import AttendanceTrackerComponent from '../components/AttendanceTrackerComponent
 import MarketingHeroComponent from '../components/MarketingHeroComponent'
 import LiteScheduleComponent from '../components/LiteScheduleComponent'
 import DisqusComponent from '../components/DisqusComponent'
+import {syncData} from '../actions/base-actions';
 
 import Content, { HTMLContent } from '../components/Content'
 import Countdown from '../components/Countdown'
 import Link from '../components/Link'
 import { PHASES } from '../utils/phasesUtils'
-import MarketingSite from '../content/marketing-site.json'
 import { getDisqusSSO } from '../actions/user-actions'
-import {handleResetReducers} from '../actions/event-actions';
+
+import settings from '../content/settings';
 
 import styles from "../styles/marketing.module.scss"
 import '../styles/style.scss'
@@ -27,17 +28,25 @@ import '../styles/style.scss'
 export const MarketingPageTemplate = class extends React.Component {
 
   componentWillMount() {
-    if (MarketingSite.leftColumn.disqus && this.props.isLoggedUser) {
+    const {siteSettings} = this.props;
+    if (siteSettings.leftColumn.disqus && this.props.isLoggedUser) {
       this.props.getDisqusSSO();
     }
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const {lastBuild, syncData} = this.props;
+    if (!lastBuild || settings.lastBuild > lastBuild) {
+      syncData();
+    }
+  }
+
   render() {
-    const { content, contentComponent, summit_phase, user, isLoggedUser, location, summit } = this.props;
+    const { content, contentComponent, summit_phase, user, isLoggedUser, location, summit, siteSettings } = this.props;
     const PageContent = contentComponent || Content;
 
     let scheduleProps = {};
-    if (MarketingSite.leftColumn.schedule && isLoggedUser && summit_phase !== PHASES.BEFORE) {
+    if (siteSettings.leftColumn.schedule && isLoggedUser && summit_phase !== PHASES.BEFORE) {
       scheduleProps = {
         ...scheduleProps,
         onEventClick: (ev) => navigate(`/a/event/${ev.id}`),
@@ -60,9 +69,9 @@ export const MarketingPageTemplate = class extends React.Component {
         {summit && <Countdown summit={summit} />}
         <div className="columns" id="marketing-columns">
           <div className="column is-half px-6 pt-6 pb-0" style={{ position: 'relative' }}>
-            {MarketingSite.leftColumn.schedule.display &&
+            {siteSettings.leftColumn.schedule.display &&
               <React.Fragment>
-                <h2><b>{MarketingSite.leftColumn.schedule.title}</b></h2>
+                <h2><b>{siteSettings.leftColumn.schedule.title}</b></h2>
                 <LiteScheduleComponent
                   {...scheduleProps}
                   page="marketing-site"
@@ -72,17 +81,17 @@ export const MarketingPageTemplate = class extends React.Component {
                 />
               </React.Fragment>
             }
-            {MarketingSite.leftColumn.disqus.display &&
+            {siteSettings.leftColumn.disqus.display &&
               <React.Fragment>
-                <h2><b>{MarketingSite.leftColumn.disqus.title}</b></h2>
+                <h2><b>{siteSettings.leftColumn.disqus.title}</b></h2>
                 <DisqusComponent page="marketing-site" disqusSSO={user?.disqusSSO} summit={summit} />
               </React.Fragment>
             }
-            {MarketingSite.leftColumn.image.display &&
+            {siteSettings.leftColumn.image.display &&
               <React.Fragment>
-                <h2><b>{MarketingSite.leftColumn.image.title}</b></h2>
+                <h2><b>{siteSettings.leftColumn.image.title}</b></h2>
                 <br />
-                <img alt="" src={MarketingSite.leftColumn.image.src} />
+                <img alt="" src={siteSettings.leftColumn.image.src} />
               </React.Fragment>
             }
           </div>
@@ -91,7 +100,7 @@ export const MarketingPageTemplate = class extends React.Component {
               breakpointCols={2}
               className="my-masonry-grid"
               columnClassName="my-masonry-grid_column">
-              {MarketingSite.sponsors.map((item, index) => {
+              {siteSettings.sponsors.map((item, index) => {
                 if (item.images && item.images.length === 1) {
                   return (
                     <div className={'single'} key={index}>
@@ -143,11 +152,8 @@ MarketingPageTemplate.propTypes = {
   isLoggedUser: PropTypes.bool,
 }
 
-const MarketingPage = ({ summit, location, data, summit_phase, user, isLoggedUser, getDisqusSSO, handleResetReducers }) => {
+const MarketingPage = ({ summit, location, data, summit_phase, user, isLoggedUser, getDisqusSSO, syncData, lastBuild, siteSettings }) => {
   const { html } = data.markdownRemark;
-
-  // handleResetReducers();
-  // return null;
 
   return (
     <Layout marketing={true}>
@@ -160,6 +166,9 @@ const MarketingPage = ({ summit, location, data, summit_phase, user, isLoggedUse
         user={user}
         isLoggedUser={isLoggedUser}
         getDisqusSSO={getDisqusSSO}
+        syncData={syncData}
+        lastBuild={lastBuild}
+        siteSettings={siteSettings}
       />
     </Layout>
   )
@@ -178,16 +187,18 @@ MarketingPage.propTypes = {
   getDisqusSSO: PropTypes.func,
 }
 
-const mapStateToProps = ({ clockState, loggedUserState, userState, summitState }) => ({
+const mapStateToProps = ({ clockState, loggedUserState, userState, summitState, settingState }) => ({
   summit_phase: clockState.summit_phase,
   isLoggedUser: loggedUserState.isLoggedUser,
   user: userState,
-  summit: summitState.summit
-})
+  summit: summitState.summit,
+  lastBuild: settingState.lastBuild,
+  siteSettings: settingState.siteSettings
+});
 
 export default connect(mapStateToProps, {
   getDisqusSSO,
-  handleResetReducers
+  syncData
 })(MarketingPage)
 
 export const marketingPageQuery = graphql`
@@ -199,4 +210,4 @@ export const marketingPageQuery = graphql`
       }
     }
   }
-`
+`;

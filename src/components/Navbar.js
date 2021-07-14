@@ -4,13 +4,11 @@ import LogoutButton from './LogoutButton';
 import Link from './Link'
 import ProfilePopupComponent from './ProfilePopupComponent';
 import { updateProfilePicture, updateProfile } from '../actions/user-actions'
+import { getEnvVariable, AUTHORIZED_DEFAULT_PATH } from '../utils/envVariables';
+import Content from '../content/navbar.json'
 
 import styles from '../styles/navbar.module.scss';
 
-import Content from '../content/navbar.json'
-import SummitObject from '../content/summit.json'
-
-import { getEnvVariable, AUTHORIZED_DEFAULT_PATH } from '../utils/envVariables';
 
 const Navbar = class extends React.Component {
   constructor(props) {
@@ -60,9 +58,8 @@ const Navbar = class extends React.Component {
   };
 
   render() {
-    const { isLoggedUser, idpProfile, logo, idpLoading } = this.props;
+    const { isLoggedUser, idpProfile, logo, idpLoading, summit } = this.props;
     const { showProfile } = this.state;
-    const { summit } = SummitObject;
     const defaultPath = getEnvVariable(AUTHORIZED_DEFAULT_PATH) ? getEnvVariable(AUTHORIZED_DEFAULT_PATH) : '/a/';
 
     return (
@@ -122,4 +119,8 @@ const Navbar = class extends React.Component {
   }
 };
 
-export default connect(null, { updateProfilePicture, updateProfile })(Navbar)
+const mapStateToProps = ({ summitState }) => ({
+  summit: summitState.summit
+});
+
+export default connect(mapStateToProps, { updateProfilePicture, updateProfile })(Navbar)

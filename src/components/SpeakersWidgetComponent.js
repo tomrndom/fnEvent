@@ -1,20 +1,18 @@
-import React from "react"
-import { Helmet } from 'react-helmet'
+import React from "react";
 import { connect } from "react-redux";
-
+import { Helmet } from 'react-helmet';
 import SpeakersWidget from 'speakers-widget';
+
 import 'speakers-widget/index.css';
 
-import EventsData from '../content/events.json'
-import SpeakersData from '../content/speakers.json'
 
-const SpeakersWidgetComponent = ({now, marketingSettings, ...props}) => {
+const SpeakersWidgetComponent = ({now, colorSettings, allEvents, speakers, ...props}) => {
     const widgetProps = {
         date: now,
         // featured: true,
-        speakersData: SpeakersData,
-        eventsData: EventsData,
-        marketingData: marketingSettings.colors,
+        speakersData: speakers,
+        eventsData: allEvents,
+        marketingData: colorSettings,
         ...props
     };
 
@@ -30,9 +28,11 @@ const SpeakersWidgetComponent = ({now, marketingSettings, ...props}) => {
     )
 }
 
-const mapStateToProps = ({ clockState, summitState }) => ({
+const mapStateToProps = ({ clockState, summitState, scheduleState, speakerState, settingState }) => ({
     now: clockState.nowUtc,
-    marketingSettings: summitState.marketingSettings
+    colorSettings: settingState.colorSettings,
+    allEvents: scheduleState.allEvents,
+    speakers: speakerState.speakers
 });
 
 export default connect(mapStateToProps, null)(SpeakersWidgetComponent)

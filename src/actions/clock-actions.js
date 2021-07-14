@@ -1,7 +1,5 @@
 import { createAction } from 'openstack-uicore-foundation/lib/methods';
 
-import SummitObject from '../content/summit.json';
-
 import { PHASES, getSummitPhase, getEventPhase } from '../utils/phasesUtils';
 
 export const SUMMIT_PHASE_AFTER = 'SUMMIT_PHASE_AFTER';
@@ -22,10 +20,10 @@ export const updateClock = (timestamp) => (dispatch) => {
 
 export const updateSummitPhase = () => (dispatch, getState) => {
 
-  const { clockState: { nowUtc, summit_phase } } = getState();
+  const { clockState: { nowUtc, summit_phase }, summitState: {summit} } = getState();
 
   if (nowUtc) {
-    const summitPhase = getSummitPhase(SummitObject, nowUtc, summit_phase);
+    const summitPhase = getSummitPhase(summit, nowUtc, summit_phase);
     if (summit_phase !== summitPhase) {
       switch (summitPhase) {
         case PHASES.BEFORE:

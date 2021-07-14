@@ -1,6 +1,8 @@
-import React from "react"
+import React, {useEffect} from "react"
 import { Router, Location } from "@reach/router"
 import { connect } from 'react-redux'
+import { syncData } from '../actions/base-actions';
+import settings from '../content/settings';
 
 import LoginPage from "../templates/login-page"
 import HomePage from "../templates/home-page"
@@ -13,7 +15,14 @@ import PrivateRoute from '../routes/PrivateRoute'
 import PublicRoute from "../routes/PublicRoute"
 import withSessionChecker from "../utils/withSessionChecker"
 
-const App = ({ isLoggedUser, user, summit_phase }) => {
+const App = ({ isLoggedUser, user, summit_phase, lastBuild, syncData }) => {
+
+  useEffect(() => {
+    if (!lastBuild || settings.lastBuild > lastBuild) {
+      syncData();
+    }
+  }, []);
+
   return (
     <Location>
       {({ location }) => (
@@ -30,12 +39,13 @@ const App = ({ isLoggedUser, user, summit_phase }) => {
       )}
     </Location>
   )
-}
+};
 
-const mapStateToProps = ({ loggedUserState, userState, clockState }) => ({
+const mapStateToProps = ({ loggedUserState, userState, clockState, settingState }) => ({
   isLoggedUser: loggedUserState.isLoggedUser,
   summit_phase: clockState.summit_phase,
-  user: userState
-})
+  user: userState,
+  lastBuild: settingState.lastBuild
+});
 
-export default connect(mapStateToProps)(withSessionChecker(App))
+export default connect(mapStateToProps, { syncData })(withSessionChecker(App))
