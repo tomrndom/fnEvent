@@ -26,14 +26,9 @@ const ChangePasswordComponent = ({ updatePassword }) => {
     <div className={styles.changePassowordContainer}>
       <div className={styles.title}>
         <b>Password</b>{" "}
-        <a
-          href=""
-          role="button"
-          onClick={() => setChangePassword(!changePassword)}
-          tabIndex={0}
-        >
+        <button className="link" onClick={() => setChangePassword(!changePassword)}>
           {changePassword ? "Hide" : "Change password"}
-        </a>
+        </button>
       </div>
       {changePassword && (
         <>
@@ -48,12 +43,9 @@ const ChangePasswordComponent = ({ updatePassword }) => {
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   value={currentPassword}
                 />
-                <i
-                  role="button"
-                  className={`fa fa-2x ${displayCurrentPassword ? "fa-eye-slash" : "fa-eye"} icon is-large`}
-                  onClick={() => setDisplayCurrentPassword(!displayCurrentPassword)}
-                  tabIndex={0}
-                />
+                <button className="link" onClick={() => setDisplayCurrentPassword(!displayCurrentPassword)}>
+                  <i className={`fa fa-2x ${displayCurrentPassword ? "fa-eye-slash" : "fa-eye"} icon is-large`} />
+                </button>
               </div>
             </div>
             <div className={`columns column is-full ${styles.inputField}`}>
@@ -66,12 +58,9 @@ const ChangePasswordComponent = ({ updatePassword }) => {
                   onChange={(e) => setNewPassword(e.target.value)}
                   value={newPassword}
                 />
-                <i
-                  role="button"
-                  className={`fa fa-2x ${displayNewPassword ? "fa-eye-slash" : "fa-eye"} icon is-large`}
-                  onClick={() => setDisplayNewPassword(!displayNewPassword)}
-                  tabIndex={0}
-                />
+                <button className="link" onClick={() => setDisplayNewPassword(!displayNewPassword)}>
+                  <i className={`fa fa-2x ${displayNewPassword ? "fa-eye-slash" : "fa-eye"} icon is-large`} />
+                </button>
               </div>
             </div>
             <div className={`columns column is-full ${styles.inputField}`}>
@@ -84,37 +73,22 @@ const ChangePasswordComponent = ({ updatePassword }) => {
                   onChange={(e) => setNewPasswordConfirm(e.target.value)}
                   value={newPasswordConfirm}
                 />
-                <i
-                  role="button"
-                  className={`fa fa-2x ${displayNewPasswordConfirm ? "fa-eye-slash" : "fa-eye"} icon is-large`}
-                  onClick={() => setDisplayNewPasswordConfirm(!displayNewPasswordConfirm)}
-                  tabIndex={0}
-                />
+                <button className="link" onClick={() => setDisplayNewPasswordConfirm(!displayNewPasswordConfirm)}>
+                  <i className={`fa fa-2x ${displayNewPasswordConfirm ? "fa-eye-slash" : "fa-eye"} icon is-large`} />
+                </button>
               </div>
             </div>
           </div>
           <div className={`columns is-mobile ${styles.buttons}`}>
             <div className={`column is-full`}>
-              <button
-                disabled={
-                  !currentPassword || !newPassword || !newPasswordConfirm
-                }
+              <button disabled={!currentPassword || !newPassword || !newPasswordConfirm}
                 className="button is-large"
-                onClick={() =>
-                  updatePassword(
-                    currentPassword,
-                    newPassword,
-                    newPasswordConfirm
-                  )
-                }
+                onClick={() => updatePassword(currentPassword, newPassword, newPasswordConfirm)}
               >
                 Update
               </button>
             </div>
           </div>
-          {/* <div className={styles.recoverPassword}>
-                        Can't remember your current password? <a>Reset your password here</a>
-                    </div> */}
         </>
       )}
     </div>

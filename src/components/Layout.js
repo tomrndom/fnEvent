@@ -65,9 +65,9 @@ const TemplateWrapper = ({ children, location, marketing, summit, favicon }) => 
   )
 };
 
-const mapStateToProps = ({ summitState, settingsState }) => ({
+const mapStateToProps = ({ summitState, settingState }) => ({
   summit: summitState.summit,
-  favicon: settingsState.favicon
+  favicon: settingState.favicon
 });
 
 export default connect(mapStateToProps, { } )(TemplateWrapper);

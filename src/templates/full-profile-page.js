@@ -227,14 +227,14 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
             <div className="px-6 py-6 mb-6">
                 <div className={`columns is-3 ${styles.fullProfile}`} >
                     <div className="column is-3">
-                        <div className={styles.profilePicture} onClick={() => handleTogglePopup(!showProfile)} role="button" tabIndex={0}>
-                            <img alt="" src={image} />
-                            <div className={styles.imageUpload}>
-                                <label for="file-input">
-                                    <i className={`${styles.pictureIcon} fa fa-2x fa-pencil icon is-large`} />
-                                </label>
+                        <button className="link" onClick={() => handleTogglePopup(!showProfile)}>
+                            <div className={styles.profilePicture}>
+                                <img alt="profile pic" src={image}/>
+                                <div className={styles.imageUpload}>
+                                    <i className={`${styles.pictureIcon} fa fa-2x fa-pencil icon is-large`}/>
+                                </div>
                             </div>
-                        </div>
+                        </button>
                         <h3>
                             Hello, <br />
                             {user.idpProfile.given_name} {user.idpProfile.family_name}
@@ -331,6 +331,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                         <b>Gender</b>
                                         <div className={styles.control}>
                                             <div className={`${styles.select} ${styles.isLarge}`}>
+                                                {/* eslint-disable-next-line jsx-a11y/no-onchange */}
                                                 <select
                                                     onChange={e => setPersonalProfile({ ...personalProfile, gender: e.target.value })}
                                                     value={personalProfile.gender}

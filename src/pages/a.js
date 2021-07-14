@@ -21,7 +21,7 @@ const App = ({ isLoggedUser, user, summit_phase, lastBuild, syncData }) => {
     if (!lastBuild || settings.lastBuild > lastBuild) {
       syncData();
     }
-  }, []);
+  }, [lastBuild, syncData]);
 
   return (
     <Location>

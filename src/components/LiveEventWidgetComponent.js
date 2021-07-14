@@ -29,11 +29,11 @@ const LiveEventWidgetComponent = ({allEvents, summit, colorSettings, homeSetting
     )
 };
 
-const mapStateToProps = ({ summitState, scheduleState, settingsState }) => ({
+const mapStateToProps = ({ summitState, scheduleState, settingState }) => ({
     summit: summitState.summit,
     allEvents: scheduleState.allEvents,
-    colorSettings: settingsState.colorSettings,
-    homeSettings: settingsState.homeSettings
+    colorSettings: settingState.colorSettings,
+    homeSettings: settingState.homeSettings
 });
 
 export default connect(mapStateToProps, { })(LiveEventWidgetComponent)

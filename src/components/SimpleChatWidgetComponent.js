@@ -14,7 +14,7 @@ const SimpleChatWidgetComponent = class extends React.Component {
     
     const { accessToken, widgets } = this.props;
 
-    if (accessToken == null) return null
+    if (accessToken == null) return null;
 
     const widgetProps = {
       accessToken: accessToken,
@@ -42,8 +42,8 @@ const SimpleChatWidgetComponent = class extends React.Component {
   }
 };
 
-const mapStateToProps = ({ settingsState }) => ({
-  widgets: settingsState.widgets
+const mapStateToProps = ({ settingState }) => ({
+  widgets: settingState.widgets
 });
 
 export default connect(mapStateToProps, null)(withAccessToken(SimpleChatWidgetComponent));

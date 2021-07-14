@@ -72,13 +72,13 @@ const Navbar = class extends React.Component {
               }
             </Link>
 
-            <a href="" role="button" className={`${styles.navbarBurger} ${styles.burger} ${this.state.navBarActiveClass}`}
+            <button className={`link ${styles.navbarBurger} ${styles.burger} ${this.state.navBarActiveClass}`}
               aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"
               onClick={() => this.toggleHamburger()}>
               <span aria-hidden="true" />
               <span aria-hidden="true" />
               <span aria-hidden="true" />
-            </a>
+            </button>
           </div>
 
           <div id="navbarBasicExample" className={`${styles.navbarMenu} ${this.state.navBarActiveClass}`}>
@@ -97,7 +97,9 @@ const Navbar = class extends React.Component {
               })}
               {isLoggedUser &&
                 <div className={styles.navbarItem}>
-                  <img alt="" onClick={() => this.handleTogglePopup(!showProfile)} className={styles.profilePic} src={idpProfile?.picture} />
+                  <button className="link" onClick={() => this.handleTogglePopup(!showProfile)}>
+                    <img alt="profile pic" className={styles.profilePic} src={idpProfile?.picture} />
+                  </button>
                   {showProfile &&
                     <ProfilePopupComponent
                       userProfile={idpProfile}
