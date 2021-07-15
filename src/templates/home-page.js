@@ -16,7 +16,9 @@ import DisqusComponent from '../components/DisqusComponent'
 import LiveEventWidgetComponent from '../components/LiveEventWidgetComponent'
 import SpeakersWidgetComponent from '../components/SpeakersWidgetComponent'
 import SponsorComponent from '../components/SponsorComponent'
-import SimpleChatWidgetComponent from '../components/SimpleChatWidgetComponent'
+import AccessTracker, {
+  AttendeesWidget,
+} from "../components/AttendeeToAttendeeWidgetComponent"
 import AttendanceTrackerComponent from '../components/AttendanceTrackerComponent'
 
 import { getDisqusSSO, getUserProfile } from '../actions/user-actions'
@@ -104,7 +106,8 @@ export const HomePageTemplate = class extends React.Component {
             </div>
             <div className="column is-one-quarter pb-6">
               <h2><b>My Info</b></h2>
-              <SimpleChatWidgetComponent title="Private Chat" />
+              <AccessTracker />
+              <AttendeesWidget user={user} />
               <ScheduleLiteComponent
                 onEventClick={(ev) => this.onEventChange(ev)}
                 onViewAllEventsClick={() => this.onViewAllMyEventsClick()}
