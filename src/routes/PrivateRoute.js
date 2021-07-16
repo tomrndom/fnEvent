@@ -5,19 +5,14 @@ import { navigate } from "gatsby"
 import { isAuthorizedBadge } from '../utils/authorizedGroups';
 import { PHASES } from '../utils/phasesUtils'
 import { getUserProfile } from "../actions/user-actions";
-import { checkEvents } from "../actions/event-actions";
 import HeroComponent from '../components/HeroComponent'
 
-const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, user: { loading, userProfile, hasTicket, isAuthorized }, summit_phase, getUserProfile, checkEvents, ...rest }) => {
-
-  useEffect(() => {
-    checkEvents();
-  }, [])
+const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, user: { loading, userProfile, hasTicket, isAuthorized }, summit_phase, getUserProfile, ...rest }) => {
 
   const [userRevalidation, setUserRevalidation] = useState(null);
 
   useEffect(() => {
-
+   
     if (!isLoggedIn) return;
 
     if (userProfile === null) {
@@ -34,7 +29,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
     } else {
       setUserRevalidation(false);
     }
-  }, [userProfile, hasTicket, isAuthorized]);
+  }, [userProfile, hasTicket, isAuthorized, getUserProfile, isLoggedIn, userRevalidation]);
 
   if (!isLoggedIn) {
     navigate('/', {
@@ -46,7 +41,7 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
   }
 
   if (loading || userProfile === null || hasTicket === null || isAuthorized === null || userRevalidation === null ||
-    (hasTicket === false && isAuthorized === false && userRevalidation === true)) {
+      (hasTicket === false && isAuthorized === false && userRevalidation === true)) {
     return (
       <HeroComponent
         title="Checking credentials..."
@@ -86,4 +81,4 @@ const PrivateRoute = ({ component: Component, isLoggedIn, location, eventId, use
   return (<Component location={location} eventId={eventId} {...rest} />);
 }
 
-export default connect(null, { getUserProfile, checkEvents })(PrivateRoute)
+export default connect(null, { getUserProfile })(PrivateRoute)

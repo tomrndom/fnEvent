@@ -1,18 +1,22 @@
-import summit from '../content/summit.json';
+import sponsorData from '../content/sponsors';
+import tierData from '../content/sponsors-tiers';
 
 import { START_LOADING, STOP_LOADING, LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
-import {RESET_STATE} from "../actions/base-actions";
+import {RESET_STATE, SYNC_DATA} from "../actions/base-actions";
 
 const DEFAULT_STATE = {
-  loading: false,
-  summit: summit.summit,
+  sponsors: sponsorData.tierSponsors,
+  tiers: tierData.tiers,
+  imageHeader: tierData.imageHeader,
+  lobbyButton: tierData.lobbyButton
 };
 
-const summitReducer = (state = DEFAULT_STATE, action) => {
+const sponsorReducer = (state = DEFAULT_STATE, action) => {
   const { type } = action;
 
   switch (type) {
     case RESET_STATE:
+    case SYNC_DATA:
     case LOGOUT_USER:
       return DEFAULT_STATE;
     case START_LOADING:
@@ -24,4 +28,4 @@ const summitReducer = (state = DEFAULT_STATE, action) => {
   }
 };
 
-export default summitReducer
+export default sponsorReducer
