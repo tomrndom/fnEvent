@@ -7,6 +7,7 @@ import filtersData from '../content/filters.json';
 import { LOGOUT_USER } from "openstack-uicore-foundation/lib/actions";
 import { UPDATE_FILTER, UPDATE_FILTERS, CHANGE_VIEW } from '../actions/schedule-actions'
 import { RESET_STATE, SYNC_DATA } from '../actions/base-actions';
+import { GET_EVENT_DATA } from '../actions/event-actions';
 
 const {color_source, ...filters} = filtersData;
 
@@ -37,6 +38,19 @@ const scheduleReducer = (state = DEFAULT_STATE, action) => {
       const events = getFilteredEvents(eventsData, currentFilters, summitData.time_zone_id);
 
       return {...state, allEvents: eventsData, filters: currentFilters, colorSource: color_source, events};
+    }
+    case GET_EVENT_DATA: {
+      const {allEvents} = state;
+      const event = payload.response || payload.event;
+      const index = state.allEvents.findIndex((e) => e.id === event.id);
+      const updatedEvents = [...allEvents];
+
+      if (index > 0) {
+        updatedEvents[index] = event;
+      } else {
+        updatedEvents.push(event);
+      }
+      return { ...state, allEvents: updatedEvents };
     }
     case UPDATE_FILTER: {
       const {type, values} = payload;
