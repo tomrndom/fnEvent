@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import { getUrlParam } from "../utils/fragmentParser";
+import { FragmentParser } from "openstack-uicore-foundation/lib/components";
 import { getAccessToken } from "openstack-uicore-foundation/lib/methods";
 import { AttendeeToAttendeeContainer, permissions, Tracker } from "attendee-to-attendee-widget";
 import {
@@ -31,10 +31,11 @@ export const AttendeesWidget = ({ user, event, location }) => {
   const ocrRef = useRef();
 
   useEffect(() => {
-    const starHelpChatParam = getUrlParam("starthelpchat");
-    const starQAChatParam = getUrlParam("startqachat");
-    const starDirectChatParam = getUrlParam("startdirectchat");
-    const openChatRoomParam = getUrlParam("openchatroom");
+    const fragmentParser = new FragmentParser();
+    const starHelpChatParam = fragmentParser.getParam("starthelpchat");
+    const starQAChatParam = fragmentParser.getParam("startqachat");
+    const starDirectChatParam = fragmentParser.getParam("startdirectchat");
+    const openChatRoomParam = fragmentParser.getParam("openchatroom");
 
     if (starHelpChatParam) {
       shcRef.current.startHelpChat();

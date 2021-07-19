@@ -142,8 +142,9 @@ const DisqusComponent = class extends React.Component {
 
 };
 
-const mapStateToProps = ({settingState}) => ({
+const mapStateToProps = ({settingState, summitState}) => ({
   disqusSettings: settingState.disqusSettings,
+  summit: summitState.summit
 });
 
 export default connect(mapStateToProps, {})(DisqusComponent)
