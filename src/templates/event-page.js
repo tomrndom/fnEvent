@@ -40,7 +40,22 @@ export const EventPageTemplate = class extends React.Component {
   }
 
   componentDidMount() {
+    const { eventId, event } = this.props;
+
     this.setState({ firstRender: false });
+
+    if (!event || event.id !== eventId) {
+      this.props.getEventById(eventId);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { eventId, event } = this.props;
+    const { eventId: prevEventId } = prevProps;
+
+    if (eventId !== prevEventId || !event || event.id !== eventId) {
+      this.props.getEventById(eventId);
+    }
   }
 
   onEventChange(ev) {
@@ -54,12 +69,6 @@ export const EventPageTemplate = class extends React.Component {
     navigate("/a/schedule");
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { eventId } = this.props;
-    if (eventId !== nextProps.eventId) {
-      this.props.getEventById(nextProps.eventId);
-    }
-  }
 
   shouldComponentUpdate(nextProps, nextState) {
     const { loading, eventId, event, eventsPhases } = this.props;
@@ -70,28 +79,22 @@ export const EventPageTemplate = class extends React.Component {
     const nextCurrentPhase = nextProps.eventsPhases.find(
       (e) => e.id === eventId
     )?.phase;
-    if (
-      currentPhase !== nextCurrentPhase &&
-      !(currentPhase === 0 && nextCurrentPhase === 1)
-    )
-      return true;
-    return false;
+
+    return (currentPhase !== nextCurrentPhase && !(currentPhase === 0 && nextCurrentPhase === 1));
   }
 
   render() {
     const { event, eventId, eventsPhases, user, loading, nowUtc, summit } = this.props;
     const { firstRender } = this.state;
-    let currentEvent = eventsPhases.find((e) => e.id === eventId);
-    let eventStarted =
-      currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;
-    let firstHalf =
-      currentEvent?.phase === 0
-        ? nowUtc < (event?.start_date + event?.end_date) / 2
-        : null;
+
+    const currentEvent = eventsPhases.find((e) => `${e.id}` === eventId);
+    const eventStarted = currentEvent && currentEvent.phase !== null ? currentEvent.phase : null;
+    const firstHalf = currentEvent?.phase === 0 ? nowUtc < (event?.start_date + event?.end_date) / 2 : null;
 
     if (!firstRender && !loading && !event) {
       return <HeroComponent title="Event not found" redirectTo="/a/schedule" />;
     }
+
 
     if (loading || eventStarted === null) {
       return <HeroComponent title="Loading event" />;
@@ -212,6 +215,7 @@ export const EventPageTemplate = class extends React.Component {
 };
 
 const EventPage = ({
+  summit,
   location,
   loading,
   event,
@@ -232,6 +236,7 @@ const EventPage = ({
         />
       )}
       <EventPageTemplate
+        summit={summit}
         event={event}
         loading={loading}
         eventId={eventId}

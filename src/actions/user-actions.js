@@ -280,8 +280,5 @@ export const getScheduleSyncLink = () => async (dispatch) => {
       `${window.SUMMIT_API_BASE_URL}/api/v1/summits/${window.SUMMIT_ID}/members/me/schedule/shareable-link`,
       null,
       customErrorHandler,
-  )(params)(dispatch)
-      .then((payload) => {
-        console.log(payload);
-      });
+  )(params)(dispatch);
 };
