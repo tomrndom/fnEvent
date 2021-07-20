@@ -6,7 +6,6 @@ import Layout from "../components/Layout";
 import DisqusComponent from "../components/DisqusComponent";
 import AdvertiseComponent from "../components/AdvertiseComponent";
 import Etherpad from "../components/Etherpad";
-import SimpleChatWidgetComponent from "../components/SimpleChatWidgetComponent";
 import VideoComponent from "../components/VideoComponent";
 import TalkComponent from "../components/TalkComponent";
 import DocumentsComponent from "../components/DocumentsComponent";
@@ -15,6 +14,7 @@ import SponsorComponent from "../components/SponsorComponent";
 import NoTalkComponent from "../components/NoTalkComponent";
 import HeroComponent from "../components/HeroComponent";
 import UpcomingEventsComponent from "../components/UpcomingEventsComponent";
+import AccessTracker, { AttendeesWidget } from "../components/AttendeeToAttendeeWidgetComponent"
 import AttendanceTrackerComponent from "../components/AttendanceTrackerComponent";
 
 import { getEventById } from "../actions/event-actions";
@@ -198,7 +198,8 @@ export const EventPageTemplate = class extends React.Component {
                   </div>
                   <div className="column px-0 py-0 is-one-quarter is-full-mobile">
                     <DocumentsComponent event={event} />
-                    <SimpleChatWidgetComponent />
+                    <AccessTracker />
+                    <AttendeesWidget user={user} event={event} />
                     <AdvertiseComponent section="event" column="right" />
                   </div>
                 </div>
