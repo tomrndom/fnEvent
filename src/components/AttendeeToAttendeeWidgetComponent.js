@@ -89,7 +89,7 @@ export const AttendeesWidget = ({ user, event, location }) => {
               .filter((v, i, a) => a.map(item => item.id).indexOf(v.id) === i);  //distinct
             if (accessLevels && accessLevels.length > 0) {
               const canChat = accessLevels.filter(a => a.name).map(a => a.name.toUpperCase()).includes('CHAT');
-              //console.log('AL', accessLevels.map(a => a.name.toUpperCase()));
+              console.log('AL', accessLevels.map(a => a.name));
               return canChat;
             }
             return false;              
