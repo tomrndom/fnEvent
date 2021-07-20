@@ -9,7 +9,7 @@
     "@types/googlemaps": "^3.39.9",
     "@types/markerclustererplus": "^2.1.33",
     "@types/react": "^16.9.42",
-    "attendee-to-attendee-widget": "^1.1.71",
+    "attendee-to-attendee-widget": "^1.1.72",
     "awesome-bootstrap-checkbox": "^1.0.1",
     "axios": "^0.19.2",
     "blob-polyfill": "^4.0.20200601",
@@ -111,7 +111,7 @@
     "develop": "npm run clean && gatsby develop --S -H 0.0.0.0 -o",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update-libs": "yarn upgrade live-event-widget openstack-uicore-foundation schedule-lite simple-chat-widget speakers-widget"
+    "update-libs": "yarn upgrade live-event-widget openstack-uicore-foundation schedule-lite simple-chat-widget speakers-widget attendee-to-attendee-widget"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",

@@ -61,7 +61,7 @@ export const AttendeesWidget = ({ user, event, location }) => {
     activity: null,
     getAccessToken: async () => {
       const accessToken = await getAccessToken();
-      console.log("AttendeesList->getAccessToken", accessToken);
+      //console.log("AttendeesList->getAccessToken", accessToken);
       return accessToken;
     },
   };
@@ -88,8 +88,8 @@ export const AttendeesWidget = ({ user, event, location }) => {
             const accessLevels = summit_tickets.flatMap(x => x.badge.type.access_levels)
               .filter((v, i, a) => a.map(item => item.id).indexOf(v.id) === i);  //distinct
             if (accessLevels && accessLevels.length > 0) {
-              const canChat = accessLevels.map(a => a.name.toUpperCase()).includes('CHAT');
-              console.log('AL', accessLevels.map(a => a.name.toUpperCase()));
+              const canChat = accessLevels.filter(a => a.name).map(a => a.name.toUpperCase()).includes('CHAT');
+              //console.log('AL', accessLevels.map(a => a.name.toUpperCase()));
               return canChat;
             }
             return false;              
