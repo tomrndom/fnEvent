@@ -81,14 +81,15 @@ export const getUserProfile = () => async (dispatch) => {
   }
 
   if (!accessToken) return Promise.resolve();
-
   let params = {
     access_token: accessToken,
-    expand: 'groups,summit_tickets,summit_tickets,summit_tickets.owner,summit_tickets.owner.extra_questions,summit_tickets.badge,summit_tickets.badge.features,summit_tickets.badge.type,favorite_summit_events,feedback,schedule_summit_events,rsvp,rsvp.answers'
+    expand: 'groups,summit_tickets,summit_tickets,summit_tickets.owner,summit_tickets.owner.extra_questions,summit_tickets.badge,summit_tickets.badge.features,summit_tickets.badge.type, summit_tickets.badge.type.access_levels,summit_tickets.badge.type.features,favorite_summit_events,feedback,schedule_summit_events,rsvp,rsvp.answers'
   };
 
-  dispatch(startLoading());
 
+
+  dispatch(startLoading());
+  dispatch(createAction(START_LOADING_PROFILE)());
   return getRequest(
     null,
     createAction(GET_USER_PROFILE),
@@ -100,7 +101,7 @@ export const getUserProfile = () => async (dispatch) => {
     dispatch(getIDPProfile());
     dispatch(getScheduleSyncLink());
     return dispatch(createAction(STOP_LOADING_PROFILE)());
-  });
+  }).catch(() => dispatch(createAction(STOP_LOADING_PROFILE)()));
 }
 
 export const getIDPProfile = () => async (dispatch) => {
