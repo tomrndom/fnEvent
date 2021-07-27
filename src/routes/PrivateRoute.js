@@ -20,6 +20,14 @@ const PrivateRoute = ({
                         ...rest }) => {
 
 
+  const userIsAuthz = () => {
+    return (hasTicket || isAuthorized)
+  }
+
+  const userIsReady = () => {
+    return userProfile && !loading;
+  }
+
   useEffect(() => {
 
     if (!isLoggedIn) return;
@@ -27,7 +35,6 @@ const PrivateRoute = ({
     if (!userProfile) {
       // get user profile
       getUserProfile();
-      return;
     }
 
   }, [userProfile, getUserProfile, isLoggedIn ]);
@@ -39,14 +46,6 @@ const PrivateRoute = ({
       }
     })
     return null
-  }
-
-  const userIsAuthz = () => {
-    return (hasTicket || isAuthorized)
-  }
-
-  const userIsReady = () => {
-    return userProfile && !loading;
   }
 
   // we are checking credentials if userProfile is being loading yet
@@ -91,8 +90,6 @@ const PrivateRoute = ({
         />
       );
   }
-
-
 
   // if we are at an activity page ...
   if (eventId && userIsReady() && !isAuthorizedBadge(eventId, userProfile.summit_tickets)) {
