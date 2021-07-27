@@ -46,15 +46,36 @@ const PrivateRoute = ({
   }
 
   const userIsReady = () => {
-    return userProfile && userIsAuthz();
+    return userProfile && !loading;
   }
 
-  if (loading || !userIsReady()) {
+  // we are checking credentials if userProfile is being loading yet
+  if (!userIsReady()) {
     return (
       <HeroComponent
         title="Checking credentials..."
       />
     )
+  }
+
+  // if summit didnt started yet ...
+  if (!userIsAuthz() && summit_phase === PHASES.BEFORE) {
+    return (
+        <HeroComponent
+            title="Its not yet show time!"
+            redirectTo="/"
+        />
+    )
+  }
+
+  // if we are not authorized
+  if (!userIsAuthz() && location.pathname !== "/a/extra-questions") {
+    navigate('/authz/ticket', {
+      state: {
+        error: 'no-ticket'
+      }
+    })
+    return null
   }
 
   if (requireExtraQuestions()) {
@@ -71,23 +92,7 @@ const PrivateRoute = ({
       );
   }
 
-  if (!userIsAuthz() &&  location.pathname !== "/a/extra-questions") {
-    navigate('/authz/ticket', {
-      state: {
-        error: 'no-ticket'
-      }
-    })
-    return null
-  }
 
-  if (!userIsAuthz() && summit_phase === PHASES.BEFORE) {
-    return (
-      <HeroComponent
-        title="Its not yet show time!"
-        redirectTo="/"
-      />
-    )
-  }
 
   // if we are at an activity page ...
   if (eventId && userIsReady() && !isAuthorizedBadge(eventId, userProfile.summit_tickets)) {
