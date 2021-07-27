@@ -6,13 +6,16 @@ import {
   putFile,
   createAction,
   startLoading,
+  stopLoading,
+  passwordlessLogin
 } from 'openstack-uicore-foundation/lib/methods';
 
 import Swal from 'sweetalert2';
-
-import { customErrorHandler, customBadgeHandler } from '../utils/customErrorHandler';
-import { isAuthorizedUser } from '../utils/authorizedGroups';
 import axios from "axios";
+import { navigate } from 'gatsby-link';
+
+import { isAuthorizedUser } from '../utils/authorizedGroups';
+import { customErrorHandler, customBadgeHandler } from '../utils/customErrorHandler';
 import {getEnvVariable, SUMMIT_API_BASE_URL, SUMMIT_ID} from "../utils/envVariables";
 
 export const GET_DISQUS_SSO                   = 'GET_DISQUS_SSO';
@@ -24,6 +27,7 @@ export const UPDATE_PASSWORD                  = 'UPDATE_PASSWORD';
 export const SET_AUTHORIZED_USER              = 'SET_AUTHORIZED_USER';
 export const SET_USER_TICKET                  = 'SET_USER_TICKET';
 export const UPDATE_PROFILE_PIC               = 'UPDATE_PROFILE_PIC';
+export const UPDATE_EXTRA_QUESTIONS           = 'UPDATE_EXTRA_QUESTIONS';
 export const START_LOADING_IDP_PROFILE        = 'START_LOADING_IDP_PROFILE';
 export const STOP_LOADING_IDP_PROFILE         = 'STOP_LOADING_IDP_PROFILE';
 export const GET_IDP_PROFILE                  = 'GET_IDP_PROFILE';
@@ -34,6 +38,7 @@ export const SCAN_BADGE_ERROR                 = 'SCAN_BADGE_ERROR';
 export const ADD_TO_SCHEDULE                  = 'ADD_TO_SCHEDULE';
 export const REMOVE_FROM_SCHEDULE             = 'REMOVE_FROM_SCHEDULE';
 export const SCHEDULE_SYNC_LINK_RECEIVED      = 'SCHEDULE_SYNC_LINK_RECEIVED';
+export const SET_USER_ORDER                   = 'SET_USER_ORDER';
 
 export const getDisqusSSO = () => async (dispatch) => {
 
@@ -73,7 +78,7 @@ export const getUserProfile = () => async (dispatch) => {
 
   let params = {
     access_token: accessToken,
-    expand: 'groups,summit_tickets,summit_tickets.badge,summit_tickets.badge.features,summit_tickets.badge.type, summit_tickets.badge.type.access_levels,favorite_summit_events,feedback,schedule_summit_events,rsvp,rsvp.answers'
+    expand: 'groups,summit_tickets,summit_tickets,summit_tickets.owner,summit_tickets.owner.extra_questions,summit_tickets.badge,summit_tickets.badge.features,summit_tickets.badge.type,favorite_summit_events,feedback,schedule_summit_events,rsvp,rsvp.answers'
   };
 
   dispatch(startLoading());
@@ -90,6 +95,48 @@ export const getUserProfile = () => async (dispatch) => {
     dispatch(getScheduleSyncLink());
     return dispatch(createAction(STOP_LOADING_PROFILE)());
   });
+}
+
+export const getIDPProfile = () => async (dispatch) => {
+
+  const accessToken = await getAccessToken();
+
+  if (!accessToken) return Promise.resolve();
+
+  let params = {
+    access_token: accessToken,
+  };
+
+  dispatch(createAction(START_LOADING_IDP_PROFILE)());
+
+  return getRequest(
+      null,
+      createAction(GET_IDP_PROFILE),
+      `${window.IDP_BASE_URL}/api/v1/users/me`,
+      customErrorHandler
+  )(params)(dispatch)
+      .then(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()))
+      .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
+}
+
+export const requireExtraQuestions = () => (dispatch, getState) => {
+
+  const { summitState : { summit }} = getState();
+  const { userState: { userProfile } } = getState();
+
+  const requiredExtraQuestions = summit.order_extra_questions.filter(q => q.mandatory === true);
+
+  if (requiredExtraQuestions.length > 0 && userProfile) {
+    const ticketExtraQuestions = userProfile?.summit_tickets[0]?.owner?.extra_questions || [];
+    if (ticketExtraQuestions.length > 0) {
+      return !requiredExtraQuestions.every(q => {
+        const answer = ticketExtraQuestions.find(answer => answer.question_id === q.id);
+        return answer && answer.value;
+      });
+    }
+    return true;
+  }
+  return false;
 }
 
 const setAuthorization = () => (dispatch, getState) => {
@@ -131,28 +178,6 @@ export const scanBadge = (sponsorId) => async (dispatch) => {
       dispatch(createAction(SCAN_BADGE_ERROR)(e));
       return (e);
     });
-}
-
-export const getIDPProfile = () => async (dispatch) => {
-
-  const accessToken = await getAccessToken();
-
-  if (!accessToken) return Promise.resolve();
-
-  let params = {
-    access_token: accessToken,
-  };
-
-  dispatch(createAction(START_LOADING_IDP_PROFILE)());
-
-  getRequest(
-    null,
-    createAction(GET_IDP_PROFILE),
-    `${window.IDP_BASE_URL}/api/v1/users/me`,
-    customErrorHandler
-  )(params)(dispatch)
-    .then(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()))
-    .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
 
 export const addToSchedule = (event) => async (dispatch, getState) => {
@@ -265,6 +290,61 @@ export const updatePassword = (password) => async (dispatch) => {
     .catch(() => dispatch(createAction(STOP_LOADING_IDP_PROFILE)()));
 }
 
+export const saveExtraQuestions = (extra_questions, disclaimer) => async (dispatch, getState) => {
+
+  const { userState: { userProfile: { summit_tickets } } } = getState();
+
+  const { owner } = summit_tickets[0];
+
+  const extraQuestionsAnswers = extra_questions.map(q => {
+    return { question_id: q.id, answer: `${q.value}` }
+  })
+
+  let normalizedEntity = {
+    attendee_email: owner.email,
+    attendee_first_name: owner.first_name,
+    attendee_last_name: owner.last_name,
+    attendee_company: owner.company,
+    disclaimer_accepted: disclaimer,
+    extra_questions: extraQuestionsAnswers
+  };
+
+  const accessToken = await getAccessToken();
+
+  dispatch(startLoading());
+
+  let params = {
+    access_token: accessToken,
+    expand: 'owner, owner.extra_questions'
+  };
+
+  return putRequest(
+    null,
+    createAction(UPDATE_EXTRA_QUESTIONS),
+    `${window.API_BASE_URL}/api/v1/summits/all/orders/all/tickets/${summit_tickets[0].id}`,
+    normalizedEntity,
+    customErrorHandler
+  )(params)(dispatch).then(() => {
+    Swal.fire('Success', "Extra questions saved successfully", "success");
+    dispatch(getUserProfile());
+    navigate('/')
+  }
+  ).catch(e => {
+    dispatch(stopLoading());
+    Swal.fire('Error', "Error saving your questions. Please retry.", "warning");
+    return (e);
+  });
+};
+
+export const setPasswordlessLogin = (params) => (dispatch, getState) => {  
+  return dispatch(passwordlessLogin(params))
+    .then((res) => {      
+      dispatch(getUserProfile());
+    }, (err) => {
+      return Promise.resolve(err)
+    })
+}
+
 export const getScheduleSyncLink = () => async (dispatch) => {
   const accessToken = await getAccessToken();
 
@@ -282,3 +362,7 @@ export const getScheduleSyncLink = () => async (dispatch) => {
       customErrorHandler,
   )(params)(dispatch);
 };
+
+export const setUserOrder = (order) => (dispatch) => {
+  return dispatch(createAction(SET_USER_ORDER)(order));
+}

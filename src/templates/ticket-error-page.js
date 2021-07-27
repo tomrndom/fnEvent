@@ -25,11 +25,10 @@ export const TicketErrorPageTemplate = class extends React.Component {
       let targetUrl = null;
       switch (error) {
         case 'no-ticket':
-          const { slug } = this.props.summit;
-          targetUrl = `${getEnvVariable(REGISTRATION_BASE_URL)}/a/${slug}/`;
+          targetUrl = `/#registration=1`;
           break;
         case 'incomplete':
-          targetUrl = `${getEnvVariable(REGISTRATION_BASE_URL)}/a/tickets`;
+          targetUrl = `/a/extra-questions`;
           break;
         default:
           break;

@@ -7,9 +7,9 @@ import { PHASES } from "../utils/phasesUtils";
 import {
   getEnvVariable,
   AUTHORIZED_DEFAULT_PATH,
-  REGISTRATION_BASE_URL,
 } from "../utils/envVariables";
 import Link from "../components/Link";
+import RegistrationLiteComponent from "./RegistrationLiteComponent";
 
 import styles from "../styles/lobby-hero.module.scss";
 
@@ -30,29 +30,36 @@ class MarketingHeroComponent extends React.Component {
   };
 
   getButtons = () => {
-    const { summit, summit_phase, isLoggedUser, siteSettings } = this.props;
+    const { summit, summit_phase, isLoggedUser, siteSettings, userProfile } = this.props;
     const path = getEnvVariable(AUTHORIZED_DEFAULT_PATH) || '/a/';
     const {registerButton, loginButton} = siteSettings.heroBanner.buttons;
-    const summitPath = `${getEnvVariable(REGISTRATION_BASE_URL)}/a/${summit.slug}/`;
 
     if (summit_phase >= PHASES.DURING && isLoggedUser) {
       return (
+        <>
+        {registerButton.display && !userProfile?.summit_tickets?.length > 0 &&
+        (
+          <a className={styles.link}>
+            <RegistrationLiteComponent location={this.props.location} />
+          </a>
+        )}
         <Link className={styles.link} to={path}>
           <button className={`${styles.button} button is-large`}>
             <i className={`fa fa-2x fa-sign-in icon is-large`} />
             <b>Enter</b>
           </button>
         </Link>
+        </>
       );
     }
 
     return (
         <>
-          {registerButton.display && (
-              <a className={`${styles.button} button is-large ${styles.white}`} href={summitPath} target="_blank" rel="noreferrer">
-                  <i className={`fa fa-2x fa-edit icon is-large`} />
-                  <b>{registerButton.text}</b>
-              </a>
+          {registerButton.display && !userProfile?.summit_tickets?.length > 0 &&
+          (
+            <span className={styles.link}>
+              <RegistrationLiteComponent location={this.props.location} />
+            </span>
           )}
           {loginButton.display && !isLoggedUser && (
               <button className={`${styles.button} button is-large`} onClick={() => this.onClickLogin()}>
@@ -102,7 +109,7 @@ class MarketingHeroComponent extends React.Component {
                   <div>{siteSettings.heroBanner.date}</div>
                 </div>
                 <h4>{siteSettings.heroBanner.time}</h4>
-                <div className={styles.heroButtons}>
+                <div className={styles.heroButtons}>                  
                   {this.getButtons()}
                 </div>
               </div>
@@ -125,9 +132,10 @@ class MarketingHeroComponent extends React.Component {
   }
 }
 
-const mapStateToProps = ({ clockState, settingState }) => ({
+const mapStateToProps = ({ clockState, settingState, userState }) => ({
   summit_phase: clockState.summit_phase,
   siteSettings: settingState.siteSettings,
+  userProfile: userState.userProfile
 });
 
 export default connect(mapStateToProps, null)(MarketingHeroComponent);
