@@ -11,6 +11,8 @@ import { GET_EVENT_DATA } from '../actions/event-actions';
 
 const {color_source, ...filters} = filtersData;
 
+const summitTimeZoneId = summitData.summit.time_zone_id;  // TODO use reducer data
+
 const DEFAULT_STATE = {
   filters: filters,
   colorSource: color_source,
@@ -35,7 +37,7 @@ const scheduleReducer = (state = DEFAULT_STATE, action) => {
         value.label = newFilters[key].label;
       });
 
-      const events = getFilteredEvents(eventsData, currentFilters, summitData.time_zone_id);
+      const events = getFilteredEvents(eventsData, currentFilters, summitTimeZoneId);
 
       return {...state, allEvents: eventsData, filters: currentFilters, colorSource: color_source, events};
     }
@@ -58,7 +60,7 @@ const scheduleReducer = (state = DEFAULT_STATE, action) => {
       filters[type].values = values;
 
       // update events
-      const events = getFilteredEvents(allEvents, filters, summitData.time_zone_id);
+      const events = getFilteredEvents(allEvents, filters, summitTimeZoneId);
 
       return {...state, filters, events}
     }
@@ -66,8 +68,9 @@ const scheduleReducer = (state = DEFAULT_STATE, action) => {
       const {filters, view} = payload;
       const {allEvents} = state;
 
+
       // update events
-      const events = getFilteredEvents(allEvents, filters, summitData.time_zone_id);
+      const events = getFilteredEvents(allEvents, filters, summitTimeZoneId);
 
       return {...state, filters, events, view}
     }

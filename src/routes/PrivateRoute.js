@@ -30,7 +30,7 @@ const PrivateRoute = ({
       return;
     }
 
-  }, [userProfile, getUserProfile ]);
+  }, [userProfile, getUserProfile, isLoggedIn ]);
 
   if (!isLoggedIn) {
     navigate('/', {

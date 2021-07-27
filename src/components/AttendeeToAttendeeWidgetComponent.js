@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { FragmentParser } from "openstack-uicore-foundation/lib/components";
 import { getAccessToken } from "openstack-uicore-foundation/lib/methods";

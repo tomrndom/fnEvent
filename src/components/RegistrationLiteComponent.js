@@ -38,24 +38,24 @@ const RegistrationLiteComponent = ({
 
     useEffect(() => {
         const fragmentParser = new FragmentParser();
-        setIsActive(fragmentParser.getParam('registration'))
+        setIsActive(fragmentParser.getParam('registration'));
         getThirdPartyProviders();
-    }, [])
+    }, [getThirdPartyProviders]);
 
 
     const getBackURL = () => {
         let backUrl = '/#registration=1';
         return URI.encode(backUrl);
-    }
+    };
 
     const onClickLogin = (provider) => {
         doLogin(getBackURL(), provider);
-    }
+    };
 
     const formatThirdPartyProviders = (providers_array) => {
         const providers = [
             { button_color: '#082238', provider_label: 'FNid' },
-        ]
+        ];
 
         const thirdPartyProviders = [
             { button_color: '#0370C5', provider_label: 'Facebook', provider_param: 'facebook' },
@@ -63,19 +63,17 @@ const RegistrationLiteComponent = ({
             { button_color: '#000000', provider_label: 'Apple ID', provider_param: 'apple' },
             { button_color: '#3FA2F7', provider_label: 'LinkedIn', provider_param: 'linkedin' },
             { button_color: '#2272E7', provider_label: 'Microsoft', provider_param: 'microsoft' },
-        ]
+        ];
         
-        const activeProviders = [...providers, ...thirdPartyProviders.filter(p => providers_array?.includes(p.provider_param))]
-
-        return activeProviders;
-    }
+        return [...providers, ...thirdPartyProviders.filter(p => providers_array?.includes(p.provider_param))];
+    };
 
     const getPasswordlessCode = (email) => {
         const params = {
             connection: "email",
             send: "code",
             email
-        }
+        };
 
         return passwordlessStart(params)
     };
@@ -85,7 +83,7 @@ const RegistrationLiteComponent = ({
             connection: "email",
             otp: code,
             email
-        }
+        };
 
         navigate('/#registration=1');
 
@@ -124,7 +122,7 @@ const RegistrationLiteComponent = ({
     return (
         <>
             <button className={`${styles.button} button is-large`} onClick={() => setIsActive(true)}>
-                <i className={`fa fa-2x fa-edit icon is-large`}></i>
+                <i className={`fa fa-2x fa-edit icon is-large`} />
                 <b>{registerButton.text}</b>
             </button>
             <div>
@@ -132,7 +130,7 @@ const RegistrationLiteComponent = ({
             </div>
         </>
     )
-}
+};
 
 
 const mapStateToProps = ({ userState, summitState, settingState }) => ({
@@ -144,7 +142,7 @@ const mapStateToProps = ({ userState, summitState, settingState }) => ({
     summit: summitState.summit,
     colorSettings: settingState.colorSettings,
     siteSettings: settingState.siteSettings,
-})
+});
 
 export default connect(mapStateToProps, {
     getThirdPartyProviders,

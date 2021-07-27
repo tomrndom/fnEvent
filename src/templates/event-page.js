@@ -21,9 +21,6 @@ import { getEventById } from "../actions/event-actions";
 import { getDisqusSSO } from "../actions/user-actions";
 
 export const EventPageTemplate = class extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     const { eventId } = this.props;

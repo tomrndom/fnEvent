@@ -30,7 +30,7 @@ class MarketingHeroComponent extends React.Component {
   };
 
   getButtons = () => {
-    const { summit, summit_phase, isLoggedUser, siteSettings, userProfile } = this.props;
+    const { summit_phase, isLoggedUser, siteSettings, userProfile } = this.props;
     const path = getEnvVariable(AUTHORIZED_DEFAULT_PATH) || '/a/';
     const {registerButton, loginButton} = siteSettings.heroBanner.buttons;
 
@@ -39,9 +39,9 @@ class MarketingHeroComponent extends React.Component {
         <>
         {registerButton.display && !userProfile?.summit_tickets?.length > 0 &&
         (
-          <a className={styles.link}>
+          <button className={styles.link}>
             <RegistrationLiteComponent location={this.props.location} />
-          </a>
+          </button>
         )}
         <Link className={styles.link} to={path}>
           <button className={`${styles.button} button is-large`}>

@@ -97,8 +97,16 @@ const ExtraQuestions = ({ question, handleChange, getAnswer }) => {
                     </div>
                 </div>
             );
+        default:
+            return null;
     }
-}
+};
 
+
+ExtraQuestions.propTypes = {
+    question: PropTypes.object.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    getAnswer: PropTypes.func.isRequired
+};
 
 export default ExtraQuestions
