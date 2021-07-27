@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { connect } from 'react-redux'
 import { navigate } from "gatsby"
 
@@ -19,25 +19,25 @@ const PrivateRoute = ({
                         requireExtraQuestions,
                         ...rest }) => {
 
+  const [fetchingUserProfile, setFetchingUserProfile] = useState(isLoggedIn);
 
   const userIsAuthz = () => {
     return (hasTicket || isAuthorized)
   }
 
   const userIsReady = () => {
-    return userProfile && !loading;
+    // we have an user profile , its not reloading it and we are not fetching it
+    return userProfile && !fetchingUserProfile;
   }
 
   useEffect(() => {
-
     if (!isLoggedIn) return;
-
-    if (!userProfile) {
-      // get user profile
-      getUserProfile();
+    // if the user is not authz and we accessing a private route , get fresh data to recheck
+    // authz condition ( new tickets / new groups ) after every render of the route
+    if(fetchingUserProfile) {
+      getUserProfile().then(() => setFetchingUserProfile(false));
     }
-
-  }, [userProfile, getUserProfile, isLoggedIn ]);
+  }, [fetchingUserProfile, getUserProfile, isLoggedIn ]);
 
   if (!isLoggedIn) {
     navigate('/', {
