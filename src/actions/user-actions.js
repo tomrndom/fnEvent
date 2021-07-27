@@ -72,7 +72,13 @@ export const getRocketChatSSO = () => async (dispatch) => {
 
 export const getUserProfile = () => async (dispatch) => {
 
-  const accessToken = await getAccessToken();
+  let accessToken = null;
+  try {
+     accessToken = await getAccessToken();
+  }
+  catch (e){
+    return Promise.resolve();
+  }
 
   if (!accessToken) return Promise.resolve();
 
