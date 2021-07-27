@@ -39,9 +39,9 @@ class MarketingHeroComponent extends React.Component {
         <>
         {registerButton.display && !userProfile?.summit_tickets?.length > 0 &&
         (
-          <button className={styles.link}>
+          <span className={styles.link}>
             <RegistrationLiteComponent location={this.props.location} />
-          </button>
+          </span>
         )}
         <Link className={styles.link} to={path}>
           <button className={`${styles.button} button is-large`}>
