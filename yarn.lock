@@ -10901,10 +10901,10 @@ linkifyjs@^2.1.9:
   resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-2.1.9.tgz#af06e45a2866ff06c4766582590d098a4d584702"
   integrity sha512-74ivurkK6WHvHFozVaGtQWV38FzBwSTGNmJolEgFp7QgR2bl6ArUWlvT4GcHKbPe1z3nWYi+VUdDZk16zDOVug==
 
-lite-schedule-widget@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.8.tgz#a63a9bdd0f11dfcb6f33ce4231c4f17b276cc699"
-  integrity sha512-F4N3mbu+I2xt3Y+E/Ww9ZZVPo3FcLYhCqRtevIGtvApsqycscQTAo8FGZLmZOEhd+/1LQvl08Dw4/AQKSwEqcg==
+lite-schedule-widget@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.9.tgz#d041b0e78d899d139d3dbbb31ba7c57ccc276654"
+  integrity sha512-dzUOI0F2/nFqMn6F4QolcWxkMxF7c/EG9AC14CgcSNn96XAqqckvFOZUfNMDOWzORmXzzo9Y5gMWzhUHEdbaqw==
   dependencies:
     pure-react-carousel "^1.27.4"
     use-fit-text "^2.4.0"
@@ -16290,10 +16290,10 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-schedule-filter-widget@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/schedule-filter-widget/-/schedule-filter-widget-1.0.8.tgz#79d7b40bd456ab078eddfbbec5f646583747586f"
-  integrity sha512-N0i2fm8nubnC/wQfrB9KumdkxO726h5B+xA2wCmcEJ4zqBQlymSFbf4Bp3jKDpm48nyiw+3XyWdBIA2o7gm7QA==
+schedule-filter-widget@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/schedule-filter-widget/-/schedule-filter-widget-1.0.9.tgz#f32d9030ecea8af879b2a188980596609b522746"
+  integrity sha512-wJT6Ax8LY0nk8u2cGf39DijZkFEY0Tbe0YCxr51wb/mcR8d7u4ZLzuMiQBtQn/UR6FsPYsncdpvo25DW3H1zAQ==
   dependencies:
     dropzone "^5.9.2"
     react-spring "^9.1.2"
