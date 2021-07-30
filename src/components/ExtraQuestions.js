@@ -1,17 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Input, Dropdown, RadioList, CheckboxList } from 'openstack-uicore-foundation/lib/components'
+import { Input, Dropdown, RadioList, CheckboxList, RawHTML } from 'openstack-uicore-foundation/lib/components'
 import styles from '../styles/extra-questions.module.scss'
 
 const ExtraQuestions = ({ question, handleChange, getAnswer }) => {    
 
     let questionValues = question.values;
 
+    let htmlLabel = question.label;
+    if (question.mandatory) {
+        //Assuming that labels generated as html are wrapped in <p> bc the react-rte component generates them that way (defaultBlockTag: 'p')
+        htmlLabel = htmlLabel?.endsWith('</p>') ? htmlLabel.replace(/<\/p>$/g, " <b>*</b></p>") : `${htmlLabel} <b>*</b>`;
+    }
+
     switch (question.type) {
         case 'Text':
             return (
                 <div key={question.id} className={`${styles.questionWrapper} columns`}>
-                    <div className="column is-one-third" style={{ paddingTop: '10px' }}>{question.label} <b>{question.mandatory ? '*' : ''}</b></div>
+                    <div className="column is-one-third" style={{ paddingTop: '10px' }}><RawHTML>{htmlLabel}</RawHTML></div>
                     <div className="column is-two-thirds">
                         <Input
                             id={question.id}
@@ -26,7 +32,7 @@ const ExtraQuestions = ({ question, handleChange, getAnswer }) => {
         case 'TextArea':
             return (
                 <div key={question.id} className={`${styles.questionWrapper} columns`}>
-                    <div className="column is-one-third" style={{ paddingTop: '10px' }}>{question.label} <b>{question.mandatory ? '*' : ''}</b></div>
+                    <div className="column is-one-third" style={{ paddingTop: '10px' }}><RawHTML>{htmlLabel}</RawHTML></div>
                     <div className="column is-two-thirds">
                         <textarea
                             id={question.id}
@@ -42,7 +48,7 @@ const ExtraQuestions = ({ question, handleChange, getAnswer }) => {
         case 'CheckBox':
             return (
                 <div key={question.id} className={`${styles.questionWrapper} columns`}>
-                    <div className="column is-one-third">{question.label} <b>{question.mandatory ? '*' : ''}</b></div>
+                    <div className="column is-one-third"><RawHTML>{htmlLabel}</RawHTML></div>
                     <div className="column is-two-thirds">
                         <input type="checkbox" id={`${question.id}`} checked={(getAnswer(question) === "true")}
                             onChange={handleChange} />
@@ -54,10 +60,11 @@ const ExtraQuestions = ({ question, handleChange, getAnswer }) => {
             questionValues = questionValues.map(val => ({ ...val, value: val.id }));
             return (
                 <div key={question.id} className={`${styles.questionWrapper} columns`}>
-                    <div className="column is-one-third">{question.label} <b>{question.mandatory ? '*' : ''}</b></div>
+                    <div className="column is-one-third"><RawHTML>{htmlLabel}</RawHTML></div>
                     <div className="column is-two-thirds">
                         <Dropdown
                             id={question.id}
+                            overrideCSS={true}
                             value={getAnswer(question)}
                             options={questionValues}
                             onChange={handleChange}
@@ -70,7 +77,7 @@ const ExtraQuestions = ({ question, handleChange, getAnswer }) => {
             const answerValue = getAnswer(question) ? getAnswer(question).split(',').map(ansVal => parseInt(ansVal)) : [];
             return (
                 <div key={question.id} className={`${styles.questionWrapper} columns`}>
-                    <div className="column is-one-third">{question.label} <b>{question.mandatory ? '*' : ''}</b></div>
+                    <div className="column is-one-third"><RawHTML>{htmlLabel}</RawHTML></div>
                     <div className="column is-two-thirds">
                         <CheckboxList
                             id={`${question.id}`}
@@ -85,7 +92,7 @@ const ExtraQuestions = ({ question, handleChange, getAnswer }) => {
             questionValues = questionValues.map(val => ({ ...val, value: val.id }));
             return (
                 <div key={question.id} className={`${styles.questionWrapper} columns`}>
-                    <div className="column is-one-third">{question.label} <b>{question.mandatory ? '*' : ''}</b></div>
+                    <div className="column is-one-third"><RawHTML>{htmlLabel}</RawHTML></div>
                     <div className="column is-two-thirds">
                         <RadioList
                             id={`${question.id}`}
