@@ -92,7 +92,7 @@ const PrivateRoute = ({
   }
 
   // if we are at an activity page ...
-  if (eventId && userIsReady() && !isAuthorizedBadge(eventId, userProfile.summit_tickets)) {
+  if (!userIsAuthz() && eventId && userIsReady() && !isAuthorizedBadge(eventId, userProfile.summit_tickets)) {
     setTimeout(() => {
       navigate(location.state?.previousUrl ? location.state.previousUrl : '/')
     }, 3000);

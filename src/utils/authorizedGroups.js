@@ -1,43 +1,44 @@
-import {getEnvVariable, AUTHZ_USER_GROUPS, AUTHZ_SESSION_BADGE} from './envVariables';
+import { getEnvVariable, AUTHZ_USER_GROUPS, AUTHZ_SESSION_BADGE } from './envVariables';
 
 export const isAuthorizedUser = (groups) => {
-    let authorizedGroups = getEnvVariable(AUTHZ_USER_GROUPS);
-    authorizedGroups = authorizedGroups && authorizedGroups !== '' ? authorizedGroups.split(' ') : [];
-    return groups ? groups.some(group => authorizedGroups.includes(group.code)) : false;
-};
+  let authorizedGroups = getEnvVariable(AUTHZ_USER_GROUPS);
+      authorizedGroups = authorizedGroups && authorizedGroups !== '' ? authorizedGroups.split(' ') : [];
+  return groups ? groups.some(group => authorizedGroups.includes(group.code)) : false;
+}
 
 export const getUserBadges = (summit_tickets) => {
-    let badges = [];
+  let badges = [];
 
-    if (summit_tickets) {
-        summit_tickets.forEach(t => {
-            t.badge.features.forEach(feature => {
-                if (!badges.some(e => e === feature.id)) {
-                    badges.push(feature.id);
-                }
-            })
-        });
-    }
+  if (summit_tickets) {
+    summit_tickets.filter(t => t.badge).map(t => {
+      t.badge.features.map(feature => {
+        if (!badges.some(e => e === feature.id)) {
+          badges.push(feature.id);
+        }
+      })
+    });
+  }
 
-    return badges;
-};
+  return badges;
+}
 
 export const isAuthorizedBadge = (session, summit_tickets) => {
-    let authorizedSessionPerBadge = getEnvVariable(AUTHZ_SESSION_BADGE);
+  let authorizedSessionPerBadge = getEnvVariable(AUTHZ_SESSION_BADGE);
     authorizedSessionPerBadge = authorizedSessionPerBadge && authorizedSessionPerBadge !== '' ? authorizedSessionPerBadge.split('|').map((session => {
-        const id = session.split(':')[0];
-        const values = session.split(':')[1].split(',');
-        return {sessionId: id, authorizedBadges: values};
+      let id = session.split(':')[0];
+      let values = session.split(':')[1].split(',');
+      let sessionObject = { sessionId: id, authorizedBadges: values };
+      return sessionObject
     })) : [];
 
-    const badges = getUserBadges(summit_tickets);
+  let badges = getUserBadges(summit_tickets);
 
-    const authzSession = authorizedSessionPerBadge.find(s => s.sessionId === session);
-    if (authzSession) {
-        return authzSession.authorizedBadges.some(b => {
-            return badges.includes(parseInt(b))
-        });
-    } else {
-        return true;
-    }
-};
+  const authzSession = authorizedSessionPerBadge.find(s => s.sessionId === session)
+  if (authzSession) {
+    return authzSession.authorizedBadges.some(b => {
+      return badges.includes(parseInt(b))
+    });
+  } else {
+    return badges.length > 0;
+  }
+} 
