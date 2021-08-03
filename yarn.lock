@@ -10903,10 +10903,10 @@ linkifyjs@^2.1.9:
   resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-2.1.9.tgz#af06e45a2866ff06c4766582590d098a4d584702"
   integrity sha512-74ivurkK6WHvHFozVaGtQWV38FzBwSTGNmJolEgFp7QgR2bl6ArUWlvT4GcHKbPe1z3nWYi+VUdDZk16zDOVug==
 
-lite-schedule-widget@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.11.tgz#3dab22e2c402f7986a67d64129d5aaced5d773aa"
-  integrity sha512-BpBnxpgFS25rBhenb7cGP0txBlpgEQZOOD3WhjGLEVSqdI1Q7v32R0Sf3kTyUk+6YVbSM+TrYWNhCP0v/fknmg==
+lite-schedule-widget@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/lite-schedule-widget/-/lite-schedule-widget-1.0.12.tgz#aff919fd7f4ed8a8ffbc813c32cfd3058dac0164"
+  integrity sha512-F1uHikYqw4lGKOD+r3jVB6iHEGFm0VD6xABvmjxZ5hZZGy8uqjqL+irVX2WpXHjVxQRK2WcsyPeIe1B4Mqb1vg==
   dependencies:
     pure-react-carousel "^1.27.4"
     use-fit-text "^2.4.0"
@@ -17638,10 +17638,10 @@ sudo-prompt@^8.2.0:
   resolved "https://registry.yarnpkg.com/sudo-prompt/-/sudo-prompt-8.2.5.tgz#cc5ef3769a134bb94b24a631cc09628d4d53603e"
   integrity sha512-rlBo3HU/1zAJUrkY6jNxDOC9eVYliG6nS4JA8u8KAshITd07tafMc/Br7xQwCSseXwJ2iCcHCE8SNWX3q8Z+kw==
 
-summit-registration-lite@^1.0.53:
-  version "1.0.53"
-  resolved "https://registry.yarnpkg.com/summit-registration-lite/-/summit-registration-lite-1.0.53.tgz#f1fd0f1759226a7eaf8fbf721ae537fdb7df404f"
-  integrity sha512-UNBCslXqfyEZQX8jJoxNakvJUbYhx41+dYt980kRqsau97AEyp4mUfcYfuUBY4DHPZuvHtwylNLiHRUtzy3QjA==
+summit-registration-lite@^1.0.54:
+  version "1.0.54"
+  resolved "https://registry.yarnpkg.com/summit-registration-lite/-/summit-registration-lite-1.0.54.tgz#a7ac1439b2802883c55358920b1b655c5f002509"
+  integrity sha512-M9SSBbaYv+19UpbNme2UfuqnFMvXVwLc90DQhRGF2yi95jovSbRh0W0yS7RtYat1WTjL3Y401KWkOhG1je5dog==
   dependencies:
     "@stripe/react-stripe-js" "^1.4.1"
     "@stripe/stripe-js" "^1.15.0"
