@@ -11,14 +11,12 @@ const ExpoHallPage = ({ location, imageHeader }) => {
   return (
     <Layout location={location}>
       <AttendanceTrackerComponent />
-      {imageHeader &&
         <section className="hero is-large sponsors-header" style={{ backgroundImage: `url(${imageHeader})` }}>
           <div className="hero-body">
             <div className="container">
             </div>
           </div>
-        </section>
-      }
+        </section>      
       <section className="section px-6 py-6">
         <SponsorComponent />
       </section>
