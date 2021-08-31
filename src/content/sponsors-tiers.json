@@ -18,6 +18,10 @@
           "banner": true
         }
       },
+      "expoHallPage": {
+        "expoHallTemplate": "big-images",
+        "display": true
+      },
       "eventTemplate": "",
       "expoHallSize": "large"
     },
@@ -39,6 +43,10 @@
           "banner": true
         }
       },
+      "expoHallPage": {
+        "expoHallTemplate": "big-images",
+        "display": true
+      },
       "eventTemplate": "",
       "expoHallSize": "medium"
     },
@@ -59,6 +67,10 @@
           "schedule": true,
           "banner": true
         }
+      },
+      "expoHallPage": {
+        "expoHallTemplate": "small-images",
+        "display": true
       },
       "eventTemplate": "",
       "expoHallSize": "small"
