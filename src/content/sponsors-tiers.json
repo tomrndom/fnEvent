@@ -2,9 +2,8 @@
   "tiers": [
     {
       "id": "tier-cYGYq5-ae",
-      "name": "Top-Tier Sponsors",
-      "widgetTitle": "Top-Tier Sponsors",
-      "badge": "",
+      "name": "Top-Tier",
+      "badge": "/img/tier1-default-sessionbar-logo.png",
       "lobby": {
         "lobbyTemplate": "big-images",
         "display": true
@@ -23,9 +22,8 @@
     },
     {
       "id": "tier-DHcI3dWGk",
-      "name": "Middle-Tier Sponsors",
-      "widgetTitle": "Middle-Tier Sponsors",
-      "badge": "",
+      "name": "Mid-Tier",
+      "badge": "/img/tier1-default-sessionbar-logo.png",
       "lobby": {
         "lobbyTemplate": "small-images",
         "display": true
@@ -44,9 +42,8 @@
     },
     {
       "id": "tier-U_wEwGX8a",
-      "name": "Lower-Tier Sponsors",
-      "widgetTitle": "Lower-Tier Sponsors",
-      "badge": "",
+      "name": "Lower-Tier",
+      "badge": "/img/tier1-default-sessionbar-logo.png",
       "lobby": {
         "lobbyTemplate": "small-images",
         "display": true
@@ -64,9 +61,9 @@
       "expoHallSize": "small"
     }
   ],
-  "imageHeader": "/img/booth-crawl-1_adjusted-mobile.png",
+  "imageHeader": "/img/tier1-default-sponsor-headerimage-expopage.png",
   "lobbyButton": {
-    "text": "View all",
+    "text": "Visit the Expo Hall",
     "link": "/a/sponsors/"
   }
 }

@@ -13,6 +13,12 @@
       "requiresAuth": false
     },
     {
+      "title": "My Schedule",
+      "link": "/a/my-schedule",
+      "display": true,
+      "requiresAuth": false
+    },
+    {
       "title": "Sponsors ",
       "link": "/a/sponsors/",
       "display": true,
