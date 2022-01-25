@@ -34,7 +34,7 @@ const RegistrationLiteComponent = ({
         const fragmentParser = new FragmentParser();
         setIsActive(fragmentParser.getParam('registration'));
         getThirdPartyProviders();
-    }, [getThirdPartyProviders]);
+    }, []);
 
 
     const getBackURL = () => {
