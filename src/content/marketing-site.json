@@ -18,13 +18,16 @@
     "background": "",
     "images": [
       {
-        "image": "/img/tier1-default-header1.png"
+        "file": "/img/tier1-default-header1.png",
+        "alt": ""
       },
       {
-        "image": "/img/tier1-default-header2.png"
+        "file": "/img/tier1-default-header2.png",
+        "alt": ""
       },
       {
-        "image": "/img/tier1-default-header3.png"
+        "file": "/img/tier1-default-header3.png",
+        "alt": ""
       }
     ]
   },
@@ -49,10 +52,12 @@
       "images": [
         {
           "image": "/img/tier1-default-space3.png",
-          "link": ""
+          "link": "",
+          "alt": ""
         },
         {
-          "image": "/img/tier1-default-space4.png"
+          "image": "/img/tier1-default-space4.png",
+          "alt": ""
         }
       ]
     },
@@ -61,7 +66,8 @@
       "images": [
         {
           "image": "/img/tier1-default-space1.png",
-          "link": ""
+          "link": "",
+          "alt": ""
         }
       ]
     },
@@ -69,14 +75,16 @@
       "title": "Mid Left",
       "images": [
         {
-          "image": "/img/tier1-default-space2.png"
+          "image": "/img/tier1-default-space2.png",
+          "alt": ""
         }
       ]
     },
     {
       "images": [
         {
-          "image": "/img/tier1-default-space4.png"
+          "image": "/img/tier1-default-space4.png",
+          "alt": ""
         }
       ]
     }

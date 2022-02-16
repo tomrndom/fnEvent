@@ -4,28 +4,40 @@
       "section": "lobby",
       "columnAds": [
         {
-          "image": "/img/tier1-default-lobby-space1.png",
+          "image":{
+            "file": "/img/tier1-default-lobby-space1.png",
+            "alt" : ""
+          },
           "column": "left",
           "button": {
             "link": "/link-to-url-of-your-choice"
           }
         },
         {
-          "image": "/img/tier1-default-lobby-button.png",
+          "image": {
+            "file": "/img/tier1-default-lobby-button.png",
+            "alt": ""
+          },
           "column": "left",
           "button": {
             "link": "/link-to-url-of-your-choice"
           }
         },
         {
-          "image": "/img/tier1-default-lobby-button.png",
+          "image": {
+            "file" : "/img/tier1-default-lobby-button.png",
+            "alt" : ""
+          },
           "button": {
             "link": "/link-to-url-of-your-choice"
           },
           "column": "right"
         },
         {
-          "image": "/img/tier1-default-lobby-space1.png",
+          "image": {
+            "file": "/img/tier1-default-lobby-space1.png",
+            "alt": ""
+          },
           "button": {
             "text": "",
             "link": "/link-to-url-of-your-choice"
@@ -34,7 +46,10 @@
           "id": null
         },
         {
-          "image": "/img/tier1-default-lobby-space2.png",
+          "image": {
+            "file": "/img/tier1-default-lobby-space2.png",
+            "alt": ""
+          },
           "button": {
             "text": "",
             "link": "/link-to-url-of-your-choice"

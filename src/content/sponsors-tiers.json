@@ -61,7 +61,10 @@
       "expoHallSize": "small"
     }
   ],
-  "imageHeader": "/img/tier1-default-sponsor-headerimage-expopage.png",
+  "imageHeader": {
+    "file": "/img/tier1-default-sponsor-headerimage-expopage.png",
+    "alt": "header"
+  },
   "lobbyButton": {
     "text": "Visit the Expo Hall",
     "link": "/a/sponsors/"
