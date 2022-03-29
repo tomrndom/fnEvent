@@ -12,7 +12,6 @@ import SponsorPage from "../../templates/sponsor-page"
 import ExpoHallPage from "../../templates/expo-hall-page"
 import FullProfilePage from "../../templates/full-profile-page"
 import WithAuthRoute from '../../routes/WithAuthRoute'
-import withSessionChecker from "../../utils/withSessionChecker"
 import ExtraQuestionsPage from "../../templates/extra-questions-page"
 import ShowOpenRoute from "../../routes/ShowOpenRoute";
 import WithBadgeRoute from "../../routes/WithBadgeRoute";

@@ -9,17 +9,17 @@ import 'lite-schedule-widget/dist/index.css';
 import {addToSchedule, removeFromSchedule} from '../actions/user-actions';
 
 const LiteScheduleComponent = ({
-    className,
-    userProfile,
-    colorSettings,
-    homeSettings,
-    page,
-    addToSchedule,
-    removeFromSchedule,
-    allScheduleEvents,
-    summit,
-    ...rest
-}) => {
+                                   className,
+                                   userProfile,
+                                   colorSettings,
+                                   homeSettings,
+                                   page,
+                                   addToSchedule,
+                                   removeFromSchedule,
+                                   allScheduleEvents,
+                                   summit,
+                                   ...rest
+                               }) => {
     const wrapperClass = page === 'marketing-site' ? 'schedule-container-marketing' : 'schedule-container';
 
     const componentProps = {

@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Helmet } from 'react-helmet';
 import SpeakersWidget from 'speakers-widget/dist';
-
 import 'speakers-widget/dist/index.css';
-
 
 const SpeakersWidgetComponent = ({now, colorSettings, allEvents, speakers, ...props}) => {
     const widgetProps = {
@@ -28,7 +26,7 @@ const SpeakersWidgetComponent = ({now, colorSettings, allEvents, speakers, ...pr
     )
 }
 
-const mapStateToProps = ({ clockState, allSchedulesState, speakerState, settingState }) => ({
+const mapStateToProps = ({ clockState, summitState, allSchedulesState, speakerState, settingState }) => ({
     now: clockState.nowUtc,
     colorSettings: settingState.colorSettings,
     allEvents: allSchedulesState.allEvents,

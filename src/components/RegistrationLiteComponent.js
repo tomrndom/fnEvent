@@ -2,39 +2,30 @@ import React, { useEffect, useState } from "react"
 import { navigate } from "gatsby"
 import { connect } from "react-redux";
 import URI from "urijs"
-
-import {
-    getAccessToken
-} from 'openstack-uicore-foundation/lib/methods';
-
 // these two libraries are client-side only
 import RegistrationLiteWidget from 'summit-registration-lite/dist';
-
-import { FragmentParser } from "openstack-uicore-foundation/lib/components";
-
-import { doLogin, passwordlessStart } from 'openstack-uicore-foundation/lib/methods'
+import FragmentParser from "openstack-uicore-foundation/lib/utils/fragment-parser";
+import { doLogin, passwordlessStart, getAccessToken } from 'openstack-uicore-foundation/lib/security/methods'
 import { getEnvVariable, SUMMIT_API_BASE_URL, OAUTH2_CLIENT_ID, REGISTRATION_BASE_URL } from '../utils/envVariables'
-
 import { getUserProfile, setPasswordlessLogin, setUserOrder, checkOrderData } from "../actions/user-actions";
 import { getThirdPartyProviders } from "../actions/base-actions";
-
 import 'summit-registration-lite/dist/index.css';
 import styles from '../styles/marketing-hero.module.scss'
 
 const RegistrationLiteComponent = ({
-    registrationProfile,
-    userProfile,
-    getThirdPartyProviders,
-    thirdPartyProviders,
-    getUserProfile,
-    setPasswordlessLogin,
-    setUserOrder,
-    checkOrderData,
-    loadingProfile,
-    loadingIDP,
-    summit,
-    colorSettings,
-    siteSettings }) => {
+                                       registrationProfile,
+                                       userProfile,
+                                       getThirdPartyProviders,
+                                       thirdPartyProviders,
+                                       getUserProfile,
+                                       setPasswordlessLogin,
+                                       setUserOrder,
+                                       checkOrderData,
+                                       loadingProfile,
+                                       loadingIDP,
+                                       summit,
+                                       colorSettings,
+                                       siteSettings }) => {
 
     const [isActive, setIsActive] = useState(false);
     // this variable let to know to the widget that should not show
@@ -133,13 +124,13 @@ const RegistrationLiteComponent = ({
     return (
         <>
             {!userProfile?.summit_tickets?.length > 0 &&
-                <button className={`${styles.button} button is-large`} onClick={() => setIsActive(true)}>
-                    <i className={`fa fa-2x fa-edit icon is-large`} />
-                    <b>{registerButton.text}</b>
-                </button>
+            <button className={`${styles.button} button is-large`} onClick={() => setIsActive(true)}>
+                <i className={`fa fa-2x fa-edit icon is-large`} />
+                <b>{registerButton.text}</b>
+            </button>
             }
             <div>
-                {isActive && !summit.invite_only_registration && <RegistrationLiteWidget {...widgetProps} />}
+                {isActive && <RegistrationLiteWidget {...widgetProps} />}
             </div>
         </>
     )
