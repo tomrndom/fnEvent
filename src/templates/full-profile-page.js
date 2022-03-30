@@ -21,6 +21,8 @@ import { updateProfilePicture, updateProfile, getIDPProfile, updatePassword } fr
 
 import styles from '../styles/full-profile.module.scss'
 
+import "openstack-uicore-foundation/lib/css/components/inputs/datetimepicker.css";
+
 export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, updateProfilePicture, updatePassword }) => {
 
     const [showProfile, setShowProfile] = useState(false);
@@ -325,7 +327,7 @@ export const FullProfilePageTemplate = ({ user, getIDPProfile, updateProfile, up
                                                 <DateTimePicker
                                                     onChange={e => setPersonalProfile({ ...personalProfile, birthday: e.target.value })}
                                                     format={{ date: 'MM/DD/YYYY', time: '' }}
-                                                    value={personalProfile.birthday}
+                                                    value={personalProfile.birthday || null}
                                                 />
                                             </div>
                                         </div>
