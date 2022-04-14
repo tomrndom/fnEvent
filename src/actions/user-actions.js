@@ -22,7 +22,6 @@ import { customErrorHandler, customBadgeHandler } from '../utils/customErrorHand
 import { getEnvVariable, SUMMIT_API_BASE_URL, SUMMIT_ID } from "../utils/envVariables";
 
 export const GET_DISQUS_SSO = 'GET_DISQUS_SSO';
-export const GET_ROCKETCHAT_SSO = 'GET_ROCKETCHAT_SSO';
 export const GET_USER_PROFILE = 'GET_USER_PROFILE';
 export const START_LOADING_PROFILE = 'START_LOADING_PROFILE';
 export const STOP_LOADING_PROFILE = 'STOP_LOADING_PROFILE';
