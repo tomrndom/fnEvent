@@ -8,7 +8,7 @@ import {
   startLoading,
   stopLoading,
 } from 'openstack-uicore-foundation/lib/utils/actions';
-
+import { LOGOUT_USER } from 'openstack-uicore-foundation/lib/security/actions';
 import {
   getAccessToken,
   clearAccessToken,
@@ -47,9 +47,12 @@ export const UNCAST_PRESENTATION_VOTE_REQUEST = 'UNCAST_PRESENTATION_VOTE_REQUES
 export const UNCAST_PRESENTATION_VOTE_RESPONSE = 'UNCAST_PRESENTATION_VOTE_RESPONSE';
 export const TOGGLE_PRESENTATION_VOTE = 'TOGGLE_PRESENTATION_VOTE';
 
+export const logoutUser = () => (dispatch) => {
+  dispatch(createAction(LOGOUT_USER));
+};
+
 // shortName is the unique identifier assigned to a Disqus site.
 export const getDisqusSSO = (shortName) => async (dispatch, getState) => {
-
   const { userState: { disqusSSO } } = getState();
 
   if (disqusSSO !== null) return;
@@ -70,6 +73,7 @@ export const getDisqusSSO = (shortName) => async (dispatch, getState) => {
   )({})(dispatch).catch(e => {
     console.log('ERROR: ', e);
     clearAccessToken();
+
     return Promise.reject(e);
   });
 }
@@ -543,9 +547,10 @@ export const setUserOrder = (order) => (dispatch) => Promise.resolve().then(() =
 })
 
 export const checkOrderData = (order) => (dispatch, getState) => {
+  if (!order) return;
 
   const { userState: { idpProfile: { company, given_name, family_name } } } = getState();
-  const { owner_company, owner_first_name, owner_last_name } = order;
+  const { owner_company, owner_first_name, owner_last_name } = order || {};
 
   if (owner_company !== company || owner_first_name !== given_name || owner_last_name !== family_name) {
     const newProfile = {

@@ -1,10 +1,9 @@
 import { reduceReducers } from '../utils/reducer-utils';
-
-import { LOGOUT_USER } from 'openstack-uicore-foundation/lib/utils/actions';
-
+import { LOGOUT_USER } from 'openstack-uicore-foundation/lib/security/actions';
 import {
   GET_DISQUS_SSO,
   GET_USER_PROFILE,
+  CLEAR_USER_PROFILE,
   START_LOADING_PROFILE,
   STOP_LOADING_PROFILE,
   GET_IDP_PROFILE,
@@ -19,9 +18,7 @@ import {
   UNCAST_PRESENTATION_VOTE_RESPONSE,
   TOGGLE_PRESENTATION_VOTE,
 } from '../actions/user-actions';
-
 import { RESET_STATE } from '../actions/base-actions';
-
 import { isAuthorizedUser } from '../utils/authorizedGroups';
 
 const DEFAULT_STATE = {
@@ -39,8 +36,9 @@ const userReducer = (state = DEFAULT_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
     case RESET_STATE:
-    case LOGOUT_USER:
+    case LOGOUT_USER: {
       return DEFAULT_STATE;
+    }
     case START_LOADING_PROFILE:
       return { ...state, loading: true };
     case STOP_LOADING_PROFILE:
@@ -51,17 +49,24 @@ const userReducer = (state = DEFAULT_STATE, action) => {
       return { ...state, loadingIDP: false };
     case GET_USER_PROFILE:
       const { response: userProfile } = payload;
-      return { ...state,
-                userProfile: userProfile,
-                isAuthorized: isAuthorizedUser(userProfile.groups),
-                hasTicket: userProfile.summit_tickets?.length > 0
-             }
+      return {
+        ...state,
+        userProfile: userProfile,
+        isAuthorized: isAuthorizedUser(userProfile.groups),
+        hasTicket: userProfile.summit_tickets?.length > 0
+      }
     // is this action type used?
     case SET_USER_TICKET:
       return { ...state, hasTicket: payload }
     case SET_USER_ORDER: {
-      const { tickets } = payload;
-      return {...state, hasTicket: true, userProfile: {...state.userProfile, summit_tickets: [...tickets] }};
+      return {
+        ...state,
+        hasTicket: true,
+        userProfile: {
+          ...state.userProfile,
+          summit_tickets: [...(state.userProfile?.summit_tickets || []), ...(payload?.tickets || [])]
+        }
+      };
     }
     case GET_IDP_PROFILE:
       return { ...state, idpProfile: payload.response }
@@ -75,8 +80,8 @@ const userReducer = (state = DEFAULT_STATE, action) => {
       const disqus = payload.response;
       return { ...state, loading: false, disqusSSO: disqus };
     case SCHEDULE_SYNC_LINK_RECEIVED:
-      const {link} = payload.response;
-      return { ...state, userProfile: {...state.userProfile, schedule_shareable_link: link} };
+      const { link } = payload.response;
+      return { ...state, userProfile: { ...state.userProfile, schedule_shareable_link: link } };
     default:
       return state;
   }
@@ -89,7 +94,7 @@ const attendeeReducer = (state, action) => {
       const { summit_tickets: [ticket] } = payload.response;
       return { ...state, attendee: ticket?.owner ?? null };
     case SET_USER_ORDER: {
-      const { tickets: [ticket] } = payload;
+      const [ticket] = payload?.tickets || [];
       return { ...state, attendee: ticket?.owner ?? null };
     }
     case CAST_PRESENTATION_VOTE_RESPONSE: {
