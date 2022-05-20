@@ -26,8 +26,11 @@ const RegistrationLiteComponent = ({
     loadingIDP,
     summit,
     colorSettings,
-    siteSettings
+    siteSettings , 
+    allowsNativeAuth,
+    allowsOtpAuth,
 }) => {
+    
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
@@ -123,7 +126,10 @@ const RegistrationLiteComponent = ({
             // check if it's necesary to update profile
             setUserOrder(order).then(_ => checkOrderData(order));
         },
-        inPersonDisclaimer: siteSettings?.registration_in_person_disclaimer
+        inPersonDisclaimer: siteSettings?.registration_in_person_disclaimer,
+        handleCompanyError: () => handleCompanyError,
+        allowsNativeAuth: allowsNativeAuth,
+        allowsOtpAuth: allowsOtpAuth,
     };
 
     const { registerButton } = siteSettings.heroBanner.buttons;
@@ -151,11 +157,14 @@ const mapStateToProps = ({ userState, summitState, settingState }) => {
         loadingProfile: userState.loading,
         loadingIDP: userState.loadingIDP,
         thirdPartyProviders: summitState.third_party_providers,
+        allowsNativeAuth: summitState.allows_native_auth,
+        allowsOtpAuth: summitState.allows_otp_auth,
         summit: summitState.summit,
         colorSettings: settingState.colorSettings,
         siteSettings: settingState.siteSettings,
     })
 };
+
 
 export default connect(mapStateToProps, {
     getThirdPartyProviders,
