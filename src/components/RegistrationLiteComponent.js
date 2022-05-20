@@ -6,11 +6,13 @@ import URI from "urijs"
 import RegistrationLiteWidget from 'summit-registration-lite/dist';
 import FragmentParser from "openstack-uicore-foundation/lib/utils/fragment-parser";
 import { doLogin, passwordlessStart, getAccessToken } from 'openstack-uicore-foundation/lib/security/methods'
+import { doLogout } from 'openstack-uicore-foundation/lib/security/actions'
 import { getEnvVariable, SUMMIT_API_BASE_URL, OAUTH2_CLIENT_ID, REGISTRATION_BASE_URL } from '../utils/envVariables'
 import { getUserProfile, setPasswordlessLogin, setUserOrder, checkOrderData } from "../actions/user-actions";
 import { getThirdPartyProviders } from "../actions/base-actions";
 import 'summit-registration-lite/dist/index.css';
 import styles from '../styles/marketing-hero.module.scss'
+import Swal from "sweetalert2";
 
 const RegistrationLiteComponent = ({
     registrationProfile,
@@ -48,6 +50,15 @@ const RegistrationLiteComponent = ({
     const onClickLogin = (provider) => {
         doLogin(getBackURL(), provider);
     };
+
+    const handleCompanyError = () => {
+        console.log('company error...')
+        Swal.fire("ERROR", "Hold on. Your session expired!.", "error").then(() => {
+            // save current location and summit slug, for further redirect logic
+            window.localStorage.setItem('post_logout_redirect_path', new URI(window.location.href).pathname());
+            doLogout();
+        });
+    }
 
     const formatThirdPartyProviders = (providers_array) => {
         const providers = [
