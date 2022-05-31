@@ -55,6 +55,7 @@
     "i18next-browser-languagedetector": "^6.1.4",
     "i18next-http-backend": "^1.4.0",
     "idtoken-verifier": "^2.2.2",
+    "image-size": "^1.0.1",
     "immutability-helper": "2.9.1",
     "immutable": "^3.7.6",
     "jsdom": "^16.2.2",
