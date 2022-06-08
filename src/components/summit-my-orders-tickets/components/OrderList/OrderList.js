@@ -25,42 +25,40 @@ export const OrderList = ({ className }) => {
     const hasOrders = orders.length > 0;
     const hasMultiplePages = total > perPage;
 
+    if (!hasOrders) return null;
+
     return (
         <>
             <h2 className="order-list__title">
                 {t("orders.title")}
             </h2>
 
-            {hasOrders && (
-                <>
-                    <ul className={classNames('order-list', className)}>
-                        {orders.map(order => (
-                            <OrderListItem key={order.id} order={order} />
-                        ))}
-                    </ul>
+            <ul className={classNames('order-list', className)}>
+                {orders.map(order => (
+                    <OrderListItem key={order.id} order={order} />
+                ))}
+            </ul>
 
-                    {hasMultiplePages && (
-                        <div className="order-list__pagination">
-                            <div className="row">
-                                <div className="col-md-8">
-                                    <Pagination
-                                        bsSize="medium"
-                                        prev
-                                        next
-                                        first
-                                        last
-                                        ellipsis
-                                        boundaryLinks
-                                        maxButtons={5}
-                                        items={lastPage}
-                                        activePage={currentPage}
-                                        onSelect={handlePageChange}
-                                    />
-                                </div>
-                            </div>
+            {hasMultiplePages && (
+                <div className="order-list__pagination">
+                    <div className="row">
+                        <div className="col-md-8">
+                            <Pagination
+                                bsSize="medium"
+                                prev
+                                next
+                                first
+                                last
+                                ellipsis
+                                boundaryLinks
+                                maxButtons={5}
+                                items={lastPage}
+                                activePage={currentPage}
+                                onSelect={handlePageChange}
+                            />
                         </div>
-                    )}
-                </>
+                    </div>
+                </div>
             )}
         </>
     );
