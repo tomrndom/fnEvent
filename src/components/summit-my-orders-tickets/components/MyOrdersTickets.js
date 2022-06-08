@@ -15,8 +15,7 @@ export const MyOrdersTickets = ({ className }) => {
     const dispatch = useDispatch();
     const {
         orderState,
-        ticketState,
-        summitState
+        ticketState
     } = useSelector(state => state || {});
 
     useEffect(() => {
@@ -24,7 +23,7 @@ export const MyOrdersTickets = ({ className }) => {
         dispatch(getUserTickets(null, ticketState.current_page, ticketState.per_page));
     }, []);
 
-    const isLoading = orderState.loading || ticketState.loading || summitState.loading;
+    const isLoading = orderState.loading || ticketState.loading;
     const hasOrders = orderState.memberOrders?.length > 0;
     const hasTickets = ticketState.memberTickets?.length > 0;
 
