@@ -17,39 +17,19 @@ export const OrderList = ({ className }) => {
         current_page: currentPage,
         last_page: lastPage,
         per_page: perPage,
-        total,
-        loading: orderLoading
+        total
     } = useSelector(state => state.orderState || {});
-
-    const {
-        loading: summitLoading
-    } = useSelector(state => state.summitState || {});
 
     const handlePageChange = (page) => dispatch(getUserOrders(null, page, perPage));
 
-    const isLoading = orderLoading || summitLoading;
     const hasOrders = orders.length > 0;
     const hasMultiplePages = total > perPage;
 
     return (
         <>
-            <h2 className="order-list-title">
+            <h2 className="order-list__title">
                 {t("orders.title")}
             </h2>
-
-            {/* TODO: Replace with inline `Loading` component. */}
-            {(isLoading) && (
-                <div className="order-list-loading">
-                    {t("orders.loading")}
-                </div>
-            )}
-
-            {/* TODO: Replace with `Empty` component. */}
-            {(!isLoading && !hasOrders) && (
-                <div className="order-list-empty">
-                    {t("orders.empty")}
-                </div>
-            )}
 
             {hasOrders && (
                 <>
@@ -60,7 +40,7 @@ export const OrderList = ({ className }) => {
                     </ul>
 
                     {hasMultiplePages && (
-                        <div className="order-list-pagination">
+                        <div className="order-list__pagination">
                             <div className="row">
                                 <div className="col-md-8">
                                     <Pagination

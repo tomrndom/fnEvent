@@ -17,39 +17,19 @@ export const TicketList = ({ className }) => {
         current_page: currentPage,
         last_page: lastPage,
         per_page: perPage,
-        total,
-        loading: ticketLoading
+        total
     } = useSelector(state => state.ticketState || {});
-
-    const {
-        loading: summitLoading
-    } = useSelector(state => state.summitState || {});
 
     const handlePageChange = (page) => dispatch(getUserTickets(null, page, perPage));
 
-    const isLoading = ticketLoading || summitLoading;
     const hasTickets = tickets.length > 0;
     const hasMultiplePages = total > perPage;
 
     return (
         <>
-            <h2 className="ticket-list-title">
+            <h2 className="ticket-list__title">
                 {t("tickets.title")}
             </h2>
-
-            {/* TODO: Replace with inline `Loading` component. */}
-            {(isLoading) && (
-                <div className="ticket-list-loading">
-                    {t("tickets.loading")}
-                </div>
-            )}
-
-            {/* TODO: Replace with `Empty` component. */}
-            {(!isLoading && !hasTickets) && (
-                <div className="ticket-list-empty">
-                    {t('tickets.empty')}
-                </div>
-            )}
 
             {hasTickets && (
                 <>
@@ -60,7 +40,7 @@ export const TicketList = ({ className }) => {
                     </ul>
 
                     {hasMultiplePages && (
-                        <div className="ticket-list-pagination">
+                        <div className="ticket-list__pagination">
                             <div className="row">
                                 <div className="col-md-8">
                                     <Pagination

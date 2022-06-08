@@ -6,7 +6,7 @@ import './order-ticket-list.scss';
 
 export const OrderTicketList = ({ ticketType, tickets, summit, order, className }) => (
     <>
-        <div className="order-ticket-list-type">{ticketType.name} Tickets ({tickets.length})</div>
+        <div className="order-ticket-list__type">{ticketType.name} Tickets ({tickets.length})</div>
 
         {tickets.length > 0 && (
             <ul className={classNames('order-ticket-list', className)}>

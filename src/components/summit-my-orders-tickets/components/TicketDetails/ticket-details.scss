@@ -108,4 +108,17 @@
   &--cancel &__status {
     color: $color-danger;
   }
+
+  &--disabled &__status {
+    color: $color-black;
+  }
+
+  &--disabled:hover {
+    cursor: default;
+    background-color: $color-white;
+  }
+
+  &--disabled {
+    opacity: 0.6;
+  }
 }
