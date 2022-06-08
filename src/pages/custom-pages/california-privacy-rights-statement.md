@@ -11,24 +11,23 @@ Your California Privacy Rights under the CCPA
 
 The categories of Personal Information we collect are described below by reference to the statutory categories of Personal Information specified in the CCPA (California Civil Code section 1798.140):
 
-* * Identifiers, such as name, email address, postal address, username, password, IP address, and other online identifiers.
-  * Sensory information, such as call and video recordings and profile photos.
-  * California customer records (as defined in California Civil Code § 1798.80), such as contact details and communications we collect through our support channels, marketing webpages, social media, at our events, and connected with our other marketing activities.
-  * Internet or network activity information, such as information generated from interactions with our online services, such as data collected through server logs and cookies and similar technologies.
-  * Geolocation, such as your city or other general location.
-  * Professional or employment-related information, such as current or prior organizational affiliation, job title, information about your role, and work-related contact details.
-  * Education information, such as student records and directory information.
-  * Inferences that we derive from the preceding or other information we collect.
+* Identifiers, such as name, email address, postal address, username, password, IP address, and other online identifiers.
+* Sensory information, such as call and video recordings and profile photos.
+* California customer records (as defined in California Civil Code § 1798.80), such as contact details and communications we collect through our support channels, marketing webpages, social media, at our events, and connected with our other marketing activities.
+* Internet or network activity information, such as information generated from interactions with our online services, such as data collected through server logs and cookies and similar technologies.
+* Geolocation, such as your city or other general location.
+* Professional or employment-related information, such as current or prior organizational affiliation, job title, information about your role, and work-related contact details.
+* Education information, such as student records and directory information.
+* Inferences that we derive from the preceding or other information we collect.
 
 How to Exercise Your Rights
 
 You may submit requests to exercise your California privacy rights described above as follows:
 
-* * Right to information, access, and deletion. If you are a California resident, you may submit a request to exercise your information, access, and deletion rights by emailing [support@fntech.com](<>) or by calling 714-429-7833.
-  * Right to opt-out of the “sale” of your Personal Information. We do not sell your personal information but may share information with event sponsors including your interaction during an event.
-  * You may make this request once every 12-month period.
-  * If you exercise your rights under the CCPA, FNTECH will not deny you the use of our services, charge you a different price, or provide a different level of service.
-*
+* Right to information, access, and deletion. If you are a California resident, you may submit a request to exercise your information, access, and deletion rights by emailing [support@fntech.com](<>) or by calling 714-429-7833.
+* Right to opt-out of the “sale” of your Personal Information. We do not sell your personal information but may share information with event sponsors including your interaction during an event.
+* You may make this request once every 12-month period.
+* If you exercise your rights under the CCPA, FNTECH will not deny you the use of our services, charge you a different price, or provide a different level of service.
 
 These rights are not absolute, and in some instances, we may decline your request as permitted by law. We will need to verify your identity to process your information, access, and deletion requests and reserve the right to confirm your California residency.  To verify your identity, we may require you to log into your FNTECH account (if applicable), provide government identification, give a declaration as to your identity under penalty of perjury, and/or provide additional information.
 
