@@ -1,8 +1,20 @@
 ---
 templateKey: custom-page
-userRequirement: NONE
 title: Contact
+userRequirement: NONE
 ---
-YOU DECIDE!
+#### Email OCP for questions regarding:
 
-This can be your company contact info, the event group, a combination (like your info and your brand partners or top sponsors), or a totally different set of details that you’d like linked to your top navigation. Flexibility is what we’re all about!
+OCP Membership: [membership@opencompute.org](mailto:membership@opencompute.org)
+
+OCP Solution Provider Program: [solutionproviders@opencompute.org](mailto:solutionproviders@opencompute.org)
+
+Event Sponsorship: [sponsor@opencompute.org](mailto:sponsor@opencompute.org)
+
+Upcoming Events: [events@opencompute.org](mailto:events@opencompute.org)
+
+Current Registration for an Event:  [registration@opencompute.org](mailto:registration@opencompute.org)
+
+Press Inquiries: [press@opencompute.org](mailto:press@opencompute.org)
+
+OCP Brand Site: [OCPgear@opencompute.org](mailto:OCPgear@opencompute.org)
