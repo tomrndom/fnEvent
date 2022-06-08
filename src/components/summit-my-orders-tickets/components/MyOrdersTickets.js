@@ -28,10 +28,6 @@ export const MyOrdersTickets = ({ className }) => {
     const hasOrders = orderState.memberOrders?.length > 0;
     const hasTickets = ticketState.memberTickets?.length > 0;
 
-    console.log('orderState.loading', orderState.loading);
-    console.log('ticketState.loading', ticketState.loading);
-    console.log('summitState.loading', summitState.loading);
-
     return (
         <>
             <AjaxLoader show={isLoading} size={120} />
