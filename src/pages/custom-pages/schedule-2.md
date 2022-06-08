@@ -1,6 +1,6 @@
 ---
 templateKey: custom-page
-title: Schedule-2
+title: Schedule
 userRequirement: NONE
 ---
 Static image of schedule TBD
