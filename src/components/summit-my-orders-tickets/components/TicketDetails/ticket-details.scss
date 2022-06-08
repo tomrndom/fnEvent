@@ -114,12 +114,12 @@
     color: $color-black;
   }
 
-  &--disabled:hover {
-    cursor: default;
-    background-color: $color-white;
-  }
-
   &--disabled {
     opacity: 0.6;
+
+    &:hover {
+      cursor: default;
+      background-color: $color-white;
+    }
   }
 }
