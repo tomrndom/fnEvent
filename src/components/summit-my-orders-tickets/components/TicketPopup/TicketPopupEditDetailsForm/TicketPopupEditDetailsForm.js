@@ -31,9 +31,10 @@ const getInitialValues = (ticket) => {
         extra_questions
     } = ticket.owner || {};
 
-    const formattedExtraQuestions = extra_questions.map(({ question_id, value }) => (
-        { question_id: question_id, value }
-    ));
+    const formattedExtraQuestions = extra_questions ?
+        extra_questions.map(({ question_id, value }) => (
+            { question_id: question_id, value }
+        )) : [];
 
     return {
         attendee_email: email,
@@ -54,7 +55,12 @@ export const TicketPopupEditDetailsForm = ({ ticket, summit, order, allowExtraQu
     const isLoading = useSelector(state => state.orderState.loading || state.summitState.loading);
     const [inputEmail, setInputEmail] = useState(false);
     const [showSaveMessage, setShowSaveMessage] = useState(false);
-    const { isUnassigned, isReassignable } = useTicketDetails({ ticket, summit });
+    const {
+        isUnassigned,
+        isReassignable,
+        formattedReassignDate,
+        daysUntilReassignDeadline
+    } = useTicketDetails({ ticket, summit });
 
     const readOnly = !isReassignable;
     const hasExtraQuestions = extraQuestions.length > 0;
@@ -189,9 +195,9 @@ export const TicketPopupEditDetailsForm = ({ ticket, summit, order, allowExtraQu
 
                                             <p>
                                                 {t("ticket_popup.assign_expire")}{` `}
-                                                {this.handleFormatReassignDate(true)}{` `}
+                                                {daysUntilReassignDeadline}{` `}
                                                 {t("ticket_popup.assign_days")}{` `}
-                                                ({this.handleFormatReassignDate(false)})
+                                                ({formattedReassignDate})
                                             </p>
                                         </>
                                     )}
@@ -260,9 +266,9 @@ export const TicketPopupEditDetailsForm = ({ ticket, summit, order, allowExtraQu
 
                                             <p>
                                                 {t("ticket_popup.assign_expire")}{` `}
-                                                {this.handleFormatReassignDate(true)}{` `}
+                                                {daysUntilReassignDeadline}{` `}
                                                 {t("ticket_popup.assign_days")}{` `}
-                                                ({this.handleFormatReassignDate(false)})
+                                                ({formattedReassignDate})
                                             </p>
                                         </>
                                     )}

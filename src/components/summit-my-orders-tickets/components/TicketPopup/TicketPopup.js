@@ -31,7 +31,7 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
 
     const ticketName = ticketType.name;
     const isUserOrderOwner = order.owner_id === userProfile.id;
-    const isUserTicketOwner = ticket.owner.email === userProfile.email;
+    const isUserTicketOwner = ticket.owner?.email === userProfile.email;
 
     // If the user is purchasing a ticket, allow to edit the extra questions (fromTicketList === undefined && fromOrderList === undefined)
     const allowExtraQuestionsEdit = (fromTicketList === undefined && fromOrderList === undefined) || isUserOrderOwner && summit.allow_update_attendee_extra_questions;

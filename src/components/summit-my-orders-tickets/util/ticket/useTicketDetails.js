@@ -5,7 +5,14 @@ import { getTicketRole } from "./getTicketRole";
 import { getTicketStatusData } from "./getTicketStatusData";
 
 export const useTicketDetails = ({ ticket, summit }) => {
-    const { isPast, isStarted, isReassignable, formattedDate } = useSummitDetails({ summit });
+    const {
+        isPast,
+        isStarted,
+        isReassignable,
+        formattedDate,
+        formattedReassignDate,
+        daysUntilReassignDeadline
+    } = useSummitDetails({ summit });
     const [showPopup, setShowPopup] = useState(false);
 
     if (!summit || !ticket) return null;
@@ -40,6 +47,8 @@ export const useTicketDetails = ({ ticket, summit }) => {
         isReassignable,
         isRefundable,
         formattedDate,
+        formattedReassignDate,
+        daysUntilReassignDeadline,
         showPopup,
         setShowPopup,
         togglePopup,
