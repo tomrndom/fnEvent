@@ -109,6 +109,7 @@
     color: $color-danger;
   }
 
+  &--disabled &__icon,
   &--disabled &__status {
     color: $color-black;
   }
