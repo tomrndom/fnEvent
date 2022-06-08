@@ -52,15 +52,9 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
         if (onClose) onClose();
     };
 
-    const handleDownloadClick = () => {
-        dispatch(getTicketPDF({ ticket }));
-    };
+    const handleDownloadClick = () => dispatch(getTicketPDF({ ticket }));
 
-    const handleCloseClick = () => {
-        closePopup();
-    };
-
-    console.log('isUserOrderOwner  ', isUserOrderOwner);
+    const handleCloseClick = () => closePopup();
 
     return (
         <div className={classNames('ticket-popup', className)}>

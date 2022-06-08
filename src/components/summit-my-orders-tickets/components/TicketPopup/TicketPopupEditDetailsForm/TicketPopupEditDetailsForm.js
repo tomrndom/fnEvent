@@ -9,10 +9,10 @@ import { Input, RawHTML } from 'openstack-uicore-foundation/lib/components';
 import ExtraQuestionsForm from 'openstack-uicore-foundation/lib/components/extra-questions';
 import QuestionsSet from 'openstack-uicore-foundation/lib/utils/questions-set';
 import { getMainOrderExtraQuestions } from '../../../store/actions/summit-actions';
+import { editOwnedTicket, removeAttendee } from '../../../store/actions/ticket-actions';
 import { useTicketDetails } from '../../../util';
 
 import './ticket-popup-edit-details-form.scss';
-import { editOwnedTicket, removeAttendee } from '../../../store/actions/ticket-actions';
 
 const validationSchema = Yup.object().shape({
     attendee_email: Yup.string().email('Please enter a valid email.').required('Email is required.'),
@@ -82,24 +82,14 @@ export const TicketPopupEditDetailsForm = ({ ticket, summit, order, allowExtraQu
 
         if (ticket.owner?.email !== values.attendee_email)
             return dispatch(removeAttendee(params))
-                .then(() => {
-                    toggleSaveMessage();
-                })
-                .catch((error) => {
-                    console.log(error);
-                }).then(() => {
-                    formikHelpers.setSubmitting(false);
-                });
+                .then(() => toggleSaveMessage())
+                .catch((error) => console.log(error))
+                .then(() => formikHelpers.setSubmitting(false));
 
         dispatch(editOwnedTicket(params))
-            .then(() => {
-                toggleSaveMessage();
-            })
-            .catch((error) => {
-                console.log(error)
-            }).then(() => {
-                formikHelpers.setSubmitting(false);
-            });
+            .then(() => toggleSaveMessage())
+            .catch((error) => console.log(error))
+            .then(() => formikHelpers.setSubmitting(false));
     };
 
     const handleSubmit = (values, formikHelpers) => updateTicket(values, formikHelpers);
@@ -112,8 +102,8 @@ export const TicketPopupEditDetailsForm = ({ ticket, summit, order, allowExtraQu
 
     // This simply triggers the submit for the `ExtraQuestionsForm`.
     const triggerSubmit = () => {
-        // TODO: We should have to do this to get the changes from the `ExtraQuestionsForm`.
-        // We should be able to pass an `onChange` event handler to the `ExtraQuestionsForm`.
+        // TODO: We shouldn't have to do this to get the changes from the `ExtraQuestionsForm`.
+        // We should just be able to pass an `onChange` event handler to the `ExtraQuestionsForm`.
         formRef.current.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
     };
 

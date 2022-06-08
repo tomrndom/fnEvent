@@ -15,9 +15,7 @@ export const OrderSummary = ({ type = 'desktop', order, summit, className }) => 
     const isMobile = type === 'mobile';
 
     // TODO: Determine if we need to finish implementing a separate a `mobile` version of this component.
-    const toggleTable = () => {
-        setShowTable(!showTable);
-    };
+    const toggleTable = () => setShowTable(!showTable);
 
     const handleToggleClick = () => {
         if (!isMobile) return;

@@ -42,7 +42,7 @@ export const OrderDetails = ({ order, summit, className }) => {
         }, 50);
     };
 
-    // Clear active order on unmount.
+    // Clear active order on unmount (i.e., when page pagination changes)
     useEffect(() => () => actions.setActiveOrderId(null), []);
 
     return (
@@ -51,7 +51,8 @@ export const OrderDetails = ({ order, summit, className }) => {
             className={classNames(
                 'order-details',
                 `order-details--${statusData.className}`,
-                { 'order-details--active': isActive }
+                { 'order-details--active': isActive },
+                className
             )}
             onClick={handleClick}
         >
@@ -92,6 +93,13 @@ export const OrderDetails = ({ order, summit, className }) => {
 
             <div className="order-details__footer">
                 <h4 className="order-details__amount">${order.amount}</h4>
+                <i className={classNames(
+                    'order-details__arrow fa',
+                    {
+                        'fa-angle-down': !isActive,
+                        'fa-angle-up': isActive
+                    }
+                )} />
             </div>
         </div>
     );

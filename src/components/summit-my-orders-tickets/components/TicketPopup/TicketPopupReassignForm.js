@@ -58,9 +58,7 @@ export const TicketPopupReassignForm = ({ ticket, order }) => {
             ticket,
             order,
             data: { attendee_email: newAttendeeEmail }
-        })).then(() => {
-            toggleSaveMessage();
-        });
+        })).then(() => toggleSaveMessage());
     };
 
     const handleConfirmReject = () => {

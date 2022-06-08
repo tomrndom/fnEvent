@@ -18,9 +18,7 @@ export const useTicketDetails = ({ ticket, summit }) => {
     const isUnassigned = status.type === STATUS_UNASSIGNED;
     const isRefundable = ticket.final_amount > 0 && ticket.final_amount > ticket.refunded_amount;
 
-    const togglePopup = () => {
-        setShowPopup(!showPopup);
-    };
+    const togglePopup = () => setShowPopup(!showPopup);
 
     const handleClick = () => {
         if (!isActive) return;
@@ -29,9 +27,7 @@ export const useTicketDetails = ({ ticket, summit }) => {
         togglePopup();
     };
 
-    const handlePopupClose = () => {
-        togglePopup();
-    };
+    const handlePopupClose = () => togglePopup();
 
     return {
         status,

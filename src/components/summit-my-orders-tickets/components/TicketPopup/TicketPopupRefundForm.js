@@ -12,9 +12,7 @@ export const TicketPopupRefundForm = ({ ticket, order }) => {
     const [showConfirm, setShowConfirm] = useState(false);
     const [showRefundSuccess, setShowRefundSuccess] = useState(false);
 
-    const handleCancelClick = () => {
-        setShowConfirm(true);
-    };
+    const handleCancelClick = () => setShowConfirm(true);
 
     const handleConfirmAccept = () => {
         dispatch(refundTicket({ ticket, order })).then(() => {
@@ -26,9 +24,7 @@ export const TicketPopupRefundForm = ({ ticket, order }) => {
 
     };
 
-    const handleConfirmReject = () => {
-        setShowConfirm(false);
-    };
+    const handleConfirmReject = () => setShowConfirm(false);
 
     return (
         <>

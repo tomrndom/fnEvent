@@ -43,9 +43,7 @@ export const TicketPopupAssignForm = ({ ticket, summit, order }) => {
                 ...emptyAttendee,
                 attendee_email: values.reassign_email
             }
-        })).then(() => {
-            toggleSaveMessage();
-        });
+        })).then(() => toggleSaveMessage());
     };
 
     const formik = useFormik({
@@ -63,9 +61,7 @@ export const TicketPopupAssignForm = ({ ticket, summit, order }) => {
                 attendee_first_name: userProfile.first_name,
                 attendee_last_name: userProfile.last_name
             }
-        })).then(() => {
-            toggleSaveMessage();
-        });
+        })).then(() => toggleSaveMessage());
     };
 
     return (
