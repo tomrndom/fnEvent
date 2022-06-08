@@ -56,7 +56,6 @@ export const getConfirmPopupContent = ({ popupCase, cleanFields }) => {
     return popupCaseContentMap[popupCase];
 };
 
-// TODO: Use a React portal to render the popup in the correct place.
 export const ConfirmPopup = ({ isOpen, popupCase, onAccept, onReject, cleanFields }) => {
     var { Portal } = usePortal();
     const { t } = useTranslation();
