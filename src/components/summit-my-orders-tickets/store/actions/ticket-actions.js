@@ -1,5 +1,5 @@
 /**
- * Copyright 2019
+ * Copyright 2022
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -86,7 +86,9 @@ export const getUserTickets = (ticketRefresh, page = 1, per_page = 5) => async (
         createAction(GET_TICKETS),
         `${apiBaseUrl}/api/v1/summits/${summit.id}/orders/all/tickets/me`,
         authErrorHandler
-    )(params)(dispatch).catch(e => {
+    )(params)(dispatch).then(() => {
+        dispatch(stopLoading());
+    }).catch(e => {
         dispatch(stopLoading());
         return (e);
     });

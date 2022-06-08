@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
@@ -25,10 +25,6 @@ export const OrderList = ({ className }) => {
         loading: summitLoading
     } = useSelector(state => state.summitState || {});
 
-    useEffect(() => {
-        dispatch(getUserOrders(null, currentPage, perPage));
-    }, [dispatch]);
-
     const handlePageChange = (page) => dispatch(getUserOrders(null, page, perPage));
 
     const isLoading = orderLoading || summitLoading;
@@ -37,16 +33,22 @@ export const OrderList = ({ className }) => {
 
     return (
         <>
-            <h2 className="order-list-title">My Purchase Orders</h2>
+            <h2 className="order-list-title">
+                {t("orders.title")}
+            </h2>
 
             {/* TODO: Replace with inline `Loading` component. */}
             {(isLoading) && (
-                <div className="order-list-loading">{t("orders.loading")}</div>
+                <div className="order-list-loading">
+                    {t("orders.loading")}
+                </div>
             )}
 
             {/* TODO: Replace with `Empty` component. */}
             {(!isLoading && !hasOrders) && (
-                <div className="order-list-empty">{t("orders.empty")}</div>
+                <div className="order-list-empty">
+                    {t("orders.empty")}
+                </div>
             )}
 
             {hasOrders && (

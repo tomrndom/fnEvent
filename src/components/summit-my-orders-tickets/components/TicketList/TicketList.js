@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
@@ -25,10 +25,6 @@ export const TicketList = ({ className }) => {
         loading: summitLoading
     } = useSelector(state => state.summitState || {});
 
-    useEffect(() => {
-        dispatch(getUserTickets(null, currentPage, perPage));
-    }, [dispatch]);
-
     const handlePageChange = (page) => dispatch(getUserTickets(null, page, perPage));
 
     const isLoading = ticketLoading || summitLoading;
@@ -37,7 +33,9 @@ export const TicketList = ({ className }) => {
 
     return (
         <>
-            <h2 className="ticket-list-title">Other Tickets Assigned to Me</h2>
+            <h2 className="ticket-list-title">
+                {t("tickets.title")}
+            </h2>
 
             {/* TODO: Replace with inline `Loading` component. */}
             {(isLoading) && (
@@ -48,7 +46,9 @@ export const TicketList = ({ className }) => {
 
             {/* TODO: Replace with `Empty` component. */}
             {(!isLoading && !hasTickets) && (
-                <div className="ticket-list-empty">{t('tickets.empty')}</div>
+                <div className="ticket-list-empty">
+                    {t('tickets.empty')}
+                </div>
             )}
 
             {hasTickets && (

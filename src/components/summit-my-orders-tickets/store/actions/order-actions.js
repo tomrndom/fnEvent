@@ -1,5 +1,5 @@
 /**
- * Copyright 2019
+ * Copyright 2022
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,6 @@ import {
     startLoading
 } from 'openstack-uicore-foundation/lib/utils/actions';
 import history from '../history';
-import { getUserSummits } from './summit-actions';
 
 export const RESET_ORDER = 'RESET_ORDER';
 export const RECEIVE_ORDER = 'RECEIVE_ORDER';
@@ -47,7 +46,6 @@ export const getUserOrders = (updateId, page = 1, per_page = 5) => async (dispat
 
     dispatch(startLoading());
 
-
     const params = {
         access_token: accessToken,
         expand: 'extra_questions, tickets, tickets.refund_requests, tickets.owner, tickets.owner.extra_questions, tickets.badge, tickets.badge.features',
@@ -63,32 +61,12 @@ export const getUserOrders = (updateId, page = 1, per_page = 5) => async (dispat
         `${apiBaseUrl}/api/v1/summits/${summit.id}/orders/me`,
         authErrorHandler
     )(params)(dispatch).then(() => {
-        if (updateId) {
-            dispatch(selectOrder({}, updateId))
-        } else {
-            dispatch(getUserSummits('orders'));
-        }
+        dispatch(stopLoading());
     }
     ).catch(e => {
         dispatch(stopLoading());
         return (e);
     });
-}
-
-export const selectOrder = (order, updateId = null) => (dispatch, getState) => {
-    dispatch(startLoading());
-
-    if (updateId) {
-        let { orderState: { memberOrders } } = getState();
-        let updatedOrder = memberOrders.find(o => o.id === updateId);
-        dispatch(createAction(SELECT_ORDER)(updatedOrder));
-        dispatch(stopLoading());
-    } else {
-        dispatch(createAction(SELECT_ORDER)(order));
-        dispatch(stopLoading());
-    }
-
-    return Promise.resolve();
 }
 
 export const cancelOrder = ({ order }) => async (dispatch, getState, { getAccessToken, apiBaseUrl, loginUrl }) => {
