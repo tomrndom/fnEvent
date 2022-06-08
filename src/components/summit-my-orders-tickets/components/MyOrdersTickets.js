@@ -9,7 +9,6 @@ import { OrderList } from './OrderList/OrderList';
 import { OrderListContextProvider } from './OrderList/OrderList.helpers';
 import { TicketList } from './TicketList/TicketList';
 
-
 export const MyOrdersTickets = ({ className }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
