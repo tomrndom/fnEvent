@@ -586,9 +586,16 @@ h2 {
 .extra-question-error {
   display: block;
   color: red;
+  font-size: 12px;
   font-weight: bold;
   padding: 0;
   margin: auto 0;
+}
+
+.extra-question-error:before{
+  font-family: FontAwesome;
+  content: "\f071";
+  padding-right: 5px;
 }
 
 .questions-form {
@@ -602,3 +609,9 @@ h2 {
     font-weight: normal !important;
   }
 }
+
+input:invalid {
+  border-color: red !important;
+}
+
+
