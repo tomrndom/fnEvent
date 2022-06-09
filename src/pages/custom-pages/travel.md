@@ -12,7 +12,7 @@ Looking for things to do in San Jose? Visit their <a href="https://www.sanjose.
 
 - - -
 
-***Hotels***
+**Hotels**
 
 Room blocks will be available soon! 
 
