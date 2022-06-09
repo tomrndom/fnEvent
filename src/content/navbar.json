@@ -28,6 +28,15 @@
       ]
     },
     {
+      "title": "MY SCHEDULE",
+      "link": "/a/my-schedule",
+      "display": false,
+      "requiresAuth": true,
+      "pageRestriction": [
+        "ANY"
+      ]
+    },
+    {
       "requiresAuth": false,
       "showOnlyAtShowTime": false,
       "pageRestriction": [
@@ -36,15 +45,6 @@
       "title": "TRAVEL",
       "link": "/travel",
       "display": true
-    },
-    {
-      "title": "MY SCHEDULE",
-      "link": "/a/my-schedule",
-      "display": true,
-      "requiresAuth": true,
-      "pageRestriction": [
-        "ANY"
-      ]
     },
     {
       "title": "CONTACT",
