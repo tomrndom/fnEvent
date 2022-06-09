@@ -583,22 +583,4 @@ h2 {
   top: 70% !important;
 }
 
-.extra-question-error {
-  display: block;
-  color: red;
-  font-weight: bold;
-  padding: 0;
-  margin: auto 0;
-}
-
-.questions-form {
-  h4{
-    font-size: 12pt;
-  }
-  .abc-checkbox{
-    padding: 0 !important;
-  }
-  .form-check-label{
-    font-weight: normal !important;
-  }
-}
+@import "~openstack-uicore-foundation/lib/css/components/extra-questions.css";
