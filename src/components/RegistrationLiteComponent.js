@@ -38,9 +38,11 @@ const RegistrationLiteComponent = ({
     useEffect(() => {
         const fragmentParser = new FragmentParser();
         setIsActive(fragmentParser.getParam('registration'));
-        getThirdPartyProviders();
     }, []);
 
+    useEffect(() => {
+        if (!thirdPartyProviders.length) getThirdPartyProviders();
+    }, [thirdPartyProviders]);
 
     const getBackURL = () => {
         let backUrl = '/#registration=1';
@@ -60,7 +62,7 @@ const RegistrationLiteComponent = ({
         });
     }
 
-    const formatThirdPartyProviders = (providers_array) => {
+    const formatThirdPartyProviders = (providersArray) => {
         const providers = [
             { button_color: '#082238', provider_label: 'Continue with FNid', provider_param: '', provider_logo: '../img/logo_fn.svg', provider_logo_size: 35 },
         ];
@@ -71,7 +73,7 @@ const RegistrationLiteComponent = ({
             { button_color: '#000000', provider_label: 'Continue with Apple', provider_param: 'apple', provider_logo: '../img/third-party-idp/logo_apple.svg', provider_logo_size: 19 }
         ];
 
-        return [...providers, ...thirdPartyProviders.filter(p => providers_array?.includes(p.provider_param))];
+        return [...providers, ...thirdPartyProviders.filter(p => providersArray.includes(p.provider_param))];
     };
 
     const getPasswordlessCode = (email) => {

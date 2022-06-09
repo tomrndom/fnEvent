@@ -6,7 +6,7 @@ import { GET_EXTRA_QUESTIONS } from '../actions/user-actions';
 
 const DEFAULT_STATE = {
   loading: false,
-  third_party_providers: null,
+  third_party_providers: [],
   summit: summit.summit,
   allows_native_auth: true,
   allows_otp_auth: true,
