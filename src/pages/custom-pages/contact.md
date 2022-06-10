@@ -27,14 +27,12 @@ OCP Brand Site: [OCPgear@opencompute.org](mailto:OCPgear@opencompute.org)
 
 Austin, TX 78750
 
-
-
 ###### Call OCP
 
 (281) 667-4644
 
 <br><br>
 
-**Event Tech Support:** [support@fntech.com ](Mailto:support@fntech.com)
+**Event Tech Support:**  [support@fntech.com](Mailto:support@fntech.com)
 
-**Event Registration Issues:** [registration@opencompute.org](<>)
+**Event Registration Issues:**  [registration@opencompute.org](<>)
