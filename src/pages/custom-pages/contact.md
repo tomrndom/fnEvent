@@ -31,8 +31,8 @@ Austin, TX 78750
 
 (281) 667-4644
 
-<br><br>
 
-**Event Tech Support:**  [support@fntech.com](Mailto:support@fntech.com)
+
+<br><br>**Event Tech Support:**  [support@fntech.com](Mailto:support@fntech.com)
 
 **Event Registration Issues:**  [registration@opencompute.org](<>)
