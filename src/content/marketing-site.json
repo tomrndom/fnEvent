@@ -40,12 +40,12 @@
   },
   "sponsors": [
     {
-      "title": "Top Left",
+      "title": "Mid Left",
       "images": [
         {
-          "image": "/img/tier1-default-space3.png",
-          "link": "",
-          "alt": ""
+          "image": "/img/ocpglo22-fnv-marketing-space3.png",
+          "alt": "",
+          "link": "https://www.opencompute.org/membership/how-to-join"
         }
       ],
       "size": 1
@@ -54,18 +54,19 @@
       "title": "Top Right",
       "images": [
         {
-          "image": "/img/tier1-default-space1.png",
-          "link": "",
+          "image": "/img/ocpglo22-fnv-marketing-space2.png",
+          "link": "/travel/",
           "alt": ""
         }
       ],
       "size": 1
     },
     {
-      "title": "Mid Left",
+      "title": "Top Left",
       "images": [
         {
-          "image": "/img/tier1-default-space2.png",
+          "image": "/img/ocpglo22-fnv-marketing-space1.png",
+          "link": "https://www.opencompute.org/summit/regional-summit",
           "alt": ""
         }
       ],
@@ -74,8 +75,9 @@
     {
       "images": [
         {
-          "image": "/img/tier1-default-space4.png",
-          "alt": ""
+          "image": "/img/ocpglo22-fnv-marketing-space4.png",
+          "alt": "",
+          "link": "https://vimeo.com/645393483"
         }
       ],
       "size": 1
