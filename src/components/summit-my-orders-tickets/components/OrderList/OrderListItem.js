@@ -14,8 +14,8 @@ export const OrderListItem = ({ order, className }) => {
     const isActive = state.activeOrderId === order.id;
 
     return (
-        <li className={classNames('order-list-item', { active: isActive }, className)}>
-            <div className="order-list-item-content row">
+        <li className={classNames('order-list__item', { 'order-list__item--active': isActive }, className)}>
+            <div className="order-list__item__content row">
                 <div className="col-md-8">
                     <OrderDetails order={order} summit={summit} />
 
@@ -44,7 +44,7 @@ export const OrderListItem = ({ order, className }) => {
 
                 <div className="col-md-4">
                     {isActive && (
-                        <div className="order-list-item-sidebar">
+                        <div className="order-list__item__sidebar">
                             <OrderSummary order={order} summit={summit} />
                             <OrderOptions order={order} summit={summit} />
                         </div>

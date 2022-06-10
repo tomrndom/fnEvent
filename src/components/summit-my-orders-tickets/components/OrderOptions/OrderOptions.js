@@ -18,9 +18,7 @@ export const OrderOptions = ({ order, summit, ticket, guest, className }) => {
     const [showRefundSuccess, setShowRefundSuccess] = useState(false);
     const now = dispatch(getNow());
 
-    const handleCancelClick = () => {
-        setShowConfirm(true);
-    };
+    const handleCancelClick = () => setShowConfirm(true);
 
     const handleConfirmAccept = () => {
         dispatch(cancelOrder({ order })).then(() => {
@@ -31,9 +29,7 @@ export const OrderOptions = ({ order, summit, ticket, guest, className }) => {
         setShowConfirm(false);
     };
 
-    const handleConfirmReject = () => {
-        setShowConfirm(false);
-    };
+    const handleConfirmReject = () => setShowConfirm(false);
 
     if (!summit) return null;
 

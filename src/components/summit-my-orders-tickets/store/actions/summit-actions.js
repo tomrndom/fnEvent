@@ -1,5 +1,5 @@
 /**
- * Copyright 2019
+ * Copyright 2022
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,10 @@ import {
     authErrorHandler,
 } from 'openstack-uicore-foundation/lib/utils/actions';
 
+export const SET_SUMMIT = 'SET_SUMMIT';
 export const GET_MAIN_EXTRA_QUESTIONS = 'GET_MAIN_EXTRA_QUESTIONS';
+
+export const setSummit = (summit) => async (dispatch) => dispatch(createAction(SET_SUMMIT)(summit))
 
 export const getMainOrderExtraQuestions = ({ summit }) => async (dispatch, getState, { apiBaseUrl }) => {
     dispatch(startLoading());
