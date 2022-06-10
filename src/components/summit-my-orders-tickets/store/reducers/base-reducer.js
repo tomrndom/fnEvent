@@ -12,6 +12,7 @@
  **/
 
 import { START_LOADING, STOP_LOADING, LOGOUT_USER, RECEIVE_COUNTRIES } from "openstack-uicore-foundation/lib/utils/actions";
+import { RESET_STATE } from "../actions/base-actions";
 import { RECEIVE_MARKETING_SETTINGS, CLEAR_MARKETING_SETTINGS } from '../actions/summit-actions';
 
 const DEFAULT_STATE = {
@@ -24,6 +25,9 @@ const baseReducer = (state = DEFAULT_STATE, action) => {
     const { type, payload } = action
 
     switch (type) {
+        case RESET_STATE:
+            return DEFAULT_STATE;
+            break;
         case LOGOUT_USER:
             return DEFAULT_STATE;
         case START_LOADING:

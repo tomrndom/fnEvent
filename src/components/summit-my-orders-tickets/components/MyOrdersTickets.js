@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from "react-i18next";
 import classNames from 'classnames';
@@ -13,16 +13,27 @@ export const MyOrdersTickets = ({ className }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const {
+        userState,
         orderState,
-        ticketState
+        ticketState,
+        summitState,
     } = useSelector(state => state || {});
+    const [isInitializing, setIsInitializing] = useState(true);
+
+    const fetchData = async () => {
+        setIsInitializing(true);
+
+        await dispatch(getUserOrders({ page: orderState.current_page, perPage: orderState.per_page }));
+        await dispatch(getUserTickets({ page: ticketState.current_page, perPage: ticketState.per_page }));
+
+        setIsInitializing(false);
+    };
 
     useEffect(() => {
-        dispatch(getUserOrders(null, orderState.current_page, orderState.per_page));
-        dispatch(getUserTickets(null, ticketState.current_page, ticketState.per_page));
+        fetchData();
     }, []);
 
-    const isLoading = orderState.loading || ticketState.loading;
+    const isLoading = isInitializing || userState.loading || orderState.loading || ticketState.loading || summitState.loading;
     const hasOrders = orderState.memberOrders?.length > 0;
     const hasTickets = ticketState.memberTickets?.length > 0;
 
@@ -30,9 +41,16 @@ export const MyOrdersTickets = ({ className }) => {
         <>
             <AjaxLoader show={isLoading} size={120} />
 
+            {isLoading && (!hasOrders && !hasTickets) && (
+                <div className="orders-tickets-loading">
+                    <p>{t('orders-tickets.loading')}</p>
+                </div>
+            )}
+
             {!isLoading && (!hasOrders && !hasTickets) && (
                 <div className="orders-tickets-empty">
-                    {t('orders-tickets.empty')}
+                    <h2>{t('orders-tickets.empty-title')}</h2>
+                    {t('orders-tickets.empty-text')}
                 </div>
             )}
 

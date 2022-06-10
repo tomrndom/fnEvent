@@ -138,7 +138,9 @@
         "save": "Save"
     },
     "orders-tickets": {
-        "empty": "You do not have placed any orders, and no tickets have been assigned to you yet."
+        "loading": "Loading your orders and tickets...",
+        "empty-title": "You don't have any orders or tickets.",
+        "empty-text": "You do not have placed any orders, and no tickets have been assigned to you yet."
     },
     "orders": {
         "title": "My Orders with Tickets",

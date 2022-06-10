@@ -125,7 +125,9 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
                                     ticket={ticket}
                                     summit={summit}
                                     order={order}
-                                    allowExtraQuestionsEdit={allowExtraQuestionsEdit} />
+                                    allowExtraQuestionsEdit={allowExtraQuestionsEdit}
+                                    context={fromTicketList ? 'ticket-list' : 'order-list'}
+                                />
                             </div>
                         </TabPanel>
 

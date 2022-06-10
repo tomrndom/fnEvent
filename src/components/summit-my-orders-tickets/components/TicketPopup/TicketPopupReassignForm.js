@@ -70,60 +70,62 @@ export const TicketPopupReassignForm = ({ ticket, order }) => {
     return (
         <>
             <form className="ticket-reassign-form" onSubmit={formik.handleSubmit}>
-                {showSaveMessage && (
-                    <CSSTransition
-                        unmountOnExit
-                        in={showSaveMessage}
-                        timeout={2000}
-                        classNames="fade-in-out"
+                <div className="ticket-popup-form-body">
+                    {showSaveMessage && (
+                        <CSSTransition
+                            unmountOnExit
+                            in={showSaveMessage}
+                            timeout={2000}
+                            classNames="fade-in-out"
+                        >
+                            <Alert bsStyle="success" className="ticket-popup-form-alert text-center">
+                                {t("tickets.reassign_success_message")}
+                            </Alert>
+                        </CSSTransition>
+                    )}
+
+                    {!isUserTicketOwner && (
+                        <>
+                            <p>
+                                {t("ticket_popup.reassign_text")}
+                                <br />
+                                <b>{ticket.owner.email}</b>
+                            </p>
+                            <button className="btn btn-primary" onClick={assignTicketToSelf} type="button">
+                                {t("ticket_popup.reassign_me")}
+                            </button>
+
+                            <div className="ticket-popup-separator">
+                                <div><hr /></div>
+                                <span>{t("ticket_popup.assign_or")}</span>
+                                <div><hr /></div>
+                            </div>
+                        </>
+                    )}
+
+                    <p>{t("ticket_popup.reassign_want_text")}</p>
+                    <span>{t("ticket_popup.reassign_enter_email")}</span>
+
+                    <Input
+                        id="attendee_email"
+                        name="attendee_email"
+                        className="form-control"
+                        placeholder="Email"
+                        error={formik.errors.attendee_email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.attendee_email}
+                    />
+
+
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}
                     >
-                        <Alert bsStyle="success" className="text-center">
-                            {t("tickets.reassign_success_message")}
-                        </Alert>
-                    </CSSTransition>
-                )}
-
-                {!isUserTicketOwner && (
-                    <>
-                        <p>
-                            {t("ticket_popup.reassign_text")}
-                            <br />
-                            <b>{ticket.owner.email}</b>
-                        </p>
-                        <button className="btn btn-primary" onClick={assignTicketToSelf} type="button">
-                            {t("ticket_popup.reassign_me")}
-                        </button>
-
-                        <div className="ticket-popup-separator">
-                            <div><hr /></div>
-                            <span>{t("ticket_popup.assign_or")}</span>
-                            <div><hr /></div>
-                        </div>
-                    </>
-                )}
-
-                <p>{t("ticket_popup.reassign_want_text")}</p>
-                <span>{t("ticket_popup.reassign_enter_email")}</span>
-
-                <Input
-                    id="attendee_email"
-                    name="attendee_email"
-                    className="form-control"
-                    placeholder="Email"
-                    error={formik.errors.attendee_email}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.attendee_email}
-                />
-
-
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}
-                >
-                    {t("ticket_popup.reassign_someone")}
-                </button>
+                        {t("ticket_popup.reassign_someone")}
+                    </button>
+                </div>
             </form>
 
             <ConfirmPopup

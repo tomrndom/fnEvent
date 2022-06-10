@@ -20,7 +20,7 @@ export const TicketList = ({ className }) => {
         total
     } = useSelector(state => state.ticketState || {});
 
-    const handlePageChange = (page) => dispatch(getUserTickets(null, page, perPage));
+    const handlePageChange = (page) => dispatch(getUserTickets({ page, perPage }));
 
     const hasTickets = tickets.length > 0;
     const hasMultiplePages = total > perPage;

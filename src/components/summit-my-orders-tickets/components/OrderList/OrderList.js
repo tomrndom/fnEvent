@@ -20,7 +20,7 @@ export const OrderList = ({ className }) => {
         total
     } = useSelector(state => state.orderState || {});
 
-    const handlePageChange = (page) => dispatch(getUserOrders(null, page, perPage));
+    const handlePageChange = (page) => dispatch(getUserOrders({ page, perPage }));
 
     const hasOrders = orders.length > 0;
     const hasMultiplePages = total > perPage;

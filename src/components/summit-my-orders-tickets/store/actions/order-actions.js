@@ -21,23 +21,10 @@ import {
 } from 'openstack-uicore-foundation/lib/utils/actions';
 import history from '../history';
 
-export const RESET_ORDER = 'RESET_ORDER';
-export const RECEIVE_ORDER = 'RECEIVE_ORDER';
-export const CHANGE_ORDER = 'CHANGE_ORDER';
-export const VALIDATE_STRIPE = 'VALIDATE_STRIPE';
-export const CREATE_RESERVATION = 'CREATE_RESERVATION';
-export const CREATE_RESERVATION_SUCCESS = 'CREATE_RESERVATION_SUCCESS';
-export const CREATE_RESERVATION_ERROR = 'CREATE_RESERVATION_ERROR';
-export const DELETE_RESERVATION = 'DELETE_RESERVATION';
-export const DELETE_RESERVATION_SUCCESS = 'DELETE_RESERVATION_SUCCESS';
-export const DELETE_RESERVATION_ERROR = 'DELETE_RESERVATION_ERROR';
-export const PAY_RESERVATION = 'PAY_RESERVATION';
 export const GET_USER_ORDERS = 'GET_ORDERS';
-export const SELECT_ORDER = 'SELECT_ORDER';
 export const REFUND_ORDER = 'REFUND_ORDER';
-export const CLEAR_RESERVATION = 'CLEAR_RESERVATION';
 
-export const getUserOrders = (updateId, page = 1, per_page = 5) => async (dispatch, getState, { getAccessToken, apiBaseUrl, loginUrl }) => {
+export const getUserOrders = ({ page = 1, perPage = 5 }) => async (dispatch, getState, { getAccessToken, apiBaseUrl, loginUrl }) => {
     const { summitState: { summit } } = getState();
 
     const accessToken = await getAccessToken().catch(_ => history.replace(loginUrl));
@@ -52,7 +39,7 @@ export const getUserOrders = (updateId, page = 1, per_page = 5) => async (dispat
         order: '-id',
         filter: 'status==Confirmed,status==Paid,status==Error',
         page: page,
-        per_page: per_page
+        per_page: perPage
     };
 
     return getRequest(
@@ -62,8 +49,7 @@ export const getUserOrders = (updateId, page = 1, per_page = 5) => async (dispat
         authErrorHandler
     )(params)(dispatch).then(() => {
         dispatch(stopLoading());
-    }
-    ).catch(e => {
+    }).catch(e => {
         dispatch(stopLoading());
         return (e);
     });
@@ -89,7 +75,7 @@ export const cancelOrder = ({ order }) => async (dispatch, getState, { getAccess
         {},
         authErrorHandler
     )(params)(dispatch).then((payload) => {
-        dispatch(getUserOrders(order.id, current_page));
+        dispatch(getUserOrders({ page: current_page }));
         dispatch(stopLoading());
     }).catch(e => {
         dispatch(stopLoading());

@@ -13,6 +13,16 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.ticket-popup-form-body {
+  position: relative;
+}
+
+.ticket-popup-form-alert {
+  z-index: 20;
+  position: sticky;
+  top: 0;
+}
+
 .ticket-popup-scroll {
   padding: 20px 15px;
 }
@@ -247,7 +257,7 @@
       height: calc(100vh - 200px);
     }
 
-    .ticket-popup-footer-save {
+    .ticket-popup-footer {
       border-top: 1px solid $color-gray-lighter;
       left: 0;
       bottom: 0;

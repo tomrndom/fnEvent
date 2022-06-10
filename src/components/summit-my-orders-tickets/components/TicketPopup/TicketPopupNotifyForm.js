@@ -21,24 +21,27 @@ export const TicketPopupNotifyForm = ({ ticket, summit }) => {
 
     return (
         <div className="ticket-notify-form">
-            {showSaveMessage && (
-                <CSSTransition
-                    unmountOnExit
-                    in={showSaveMessage}
-                    timeout={2000}
-                    classNames="fade-in-out"
-                >
-                    <Alert bsStyle="success" className="text-center">
-                        {t("tickets.notify_success_message")}
-                    </Alert>
-                </CSSTransition>
-            )}
+            <div className="ticket-popup-form-body">
+                {showSaveMessage && (
+                    <CSSTransition
+                        unmountOnExit
+                        in={showSaveMessage}
+                        timeout={2000}
+                        classNames="fade-in-out"
+                    >
+                        <Alert bsStyle="success" className="ticket-popup-form-alert text-center">
+                            {t("tickets.notify_success_message")}
+                        </Alert>
+                    </CSSTransition>
+                )}
 
-            <p>{t("ticket_popup.notify_text_1")} {getSummitFormattedReassignDate(summit)}.</p>
-            <p>{t("ticket_popup.notify_text_2")} <b>{ticket.owner.email}</b></p>
-            <button className="btn btn-primary" onClick={handleNotifyButtonClick}>
-                {t("ticket_popup.notify_button")}
-            </button>
+                <p>{t("ticket_popup.notify_text_1")} {getSummitFormattedReassignDate(summit)}.</p>
+                <p>{t("ticket_popup.notify_text_2")} <b>{ticket.owner.email}</b></p>
+
+                <button className="btn btn-primary" onClick={handleNotifyButtonClick}>
+                    {t("ticket_popup.notify_button")}
+                </button>
+            </div>
         </div>
     );
 };
