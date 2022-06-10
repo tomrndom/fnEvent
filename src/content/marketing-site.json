@@ -33,9 +33,9 @@
       "title": "Join the conversation"
     },
     "image": {
-      "display": false,
-      "title": "Image",
-      "src": ""
+      "display": true,
+      "title": "",
+      "src": "/img/ocp22glo-fnv-highlevelschedule-060922.png"
     }
   },
   "sponsors": [
@@ -45,10 +45,6 @@
         {
           "image": "/img/tier1-default-space3.png",
           "link": "",
-          "alt": ""
-        },
-        {
-          "image": "/img/tier1-default-space4.png",
           "alt": ""
         }
       ],
