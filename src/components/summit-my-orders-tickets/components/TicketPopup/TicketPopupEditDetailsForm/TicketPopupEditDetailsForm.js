@@ -103,6 +103,7 @@ export const TicketPopupEditDetailsForm = ({
                 })
                 .catch((error) => console.error(error))
                 .then(() => {
+                    formikHelpers.resetForm({ values });
                     formikHelpers.setSubmitting(false);
                     setChangingAttendee(false);
                 });
@@ -118,6 +119,7 @@ export const TicketPopupEditDetailsForm = ({
                 })
                 .catch((error) => console.error(error))
                 .then(() => {
+                    formikHelpers.resetForm({ values });
                     formikHelpers.setSubmitting(false);
                     setChangingAttendee(false);
                 });
@@ -127,6 +129,8 @@ export const TicketPopupEditDetailsForm = ({
             .then(() => toggleSaveMessage())
             .catch((error) => console.error(error))
             .then(() => {
+                // Note: Need to do this to persist the extra question values
+                formikHelpers.resetForm({ values });
                 formikHelpers.setSubmitting(false);
             });
     };
