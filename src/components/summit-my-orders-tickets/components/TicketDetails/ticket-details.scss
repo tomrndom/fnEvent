@@ -89,6 +89,10 @@
     text-transform: uppercase;
   }
 
+  &--warning {
+    border-color: $color-warning;
+  }
+
   &--warning &__icon,
   &--warning &__status {
     color: $color-warning;
