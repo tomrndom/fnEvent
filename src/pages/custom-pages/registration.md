@@ -7,7 +7,7 @@ userRequirement: NONE
 
 **Registration Options**
 
-Early Bird: $700 (June 1 - July 31)\
+Early Bird: $700 (June 14 - July 31)\
 General: $900 ( August 1 - October 16)\
 On-site: $1,200 (October 17-20)
 
