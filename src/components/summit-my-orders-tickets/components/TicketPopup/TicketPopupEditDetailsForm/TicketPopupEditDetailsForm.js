@@ -14,13 +14,6 @@ import { useTicketDetails } from '../../../util';
 
 import './ticket-popup-edit-details-form.scss';
 
-const validationSchema = Yup.object().shape({
-    attendee_email: Yup.string().email('Please enter a valid email.').required('Email is required.'),
-    attendee_first_name: Yup.string().nullable(),
-    attendee_last_name: Yup.string().nullable(),
-    attendee_company: Yup.string().nullable(),
-});
-
 export const TicketPopupEditDetailsForm = ({
     ticket,
     summit,
@@ -70,6 +63,16 @@ export const TicketPopupEditDetailsForm = ({
         };
     }, [ticket]);
 
+    const validationSchema = useMemo(() => Yup.object().shape({
+        attendee_email: Yup.string().email('Please enter a valid email.').required('Email is required.'),
+
+        ...((!changeAttendee) && {
+            attendee_first_name: Yup.string().nullable().required('First name is required.'),
+            attendee_last_name: Yup.string().nullable().required('Last name is required.'),
+            attendee_company: Yup.string().nullable().required('Company is required.')
+        })
+    }), [changeAttendee]);
+
     const readOnly = !isReassignable;
     const hasExtraQuestions = extraQuestions.length > 0;
     const isUserTicketOwner = order.owner_id === userProfile.id;
@@ -85,6 +88,10 @@ export const TicketPopupEditDetailsForm = ({
 
     const updateTicket = (values, formikHelpers) => {
         formikHelpers.setSubmitting(true);
+
+        // Return early if the user changing the attendee but the value hasn't changed
+        if (changeAttendee && ticket.owner?.email && ticket.owner?.email === values.attendee_email)
+            return formikHelpers.setSubmitting(false);
 
         const params = {
             ticket,
@@ -145,7 +152,7 @@ export const TicketPopupEditDetailsForm = ({
 
     // This simply triggers the submit for the `ExtraQuestionsForm`.
     const triggerSubmit = () => {
-        if (formik.values.attendee_email !== initialValues.attendee_email)
+        if (changeAttendee)
             return formik.submitForm();
 
         // TODO: We shouldn't have to do this to get the changes from the `ExtraQuestionsForm`.
@@ -366,7 +373,7 @@ export const TicketPopupEditDetailsForm = ({
                             </div>
                         </div>
 
-                        {(!changeAttendee || isUnassigned) && (
+                        {(!changeAttendee) && (
                             <>
                                 <div className="row field-wrapper">
                                     <div className="col-sm-4">
