@@ -12,9 +12,7 @@ Looking for things to do in San Jose? Visit their <a href="https://www.sanjose.
 
 - - -
 
-**Hotels**
-
-***Hotels***\
+**Hotels**\
 Book your reservations in one of our OCP blocks below!
 
 **Marriott**\
