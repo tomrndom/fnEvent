@@ -51,22 +51,22 @@
       "size": 1
     },
     {
-      "title": "Top Right",
+      "title": "Top Left",
       "images": [
         {
-          "image": "/img/ocpglo22-fnv-marketing-space2.png",
-          "link": "/travel/",
+          "image": "/img/ocpglo22-fnv-marketing-space1.png",
+          "link": "https://www.opencompute.org/summit/regional-summit",
           "alt": ""
         }
       ],
       "size": 1
     },
     {
-      "title": "Top Left",
+      "title": "Top Right",
       "images": [
         {
-          "image": "/img/ocpglo22-fnv-marketing-space1.png",
-          "link": "https://www.opencompute.org/summit/regional-summit",
+          "image": "/img/ocpglo22-fnv-marketing-space2.png",
+          "link": "/travel/",
           "alt": ""
         }
       ],
