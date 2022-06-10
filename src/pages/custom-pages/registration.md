@@ -1,9 +1,9 @@
 ---
 templateKey: custom-page
-title: Registration
+title: REGISTRATION
 userRequirement: NONE
 ---
-The 2022 OCP Global Summit will be an in-person event. All sessions will be recorded and shared with the Community after the event. Now that we have expanded the Summit to 3 days, we have adjusted prices accordingly. Please find the registration dates and fees below. Please direct any questions to [registration@opencompute.org](mailto:registration@opencompute.org)
+<BR>The 2022 OCP Global Summit will be an in-person event. All sessions will be recorded and shared with the Community after the event. Now that we have expanded the Summit to 3 days, we have adjusted prices accordingly. Please find the registration dates and fees below. Please direct any questions to [registration@opencompute.org](mailto:registration@opencompute.org)
 
 **Registration Options**
 
