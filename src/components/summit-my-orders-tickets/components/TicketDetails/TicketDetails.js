@@ -27,7 +27,7 @@ export const TicketDetails = ({ ticket, className }) => {
                     'ticket-details',
                     `ticket-details--${status.className}`,
                     {
-                        'disabled': isUnassigned && !isReassignable,
+                        'ticket-details--disabled': isUnassigned && !isReassignable,
                         [status.className]: isReassignable,
                     },
                     className

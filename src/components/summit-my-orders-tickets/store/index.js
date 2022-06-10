@@ -1,5 +1,5 @@
 /**
- * Copyright 2019
+ * Copyright 2022
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,7 +25,16 @@ import userReducer from './reducers/user-reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const getStore = ({ clientId, apiBaseUrl, getAccessToken, summit, user, loginUrl }) => {
+export const getStore = ({
+    clientId,
+    apiBaseUrl,
+    idpBaseUrl,
+    loginUrl,
+    getAccessToken,
+    getUserProfile,
+    summit,
+    user
+}) => {
     const config = {
         key: `root_registration_${clientId}`,
         storage,
@@ -33,11 +42,12 @@ export const getStore = ({ clientId, apiBaseUrl, getAccessToken, summit, user, l
             // this will be not saved to persistent storage see
             // https://github.com/rt2zz/redux-persist#blacklist--whitelist
             'orderState',
-            'ticketState',
             'summitState',
+            'ticketState',
             'timerState',
+            'userState'
         ]
-    }
+    };
 
     const reducers = persistCombineReducers(config, {
         loggedUserState: loggedUserReducer,
@@ -57,8 +67,10 @@ export const getStore = ({ clientId, apiBaseUrl, getAccessToken, summit, user, l
             applyMiddleware(
                 thunk.withExtraArgument({
                     apiBaseUrl,
+                    idpBaseUrl,
+                    loginUrl,
                     getAccessToken,
-                    loginUrl
+                    getUserProfile
                 })
             )
         )
