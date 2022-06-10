@@ -2,8 +2,8 @@
   "heroBanner": {
     "title": "OCP Global Summit 2022",
     "subTitle": "Empowering Open. ",
-    "date": "",
-    "time": "October 18–20, 2022 ",
+    "date": "October 18–20, 2022 ",
+    "time": "",
     "dateLayout": false,
     "buttons": {
       "registerButton": {
