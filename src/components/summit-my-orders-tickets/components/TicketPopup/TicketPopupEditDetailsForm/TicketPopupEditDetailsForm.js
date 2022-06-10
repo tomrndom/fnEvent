@@ -103,7 +103,6 @@ export const TicketPopupEditDetailsForm = ({
                 })
                 .catch((error) => console.error(error))
                 .then(() => {
-                    formikHelpers.resetForm({ values });
                     formikHelpers.setSubmitting(false);
                     setChangingAttendee(false);
                 });
@@ -119,7 +118,6 @@ export const TicketPopupEditDetailsForm = ({
                 })
                 .catch((error) => console.error(error))
                 .then(() => {
-                    formikHelpers.resetForm({ values });
                     formikHelpers.setSubmitting(false);
                     setChangingAttendee(false);
                 });
