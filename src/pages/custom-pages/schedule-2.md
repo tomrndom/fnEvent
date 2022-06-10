@@ -5,4 +5,4 @@ userRequirement: NONE
 ---
 <BR>
 
-![](/img/ocp22glo-fnv-highlevelschedule-page-060922.png)
+![](../../img/ocp22glo-fnv-highlevelschedule-page-060922.png)
