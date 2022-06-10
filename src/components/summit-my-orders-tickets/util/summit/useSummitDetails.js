@@ -1,4 +1,4 @@
-import { getFormattedDate } from "../helpers";
+import { getDaysBetweenDates, getFormattedDate } from "../helpers";
 import { useNow } from "../timer";
 import { checkSummitPast } from "./checkSummitPast";
 import { checkSummitStarted } from "./checkSummitStarted";
@@ -14,7 +14,8 @@ export const useSummitDetails = ({ summit }) => {
     const location = getSummitLocation(summit);
     const formattedDate = getSummitFormattedDate(summit);
     const reassignDate = getSummitReassignDate(summit);
-    const formattedReassignDate = getFormattedDate(reassignDate);
+    const formattedReassignDate = getFormattedDate(reassignDate, summit.time_zone.name);
+    const daysUntilReassignDeadline = getDaysBetweenDates(now, reassignDate, summit.time_zone.name)?.length;
 
     const isPast = checkSummitPast(summit, now);
     const isStarted = checkSummitStarted(summit, now);
@@ -27,6 +28,7 @@ export const useSummitDetails = ({ summit }) => {
         formattedDate,
         reassignDate,
         formattedReassignDate,
+        daysUntilReassignDeadline,
         isPast,
         isStarted,
         isReassignable

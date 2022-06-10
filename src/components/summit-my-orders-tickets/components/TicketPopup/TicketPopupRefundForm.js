@@ -12,9 +12,7 @@ export const TicketPopupRefundForm = ({ ticket, order }) => {
     const [showConfirm, setShowConfirm] = useState(false);
     const [showRefundSuccess, setShowRefundSuccess] = useState(false);
 
-    const handleCancelClick = () => {
-        setShowConfirm(true);
-    };
+    const handleCancelClick = () => setShowConfirm(true);
 
     const handleConfirmAccept = () => {
         dispatch(refundTicket({ ticket, order })).then(() => {
@@ -26,30 +24,30 @@ export const TicketPopupRefundForm = ({ ticket, order }) => {
 
     };
 
-    const handleConfirmReject = () => {
-        setShowConfirm(false);
-    };
+    const handleConfirmReject = () => setShowConfirm(false);
 
     return (
         <>
             <div className="ticket-refund-form">
-                <CSSTransition
-                    unmountOnExit
-                    in={showRefundSuccess}
-                    timeout={2000}
-                    classNames="fade-in-out"
-                >
-                    <Alert bsStyle="success">
-                        {t("tickets.refund_request_success_message")}
-                    </Alert>
-                </CSSTransition>
+                <div className="ticket-popup-form-body">
+                    <CSSTransition
+                        unmountOnExit
+                        in={showRefundSuccess}
+                        timeout={2000}
+                        classNames="fade-in-out"
+                    >
+                        <Alert bsStyle="success" className="ticket-popup-form-alert text-center">
+                            {t("tickets.refund_request_success_message")}
+                        </Alert>
+                    </CSSTransition>
 
-                <div className="row">
-                    <div className="col-md-12 text-center">
-                        <div className="ticket-refund-button">
-                            <a onClick={handleCancelClick} className="cancel">
-                                {t("ticket_popup.cancel_ticket")}
-                            </a>
+                    <div className="row">
+                        <div className="col-md-12 text-center">
+                            <div className="ticket-refund-button">
+                                <a onClick={handleCancelClick} className="cancel">
+                                    {t("ticket_popup.cancel_ticket")}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 /**
- * Copyright 2019
+ * Copyright 2022
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -56,7 +56,6 @@ export const getConfirmPopupContent = ({ popupCase, cleanFields }) => {
     return popupCaseContentMap[popupCase];
 };
 
-// TODO: Use a React portal to render the popup in the correct place.
 export const ConfirmPopup = ({ isOpen, popupCase, onAccept, onReject, cleanFields }) => {
     var { Portal } = usePortal();
     const { t } = useTranslation();

@@ -1,4 +1,5 @@
 import { LOGOUT_USER } from "openstack-uicore-foundation/lib/utils/actions";
+import { RESET_STATE } from "../actions/base-actions";
 import { SET_USER } from "../actions/user-actions";
 /**
  * Copyright 2022
@@ -19,6 +20,9 @@ const userReducer = (state = DEFAULT_STATE, action) => {
     const { type, payload } = action;
 
     switch (type) {
+        case RESET_STATE:
+            return DEFAULT_STATE;
+            break;
         case LOGOUT_USER:
             return DEFAULT_STATE;
         case SET_USER:

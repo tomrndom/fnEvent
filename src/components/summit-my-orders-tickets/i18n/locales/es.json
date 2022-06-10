@@ -137,7 +137,13 @@
         "cancel": "Cancel",
         "save": "Save"
     },
+    "orders-tickets": {
+        "loading": "Loading your orders and tickets...",
+        "empty-title": "You don't have any orders or tickets.",
+        "empty-text": "You do not have placed any orders, and no tickets have been assigned to you yet."
+    },
     "orders": {
+        "title": "My Orders with Tickets",
         "purchased": "Purchased on",
         "empty": "There are no active orders so far",
         "loading": "Loading orders..."
@@ -157,6 +163,7 @@
         "calendar": "Add to Calendar"
     },
     "tickets": {
+        "title": "External Tickets Assigned to Me",
         "empty": "There are no tickets so far",
         "loading": "Loading tickets...",
         "save_message": "Thank you! Your information has been saved and ticket updated.",

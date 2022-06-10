@@ -1,5 +1,5 @@
 /**
- * Copyright 2019
+ * Copyright 2022
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,10 +27,9 @@ import {
 import { objectToQueryString } from 'openstack-uicore-foundation/lib/utils/methods';
 import { getIdToken } from 'openstack-uicore-foundation/lib/security/methods';
 import { getUserOrders } from "./order-actions";
-import { updateProfile } from "./user-actions";
+import { updateProfile } from './user-actions';
 
 export const GET_TICKETS = 'GET_TICKETS';
-export const SELECT_TICKET = 'SELECT_TICKET';
 export const ASSIGN_TICKET = 'ASSIGN_TICKET';
 export const REMOVE_TICKET_ATTENDEE = 'REMOVE_TICKET_ATTENDEE';
 export const REFUND_TICKET = 'REFUND_TICKET';
@@ -63,8 +62,10 @@ const customFetchErrorHandler = (response) => {
     }
 };
 
-export const getUserTickets = (ticketRefresh, page = 1, per_page = 5) => async (dispatch, getState, { getAccessToken, apiBaseUrl, loginUrl }) => {
+export const getUserTickets = ({ page = 1, perPage = 5 }) => async (dispatch, getState, { getAccessToken, apiBaseUrl, loginUrl }) => {
     const { userState: { userProfile }, summitState: { summit } } = getState();
+
+    if (!summit) return
 
     const accessToken = await getAccessToken().catch(_ => history.replace(loginUrl));
 
@@ -78,7 +79,7 @@ export const getUserTickets = (ticketRefresh, page = 1, per_page = 5) => async (
         order: '-id',
         'filter[]': [`status==Confirmed,status==Paid,status==Error`, `order_owner_id<>${userProfile.id}`],
         page: page,
-        per_page: per_page,
+        per_page: perPage,
     };
 
     return getRequest(
@@ -86,7 +87,9 @@ export const getUserTickets = (ticketRefresh, page = 1, per_page = 5) => async (
         createAction(GET_TICKETS),
         `${apiBaseUrl}/api/v1/summits/${summit.id}/orders/all/tickets/me`,
         authErrorHandler
-    )(params)(dispatch).catch(e => {
+    )(params)(dispatch).then(() => {
+        dispatch(stopLoading());
+    }).catch(e => {
         dispatch(stopLoading());
         return (e);
     });
@@ -95,6 +98,7 @@ export const getUserTickets = (ticketRefresh, page = 1, per_page = 5) => async (
 export const assignAttendee = ({
     ticket,
     order,
+    context,
     data: {
         attendee_email,
         attendee_first_name,
@@ -102,8 +106,7 @@ export const assignAttendee = ({
         attendee_company,
         disclaimer_accepted,
         extra_questions,
-        reassignOrderId = null,
-        refreshTickets = false
+        reassignOrderId = null
     }
 }) => async (dispatch, getState, { getAccessToken, apiBaseUrl, loginUrl }) => {
     const accessToken = await getAccessToken().catch(_ => history.replace(loginUrl));
@@ -143,23 +146,20 @@ export const assignAttendee = ({
         normalizedEntity,
         authErrorHandler
     )(params)(dispatch).then(() => {
-        if (reassignOrderId) {
-            refreshTickets ? dispatch(getUserTickets(ticket.id, ticketPage)) : dispatch(getUserOrders(order.id, orderPage));
-            dispatch(getUserTickets(ticket.id, ticketPage))
+        if (reassignOrderId && context === 'ticket-list') {
+            dispatch(getUserTickets({ page: ticketPage }));
         } else {
-            dispatch(getUserOrders(order.id, orderPage));
+            dispatch(getUserOrders({ page: orderPage }));
         }
-    }
-    ).catch(e => {
+    }).catch(e => {
         dispatch(stopLoading());
         return (e);
     });
 }
 
-
 export const editOwnedTicket = ({
     ticket,
-    order,
+    context,
     data: {
         attendee_email,
         attendee_first_name,
@@ -167,9 +167,8 @@ export const editOwnedTicket = ({
         attendee_company,
         disclaimer_accepted,
         extra_questions,
-        updateOrder = false
     }
-}) => async (dispatch, getState, { getAccessToken, apiBaseUrl, loginUrl }) => {
+}) => async (dispatch, getState, { getAccessToken, getUserProfile, apiBaseUrl, loginUrl }) => {
     const accessToken = await getAccessToken().catch(_ => history.replace(loginUrl));
 
     if (!accessToken) return;
@@ -215,7 +214,9 @@ export const editOwnedTicket = ({
         `${apiBaseUrl}/api/v1/summits/all/orders/all/tickets/${ticket.id}`,
         normalizedEntity,
         authErrorHandler
-    )(params)(dispatch).then(() => {
+    )(params)(dispatch).then(async () => {
+        dispatch(startLoading());
+
         // Check if there's changes in the ticket data to update the profile
         if (attendee_company !== company || attendee_first_name !== userProfile.first_name || attendee_last_name !== userProfile.last_name) {
             const newProfile = {
@@ -225,9 +226,19 @@ export const editOwnedTicket = ({
             };
             dispatch(updateProfile(newProfile));
         }
-        updateOrder ? dispatch(getUserOrders(order.id, orderPage)) : dispatch(getUserTickets(null, ticketPage));
-    }
-    ).catch(e => {
+
+        // Note: make sure we re-fetch the user profile for the parent app.
+        await getUserProfile();
+
+        // Note: refresh the list view after updating the ticket.
+        if (context === 'ticket-list') {
+            dispatch(getUserTickets({ page: ticketPage }));
+        } else {
+            dispatch(getUserOrders({ page: orderPage }))
+        }
+
+        dispatch(stopLoading());
+    }).catch(e => {
         dispatch(stopLoading());
         return (e);
     });
@@ -262,7 +273,8 @@ export const resendNotification = ({ ticket }) => async (dispatch, getState, { g
 export const removeAttendee = ({
     ticket,
     order,
-    data: { attendee_email, fromTicket = false }
+    context,
+    data: { attendee_email }
 }) => async (dispatch, getState, { getAccessToken, apiBaseUrl, loginUrl }) => {
     const accessToken = await getAccessToken().catch(_ => history.replace(loginUrl));
 
@@ -287,6 +299,7 @@ export const removeAttendee = ({
         dispatch(assignAttendee({
             ticket,
             order,
+            context,
             data: {
                 attendee_email,
                 attendee_first_name: '',
@@ -295,7 +308,6 @@ export const removeAttendee = ({
                 disclaimer_accepted: false,
                 extra_questions: [],
                 reassignOrderId: orderId,
-                refreshTickets: fromTicket
             }
         }));
     }).catch((e) => {
@@ -367,13 +379,13 @@ export const refundTicket = ({ ticket, order }) => async (dispatch, getState, { 
         authErrorHandler
     )(params)(dispatch).then((payload) => {
         dispatch(stopLoading());
+
         if (ticket.order_id) {
-            dispatch(getUserOrders(order.id, orderPage));
+            dispatch(getUserOrders({ page: orderPage }));
         } else {
-            dispatch(getUserTickets(ticket.id, ticketPage));
+            dispatch(getUserTickets({ page: ticketPage }));
         }
-    }
-    ).catch(e => {
+    }).catch(e => {
         dispatch(stopLoading());
         throw (e);
     });

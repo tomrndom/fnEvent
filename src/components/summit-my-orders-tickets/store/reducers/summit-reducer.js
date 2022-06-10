@@ -11,7 +11,8 @@
  * limitations under the License.
  **/
 import { START_LOADING, STOP_LOADING, LOGOUT_USER } from "openstack-uicore-foundation/lib/utils/actions";
-import { GET_MAIN_EXTRA_QUESTIONS } from "../actions/summit-actions";
+import { RESET_STATE } from "../actions/base-actions";
+import { GET_MAIN_EXTRA_QUESTIONS, SET_SUMMIT } from "../actions/summit-actions";
 
 const DEFAULT_STATE = {
     loading: true,
@@ -23,6 +24,9 @@ const summitReducer = (state = DEFAULT_STATE, action) => {
     const { type, payload } = action;
 
     switch (type) {
+        case RESET_STATE:
+            return DEFAULT_STATE;
+            break;
         case LOGOUT_USER:
             return DEFAULT_STATE;
         case START_LOADING:
@@ -30,6 +34,9 @@ const summitReducer = (state = DEFAULT_STATE, action) => {
             break;
         case STOP_LOADING:
             return { ...state, loading: false };
+            break;
+        case SET_SUMMIT:
+            return { ...state, summit: payload };
             break;
         case GET_MAIN_EXTRA_QUESTIONS: {
             const extraQuestions = payload.response.data;
