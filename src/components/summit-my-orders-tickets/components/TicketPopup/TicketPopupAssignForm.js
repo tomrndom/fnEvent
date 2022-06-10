@@ -14,10 +14,7 @@ const initialValues = {
 }
 
 const validationSchema = Yup.object().shape({
-    reassign_email: Yup.string().email('Please enter a valid email.').required('Email is required.'),
-    attendee_first_name: Yup.string().nullable(),
-    attendee_last_name: Yup.string().nullable(),
-    attendee_company: Yup.string().nullable()
+    reassign_email: Yup.string().email('Please enter a valid email.').required('Email is required.')
 });
 
 const emptyAttendee = {
