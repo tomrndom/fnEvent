@@ -102,7 +102,7 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
                                 <Tab>{t("ticket_popup.tab_reassign")}</Tab>
                             )}
 
-                            {!isUserTicketOwner && !isUnassigned && isReassignable && !fromTicketList && (
+                            {!isUnassigned && (!fromTicketList && isReassignable && !isUserTicketOwner) && (
                                 <Tab>{t("ticket_popup.tab_notify")}</Tab>
                             )}
 
@@ -139,7 +139,7 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
                             </TabPanel>
                         )}
 
-                        {!isUnassigned && isReassignable && (!fromTicketList || (fromTicketList && isUserOrderOwner)) && (
+                        {!isUnassigned && (!fromTicketList && isReassignable && !isUserTicketOwner) && (
                             <TabPanel className="ticket-popup-panel ticket-popup-panel--notify">
                                 <div className="ticket-popup-scroll">
                                     <TicketPopupNotifyForm ticket={ticket} summit={summit} order={order} />
