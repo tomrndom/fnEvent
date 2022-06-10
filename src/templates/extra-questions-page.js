@@ -138,6 +138,7 @@ export const ExtraQuestionsPageTemplate = ({ user, summit, extraQuestions, saveE
                                     userAnswers={userAnswers}
                                     onAnswerChanges={handleAnswerChanges}
                                     ref={formRef}
+                                    allowExtraQuestionsEdit={summit.allow_update_attendee_extra_questions}
                                     questionContainerClassName={'columns'}
                                     questionLabelContainerClassName={'column is-one-third'}
                                     questionControlContainerClassName={'column is-two-thirds'}
