@@ -15925,10 +15925,10 @@ sudo-prompt@^8.2.0:
   resolved "https://registry.yarnpkg.com/sudo-prompt/-/sudo-prompt-8.2.5.tgz#cc5ef3769a134bb94b24a631cc09628d4d53603e"
   integrity sha512-rlBo3HU/1zAJUrkY6jNxDOC9eVYliG6nS4JA8u8KAshITd07tafMc/Br7xQwCSseXwJ2iCcHCE8SNWX3q8Z+kw==
 
-summit-registration-lite@^2.0.7:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/summit-registration-lite/-/summit-registration-lite-2.0.7.tgz#05de459409b11a741dde75e640ca34466bab167e"
-  integrity sha512-etCm2pJaB603Ig4lw3lpN6Ko2nNYfcmLZqjfS4g41g2Aaa+X39xmZnsZau+sn2G/SOnLUtkneqixCKpB5uXL9A==
+summit-registration-lite@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/summit-registration-lite/-/summit-registration-lite-2.0.8.tgz#86d535fc5046e2a00b80577b883e5b28f331a080"
+  integrity sha512-c4ACqM6LQXlFeY8RWFoo7HWcSvSpUnSEcBo6rcv8b1X7nEwLKq4+C8ZkPBze3rJH9Ul1rYL/5FUnGOJ2YYj4Xw==
   dependencies:
     "@stripe/react-stripe-js" "^1.4.1"
     "@stripe/stripe-js" "^1.15.0"
