@@ -6,7 +6,7 @@ export const OrderTicketListItem = ({ ticket, summit, order, className }) => {
     if (!ticket || !summit || !order) return null;
 
     return (
-        <li className={classNames('order-ticket-list-item', className)}>
+        <li className={classNames('order-ticket-list__item', className)}>
             <OrderTicketDetails ticket={ticket} summit={summit} order={order} />
         </li>
     );

@@ -4,14 +4,14 @@
   padding-left: 30px;
   margin-top: 15px;
 
-  &-type {
+  &__type {
     display: none;
     padding: 15px 20px;
     font-size: 18px;
     font-weight: 600;
   }
 
-  &-item {
+  &__item {
     margin-bottom: 10px;
 
     &:last-child {

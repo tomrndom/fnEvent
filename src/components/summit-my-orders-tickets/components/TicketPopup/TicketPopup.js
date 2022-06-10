@@ -31,7 +31,7 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
 
     const ticketName = ticketType.name;
     const isUserOrderOwner = order.owner_id === userProfile.id;
-    const isUserTicketOwner = ticket.owner.email === userProfile.email;
+    const isUserTicketOwner = ticket.owner?.email === userProfile.email;
 
     // If the user is purchasing a ticket, allow to edit the extra questions (fromTicketList === undefined && fromOrderList === undefined)
     const allowExtraQuestionsEdit = (fromTicketList === undefined && fromOrderList === undefined) || isUserOrderOwner && summit.allow_update_attendee_extra_questions;
@@ -52,15 +52,9 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
         if (onClose) onClose();
     };
 
-    const handleDownloadClick = () => {
-        dispatch(getTicketPDF({ ticket }));
-    };
+    const handleDownloadClick = () => dispatch(getTicketPDF({ ticket }));
 
-    const handleCloseClick = () => {
-        closePopup();
-    };
-
-    console.log('isUserOrderOwner  ', isUserOrderOwner);
+    const handleCloseClick = () => closePopup();
 
     return (
         <div className={classNames('ticket-popup', className)}>
@@ -131,7 +125,9 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
                                     ticket={ticket}
                                     summit={summit}
                                     order={order}
-                                    allowExtraQuestionsEdit={allowExtraQuestionsEdit} />
+                                    allowExtraQuestionsEdit={allowExtraQuestionsEdit}
+                                    context={fromTicketList ? 'ticket-list' : 'order-list'}
+                                />
                             </div>
                         </TabPanel>
 

@@ -11,6 +11,7 @@
  * limitations under the License.
  **/
 
+import { RESET_STATE } from "../actions/base-actions";
 import {
     TIMER_INIT,
     TIMER_UPDATE,
@@ -26,6 +27,9 @@ const timerReducer = (state = DEFAULT_STATE, action) => {
     const { type, payload } = action;
 
     switch (type) {
+        case RESET_STATE:
+            return DEFAULT_STATE;
+            break;
         case TIMER_INIT:
             let { response } = payload;
             return { ...state, now: Math.round(response.timestamp) };

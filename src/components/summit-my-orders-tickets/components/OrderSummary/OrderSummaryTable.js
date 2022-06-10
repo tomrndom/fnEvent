@@ -4,7 +4,13 @@ import { calculateOrderTotals } from '../../util';
 
 export const OrderSummaryTable = ({ order, summit }) => {
     const { t } = useTranslation();
-    const { discountTotal, refundTotal, taxesTotal, amountTotal, ticketSummary } = calculateOrderTotals({ order, summit });
+    const {
+        discountTotal,
+        refundTotal,
+        taxesTotal,
+        amountTotal,
+        ticketSummary
+    } = calculateOrderTotals({ order, summit });
 
     return (
         <div className="order-summary-table">
@@ -17,7 +23,7 @@ export const OrderSummaryTable = ({ order, summit }) => {
             {ticketSummary.length > 0 && (
                 <>
                     {ticketSummary.map(ticket => {
-                        let ticketTotal = ticket.qty * ticket.ticket_type.cost;
+                        const ticketTotal = ticket.qty * ticket.ticket_type.cost;
 
                         return (
                             <div className="row order-row" key={`tixorder_${ticket.ticket_type.created}`}>

@@ -46,9 +46,16 @@
   }
 
   &__footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     flex-basis: calc(20% - 6px);
     max-width: calc(20% - 6px);
     text-align: right;
+  }
+
+  &__arrow {
+    margin-bottom: -4px;
   }
 
   &__header,

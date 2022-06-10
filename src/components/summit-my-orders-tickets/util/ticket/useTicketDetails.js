@@ -5,7 +5,14 @@ import { getTicketRole } from "./getTicketRole";
 import { getTicketStatusData } from "./getTicketStatusData";
 
 export const useTicketDetails = ({ ticket, summit }) => {
-    const { isPast, isStarted, isReassignable, formattedDate } = useSummitDetails({ summit });
+    const {
+        isPast,
+        isStarted,
+        isReassignable,
+        formattedDate,
+        formattedReassignDate,
+        daysUntilReassignDeadline
+    } = useSummitDetails({ summit });
     const [showPopup, setShowPopup] = useState(false);
 
     if (!summit || !ticket) return null;
@@ -18,9 +25,7 @@ export const useTicketDetails = ({ ticket, summit }) => {
     const isUnassigned = status.type === STATUS_UNASSIGNED;
     const isRefundable = ticket.final_amount > 0 && ticket.final_amount > ticket.refunded_amount;
 
-    const togglePopup = () => {
-        setShowPopup(!showPopup);
-    };
+    const togglePopup = () => setShowPopup(!showPopup);
 
     const handleClick = () => {
         if (!isActive) return;
@@ -29,9 +34,7 @@ export const useTicketDetails = ({ ticket, summit }) => {
         togglePopup();
     };
 
-    const handlePopupClose = () => {
-        togglePopup();
-    };
+    const handlePopupClose = () => togglePopup();
 
     return {
         status,
@@ -44,6 +47,8 @@ export const useTicketDetails = ({ ticket, summit }) => {
         isReassignable,
         isRefundable,
         formattedDate,
+        formattedReassignDate,
+        daysUntilReassignDeadline,
         showPopup,
         setShowPopup,
         togglePopup,

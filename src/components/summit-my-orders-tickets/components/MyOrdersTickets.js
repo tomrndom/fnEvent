@@ -1,26 +1,73 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from "react-i18next";
 import classNames from 'classnames';
 import { AjaxLoader } from "openstack-uicore-foundation/lib/components";
+import { getUserOrders } from '../store/actions/order-actions';
+import { getUserTickets } from '../store/actions/ticket-actions';
 import { OrderList } from './OrderList/OrderList';
 import { OrderListContextProvider } from './OrderList/OrderList.helpers';
 import { TicketList } from './TicketList/TicketList';
 
 export const MyOrdersTickets = ({ className }) => {
-    const isLoading = useSelector(state => state.orderState.loading || state.ticketState.loading || state.summitState.loading);
+    const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const {
+        userState,
+        orderState,
+        ticketState,
+        summitState,
+    } = useSelector(state => state || {});
+    const [isInitializing, setIsInitializing] = useState(true);
+
+    const fetchData = async () => {
+        setIsInitializing(true);
+
+        await dispatch(getUserOrders({ page: orderState.current_page, perPage: orderState.per_page }));
+        await dispatch(getUserTickets({ page: ticketState.current_page, perPage: ticketState.per_page }));
+
+        setIsInitializing(false);
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const isLoading = isInitializing || userState.loading || orderState.loading || ticketState.loading || summitState.loading;
+    const hasOrders = orderState.memberOrders?.length > 0;
+    const hasTickets = ticketState.memberTickets?.length > 0;
 
     return (
         <>
             <AjaxLoader show={isLoading} size={120} />
 
+            {isLoading && (!hasOrders && !hasTickets) && (
+                <div className="orders-tickets-loading">
+                    <p>{t('orders-tickets.loading')}</p>
+                </div>
+            )}
+
+            {!isLoading && (!hasOrders && !hasTickets) && (
+                <div className="orders-tickets-empty">
+                    <h2>{t('orders-tickets.empty-title')}</h2>
+                    {t('orders-tickets.empty-text')}
+                </div>
+            )}
+
             <div className={classNames('my-orders-tickets', className)}>
-                <OrderListContextProvider>
-                    <OrderList />
-                </OrderListContextProvider>
+                {hasOrders && (
+                    <OrderListContextProvider>
+                        <OrderList />
+                    </OrderListContextProvider>
+                )}
 
-                <hr className="orders-tickets-divider" />
+                {(hasOrders && hasTickets) && (
+                    <hr className="orders-tickets-divider" />
+                )}
 
-                <TicketList />
+                {hasTickets && (
+                    <TicketList />
+                )}
             </div>
         </>
     );
