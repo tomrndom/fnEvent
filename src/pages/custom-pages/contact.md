@@ -5,19 +5,19 @@ userRequirement: NONE
 ---
 ###### <BR>Email OCP for questions regarding:
 
-OCP Membership: [membership@opencompute.org](mailto:membership@opencompute.org)
+OCP Membership: <a href="mailto:membership@opencompute.org" target="_blank" style="color:#94C400">membership@opencompute.org</a>
 
-OCP Solution Provider Program: [solutionproviders@opencompute.org](mailto:solutionproviders@opencompute.org)
+OCP Solution Provider Program: <a href="mailto:solutionproviders@opencompute.org" target="_blank" style="color:#94C400">solutionproviders@opencompute.org</a>
 
-Event Sponsorship: [sponsor@opencompute.org](mailto:sponsor@opencompute.org)
+Event Sponsorship: <a href="mailto:sponsor@opencompute.org" target="_blank" style="color:#94C400">sponsor@opencompute.org</a>
 
-Upcoming Events: [events@opencompute.org](mailto:events@opencompute.org)
+Upcoming Events: <a href="mailto:events@opencompute.org" target="_blank" style="color:#94C400">events@opencompute.org</a>
 
-Current Registration for an Event:  [registration@opencompute.org](mailto:registration@opencompute.org)
+Current Registration for an Event:  <a href="mailto:registration@opencompute.org" target="_blank" style="color:#94C400">registration@opencompute.org</a>
 
-Press Inquiries: [press@opencompute.org](mailto:press@opencompute.org)
+Press Inquiries: <a href="mailto:press@opencompute.org" target="_blank" style="color:#94C400">press@opencompute.org</a>
 
-OCP Brand Site: [OCPgear@opencompute.org](mailto:OCPgear@opencompute.org)
+OCP Brand Site: <a href="mailto:OCPgear@opencompute.org" target="_blank" style="color:#94C400">OCPgear@opencompute.org</a>
 
 <br> 
 
@@ -27,12 +27,10 @@ OCP Brand Site: [OCPgear@opencompute.org](mailto:OCPgear@opencompute.org)
 
 Austin, TX 78750
 
-###### Call OCP
+###### <br>Call OCP
 
 (281) 667-4644
 
+<br><br>**Event Tech Support:**  <a href="mailto:support@fntech.com" target="_blank" style="color:#94C400">support@fntech.com</a>
 
-
-<br><br>**Event Tech Support:**  [support@fntech.com](Mailto:support@fntech.com)
-
-**Event Registration Issues:**  [registration@opencompute.org](<>)
+**Event Registration Issues:**  <a href="mailto:registration@opencompute.org" target="_blank" style="color:#94C400">registration@opencompute.org</a>
