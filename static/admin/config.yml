@@ -1,7 +1,7 @@
 backend:
   name: github
-  branch: cms-test
-  repo: tomrndom/fnEvent
+  branch: prod/2022ocpglobal
+  repo: fntechgit/fnEvent
   commit_messages:
     create: 'Create {{collection}} “{{slug}}”'
     update: 'Update {{collection}} “{{slug}}”'
