@@ -95,6 +95,10 @@
     word-wrap: break-word;
   }
 
+  &--warning {
+    border-color: $color-warning;
+  }
+
   &--warning &__icon,
   &--warning &__status {
     color: $color-warning;
