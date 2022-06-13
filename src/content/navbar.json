@@ -1,6 +1,16 @@
 {
   "items": [
     {
+      "requiresAuth": false,
+      "showOnlyAtShowTime": false,
+      "pageRestriction": [
+        "ANY"
+      ],
+      "title": "HOME",
+      "link": "/",
+      "display": true
+    },
+    {
       "title": "ABOUT THE EVENT",
       "link": "/about-the-event",
       "display": true,
