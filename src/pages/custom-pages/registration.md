@@ -3,7 +3,7 @@ templateKey: custom-page
 title: REGISTRATION
 userRequirement: NONE
 ---
-<BR>The 2022 OCP Global Summit will be an in-person event. All sessions will be recorded and shared with the Community after the event. Now that we have expanded the Summit to 3 days, we have adjusted prices accordingly. Please find the registration dates and fees below. Please direct any questions to [registration@opencompute.org](mailto:registration@opencompute.org)
+<BR>The 2022 OCP Global Summit will be an in-person event. All sessions will be recorded and shared with the Community after the event. Now that we have expanded the Summit to 3 days, we have adjusted prices accordingly. Please find the registration dates and fees below. Please direct any questions to <a href="mailto:registration@opencompute.org" target="_blank" style="color:#94C400">registration@opencompute.org</a>
 
 **Registration Options**
 
@@ -13,7 +13,7 @@ On-site: $1,200 (October 17-20)
 
 **Cancelation Policy**
 
-A request to cancel your ticket must be emailed to [registration@opencompute.org](mailto:registration@opencompute.org). Requests received prior to August 30 will receive a full refund. No refunds will be given after August 30.
+A request to cancel your ticket must be emailed to <a href="mailto:registration@opencompute.org" target="_blank" style="color:#94C400">registration@opencompute.org</a>[](mailto:registration@opencompute.org). Requests received prior to August 30 will receive a full refund. No refunds will be given after August 30.
 
 <br><br>**How to Register:**
 
