@@ -17,6 +17,8 @@ const TemplateWrapper = ({ children, location, marketing, summit, favicons }) =>
   const { title, description } = useSiteMetadata();
   const [isFocus, setIsFocus] = useState(true);
 
+  console.log('loading layout?');
+
   const onFocus = () => {
     setIsFocus(true);
   };
