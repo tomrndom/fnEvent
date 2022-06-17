@@ -5,6 +5,8 @@ userRequirement: NONE
 ---
 ###### <BR>Email OCP for questions regarding:
 
+![](/img/viewer.gif)
+
 OCP Membership: <a href="mailto:membership@opencompute.org" target="_blank" style="color:#94C400">membership@opencompute.org</a>
 
 OCP Solution Provider Program: <a href="mailto:solutionproviders@opencompute.org" target="_blank" style="color:#94C400">solutionproviders@opencompute.org</a>
