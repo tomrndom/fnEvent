@@ -12,8 +12,8 @@ import {
 
 import {customErrorHandler} from '../utils/customErrorHandler';
 
-import {LOGOUT_USER} from "openstack-uicore-foundation/lib/utils/actions";
-import moment from "moment-timezone";
+import {LOGOUT_USER} from "openstack-uicore-foundation/lib/security/actions";
+
 export const GET_EVENT_DATA = 'GET_EVENT_DATA';
 export const GET_EVENT_DATA_ERROR = 'GET_EVENT_DATA_ERROR';
 export const SET_EVENT_LAST_UPDATE = 'SET_EVENT_LAST_UPDATE';
@@ -71,8 +71,10 @@ export const getEventById = (
         null,
         createAction(GET_EVENT_DATA),
         `${window.SUMMIT_API_BASE_URL}/api/v1/summits/${window.SUMMIT_ID}/events/${eventId}/published`,
-        customErrorHandler
-    )(params)(dispatch).then(() => {
+        customErrorHandler,
+        {},
+        true)
+    (params)(dispatch).then(() => {
         if (dispatchLoader)
             dispatch(stopLoading());
     }).catch(e => {

@@ -1,15 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import { useTranslation } from "react-i18next";
 import classNames from 'classnames';
-import { getTicketPDF } from '../../store/actions/ticket-actions';
+import { getTicketById, getTicketPDF } from '../../store/actions/ticket-actions';
 import { getWindowScroll, useTicketDetails } from '../../util';
 import { TicketPopupReassignForm } from './TicketPopupReassignForm';
 import { TicketPopupAssignForm } from './TicketPopupAssignForm';
 import { TicketPopupNotifyForm } from './TicketPopupNotifyForm';
 import { TicketPopupRefundForm } from './TicketPopupRefundForm';
 import { TicketPopupEditDetailsForm } from './TicketPopupEditDetailsForm/TicketPopupEditDetailsForm';
+
+import QRCode from "react-qr-code";
 
 import './ticket-popup.scss';
 
@@ -33,8 +35,13 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
     const isUserOrderOwner = order.owner_id === userProfile.id;
     const isUserTicketOwner = ticket.owner?.email === userProfile.email;
 
-    // If the user is purchasing a ticket, allow to edit the extra questions (fromTicketList === undefined && fromOrderList === undefined)
-    const allowExtraQuestionsEdit = (fromTicketList === undefined && fromOrderList === undefined) || isUserOrderOwner && summit.allow_update_attendee_extra_questions;
+    const canEditTicketData = (isUserTicketOwner || isUserOrderOwner) && summit.allow_update_attendee_extra_questions;
+
+    const [tabIndex, setTabIndex] = useState(0);
+
+    useEffect(() => {
+        dispatch(getTicketById({order, ticket}));
+    }, []);
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -81,28 +88,42 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
                     </div>
 
                     <div className="ticket-popup-icons">
-                        {!summit.is_virtual && (
+                        <div className='ticket-popup-row-icon'>
+                        {!summit.is_virtual && statusData.type === 'STATUS_COMPLETE' && (
                             <i onClick={handleDownloadClick} className="fa fa-file-pdf-o" />
                         )}
 
                         <i onClick={handleCloseClick} className="fa fa-times" />
+                        </div>
+                        {statusData.type === 'STATUS_COMPLETE' &&
+                            <div className='ticket-popup-qr'>
+                                <QRCode
+                                    size={256}
+                                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                                    value={ticket.qr_code}
+                                    viewBox={`0 0 256 256`}
+                                />
+                            </div>
+                        }
                     </div>
                 </header>
 
                 <section className="ticket-popup-body">
-                    <Tabs selectedTabClassName="ticket-popup-tabs--active">
+                    <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)} selectedTabClassName="ticket-popup-tabs--active">
                         <TabList className="ticket-popup-tabs">
                             {isUnassigned && (
                                 <Tab>{t("ticket_popup.tab_assign")}</Tab>
                             )}
 
-                            <Tab>{t("ticket_popup.tab_edit")}</Tab>
+                            {!isUnassigned && (
+                                <Tab>{t("ticket_popup.tab_edit")}</Tab>
+                            )}
 
-                            {!isUnassigned && isReassignable && (!fromTicketList || (fromTicketList && isUserOrderOwner)) && (
+                            {!isUnassigned && isReassignable && isUserOrderOwner && (
                                 <Tab>{t("ticket_popup.tab_reassign")}</Tab>
                             )}
 
-                            {!isUnassigned && (!fromTicketList && isReassignable && !isUserTicketOwner) && (
+                            {!isUnassigned && (isReassignable && !isUserTicketOwner && isUserOrderOwner) && (
                                 <Tab>{t("ticket_popup.tab_notify")}</Tab>
                             )}
 
@@ -125,13 +146,14 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
                                     ticket={ticket}
                                     summit={summit}
                                     order={order}
-                                    allowExtraQuestionsEdit={allowExtraQuestionsEdit}
+                                    canEditTicketData={canEditTicketData}
+                                    goToReassignPanel={() => setTabIndex(1)}
                                     context={fromTicketList ? 'ticket-list' : 'order-list'}
                                 />
                             </div>
                         </TabPanel>
 
-                        {!isUnassigned && isReassignable && (!fromTicketList || (fromTicketList && isUserOrderOwner)) && (
+                        {!isUnassigned && isReassignable && isUserOrderOwner && (
                             <TabPanel className="ticket-popup-panel ticket-popup-panel--reassign">
                                 <div className="ticket-popup-scroll">
                                     <TicketPopupReassignForm ticket={ticket} summit={summit} order={order} />
@@ -139,7 +161,7 @@ export const TicketPopup = ({ ticket, order, summit, onClose, fromTicketList, fr
                             </TabPanel>
                         )}
 
-                        {!isUnassigned && (!fromTicketList && isReassignable && !isUserTicketOwner) && (
+                        {!isUnassigned && (isReassignable && !isUserTicketOwner && isUserOrderOwner) && (
                             <TabPanel className="ticket-popup-panel ticket-popup-panel--notify">
                                 <div className="ticket-popup-scroll">
                                     <TicketPopupNotifyForm ticket={ticket} summit={summit} order={order} />

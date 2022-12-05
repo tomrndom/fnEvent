@@ -31,7 +31,14 @@ collections:
               {label: "Chat", name: chat, widget: object, fields: [
                 {label: "Show QA", name: showQA, widget: boolean, required: false, default: false},
                 {label: "Show Help", name: showHelp, widget: boolean, required: false, default: false},
-              ]}
+                {label: "Default Filter Criteria", name: defaultScope, widget: select, required: false, default: 'page', options: [
+                  {label: "In this Room", value: "page" },
+                  {label: "All Attendees", value: "show" }
+                ]}
+              ]},
+              {label: "Schedule", name: schedule, widget: object, fields: [
+                {label: "Allow Clickable Behavior", name: allowClick, widget: boolean, required: false, default: true},                
+              ]}              
             ]}
       - file: "src/content/ads.json"
         label: "Advertisement"
@@ -53,7 +60,7 @@ collections:
                   {label: "Center", value: "center" },
                   {label: "Right", value: "right" },
                 ]},
-                {label: "Specific Event?", name: "id", widget: string, required: false}              
+                {label: "Specific Event?", name: "id", widget: string, required: false, default: 0}
               ]},
             ]}
       - file: "src/content/sponsors-tiers.json"
@@ -238,6 +245,7 @@ collections:
                 {label: "Alt", name: "alt", widget: string, required: false},
               ]},
             ]}
+          - {label: "Redirect to event", name: "eventRedirect", widget: number, required: false, hint: "User will be redirected to this event after login"}
           - {label: "Sponsors", name: "sponsors", widget: list, fields: [
               {label: "Name", name: title, widget: hidden},
               {label: "Size", name: size, widget: select, options: [

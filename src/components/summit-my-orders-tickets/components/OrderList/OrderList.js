@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux';
-import { Pagination } from 'react-bootstrap';
+import Pager from '../../../Pager/index';
 import { useTranslation } from "react-i18next";
 import classNames from 'classnames';
 import { getUserOrders } from "../../store/actions/order-actions";
+import { getTicketsByOrder } from "../../store/actions/ticket-actions";
 import { OrderListItem } from './OrderListItem';
+import { useOrderListContext } from "./OrderList.helpers";
 
 import './order-list.scss';
 
@@ -20,12 +22,31 @@ export const OrderList = ({ className }) => {
         total
     } = useSelector(state => state.orderState || {});
 
+    const {
+        orderTickets: {
+            current_page: orderTicketsCurrentPage,
+        }        
+    } = useSelector(state => state.ticketState || {});
+
+    const { state : { activeOrderId } } = useOrderListContext();
+
     const handlePageChange = (page) => dispatch(getUserOrders({ page, perPage }));
+
+    const handleTicketPageChange = (orderId, page) => dispatch(getTicketsByOrder({ orderId, page }));
 
     const hasOrders = orders.length > 0;
     const hasMultiplePages = total > perPage;
 
+    useEffect(() => {
+        if(activeOrderId) fetchData(activeOrderId);
+    }, [activeOrderId])
+    
     if (!hasOrders) return null;
+
+
+    const fetchData = async (orderId) => {
+        await dispatch(getTicketsByOrder({ orderId, orderTicketsCurrentPage }));
+    };
 
     return (
         <>
@@ -35,26 +56,22 @@ export const OrderList = ({ className }) => {
 
             <ul className={classNames('order-list', className)}>
                 {orders.map(order => (
-                    <OrderListItem key={order.id} order={order} />
+                    <OrderListItem key={order.id} order={order} changeTicketsPage={handleTicketPageChange} />
                 ))}
             </ul>
 
             {hasMultiplePages && (
                 <div className="order-list__pagination">
+                    
                     <div className="row">
                         <div className="col-md-8">
-                            <Pagination
-                                bsSize="medium"
-                                prev
-                                next
-                                first
-                                last
-                                ellipsis
-                                boundaryLinks
-                                maxButtons={5}
-                                items={lastPage}
-                                activePage={currentPage}
-                                onSelect={handlePageChange}
+                            <Pager
+                                totPages={lastPage}
+                                currentPage={currentPage}
+                                items={orders}
+                                pageClicked={(ele) => {
+                                    handlePageChange(ele);
+                                }}
                             />
                         </div>
                     </div>

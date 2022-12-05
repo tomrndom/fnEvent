@@ -1,4 +1,5 @@
-import { START_LOADING, STOP_LOADING, LOGOUT_USER } from "openstack-uicore-foundation/lib/utils/actions";
+import { START_LOADING, STOP_LOADING } from "openstack-uicore-foundation/lib/utils/actions";
+import { LOGOUT_USER } from "openstack-uicore-foundation/lib/security/actions";
 
 import {
   UPDATE_CLOCK,
@@ -15,24 +16,25 @@ import {RESET_STATE, SYNC_DATA} from "../actions/base-actions";
 
 import { getSummitPhase } from '../utils/phasesUtils';
 
-const localNowUtc = Date.now();
-const {summit} = summitData;
+const localNowUtc = Math.round(+new Date() / 1000);
 // calculate on initial state the nowUtc ( local ) and the summit phase using the json data
 const DEFAULT_STATE = {
   loading: false,
   nowUtc: localNowUtc,
-  summit_phase:  getSummitPhase(summit, localNowUtc),
+  summit_phase:  getSummitPhase(summitData, localNowUtc),
   events_phases: [],
 };
 
 const clockReducer = (state = DEFAULT_STATE, action) => {
   const { type, payload } = action;
-
   switch (type) {
     case RESET_STATE:
     case LOGOUT_USER:
-    case SYNC_DATA:
       return DEFAULT_STATE;
+    case SYNC_DATA: {
+      const {summitData} = payload;
+      return {...DEFAULT_STATE, summit_phase: getSummitPhase(summitData, localNowUtc)};
+    }
     case START_LOADING:
       return { ...state, loading: true };
     case STOP_LOADING:
