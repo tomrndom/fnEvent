@@ -559,6 +559,11 @@ export const TicketPopupEditDetailsForm = ({
                                         <div className="row field-wrapper">
                                             <div className="col-md-12">
                                                 <div className="form-check abc-checkbox">
+                                                    <div className="disclaimer">
+                                                        <RawHTML>
+                                                            {summit.registration_disclaimer_content}
+                                                        </RawHTML>
+                                                    </div>
                                                     <input
                                                         type="checkbox"
                                                         id="disclaimer_accepted"
@@ -571,11 +576,6 @@ export const TicketPopupEditDetailsForm = ({
                                                     <label className="form-check-label" htmlFor="disclaimer_accepted">
                                                         {summit.registration_disclaimer_mandatory && <>*</>}
                                                     </label>
-                                                    <div className="disclaimer">
-                                                        <RawHTML>
-                                                            {summit.registration_disclaimer_content}
-                                                        </RawHTML>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
