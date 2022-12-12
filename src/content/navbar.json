@@ -1,6 +1,16 @@
 {
   "items": [
     {
+      "requiresAuth": true,
+      "showOnlyAtShowTime": false,
+      "pageRestriction": [
+        "ANY"
+      ],
+      "title": "Home",
+      "link": "/",
+      "display": true
+    },
+    {
       "title": "My Tickets",
       "link": "/a/my-tickets",
       "display": true,
