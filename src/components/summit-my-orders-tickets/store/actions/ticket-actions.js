@@ -146,7 +146,7 @@ export const getTicketsByOrder = ({ orderId, page = 1, perPage = 5 }) => async (
     const params = {
         access_token: accessToken,        
         expand: 'refund_requests, owner, owner.extra_questions, badge, badge.features',
-        order: '-id',
+        order: '+id',
         page: page,
         per_page: perPage
     };
@@ -399,7 +399,7 @@ export const removeAttendee = ({ticket, context}) => async (dispatch, getState, 
 
     const {
         orderState: { current_page: orderPage },
-        ticketState: { current_page: ticketPage }
+        ticketState: { current_page: ticketPage, orderTickets: { current_page : orderTicketsCurrentPage } }
     } = getState();
 
     const accessToken = await getAccessToken().catch(_ => history.replace(loginUrl));
@@ -426,6 +426,7 @@ export const removeAttendee = ({ticket, context}) => async (dispatch, getState, 
             dispatch(getUserTickets({ page: ticketPage }));
         } else {
             dispatch(getUserOrders({ page: orderPage }));
+            dispatch(getTicketsByOrder({ orderId, page: orderTicketsCurrentPage }));
         }
         }).catch((e) => {
             console.log('error', e)
